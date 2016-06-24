@@ -6,8 +6,8 @@ BUILD_CONFIG=Release
 
 # temp debug code
 if [ `uname` = "Darwin" ] ; then
-    find $PREFIX -name python${PY_VER}
-    find $PREFIX -name libpython${PY_VER}
+    find $PREFIX -type d -name *python*
+    find $PREFIX -type f -name *libpython}*
 fi
 
 # sometimes python is suffixed, this is a quick fix
