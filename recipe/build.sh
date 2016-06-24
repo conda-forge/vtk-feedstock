@@ -4,24 +4,25 @@ cd build
 
 BUILD_CONFIG=Release
 
-# temp debug code
-if [ `uname` = "Darwin" ] ; then
-    find $PREFIX -type f -name *libpython*
-fi
-
-# sometimes python is suffixed, this is a quick fix
+# sometimes python is suffixed, these are quick fixes
 # in a future PR we should probably switch to cmake find python scripting
-PYTHON_INCLUDE=${PREFIX}/include/python${PY_VER}
+
+PYTHON_INCLUDE="${PREFIX}/include/python${PY_VER}"
 if [ ! -d $PYTHON_INCLUDE ]; then
-    PYTHON_INCLUDE=${PREFIX}/include/python${PY_VER}m
+    PYTHON_INCLUDE="${PREFIX}/include/python${PY_VER}m"
 fi
 
-# FIXME this is the wrong file on OSX
-PYTHON_LIBRARY="libpython${PY_VER}.so"
-PYTHON_LIBRARY=${PREFIX}/lib/${PYTHON_LIBRARY}
-if [ ! -f $PYTHON_LIBRARY ]; then
-    PYTHON_LIBRARY=${PREFIX}/lib/libpython${PY_VER}m.so
+PYTHON_LIBRARY_EXT="so"
+if [ `uname` = "Darwin" ] ; then
+    PYTHON_LIBRARY_EXT="dylib"
 fi
+
+PYTHON_LIBRARY="${PREFIX}/lib/libpython${PY_VER}.${PYTHON_LIBRARY_EXT}"
+if [ ! -f $PYTHON_LIBRARY ]; then
+    PYTHON_LIBRARY="${PREFIX}/lib/libpython${PY_VER}m.${PYTHON_LIBRARY_EXT}"
+fi
+
+# end of quick fixes
 
 cmake .. -G "Unix Makefiles" \
     -Wno-dev \
@@ -40,5 +41,5 @@ cmake .. -G "Unix Makefiles" \
     -DPYTHON_EXECUTABLE:FILEPATH=$PYTHON \
     -DPYTHON_INCLUDE_DIR:PATH=$PYTHON_INCLUDE \
     -DPYTHON_LIBRARY:FILEPATH=$PYTHON_LIBRARY
-        
+
 make install
