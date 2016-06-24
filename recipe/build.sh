@@ -4,13 +4,20 @@ cd build
 
 BUILD_CONFIG=Release
 
+# temp debug code
+if [ `uname` = "Darwin" ] ; then
+    find $PREFIX -name python${PY_VER}
+    find $PREFIX -name libpython${PY_VER}
+fi
+
 # sometimes python is suffixed, this is a quick fix
 # in a future PR we should probably switch to cmake find python scripting
 PYTHON_INCLUDE=${PREFIX}/include/python${PY_VER}
 if [ ! -d $PYTHON_INCLUDE ]; then
-  PYTHON_INCLUDE=${PREFIX}/include/python${PY_VER}m
+    PYTHON_INCLUDE=${PREFIX}/include/python${PY_VER}m
 fi
 
+# FIXME this is the wrong file on OSX
 PYTHON_LIBRARY="libpython${PY_VER}.so"
 PYTHON_LIBRARY=${PREFIX}/lib/${PYTHON_LIBRARY}
 if [ ! -f $PYTHON_LIBRARY ]; then
@@ -22,7 +29,6 @@ cmake .. -G "Unix Makefiles" \
     -DCMAKE_BUILD_TYPE=$BUILD_CONFIG \
     -DCMAKE_INSTALL_PREFIX:PATH="${PREFIX}" \
     -DCMAKE_INSTALL_RPATH:PATH="${PREFIX}/lib" \
-    -DINSTALL_PKGCONFIG_DIR:PATH=$PKG_CONFIG_PATH \
     -DBUILD_DOCUMENTATION:BOOL=OFF \
     -DBUILD_TESTING:BOOL=OFF \
     -DBUILD_EXAMPLES:BOOL=OFF \
