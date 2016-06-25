@@ -27,5 +27,6 @@ cmake .. -G "NMake Makefiles" ^
     -DINSTALL_MAN_DIR:PATH="%LIBRARY_PREFIX%/man"
 if errorlevel 1 exit 1
 
+set CL=/MP
 nmake install
 if errorlevel 1 exit 1
