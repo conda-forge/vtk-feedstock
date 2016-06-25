@@ -18,7 +18,7 @@ build:
     - vc14  # [win and py35]
   # only x64 py2.7 and x64 py3.5 on linux will complete before build timeout
   # see https://github.com/conda-forge/staged-recipes/pull/453#issuecomment-228308297
-  skip: true  # [win or osx or linux32 or py34]
+  skip: true  # [win32 or linux32 or py34]
 
 requirements:
   build:
