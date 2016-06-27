@@ -24,7 +24,7 @@ fi
 
 # end of quick fixes
 
-cmake .. -G "Unix Makefiles" \
+cmake .. -G "Ninja" \
     -Wno-dev \
     -DCMAKE_BUILD_TYPE=$BUILD_CONFIG \
     -DCMAKE_INSTALL_PREFIX:PATH="${PREFIX}" \
@@ -42,4 +42,4 @@ cmake .. -G "Unix Makefiles" \
     -DPYTHON_INCLUDE_DIR:PATH=$PYTHON_INCLUDE \
     -DPYTHON_LIBRARY:FILEPATH=$PYTHON_LIBRARY
 
-make install
+ninja install
