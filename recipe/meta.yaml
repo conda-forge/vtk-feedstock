@@ -22,6 +22,7 @@ requirements:
   build:
     - freeglut  # [linux]
     - cmake
+    - ninja
     - python
   run:
     - freeglut  # [linux]
