@@ -6,7 +6,7 @@ set BUILD_CONFIG=Release
 :: tell cmake where Python is
 set PYTHON_LIBRARY=%PREFIX%\libs\python%PY_VER:~0,1%%PY_VER:~2,1%.lib
 
-cmake .. -G "NMake Makefiles" ^
+cmake .. -G "Ninja" ^
     -Wno-dev ^
     -DCMAKE_INSTALL_PREFIX:PATH="%LIBRARY_PREFIX%" ^
     -DBUILD_TESTING:BOOL=OFF ^
@@ -27,6 +27,5 @@ cmake .. -G "NMake Makefiles" ^
     -DINSTALL_MAN_DIR:PATH="%LIBRARY_PREFIX%/man"
 if errorlevel 1 exit 1
 
-set CL=/MP
-nmake install
+ninja install
 if errorlevel 1 exit 1
