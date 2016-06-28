@@ -19,11 +19,20 @@ environment:
     secure: MP4hZYylDyUWEsrt3u3cod2sbFeRwUziH02mvQOdbjsTO/l1yIxDkP/76rSIjcGC
 
   matrix:
-    - TARGET_ARCH: x64
+    - TARGET_ARCH: x86
       CONDA_PY: 27
 
     - TARGET_ARCH: x64
+      CONDA_PY: 27
+
+    - TARGET_ARCH: x86
       CONDA_PY: 34
+
+    - TARGET_ARCH: x64
+      CONDA_PY: 34
+
+    - TARGET_ARCH: x86
+      CONDA_PY: 35
 
     - TARGET_ARCH: x64
       CONDA_PY: 35
