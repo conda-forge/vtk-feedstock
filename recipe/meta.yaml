@@ -16,8 +16,8 @@ build:
     - vc9  # [win and py27]
     - vc10  # [win and py34]
     - vc14  # [win and py35]
-  # removing the py34 configuration on unix avoids timeouts (although barely)
-  skip: true  # [unix and py34]
+  # skipped to avoid timeouts, will be adressed in future PR
+  skip: true  # [(unix and py34) or osx]
 
 requirements:
   build:
