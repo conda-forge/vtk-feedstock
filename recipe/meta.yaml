@@ -22,13 +22,14 @@ build:
 requirements:
   build:
     - toolchain
-    - freeglut  # [linux]
     - cmake
     - ninja
+    - freeglut  # [linux]
     - python
   run:
     - freeglut  # [linux]
     - python
+    - future
 
 test:
   imports:
