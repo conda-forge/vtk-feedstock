@@ -1,0 +1,40 @@
+From fe8c65498e8a8ef33a5c1f2c7d9c1fbfe925341b Mon Sep 17 00:00:00 2001
+From: Korijn van Golen <korijn@gmail.com>
+Date: Fri, 1 Jul 2016 08:20:19 +0200
+Subject: [PATCH] Use system libraries by default
+
+---
+ recipe/bld.bat  | 3 ++-
+ recipe/build.sh | 3 ++-
+ 2 files changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/recipe/bld.bat b/recipe/bld.bat
+index 3fcaebc..7679ba4 100644
+--- a/recipe/bld.bat
++++ b/recipe/bld.bat
+@@ -23,7 +23,8 @@ cmake .. -G "NMake Makefiles" ^
+     -DINSTALL_BIN_DIR:PATH="%LIBRARY_BIN%" ^
+     -DINSTALL_LIB_DIR:PATH="%LIBRARY_LIB%" ^
+     -DINSTALL_INC_DIR:PATH="%LIBRARY_INC%" ^
+-    -DINSTALL_MAN_DIR:PATH="%LIBRARY_PREFIX%/man"
++    -DINSTALL_MAN_DIR:PATH="%LIBRARY_PREFIX%/man" ^
++    -DVTK_USE_SYSTEM_LIBRARIES:BOOL=ON
+ if errorlevel 1 exit 1
+ 
+ set CL=/MP
+diff --git a/recipe/build.sh b/recipe/build.sh
+index 5c5d855..e8fe850 100644
+--- a/recipe/build.sh
++++ b/recipe/build.sh
+@@ -33,6 +33,7 @@ cmake .. -G "Unix Makefiles" \
+     -DVTK_INSTALL_PYTHON_MODULE_DIR:PATH="${SP_DIR}" \
+     -DPYTHON_EXECUTABLE:FILEPATH=$PYTHON \
+     -DPYTHON_INCLUDE_DIR:PATH=$PYTHON_INCLUDE \
+-    -DPYTHON_LIBRARY:FILEPATH=$PYTHON_LIBRARY
++    -DPYTHON_LIBRARY:FILEPATH=$PYTHON_LIBRARY \
++    -DVTK_USE_SYSTEM_LIBRARIES:BOOL=ON
+         
+ make install
+-- 
+1.9.4.msysgit.1
+

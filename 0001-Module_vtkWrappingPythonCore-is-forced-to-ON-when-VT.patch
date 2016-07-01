@@ -1,0 +1,38 @@
+From d37bb63b56628f2f399732e31262f9e17dcbf57c Mon Sep 17 00:00:00 2001
+From: Korijn van Golen <korijn@gmail.com>
+Date: Fri, 1 Jul 2016 08:19:21 +0200
+Subject: [PATCH] Module_vtkWrappingPythonCore is forced to ON when
+ VTK_WRAP_PYTHON is ON, so removing redundant configuration
+
+---
+ recipe/bld.bat  | 1 -
+ recipe/build.sh | 1 -
+ 2 files changed, 2 deletions(-)
+
+diff --git a/recipe/bld.bat b/recipe/bld.bat
+index 6a35462..3fcaebc 100644
+--- a/recipe/bld.bat
++++ b/recipe/bld.bat
+@@ -20,7 +20,6 @@ cmake .. -G "NMake Makefiles" ^
+     -DVTK_WRAP_PYTHON:BOOL=ON ^
+     -DVTK_PYTHON_VERSION:STRING="%PY_VER%" ^
+     -DVTK_INSTALL_PYTHON_MODULE_DIR:PATH="%SP_DIR%" ^
+-    -DModule_vtkWrappingPythonCore:BOOL=OFF ^
+     -DINSTALL_BIN_DIR:PATH="%LIBRARY_BIN%" ^
+     -DINSTALL_LIB_DIR:PATH="%LIBRARY_LIB%" ^
+     -DINSTALL_INC_DIR:PATH="%LIBRARY_INC%" ^
+diff --git a/recipe/build.sh b/recipe/build.sh
+index d09a6f8..5c5d855 100644
+--- a/recipe/build.sh
++++ b/recipe/build.sh
+@@ -31,7 +31,6 @@ cmake .. -G "Unix Makefiles" \
+     -DVTK_WRAP_PYTHON:BOOL=ON \
+     -DVTK_PYTHON_VERSION:STRING="${PY_VER}" \
+     -DVTK_INSTALL_PYTHON_MODULE_DIR:PATH="${SP_DIR}" \
+-    -DModule_vtkWrappingPythonCore:BOOL=OFF \
+     -DPYTHON_EXECUTABLE:FILEPATH=$PYTHON \
+     -DPYTHON_INCLUDE_DIR:PATH=$PYTHON_INCLUDE \
+     -DPYTHON_LIBRARY:FILEPATH=$PYTHON_LIBRARY
+-- 
+1.9.4.msysgit.1
+
