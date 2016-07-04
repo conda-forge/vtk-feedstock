@@ -32,7 +32,6 @@ requirements:
     - libpng
     - jpeg
     - libtiff
-    - boost 1.61.*
   run:
     - python
     - future  # used in the generated python wrappers
@@ -45,7 +44,6 @@ requirements:
     - libpng
     - jpeg
     - libtiff
-    - boost 1.61.*
 
 test:
   imports:
