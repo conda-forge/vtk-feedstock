@@ -79,6 +79,8 @@ cmake .. -G "Ninja" \
     -DVTK_USE_SYSTEM_EXPAT:BOOL=ON \
     -DVTK_USE_SYSTEM_SQLITE:BOOL=ON \
     -DVTK_USE_SYSTEM_NETCDF:BOOL=ON \
+    -DNETCDF_INCLUDE_DIR:PATH="${PREFIX}/include" \
+    -DNETCDF_LIBRARY:PATH="${PREFIX}/lib" \
     ${SCREEN_ARGS}
 
 # compile & install!
