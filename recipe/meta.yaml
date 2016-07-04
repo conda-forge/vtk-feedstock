@@ -32,7 +32,7 @@ requirements:
     - libnetcdf
     - libpng
     - jpeg
-    - tiff
+    - libtiff
     - boost 1.61.*
   run:
     - python
@@ -46,7 +46,7 @@ requirements:
     - libnetcdf
     - libpng
     - jpeg
-    - tiff
+    - libtiff
     - boost 1.61.*
 
 test:
