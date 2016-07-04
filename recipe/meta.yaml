@@ -32,6 +32,9 @@ requirements:
     - libpng
     - jpeg
     - libtiff
+    - jsoncpp
+    - expat
+    - sqlite
   run:
     - python
     - future  # used in the generated python wrappers
@@ -44,6 +47,9 @@ requirements:
     - libpng
     - jpeg
     - libtiff
+    - jsoncpp
+    - expat
+    - sqlite
 
 test:
   imports:
