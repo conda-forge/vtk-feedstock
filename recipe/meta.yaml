@@ -29,7 +29,7 @@ requirements:
     - freetype
     - hdf5
     - libxml2
-    - libnetcdf
+    - netcdf
     - libpng
     - jpeg
     - libtiff
@@ -43,7 +43,7 @@ requirements:
     - freetype
     - hdf5
     - libxml2
-    - libnetcdf
+    - netcdf
     - libpng
     - jpeg
     - libtiff
