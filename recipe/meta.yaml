@@ -35,6 +35,7 @@ requirements:
     - jsoncpp
     - expat
     - sqlite
+    - libnetcdf
   run:
     - python
     - future  # used in the generated python wrappers
@@ -50,6 +51,7 @@ requirements:
     - jsoncpp
     - expat
     - sqlite
+    - libnetcdf
 
 test:
   imports:
