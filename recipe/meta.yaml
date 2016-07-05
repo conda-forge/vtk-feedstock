@@ -34,6 +34,8 @@ requirements:
     - jsoncpp
     - expat
     - sqlite
+    - netcdf-cxx4  # [unix]
+    - netcdf-fortran  # [unix]
   run:
     - python
     - future  # used in the generated python wrappers
@@ -48,6 +50,8 @@ requirements:
     - jsoncpp
     - expat
     - sqlite
+    - netcdf-cxx4  # [unix]
+    - netcdf-fortran  # [unix]
 
 test:
   imports:
