@@ -24,7 +24,6 @@ requirements:
     - ninja
     - python
     # VTK Third Party dependencies
-    - freeglut  # [linux]
     - zlib
     - freetype
     - hdf5
@@ -35,12 +34,10 @@ requirements:
     - jsoncpp
     - expat
     - sqlite
-    - libnetcdf
   run:
     - python
     - future  # used in the generated python wrappers
     # VTK Third Party dependencies
-    - freeglut  # [linux]
     - zlib
     - freetype
     - hdf5
@@ -51,7 +48,6 @@ requirements:
     - jsoncpp
     - expat
     - sqlite
-    - libnetcdf
 
 test:
   imports:

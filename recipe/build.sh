@@ -78,8 +78,6 @@ cmake .. -G "Ninja" \
     -DVTK_USE_SYSTEM_JSONCPP:BOOL=ON \
     -DVTK_USE_SYSTEM_EXPAT:BOOL=ON \
     -DVTK_USE_SYSTEM_SQLITE:BOOL=ON \
-    -DVTK_USE_SYSTEM_NETCDF:BOOL=ON \
-    -DNETCDF_INCLUDE_CXX_DIR:PATH="${PREFIX}/include" \
     ${SCREEN_ARGS}
 
 # compile & install!
