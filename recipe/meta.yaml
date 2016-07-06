@@ -26,7 +26,7 @@ requirements:
     # VTK Third Party dependencies
     - zlib
     - freetype
-    - hdf5
+    - hdf5  # [unix]
     - libxml2
     - libpng
     - jpeg
@@ -40,7 +40,7 @@ requirements:
     # VTK Third Party dependencies
     - zlib
     - freetype
-    - hdf5
+    - hdf5  # [unix]
     - libxml2
     - libpng
     - jpeg
