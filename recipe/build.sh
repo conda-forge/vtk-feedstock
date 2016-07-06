@@ -78,7 +78,6 @@ cmake .. -G "Ninja" \
     -DVTK_USE_SYSTEM_TIFF:BOOL=ON \
     -DVTK_USE_SYSTEM_JSONCPP:BOOL=ON \
     -DVTK_USE_SYSTEM_EXPAT:BOOL=ON \
-    -DVTK_USE_SYSTEM_SQLITE:BOOL=ON \
     ${SCREEN_ARGS}
 
 # compile & install!

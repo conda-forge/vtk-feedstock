@@ -28,8 +28,7 @@ cmake .. -G "Ninja" ^
     -DVTK_USE_SYSTEM_PNG:BOOL=ON ^
     -DVTK_USE_SYSTEM_JPEG:BOOL=ON ^
     -DVTK_USE_SYSTEM_TIFF:BOOL=ON ^
-    -DVTK_USE_SYSTEM_EXPAT:BOOL=ON ^
-    -DVTK_USE_SYSTEM_SQLITE:BOOL=ON
+    -DVTK_USE_SYSTEM_EXPAT:BOOL=ON
 if errorlevel 1 exit 1
 
 ninja install

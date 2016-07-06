@@ -33,7 +33,6 @@ requirements:
     - libtiff
     - jsoncpp  # [unix]
     - expat
-    - sqlite
   run:
     - python
     - future  # used in the generated python wrappers
@@ -47,7 +46,6 @@ requirements:
     - libtiff
     - jsoncpp  # [unix]
     - expat
-    - sqlite
 
 test:
   imports:
