@@ -4,20 +4,25 @@
 # building against osmesa or not
 CONDA_LST=`conda list`
 if [ `uname` = "Darwin" ]; then
-    # FIXME something makes this end up single quoted on darwin... not sure how to resolve
-    SCREEN_ARGS="-DVTK_USE_X:BOOL=OFF 
-        -DVTK_USE_COCOA:BOOL=ON 
-        -DVTK_USE_CARBON:BOOL=OFF"
+    SCREEN_ARGS=(
+        "-DVTK_USE_X:BOOL=OFF"
+        "-DVTK_USE_COCOA:BOOL=ON"
+        "-DVTK_USE_CARBON:BOOL=OFF"
+    )
 elif [[ ${CONDA_LST}'y' == *'osmesa'* ]]; then
-    SCREEN_ARGS="-DVTK_USE_X:BOOL=OFF 
-        -DVTK_OPENGL_HAS_OSMESA:BOOL=ON 
-        -DOPENGL_INCLUDE_DIR:PATH=${PREFIX}/include 
-        -DOPENGL_gl_LIBRARY:FILEPATH=${PREFIX}/lib/libOSMesa.so 
-        -DOPENGL_glu_LIBRARY:FILEPATH=${PREFIX}/lib/libGLU.so 
-        -DOSMESA_INCLUDE_DIR:PATH=${PREFIX}/include 
-        -DOSMESA_LIBRARY:FILEPATH=${PREFIX}/lib/libOSMesa.so"
+    SCREEN_ARGS=(
+        "-DVTK_USE_X:BOOL=OFF"
+        "-DVTK_OPENGL_HAS_OSMESA:BOOL=ON"
+        "-DOPENGL_INCLUDE_DIR:PATH=${PREFIX}/include"
+        "-DOPENGL_gl_LIBRARY:FILEPATH=${PREFIX}/lib/libOSMesa.so"
+        "-DOPENGL_glu_LIBRARY:FILEPATH=${PREFIX}/lib/libGLU.so"
+        "-DOSMESA_INCLUDE_DIR:PATH=${PREFIX}/include"
+        "-DOSMESA_LIBRARY:FILEPATH=${PREFIX}/lib/libOSMesa.so"
+    )
 else
-    SCREEN_ARGS="-DVTK_USE_X:BOOL=ON"
+    SCREEN_ARGS=(
+        "-DVTK_USE_X:BOOL=ON"
+    )
 fi
 
 # FIXME: This is a hack to make sure the environment is activated.
@@ -78,7 +83,7 @@ cmake .. -G "Ninja" \
     -DVTK_USE_SYSTEM_TIFF:BOOL=ON \
     -DVTK_USE_SYSTEM_JSONCPP:BOOL=ON \
     -DVTK_USE_SYSTEM_EXPAT:BOOL=ON \
-    ${SCREEN_ARGS}
+    ${SCREEN_ARGS[@]}
 
 # compile & install!
 ninja install
