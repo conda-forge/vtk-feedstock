@@ -1,30 +1,5 @@
 #!/bin/bash
 
-# grab a list of the packages in the build environment to determine if we are
-# building against osmesa or not
-CONDA_LST=`conda list`
-if [ `uname` = "Darwin" ]; then
-    SCREEN_ARGS=(
-        "-DVTK_USE_X:BOOL=OFF"
-        "-DVTK_USE_COCOA:BOOL=ON"
-        "-DVTK_USE_CARBON:BOOL=OFF"
-    )
-elif [[ ${CONDA_LST}'y' == *'osmesa'* ]]; then
-    SCREEN_ARGS=(
-        "-DVTK_USE_X:BOOL=OFF"
-        "-DVTK_OPENGL_HAS_OSMESA:BOOL=ON"
-        "-DOPENGL_INCLUDE_DIR:PATH=${PREFIX}/include"
-        "-DOPENGL_gl_LIBRARY:FILEPATH=${PREFIX}/lib/libOSMesa.so"
-        "-DOPENGL_glu_LIBRARY:FILEPATH=${PREFIX}/lib/libGLU.so"
-        "-DOSMESA_INCLUDE_DIR:PATH=${PREFIX}/include"
-        "-DOSMESA_LIBRARY:FILEPATH=${PREFIX}/lib/libOSMesa.so"
-    )
-else
-    SCREEN_ARGS=(
-        "-DVTK_USE_X:BOOL=ON"
-    )
-fi
-
 # FIXME: This is a hack to make sure the environment is activated.
 # The reason this is required is due to the conda-build issue
 # mentioned below.
@@ -53,6 +28,19 @@ fi
 PYTHON_LIBRARY="${PREFIX}/lib/libpython${PY_VER}.${PYTHON_LIBRARY_EXT}"
 if [ ! -f $PYTHON_LIBRARY ]; then
     PYTHON_LIBRARY="${PREFIX}/lib/libpython${PY_VER}m.${PYTHON_LIBRARY_EXT}"
+fi
+
+# choose different screen settings for OS X and Linux
+if [ `uname` = "Darwin" ]; then
+    SCREEN_ARGS=(
+        "-DVTK_USE_X:BOOL=OFF"
+        "-DVTK_USE_COCOA:BOOL=ON"
+        "-DVTK_USE_CARBON:BOOL=OFF"
+    )
+else
+    SCREEN_ARGS=(
+        "-DVTK_USE_X:BOOL=ON"
+    )
 fi
 
 # now we can start configuring
