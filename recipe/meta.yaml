@@ -11,25 +11,42 @@ source:
   sha256: 78a990a15ead79cdc752e86b83cfab7dbf5b7ef51ba409db02570dbdd9ec32c3
 
 build:
-  number: 1
+  number: 2
   features:
     - vc9  # [win and py27]
     - vc10  # [win and py34]
     - vc14  # [win and py35]
-  # skipped to avoid timeouts, will be adressed in future PR
-  skip: true  # [(unix and py34) or osx]
+  skip: True  # [osx or (linux and py34)]
 
 requirements:
   build:
     - toolchain
     - cmake
     - ninja
-    - freeglut  # [linux]
     - python
+    # VTK Third Party dependencies
+    - zlib 1.2.*
+    - freetype 2.6.*
+    - hdf5 1.8.17|1.8.17.*  # [unix]
+    - libxml2
+    - libpng >=1.6.21,<1.7
+    - jpeg 9*
+    - libtiff 4.0.*
+    - jsoncpp  # [unix]
+    - expat
   run:
-    - freeglut  # [linux]
     - python
-    - future
+    - future  # used in the generated python wrappers
+    # VTK Third Party dependencies
+    - zlib 1.2.*
+    - freetype 2.6.*
+    - hdf5 1.8.17|1.8.17.*  # [unix]
+    - libxml2
+    - libpng >=1.6.21,<1.7
+    - jpeg 9*
+    - libtiff 4.0.*
+    - jsoncpp  # [unix]
+    - expat
 
 test:
   imports:
