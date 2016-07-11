@@ -25,26 +25,26 @@ requirements:
     - ninja
     - python
     # VTK Third Party dependencies
-    - zlib
-    - freetype
-    - hdf5  # [unix]
+    - zlib 1.2.*
+    - freetype 2.6.*
+    - hdf5 1.8.17|1.8.17.*  # [unix]
     - libxml2
-    - libpng
-    - jpeg
-    - libtiff
+    - libpng >=1.6.21,<1.7
+    - jpeg 9*
+    - libtiff 4.0.*
     - jsoncpp  # [unix]
     - expat
   run:
     - python
     - future  # used in the generated python wrappers
     # VTK Third Party dependencies
-    - zlib
-    - freetype
-    - hdf5  # [unix]
+    - zlib 1.2.*
+    - freetype 2.6.*
+    - hdf5 1.8.17|1.8.17.*  # [unix]
     - libxml2
-    - libpng
-    - jpeg
-    - libtiff
+    - libpng >=1.6.21,<1.7
+    - jpeg 9*
+    - libtiff 4.0.*
     - jsoncpp  # [unix]
     - expat
 
