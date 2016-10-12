@@ -54,11 +54,11 @@ yum install -y libXt-devel mesa-libGLU-devel
     export CONDA_PY=27
     set +x
     conda build /recipe_root --quiet || exit 1
-    /feedstock_root/ci_support/upload_or_check_non_existence.py /recipe_root conda-forge --channel=main || exit 1
+    upload_or_check_non_existence /recipe_root conda-forge --channel=main || exit 1
 
     set -x
     export CONDA_PY=35
     set +x
     conda build /recipe_root --quiet || exit 1
-    /feedstock_root/ci_support/upload_or_check_non_existence.py /recipe_root conda-forge --channel=main || exit 1
+    upload_or_check_non_existence /recipe_root conda-forge --channel=main || exit 1
 EOF
