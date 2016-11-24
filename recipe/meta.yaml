@@ -1,4 +1,4 @@
-{% set version = "7.0.0" %}
+{% set version = "7.1.0" %}
 {% set minor_version = ".".join(version.split(".")[:2]) %}
 
 package:
@@ -8,10 +8,10 @@ package:
 source:
   url: http://www.vtk.org/files/release/{{ minor_version }}/VTK-{{ version }}.tar.gz
   fn:  VTK-{{ version }}.tar.gz
-  sha256: 78a990a15ead79cdc752e86b83cfab7dbf5b7ef51ba409db02570dbdd9ec32c3
+  sha256: 5f3ea001204d4f714be972a810a62c0f2277fbb9d8d2f8df39562988ca37497a
 
 build:
-  number: 2
+  number: 0
   features:
     - vc9  # [win and py27]
     - vc10  # [win and py34]
