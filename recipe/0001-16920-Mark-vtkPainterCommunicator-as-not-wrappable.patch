@@ -1,0 +1,105 @@
+From 714d8e6071d685e34bb21a2fde7b67811135e582 Mon Sep 17 00:00:00 2001
+From: David Gobbi <david.gobbi@gmail.com>
+Date: Mon, 12 Dec 2016 11:18:50 -0700
+Subject: [PATCH] 16920: Mark vtkPainterCommunicator as not wrappable
+
+The header for vtkPainterCommunicator was not listed in CMakeLists.txt,
+and since the wrappers had no knowledge of it, the wrappers assumed that
+it was a vtkObjectBase-derived class from a different module.  Hence any
+methods that accepted a "vtkPainterCommunicator *" parameter were
+wrapped incorrectly and would segfault when called.
+---
+ Rendering/LIC/CMakeLists.txt                  | 8 +++++---
+ Rendering/LIC/vtkPainterCommunicator.h        | 6 ++----
+ Rendering/LICOpenGL2/CMakeLists.txt           | 3 ++-
+ Rendering/LICOpenGL2/vtkPainterCommunicator.h | 6 ++----
+ 4 files changed, 11 insertions(+), 12 deletions(-)
+
+diff --git a/Rendering/LIC/CMakeLists.txt b/Rendering/LIC/CMakeLists.txt
+index dff2b7c..d31c616 100644
+--- a/Rendering/LIC/CMakeLists.txt
++++ b/Rendering/LIC/CMakeLists.txt
+@@ -1,6 +1,7 @@
+ set(Module_SRCS
+   vtkImageDataLIC2D.cxx
+   vtkLineIntegralConvolution2D.cxx
++  vtkPainterCommunicator.h
+   vtkStructuredGridLIC2D.cxx
+   vtkSurfaceLICComposite.cxx
+   vtkSurfaceLICDefaultPainter.cxx
+@@ -9,11 +10,12 @@ set(Module_SRCS
+   )
+ 
+ set_source_files_properties(
+-  vtkLineIntegralConvolution2D.cxx
+-  vtkPainterCommunicator.cxx
++  vtkPainterCommunicator.h
+   vtkSurfaceLICComposite.cxx
+   vtkTextureIO.cxx
+-  WRAP_EXCLUDE
++  PROPERTIES
++    WRAP_EXCLUDE 1
++    WRAP_EXCLUDE_PYTHON 1
+   )
+ 
+ if (VTK_RENDERINGPARALLELLIC_SURFACELICPAINTER_TIMER)
+diff --git a/Rendering/LIC/vtkPainterCommunicator.h b/Rendering/LIC/vtkPainterCommunicator.h
+index 4b8362b..8dbef57 100644
+--- a/Rendering/LIC/vtkPainterCommunicator.h
++++ b/Rendering/LIC/vtkPainterCommunicator.h
+@@ -13,11 +13,9 @@
+ 
+ =========================================================================*/
+ /**
+- * @class   vtkPainterCommunicator
+- * ranks that will execute a painter chain.
++ * @class vtkPainterCommunicator
++ * @brief A communicator that can safely be used inside a painter.
+  *
+- *
+- * A communicator that can safely be used inside a painter.
+  * A simple container holding a handle to an MPI communicator.
+  * This API is sufficient to allow for control flow with/without
+  * MPI. The parallel parts of the code should use the derived
+diff --git a/Rendering/LICOpenGL2/CMakeLists.txt b/Rendering/LICOpenGL2/CMakeLists.txt
+index ebaa9fe..81ef52f 100644
+--- a/Rendering/LICOpenGL2/CMakeLists.txt
++++ b/Rendering/LICOpenGL2/CMakeLists.txt
+@@ -2,6 +2,7 @@ set(Module_SRCS
+   vtkImageDataLIC2D.cxx
+   vtkLICNoiseHelper.cxx
+   vtkLineIntegralConvolution2D.cxx
++  vtkPainterCommunicator.h
+   vtkStructuredGridLIC2D.cxx
+   vtkSurfaceLICComposite.cxx
+   vtkSurfaceLICHelper.cxx
+@@ -14,7 +15,7 @@ set(Module_SRCS
+ set_source_files_properties(
+   vtkLICNoiseHelper.cxx
+   vtkSurfaceLICHelper.cxx
+-  vtkLineIntegralConvolution2D.cxx
++  vtkPainterCommunicator.h
+   vtkSurfaceLICComposite.cxx
+   vtkTextureIO.cxx
+   PROPERTIES
+diff --git a/Rendering/LICOpenGL2/vtkPainterCommunicator.h b/Rendering/LICOpenGL2/vtkPainterCommunicator.h
+index 3e0a157..5d27825 100644
+--- a/Rendering/LICOpenGL2/vtkPainterCommunicator.h
++++ b/Rendering/LICOpenGL2/vtkPainterCommunicator.h
+@@ -13,11 +13,9 @@
+ 
+ =========================================================================*/
+ /**
+- * @class   vtkPainterCommunicator
+- * ranks that will execute a painter chain.
++ * @class vtkPainterCommunicator
++ * @brief A communicator that can safely be used inside a painter.
+  *
+- *
+- * A communicator that can safely be used inside a painter.
+  * A simple container holding a handle to an MPI communicator.
+  * This API is sufficient to allow for control flow with/without
+  * MPI. The parallel parts of the code should use the derived
+-- 
+2.10.2
+
