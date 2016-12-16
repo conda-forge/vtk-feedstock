@@ -11,7 +11,7 @@ source:
   sha256: 5f3ea001204d4f714be972a810a62c0f2277fbb9d8d2f8df39562988ca37497a
 
 build:
-  number: 0
+  number: 1
   features:
     - vc9  # [win and py27]
     - vc10  # [win and py34]
@@ -28,8 +28,8 @@ requirements:
     - zlib 1.2.*
     - freetype 2.6.*
     - hdf5 1.8.17|1.8.17.*  # [unix]
-    - libxml2
-    - libpng >=1.6.21,<1.7
+    - libxml2 2.9.*
+    - libpng >=1.6.23,<1.7
     - jpeg 9*
     - libtiff 4.0.*
     - jsoncpp  # [unix]
@@ -41,8 +41,8 @@ requirements:
     - zlib 1.2.*
     - freetype 2.6.*
     - hdf5 1.8.17|1.8.17.*  # [unix]
-    - libxml2
-    - libpng >=1.6.21,<1.7
+    - libxml2 2.9.*
+    - libpng >=1.6.23,<1.7
     - jpeg 9*
     - libtiff 4.0.*
     - jsoncpp  # [unix]
