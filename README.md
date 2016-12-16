@@ -12,6 +12,18 @@ Summary: The Visualization Toolkit (VTK) is an open-source, freely available sof
 
 
 
+Current build status
+====================
+
+Linux: [![Circle CI](https://circleci.com/gh/conda-forge/vtk-feedstock.svg?style=shield)](https://circleci.com/gh/conda-forge/vtk-feedstock)
+OSX: ![](https://cdn.rawgit.com/conda-forge/conda-smithy/90845bba35bec53edac7a16638aa4d77217a3713/conda_smithy/static/disabled.svg)
+Windows: [![AppVeyor](https://ci.appveyor.com/api/projects/status/github/conda-forge/vtk-feedstock?svg=True)](https://ci.appveyor.com/project/conda-forge/vtk-feedstock/branch/master)
+
+Current release info
+====================
+Version: [![Anaconda-Server Badge](https://anaconda.org/conda-forge/vtk/badges/version.svg)](https://anaconda.org/conda-forge/vtk)
+Downloads: [![Anaconda-Server Badge](https://anaconda.org/conda-forge/vtk/badges/downloads.svg)](https://anaconda.org/conda-forge/vtk)
+
 Installing vtk
 ==============
 
@@ -67,18 +79,6 @@ Terminology
 
 **conda-forge** - the place where the feedstock and smithy live and work to
                   produce the finished article (built conda distributions)
-
-Current build status
-====================
-
-Linux: [![Circle CI](https://circleci.com/gh/conda-forge/vtk-feedstock.svg?style=shield)](https://circleci.com/gh/conda-forge/vtk-feedstock)
-OSX: ![](https://cdn.rawgit.com/conda-forge/conda-smithy/90845bba35bec53edac7a16638aa4d77217a3713/conda_smithy/static/disabled.svg)
-Windows: [![AppVeyor](https://ci.appveyor.com/api/projects/status/github/conda-forge/vtk-feedstock?svg=True)](https://ci.appveyor.com/project/conda-forge/vtk-feedstock/branch/master)
-
-Current release info
-====================
-Version: [![Anaconda-Server Badge](https://anaconda.org/conda-forge/vtk/badges/version.svg)](https://anaconda.org/conda-forge/vtk)
-Downloads: [![Anaconda-Server Badge](https://anaconda.org/conda-forge/vtk/badges/downloads.svg)](https://anaconda.org/conda-forge/vtk)
 
 
 Updating vtk-feedstock
