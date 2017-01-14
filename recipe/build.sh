@@ -1,13 +1,5 @@
 #!/bin/bash
 
-# FIXME: This is a hack to make sure the environment is activated.
-# The reason this is required is due to the conda-build issue
-# mentioned below.
-#
-# https://github.com/conda/conda-build/issues/910
-#
-source activate "${CONDA_DEFAULT_ENV}"
-
 mkdir build
 cd build
 
@@ -20,14 +12,9 @@ if [ ! -d $PYTHON_INCLUDE ]; then
     PYTHON_INCLUDE="${PREFIX}/include/python${PY_VER}m"
 fi
 
-PYTHON_LIBRARY_EXT="so"
-if [ `uname` = "Darwin" ] ; then
-    PYTHON_LIBRARY_EXT="dylib"
-fi
-
-PYTHON_LIBRARY="${PREFIX}/lib/libpython${PY_VER}.${PYTHON_LIBRARY_EXT}"
+PYTHON_LIBRARY="${PREFIX}/lib/libpython${PY_VER}${SHLIB_EXT}"
 if [ ! -f $PYTHON_LIBRARY ]; then
-    PYTHON_LIBRARY="${PREFIX}/lib/libpython${PY_VER}m.${PYTHON_LIBRARY_EXT}"
+    PYTHON_LIBRARY="${PREFIX}/lib/libpython${PY_VER}m${SHLIB_EXT}"
 fi
 
 # choose different screen settings for OS X and Linux
