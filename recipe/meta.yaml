@@ -18,7 +18,7 @@ source:
     - 0001-16920-Mark-vtkPainterCommunicator-as-not-wrappable.patch
 
 build:
-  number: 3
+  number: 4
   features:
     - vc9  # [win and py27]
     - vc10  # [win and py34]
@@ -77,7 +77,7 @@ about:
   license: BSD 3-Clause
   summary: >
     The Visualization Toolkit (VTK) is an open-source, freely available software
-    system for 3D computer graphics, modeling, image processing, volume 
+    system for 3D computer graphics, modeling, image processing, volume
     rendering, scientific visualization, and information visualization.
 
 extra:
