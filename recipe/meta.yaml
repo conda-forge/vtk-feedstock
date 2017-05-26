@@ -18,12 +18,12 @@ source:
     - 0001-16920-Mark-vtkPainterCommunicator-as-not-wrappable.patch
 
 build:
-  number: 2
+  number: 3
   features:
     - vc9  # [win and py27]
     - vc10  # [win and py34]
     - vc14  # [win and py35]
-  skip: True  # [osx or (linux and py34)]
+  skip: True  # [osx or py27]
 
 requirements:
   build:
@@ -33,7 +33,7 @@ requirements:
     - python
     # VTK Third Party dependencies
     - zlib 1.2.*
-    - freetype 2.6.*
+    - freetype 2.7.*
     - hdf5 1.8.17|1.8.17.*  # [unix]
     - libxml2 2.9.*
     - libpng >=1.6.23,<1.7
@@ -46,7 +46,7 @@ requirements:
     - future  # used in the generated python wrappers
     # VTK Third Party dependencies
     - zlib 1.2.*
-    - freetype 2.6.*
+    - freetype 2.7.*
     - hdf5 1.8.17|1.8.17.*  # [unix]
     - libxml2 2.9.*
     - libpng >=1.6.23,<1.7
