@@ -34,7 +34,7 @@ requirements:
     # VTK Third Party dependencies
     - zlib 1.2.*
     - freetype 2.7.*
-    - hdf5 1.8.17|1.8.17.*  # [unix]
+    - hdf5 1.8.18|1.8.18.*  # [unix]
     - libxml2 2.9.*
     - libpng >=1.6.23,<1.7
     - jpeg 9*
@@ -47,7 +47,7 @@ requirements:
     # VTK Third Party dependencies
     - zlib 1.2.*
     - freetype 2.7.*
-    - hdf5 1.8.17|1.8.17.*  # [unix]
+    - hdf5 1.8.18|1.8.18.*  # [unix]
     - libxml2 2.9.*
     - libpng >=1.6.23,<1.7
     - jpeg 9*
