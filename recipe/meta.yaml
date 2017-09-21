@@ -1,4 +1,4 @@
-{% set version = "7.1.0" %}
+{% set version = "7.1.1" %}
 {% set minor_version = ".".join(version.split(".")[:2]) %}
 
 package:
@@ -8,22 +8,10 @@ package:
 source:
   url: http://www.vtk.org/files/release/{{ minor_version }}/VTK-{{ version }}.tar.gz
   fn:  VTK-{{ version }}.tar.gz
-  sha256: 5f3ea001204d4f714be972a810a62c0f2277fbb9d8d2f8df39562988ca37497a
-  patches:
-    # This patch fix the issue: https://gitlab.kitware.com/vtk/vtk/issues/16920,
-    # causing a segmentation fault during Mayavi installation.
-    # It will be available in VTK 7.1.1, and is a backport of the commit:
-    # https://gitlab.kitware.com/vtk/vtk/commit/714d8e6071d685e34bb21a2fde7b67811135e582
-    # Patch was created from VTK Git repo with: `git format-patch -1 714d8e6`
-    - 0001-16920-Mark-vtkPainterCommunicator-as-not-wrappable.patch
+  sha256: 2d5cdd048540144d821715c718932591418bb48f5b6bb19becdae62339efa75a
 
 build:
-  number: 4
-  features:
-    - vc9  # [win and py27]
-    - vc10  # [win and py34]
-    - vc14  # [win and py35]
-  skip: True  # [py27]
+  number: 1
 
 requirements:
   build:
@@ -90,3 +78,4 @@ extra:
     - msarahan
     - patricksnape
     - dfroger
+    - tadeu
