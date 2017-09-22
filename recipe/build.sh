@@ -18,6 +18,15 @@ else
     )
 fi
 
+if [ -f '$PREFIX/lib/libOSMesa32.so']; then
+    WITH_OSMESA=(
+        "-DVTK_OPENGL_HAS_OSMESA:BOOL=ON"
+        "-DOSMESA_LIBRARY=${PREFIX}/lib/libOSMesa32.so"
+    )
+else
+    WITH_OSMESA=()
+fi
+
 # now we can start configuring
 cmake .. -G "Ninja" \
     -Wno-dev \
@@ -45,7 +54,7 @@ cmake .. -G "Ninja" \
     -DVTK_USE_SYSTEM_EXPAT:BOOL=ON \
     -DVTK_USE_SYSTEM_HDF5:BOOL=ON \
     -DVTK_USE_SYSTEM_JSONCPP:BOOL=ON \
-    ${SCREEN_ARGS[@]}
+    ${SCREEN_ARGS[@]} ${WITH_OSMESA[@]}
 
 # compile & install!
 ninja install

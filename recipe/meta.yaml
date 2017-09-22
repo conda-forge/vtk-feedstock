@@ -1,5 +1,11 @@
 {% set version = "7.1.1" %}
+{% set build_number = 1 %}
 {% set minor_version = ".".join(version.split(".")[:2]) %}
+{% set with_osmesa = os.environ.get('VTK_WITH_OSMESA', 'False') %}
+
+{% if with_osmesa == "False" %}
+{% set build_number = build_number + 200 %}
+{% endif %}
 
 package:
   name: vtk
@@ -11,8 +17,18 @@ source:
   sha256: 2d5cdd048540144d821715c718932591418bb48f5b6bb19becdae62339efa75a
 
 build:
-  number: 1
+  number: {{ build_number }}
+  features:
+    - vc9  # [win and py27]
+    - vc10  # [win and py34]
+    - vc14  # [win and py35]
+{% if with_osmesa == "True" %}
+    - mesalib
+{% endif %}
   skip: True  # [osx]
+{% if with_osmesa == "True" %}
+  skip: True  # [win]
+{% endif %}
 
 requirements:
   build:
@@ -30,6 +46,9 @@ requirements:
     - libtiff 4.0.*
     - jsoncpp  # [unix]
     - expat
+{% if with_osmesa == "True" %}
+    - mesalib
+{% endif %}
   run:
     - python
     - future  # used in the generated python wrappers
@@ -43,6 +62,9 @@ requirements:
     - libtiff 4.0.*
     - jsoncpp  # [unix]
     - expat
+{% if with_osmesa == "True" %}
+    - mesalib
+{% endif %}
 
 test:
   imports:
