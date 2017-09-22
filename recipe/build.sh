@@ -48,4 +48,4 @@ cmake .. -G "Ninja" \
     ${SCREEN_ARGS[@]}
 
 # compile & install!
-ninja install
+ninja install -j 8

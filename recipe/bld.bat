@@ -33,5 +33,5 @@ cmake .. -G "Ninja" ^
     -DVTK_USE_SYSTEM_EXPAT:BOOL=ON
 if errorlevel 1 exit 1
 
-ninja install
+ninja install -j %CPU_COUNT%
 if errorlevel 1 exit 1
