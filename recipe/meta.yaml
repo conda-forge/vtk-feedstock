@@ -46,6 +46,7 @@ requirements:
     - libtiff 4.0.*
     - jsoncpp  # [unix]
     - expat
+    - tbb
 {% if with_osmesa == "True" %}
     - mesalib
 {% endif %}
@@ -62,6 +63,7 @@ requirements:
     - libtiff 4.0.*
     - jsoncpp  # [unix]
     - expat
+    - tbb
 {% if with_osmesa == "True" %}
     - mesalib
 {% endif %}
