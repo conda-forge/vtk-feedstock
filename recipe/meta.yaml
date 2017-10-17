@@ -34,6 +34,7 @@ requirements:
     - libtiff 4.0.*
     - jsoncpp  # [unix]
     - expat
+    - tbb
   run:
     - python
     - future  # used in the generated python wrappers
@@ -47,6 +48,7 @@ requirements:
     - libtiff 4.0.*
     - jsoncpp  # [unix]
     - expat
+    - tbb
 
 test:
   imports:

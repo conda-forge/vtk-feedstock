@@ -45,6 +45,7 @@ cmake .. -G "Ninja" \
     -DVTK_USE_SYSTEM_EXPAT:BOOL=ON \
     -DVTK_USE_SYSTEM_HDF5:BOOL=ON \
     -DVTK_USE_SYSTEM_JSONCPP:BOOL=ON \
+    -DVTK_SMP_IMPLEMENTATION_TYPE:STRING=TBB \
     ${SCREEN_ARGS[@]}
 
 # compile & install!
