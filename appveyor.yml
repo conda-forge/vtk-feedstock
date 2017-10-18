@@ -11,16 +11,6 @@ environment:
   matrix:
     - TARGET_ARCH: x86
       VTK_WITH_OSMESA: False
-      CONDA_PY: 27
-      CONDA_INSTALL_LOCN: C:\\Miniconda
-
-    - TARGET_ARCH: x64
-      VTK_WITH_OSMESA: False
-      CONDA_PY: 27
-      CONDA_INSTALL_LOCN: C:\\Miniconda-x64
-
-    - TARGET_ARCH: x86
-      VTK_WITH_OSMESA: False
       CONDA_PY: 35
       CONDA_INSTALL_LOCN: C:\\Miniconda35
 
