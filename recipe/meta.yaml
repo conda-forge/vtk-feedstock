@@ -1,5 +1,5 @@
 {% set version = "8.1.0" %}
-{% set build_number = 0 %}
+{% set build_number = 1 %}
 {% set minor_version = ".".join(version.split(".")[:2]) %}
 {% set with_osmesa = os.environ.get('VTK_WITH_OSMESA', 'False') %}
 
@@ -38,7 +38,7 @@ requirements:
     - python
     # VTK Third Party dependencies
     - zlib 1.2.*
-    - freetype 2.7.*
+    - freetype 2.8.*
     - hdf5 1.8.18|1.8.18.*  # [unix]
     - libxml2 2.9.*
     - libpng >=1.6.23,<1.7
@@ -55,7 +55,7 @@ requirements:
     - future  # used in the generated python wrappers
     # VTK Third Party dependencies
     - zlib 1.2.*
-    - freetype 2.7.*
+    - freetype 2.8.*
     - hdf5 1.8.18|1.8.18.*  # [unix]
     - libxml2 2.9.*
     - libpng >=1.6.23,<1.7
