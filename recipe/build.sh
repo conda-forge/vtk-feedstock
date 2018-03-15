@@ -18,7 +18,7 @@ else
     )
 fi
 
-if [ -f '$PREFIX/lib/libOSMesa32.so']; then
+if [ -f '$PREFIX/lib/libOSMesa32.so' ]; then
     WITH_OSMESA=(
         "-DVTK_OPENGL_HAS_OSMESA:BOOL=ON"
         "-DOSMESA_LIBRARY=${PREFIX}/lib/libOSMesa32.so"
