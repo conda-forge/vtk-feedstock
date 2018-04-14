@@ -20,7 +20,6 @@ build:
     - vc14  # [win and py35]
     - vc14  # [win and py36]
     - mesalib   # [VTK_WITH_OSMESA]
-  skip: True  # [osx]
 
 requirements:
   build:

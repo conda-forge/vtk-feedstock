@@ -1,3 +1,5 @@
+VTK_WITH_OSMESA:
+- 'True'
 expat:
 - '2.2'
 pin_run_as_build:
@@ -5,4 +7,4 @@ pin_run_as_build:
     min_pin: x.x
     max_pin: x.x
 python:
-- '2.7'
+- '3.5'

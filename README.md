@@ -16,7 +16,7 @@ Current build status
 ====================
 
 [![Linux](https://img.shields.io/circleci/project/github/conda-forge/vtk-feedstock/master.svg?label=Linux)](https://circleci.com/gh/conda-forge/vtk-feedstock)
-![OSX disabled](https://img.shields.io/badge/OSX-disabled-lightgrey.svg)
+[![OSX](https://img.shields.io/travis/conda-forge/vtk-feedstock/master.svg?label=macOS)](https://travis-ci.org/conda-forge/vtk-feedstock)
 [![Windows](https://img.shields.io/appveyor/ci/conda-forge/vtk-feedstock/master.svg?label=Windows)](https://ci.appveyor.com/project/conda-forge/vtk-feedstock/branch/master)
 
 Current release info
