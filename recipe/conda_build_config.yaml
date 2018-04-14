@@ -1,0 +1,4 @@
+VTK_WITH_OSMESA:  # [linux]
+- False           # [linux]
+- True            # [linux]
+
