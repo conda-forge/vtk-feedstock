@@ -1,5 +1,7 @@
 MACOSX_DEPLOYMENT_TARGET:
 - '10.9'
+VTK_WITH_OSMESA:
+- 'False'
 expat:
 - '2.2'
 macos_machine:
