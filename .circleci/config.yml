@@ -156,12 +156,12 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-      #- build_linux_VTK_WITH_OSMESAFalsepython2.7
-      #- build_linux_VTK_WITH_OSMESAFalsepython3.5
-      #- build_linux_VTK_WITH_OSMESAFalsepython3.6
-      #- build_linux_VTK_WITH_OSMESATruepython2.7
-      #- build_linux_VTK_WITH_OSMESATruepython3.5
-      #- build_linux_VTK_WITH_OSMESATruepython3.6
+      - build_linux_VTK_WITH_OSMESAFalsepython2.7
+      - build_linux_VTK_WITH_OSMESAFalsepython3.5
+      - build_linux_VTK_WITH_OSMESAFalsepython3.6
+      - build_linux_VTK_WITH_OSMESATruepython2.7
+      - build_linux_VTK_WITH_OSMESATruepython3.5
+      - build_linux_VTK_WITH_OSMESATruepython3.6
       - build_osx_python2.7
       - build_osx_python3.5
       - build_osx_python3.6

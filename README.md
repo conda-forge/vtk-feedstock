@@ -15,13 +15,12 @@ Summary: The Visualization Toolkit (VTK) is an open-source, freely available sof
 Current build status
 ====================
 
-[![Linux](https://img.shields.io/circleci/project/github/conda-forge/vtk-feedstock/master.svg?label=Linux)](https://circleci.com/gh/conda-forge/vtk-feedstock)
-![OSX disabled](https://img.shields.io/badge/OSX-disabled-lightgrey.svg)
+[![Linux,OSX](https://img.shields.io/circleci/project/github/conda-forge/vtk-feedstock/master.svg?label=Linux,OSX)](https://circleci.com/gh/conda-forge/vtk-feedstock)
 [![Windows](https://img.shields.io/appveyor/ci/conda-forge/vtk-feedstock/master.svg?label=Windows)](https://ci.appveyor.com/project/conda-forge/vtk-feedstock/branch/master)
 
 Current release info
 ====================
-
+[![Conda Recipe](https://img.shields.io/badge/recipe-vtk-green.svg)](https://anaconda.org/conda-forge/vtk)
 [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/vtk.svg)](https://anaconda.org/conda-forge/vtk)
 [![Conda Version](https://img.shields.io/conda/vn/conda-forge/vtk.svg)](https://anaconda.org/conda-forge/vtk)
 [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/vtk.svg)](https://anaconda.org/conda-forge/vtk)
