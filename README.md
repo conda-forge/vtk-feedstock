@@ -20,10 +20,10 @@ Current build status
 
 Current release info
 ====================
-[![Conda Recipe](https://img.shields.io/badge/recipe-vtk-green.svg)](https://anaconda.org/conda-forge/vtk)
-[![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/vtk.svg)](https://anaconda.org/conda-forge/vtk)
-[![Conda Version](https://img.shields.io/conda/vn/conda-forge/vtk.svg)](https://anaconda.org/conda-forge/vtk)
-[![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/vtk.svg)](https://anaconda.org/conda-forge/vtk)
+
+| Name | Downloads | Version | Platforms |
+| --- | --- | --- | --- |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-vtk-green.svg)](https://anaconda.org/conda-forge/vtk) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/vtk.svg)](https://anaconda.org/conda-forge/vtk) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/vtk.svg)](https://anaconda.org/conda-forge/vtk) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/vtk.svg)](https://anaconda.org/conda-forge/vtk) |
 
 Installing vtk
 ==============
