@@ -1,24 +1,8 @@
 VTK_WITH_OSMESA:
 - 'True'
-expat:
-- '2.2'
-freetype:
-- 2.8.1
-hdf5:
-- 1.10.1
-jpeg:
-- '9'
-libpng:
-- 1.6.32
-libtiff:
-- 4.0.8
-libxml2:
-- '2.9'
 pin_run_as_build:
   python:
-    max_pin: x.x
     min_pin: x.x
+    max_pin: x.x
 python:
 - '3.6'
-zlib:
-- '1.2'
