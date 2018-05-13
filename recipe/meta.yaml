@@ -41,6 +41,8 @@ requirements:
     - mesalib   # [VTK_WITH_OSMESA]
     - libnetcdf 4.4.*
     - lz4-c
+    - libogg     # [unix]
+    - libtheora  # [unix]
   run:
     - python
     - future  # used in the generated python wrappers
@@ -58,6 +60,8 @@ requirements:
     - mesalib   # [VTK_WITH_OSMESA]
     - libnetcdf 4.4.*
     - lz4-c
+    - libogg     # [unix]
+    - libtheora  # [unix]
 
 test:
   imports:
