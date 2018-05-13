@@ -2,15 +2,15 @@ MACOSX_DEPLOYMENT_TARGET:
 - '10.9'
 VTK_WITH_OSMESA:
 - 'False'
-expat:
-- '2.2'
+lz4_c:
+- 1.8.1
 macos_machine:
 - x86_64-apple-darwin13.4.0
 macos_min_version:
 - '10.9'
 pin_run_as_build:
-  expat:
-    max_pin: x.x
+  lz4_c:
+    max_pin: x.x.x
   python:
     min_pin: x.x
     max_pin: x.x
