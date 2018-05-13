@@ -39,7 +39,7 @@ requirements:
     - expat 2.2.*
     - tbb
     - mesalib   # [VTK_WITH_OSMESA]
-    - libnetcdf
+    - libnetcdf 4.4.*
     - lz4-c
   run:
     - python
@@ -56,7 +56,7 @@ requirements:
     - expat 2.2.*
     - tbb
     - mesalib   # [VTK_WITH_OSMESA]
-    - libnetcdf
+    - libnetcdf 4.4.*
     - lz4-c
 
 test:
