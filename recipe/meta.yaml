@@ -30,12 +30,12 @@ requirements:
     # VTK Third Party dependencies
     - zlib 1.2.11
     - freetype 2.8.1
-    - hdf5 1.10.1  # [unix]
+    - hdf5 1.10.1
     - libxml2 2.9.*
     - libpng >=1.6.32,<1.6.35
     - jpeg 9*
     - libtiff >=4.0.8,<4.0.10
-    - jsoncpp  # [unix]
+    - jsoncpp
     - expat 2.2.*
     - tbb
     - mesalib   # [VTK_WITH_OSMESA]
@@ -47,12 +47,12 @@ requirements:
     # VTK Third Party dependencies
     - zlib 1.2.11
     - freetype 2.8.1
-    - hdf5 1.10.1  # [unix]
+    - hdf5 1.10.1
     - libxml2 2.9.*
     - libpng >=1.6.32,<1.6.35
     - jpeg 9*
     - libtiff >=4.0.8,<4.0.10
-    - jsoncpp  # [unix]
+    - jsoncpp
     - expat 2.2.*
     - tbb
     - mesalib   # [VTK_WITH_OSMESA]
