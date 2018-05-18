@@ -1,5 +1,6 @@
 {% set version = "8.1.1" %}
 {% set build_number = 0 %}
+
 {% set minor_version = ".".join(version.split(".")[:2]) %}
 
 {% set build_number = build_number + 200 %}   # [not VTK_WITH_OSMESA]
@@ -41,6 +42,8 @@ requirements:
     - mesalib   # [VTK_WITH_OSMESA]
     - libnetcdf 4.4.*
     - lz4-c
+    - libogg     # [unix]
+    - libtheora  # [unix]
   run:
     - python
     - future  # used in the generated python wrappers
@@ -58,6 +61,8 @@ requirements:
     - mesalib   # [VTK_WITH_OSMESA]
     - libnetcdf 4.4.*
     - lz4-c
+    - libogg     # [unix]
+    - libtheora  # [unix]
 
 test:
   imports:
