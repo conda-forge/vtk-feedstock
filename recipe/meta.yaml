@@ -1,5 +1,6 @@
-{% set version = "8.1.0" %}
-{% set build_number = 5 %}
+{% set version = "8.1.1" %}
+{% set build_number = 0 %}
+
 {% set minor_version = ".".join(version.split(".")[:2]) %}
 
 {% set build_number = build_number + 200 %}   # [not VTK_WITH_OSMESA]
@@ -11,7 +12,7 @@ package:
 source:
   url: http://www.vtk.org/files/release/{{ minor_version }}/VTK-{{ version }}.tar.gz
   fn:  VTK-{{ version }}.tar.gz
-  sha256: 6e269f07b64fb13774f5925161fb4e1f379f4e6a0131c8408c555f6b58ef3cb7
+  sha256: 71a09b4340f0a9c58559fe946dc745ab68a866cf20636a41d97b6046cb736324
 
 build:
   skip: True  # [win and py27]
