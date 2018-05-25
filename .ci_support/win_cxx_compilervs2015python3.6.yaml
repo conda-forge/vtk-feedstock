@@ -1,9 +1,7 @@
-MACOSX_DEPLOYMENT_TARGET:
-- '10.9'
 VTK_WITH_OSMESA:
 - 'False'
 cxx_compiler:
-- toolchain_cxx
+- vs2015
 expat:
 - '2.2'
 freetype:
@@ -24,10 +22,6 @@ libxml2:
 - '2.9'
 lz4_c:
 - 1.8.1
-macos_machine:
-- x86_64-apple-darwin13.4.0
-macos_min_version:
-- '10.9'
 pin_run_as_build:
   expat:
     max_pin: x.x
@@ -54,5 +48,8 @@ pin_run_as_build:
     max_pin: x.x
 python:
 - '3.6'
+zip_keys:
+- - cxx_compiler
+  - python
 zlib:
 - '1.2'
