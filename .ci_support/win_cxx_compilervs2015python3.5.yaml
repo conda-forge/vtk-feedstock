@@ -1,7 +1,7 @@
 VTK_WITH_OSMESA:
 - 'False'
 cxx_compiler:
-- toolchain_cxx
+- vs2015
 expat:
 - '2.2'
 freetype:
@@ -43,6 +43,9 @@ pin_run_as_build:
   zlib:
     max_pin: x.x
 python:
-- '3.6'
+- '3.5'
+zip_keys:
+- - cxx_compiler
+  - python
 zlib:
 - '1.2'
