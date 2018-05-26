@@ -20,6 +20,8 @@ libxml2:
 - '2.9'
 lz4_c:
 - 1.8.1
+netcdf_cxx4:
+- '4.3'
 pin_run_as_build:
   expat:
     max_pin: x.x
