@@ -40,6 +40,7 @@ requirements:
     - tbb
     - mesalib   # [VTK_WITH_OSMESA]
     - libnetcdf
+    - netcdf-cxx4  # [unix]
     - lz4-c
     - libogg     # [unix]
     - libtheora  # [unix]
@@ -59,6 +60,7 @@ requirements:
     - tbb
     - mesalib   # [VTK_WITH_OSMESA]
     - libnetcdf
+    - netcdf-cxx4  # [unix]
     - lz4-c
     - libogg     # [unix]
     - libtheora  # [unix]
