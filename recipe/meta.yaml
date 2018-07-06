@@ -43,6 +43,7 @@ requirements:
     - lz4-c
     - libogg      # [unix]
     - libtheora   # [unix]
+    - xorg-libxt  # [linux]
   run:
     - python
     - future  # used in the generated python wrappers
@@ -62,6 +63,7 @@ requirements:
     - lz4-c
     - libogg      # [unix]
     - libtheora   # [unix]
+    - xorg-libxt  # [linux]
 
 test:
   imports:
