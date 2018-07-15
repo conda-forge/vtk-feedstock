@@ -42,3 +42,9 @@ if errorlevel 1 exit 1
 
 ninja install
 if errorlevel 1 exit 1
+
+set egg_info=%SP_DIR%\vtk-%PKG_VERSION%.egg-info
+echo>%egg_info% Metadata-Version: 2.1
+echo>>%egg_info% Version: $PKG_VERSION
+echo>>%egg_info% Summary: VTK is an open-source toolkit for 3D computer graphics, image processing, and visualization
+echo>>%egg_info% Platform: UNKNOWN

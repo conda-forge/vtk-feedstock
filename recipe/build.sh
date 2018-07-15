@@ -63,3 +63,11 @@ cmake .. -G "Ninja" \
 
 # compile & install!
 ninja install
+
+cat > $SP_DIR/vtk-$PKG_VERSION.egg-info <<FAKE_EGG
+Metadata-Version: 2.1
+Name: vtk
+Version: $PKG_VERSION
+Summary: VTK is an open-source toolkit for 3D computer graphics, image processing, and visualization
+Platform: UNKNOWN
+FAKE_EGG
