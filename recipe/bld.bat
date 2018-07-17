@@ -43,8 +43,15 @@ if errorlevel 1 exit 1
 ninja install
 if errorlevel 1 exit 1
 
+REM The egg-info file is necessary because some packages,
+REM like mayavi, have a __requires__ in their __init__.py,
+REM which means pkg_resources needs to be able to find vtk.
+REM See https://setuptools.readthedocs.io/en/latest/pkg_resources.html#workingset-objects
+
 set egg_info=%SP_DIR%\vtk-%PKG_VERSION%.egg-info
 echo>%egg_info% Metadata-Version: 2.1
 echo>>%egg_info% Version: $PKG_VERSION
 echo>>%egg_info% Summary: VTK is an open-source toolkit for 3D computer graphics, image processing, and visualization
 echo>>%egg_info% Platform: UNKNOWN
+
+if errorlevel 1 exit 1

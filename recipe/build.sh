@@ -64,6 +64,11 @@ cmake .. -G "Ninja" \
 # compile & install!
 ninja install
 
+# The egg-info file is necessary because some packages,
+# like mayavi, have a __requires__ in their __init__.py,
+# which means pkg_resources needs to be able to find vtk.
+# See https://setuptools.readthedocs.io/en/latest/pkg_resources.html#workingset-objects
+
 cat > $SP_DIR/vtk-$PKG_VERSION.egg-info <<FAKE_EGG
 Metadata-Version: 2.1
 Name: vtk
