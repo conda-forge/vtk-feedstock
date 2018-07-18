@@ -81,6 +81,8 @@ test:
     - vtk.vtkViewsCore
     - vtk.vtkRenderingVolume
     - vtk.vtkInteractionWidgets
+  requires:
+    - setuptools
 
 about:
   home: http://www.vtk.org/
