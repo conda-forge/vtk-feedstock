@@ -38,6 +38,7 @@ requirements:
     - jsoncpp
     - expat
     - tbb
+    - tbb-devel
     - mesalib   # [VTK_WITH_OSMESA]
     - libnetcdf
     - lz4-c
