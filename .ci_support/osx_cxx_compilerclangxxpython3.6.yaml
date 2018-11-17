@@ -2,12 +2,14 @@ MACOSX_DEPLOYMENT_TARGET:
 - '10.9'
 VTK_WITH_OSMESA:
 - 'False'
+build_number_decrement:
+- '0'
 channel_sources:
-- conda-forge,defaults
+- conda-forge/label/gcc7,defaults
 channel_targets:
-- conda-forge main
+- conda-forge gcc7
 cxx_compiler:
-- toolchain_cxx
+- clangxx
 expat:
 - '2.2'
 freetype:
@@ -19,7 +21,7 @@ jsoncpp:
 libnetcdf:
 - '4.6'
 libpng:
-- 1.6.34
+- 1.6.35
 libtiff:
 - 4.0.9
 libxml2:
@@ -60,5 +62,10 @@ python:
 - '3.6'
 vtk:
 - 8.1.1
+zip_keys:
+- - cxx_compiler
+  - channel_sources
+  - channel_targets
+  - build_number_decrement
 zlib:
 - '1.2'

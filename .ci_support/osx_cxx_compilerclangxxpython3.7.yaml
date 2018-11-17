@@ -1,13 +1,15 @@
+MACOSX_DEPLOYMENT_TARGET:
+- '10.9'
 VTK_WITH_OSMESA:
 - 'False'
+build_number_decrement:
+- '0'
 channel_sources:
-- conda-forge,defaults
+- conda-forge/label/gcc7,defaults
 channel_targets:
-- conda-forge main
+- conda-forge gcc7
 cxx_compiler:
-- toolchain_cxx
-docker_image:
-- condaforge/linux-anvil
+- clangxx
 expat:
 - '2.2'
 freetype:
@@ -19,13 +21,17 @@ jsoncpp:
 libnetcdf:
 - '4.6'
 libpng:
-- 1.6.34
+- 1.6.35
 libtiff:
 - 4.0.9
 libxml2:
 - '2.9'
 lz4_c:
 - 1.8.1
+macos_machine:
+- x86_64-apple-darwin13.4.0
+macos_min_version:
+- '10.9'
 pin_run_as_build:
   expat:
     max_pin: x.x
@@ -53,8 +59,13 @@ pin_run_as_build:
   zlib:
     max_pin: x.x
 python:
-- '3.6'
+- '3.7'
 vtk:
 - 8.1.1
+zip_keys:
+- - cxx_compiler
+  - channel_sources
+  - channel_targets
+  - build_number_decrement
 zlib:
 - '1.2'

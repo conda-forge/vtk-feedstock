@@ -1,11 +1,15 @@
 VTK_WITH_OSMESA:
-- 'False'
+- 'True'
+build_number_decrement:
+- '0'
 channel_sources:
-- conda-forge,defaults
+- conda-forge/label/gcc7,defaults
 channel_targets:
-- conda-forge main
+- conda-forge gcc7
 cxx_compiler:
-- vs2015
+- gxx
+docker_image:
+- condaforge/linux-anvil-comp7
 expat:
 - '2.2'
 freetype:
@@ -55,7 +59,10 @@ python:
 vtk:
 - 8.1.1
 zip_keys:
-- - python
-  - cxx_compiler
+- - cxx_compiler
+  - channel_sources
+  - channel_targets
+  - docker_image
+  - build_number_decrement
 zlib:
 - '1.2'
