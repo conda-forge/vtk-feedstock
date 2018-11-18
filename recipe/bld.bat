@@ -1,6 +1,9 @@
 mkdir build
 cd build
 
+:: remove -GL from CXXFLAGS
+set "CXXFLAGS=-MD"
+
 set BUILD_CONFIG=Release
 
 :: tell cmake where Python is
