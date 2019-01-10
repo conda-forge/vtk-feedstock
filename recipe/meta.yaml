@@ -12,7 +12,7 @@ package:
 source:
   url: http://www.vtk.org/files/release/{{ minor_version }}/VTK-{{ version }}.tar.gz
   fn:  VTK-{{ version }}.tar.gz
-  md5: fe77ae0414ab8b550f94a0f299502a2e
+  sha256: 0995fb36857dd76ccfb8bb07350c214d9f9099e80b1e66b4a8909311f24ff0db
 
 build:
   skip: True  # [win and py27]
