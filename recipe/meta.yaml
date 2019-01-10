@@ -1,5 +1,5 @@
 {% set version = "8.1.2" %}
-{% set build_number = 1004 %}
+{% set build_number = 1000 %}
 
 {% set minor_version = ".".join(version.split(".")[:2]) %}
 
