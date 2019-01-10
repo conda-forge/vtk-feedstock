@@ -1,4 +1,4 @@
-{% set version = "8.1.1" %}
+{% set version = "8.1.2" %}
 {% set build_number = 1004 %}
 
 {% set minor_version = ".".join(version.split(".")[:2]) %}
@@ -12,7 +12,7 @@ package:
 source:
   url: http://www.vtk.org/files/release/{{ minor_version }}/VTK-{{ version }}.tar.gz
   fn:  VTK-{{ version }}.tar.gz
-  sha256: 71a09b4340f0a9c58559fe946dc745ab68a866cf20636a41d97b6046cb736324
+  md5: fe77ae0414ab8b550f94a0f299502a2e
 
 build:
   skip: True  # [win and py27]
