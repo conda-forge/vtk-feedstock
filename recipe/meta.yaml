@@ -25,6 +25,7 @@ requirements:
     - {{ compiler("cxx") }}
     - cmake
     - ninja
+    
   host:
     - python
     # VTK Third Party dependencies
@@ -45,6 +46,8 @@ requirements:
     - libogg      # [unix]
     - libtheora   # [unix]
     - xorg-libxt  # [linux]
+    - {{ cdt('mesa-libgl-devel') }}  # [linux]
+    
   run:
     - python
     - future  # used in the generated python wrappers
@@ -82,6 +85,7 @@ test:
     - vtk.vtkViewsCore
     - vtk.vtkRenderingVolume
     - vtk.vtkInteractionWidgets
+    
   requires:
     - setuptools
 
