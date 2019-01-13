@@ -25,7 +25,13 @@ requirements:
     - {{ compiler("cxx") }}
     - cmake
     - ninja
+    - {{ cdt('libselinux') }}        # [linux and not VTK_WITH_OSMESA]
+    - {{ cdt('libxcb') }}            # [linux and not VTK_WITH_OSMESA]
+    - {{ cdt('libxdamage') }}        # [linux and not VTK_WITH_OSMESA]
+    - {{ cdt('libxfixes') }}         # [linux and not VTK_WITH_OSMESA]
+    - {{ cdt('libxxf86vm') }}        # [linux and not VTK_WITH_OSMESA]
     - {{ cdt('mesa-libgl-devel') }}  # [linux and not VTK_WITH_OSMESA]
+    - {{ cdt('mesa-dri-drivers') }}  # [linux and not VTK_WITH_OSMESA]
     
   host:
     - python
