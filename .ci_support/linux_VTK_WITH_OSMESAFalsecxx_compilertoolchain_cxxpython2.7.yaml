@@ -14,6 +14,8 @@ expat:
 - '2.2'
 freetype:
 - 2.9.1
+hdf5:
+- 1.10.4
 jpeg:
 - '9'
 jsoncpp:
