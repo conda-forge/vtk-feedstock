@@ -25,6 +25,7 @@ requirements:
     - {{ compiler("cxx") }}
     - cmake
     - ninja
+    - {{ cdt('mesa-libgl-devel') }}  # [linux]
     
   host:
     - python
@@ -46,7 +47,6 @@ requirements:
     - libogg      # [unix]
     - libtheora   # [unix]
     - xorg-libxt  # [linux]
-    - {{ cdt('mesa-libgl-devel') }}  # [linux]
     
   run:
     - python
