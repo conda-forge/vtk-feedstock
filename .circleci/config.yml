@@ -1,11 +1,15 @@
+# This file was generated automatically from conda-smithy. To update this configuration,
+# update the conda-forge.yml and/or the recipe/meta.yaml.
+# -*- mode: yaml -*-
+
 version: 2
 
 jobs:
-  build_linux_VTK_WITH_OSMESAFalsecxx_compilergxxpython2.7:
+  build_linux_VTK_WITH_OSMESAFalsepython2.7:
     working_directory: ~/test
     machine: true
     environment:
-      - CONFIG: "linux_VTK_WITH_OSMESAFalsecxx_compilergxxpython2.7"
+      - CONFIG: "linux_VTK_WITH_OSMESAFalsepython2.7"
     steps:
       - checkout
       - run:
@@ -14,15 +18,15 @@ jobs:
             ./.circleci/fast_finish_ci_pr_build.sh
             ./.circleci/checkout_merge_commit.sh
       - run:
-          command: docker pull condaforge/linux-anvil
+          command: docker pull condaforge/linux-anvil-comp7
       - run:
           # Run, test and (if we have a BINSTAR_TOKEN) upload the distributions.
           command: ./.circleci/run_docker_build.sh
-  build_linux_VTK_WITH_OSMESAFalsecxx_compilergxxpython3.6:
+  build_linux_VTK_WITH_OSMESAFalsepython3.6:
     working_directory: ~/test
     machine: true
     environment:
-      - CONFIG: "linux_VTK_WITH_OSMESAFalsecxx_compilergxxpython3.6"
+      - CONFIG: "linux_VTK_WITH_OSMESAFalsepython3.6"
     steps:
       - checkout
       - run:
@@ -31,15 +35,15 @@ jobs:
             ./.circleci/fast_finish_ci_pr_build.sh
             ./.circleci/checkout_merge_commit.sh
       - run:
-          command: docker pull condaforge/linux-anvil
+          command: docker pull condaforge/linux-anvil-comp7
       - run:
           # Run, test and (if we have a BINSTAR_TOKEN) upload the distributions.
           command: ./.circleci/run_docker_build.sh
-  build_linux_VTK_WITH_OSMESAFalsecxx_compilergxxpython3.7:
+  build_linux_VTK_WITH_OSMESAFalsepython3.7:
     working_directory: ~/test
     machine: true
     environment:
-      - CONFIG: "linux_VTK_WITH_OSMESAFalsecxx_compilergxxpython3.7"
+      - CONFIG: "linux_VTK_WITH_OSMESAFalsepython3.7"
     steps:
       - checkout
       - run:
@@ -48,15 +52,15 @@ jobs:
             ./.circleci/fast_finish_ci_pr_build.sh
             ./.circleci/checkout_merge_commit.sh
       - run:
-          command: docker pull condaforge/linux-anvil
+          command: docker pull condaforge/linux-anvil-comp7
       - run:
           # Run, test and (if we have a BINSTAR_TOKEN) upload the distributions.
           command: ./.circleci/run_docker_build.sh
-  build_linux_VTK_WITH_OSMESAFalsecxx_compilertoolchain_cxxpython2.7:
+  build_linux_VTK_WITH_OSMESATruepython2.7:
     working_directory: ~/test
     machine: true
     environment:
-      - CONFIG: "linux_VTK_WITH_OSMESAFalsecxx_compilertoolchain_cxxpython2.7"
+      - CONFIG: "linux_VTK_WITH_OSMESATruepython2.7"
     steps:
       - checkout
       - run:
@@ -65,15 +69,15 @@ jobs:
             ./.circleci/fast_finish_ci_pr_build.sh
             ./.circleci/checkout_merge_commit.sh
       - run:
-          command: docker pull condaforge/linux-anvil
+          command: docker pull condaforge/linux-anvil-comp7
       - run:
           # Run, test and (if we have a BINSTAR_TOKEN) upload the distributions.
           command: ./.circleci/run_docker_build.sh
-  build_linux_VTK_WITH_OSMESAFalsecxx_compilertoolchain_cxxpython3.6:
+  build_linux_VTK_WITH_OSMESATruepython3.6:
     working_directory: ~/test
     machine: true
     environment:
-      - CONFIG: "linux_VTK_WITH_OSMESAFalsecxx_compilertoolchain_cxxpython3.6"
+      - CONFIG: "linux_VTK_WITH_OSMESATruepython3.6"
     steps:
       - checkout
       - run:
@@ -82,15 +86,15 @@ jobs:
             ./.circleci/fast_finish_ci_pr_build.sh
             ./.circleci/checkout_merge_commit.sh
       - run:
-          command: docker pull condaforge/linux-anvil
+          command: docker pull condaforge/linux-anvil-comp7
       - run:
           # Run, test and (if we have a BINSTAR_TOKEN) upload the distributions.
           command: ./.circleci/run_docker_build.sh
-  build_linux_VTK_WITH_OSMESAFalsecxx_compilertoolchain_cxxpython3.7:
+  build_linux_VTK_WITH_OSMESATruepython3.7:
     working_directory: ~/test
     machine: true
     environment:
-      - CONFIG: "linux_VTK_WITH_OSMESAFalsecxx_compilertoolchain_cxxpython3.7"
+      - CONFIG: "linux_VTK_WITH_OSMESATruepython3.7"
     steps:
       - checkout
       - run:
@@ -99,118 +103,16 @@ jobs:
             ./.circleci/fast_finish_ci_pr_build.sh
             ./.circleci/checkout_merge_commit.sh
       - run:
-          command: docker pull condaforge/linux-anvil
+          command: docker pull condaforge/linux-anvil-comp7
       - run:
           # Run, test and (if we have a BINSTAR_TOKEN) upload the distributions.
           command: ./.circleci/run_docker_build.sh
-  build_linux_VTK_WITH_OSMESATruecxx_compilergxxpython2.7:
-    working_directory: ~/test
-    machine: true
-    environment:
-      - CONFIG: "linux_VTK_WITH_OSMESATruecxx_compilergxxpython2.7"
-    steps:
-      - checkout
-      - run:
-          name: Fast finish outdated PRs and merge PRs
-          command: |
-            ./.circleci/fast_finish_ci_pr_build.sh
-            ./.circleci/checkout_merge_commit.sh
-      - run:
-          command: docker pull condaforge/linux-anvil
-      - run:
-          # Run, test and (if we have a BINSTAR_TOKEN) upload the distributions.
-          command: ./.circleci/run_docker_build.sh
-  build_linux_VTK_WITH_OSMESATruecxx_compilergxxpython3.6:
-    working_directory: ~/test
-    machine: true
-    environment:
-      - CONFIG: "linux_VTK_WITH_OSMESATruecxx_compilergxxpython3.6"
-    steps:
-      - checkout
-      - run:
-          name: Fast finish outdated PRs and merge PRs
-          command: |
-            ./.circleci/fast_finish_ci_pr_build.sh
-            ./.circleci/checkout_merge_commit.sh
-      - run:
-          command: docker pull condaforge/linux-anvil
-      - run:
-          # Run, test and (if we have a BINSTAR_TOKEN) upload the distributions.
-          command: ./.circleci/run_docker_build.sh
-  build_linux_VTK_WITH_OSMESATruecxx_compilergxxpython3.7:
-    working_directory: ~/test
-    machine: true
-    environment:
-      - CONFIG: "linux_VTK_WITH_OSMESATruecxx_compilergxxpython3.7"
-    steps:
-      - checkout
-      - run:
-          name: Fast finish outdated PRs and merge PRs
-          command: |
-            ./.circleci/fast_finish_ci_pr_build.sh
-            ./.circleci/checkout_merge_commit.sh
-      - run:
-          command: docker pull condaforge/linux-anvil
-      - run:
-          # Run, test and (if we have a BINSTAR_TOKEN) upload the distributions.
-          command: ./.circleci/run_docker_build.sh
-  build_linux_VTK_WITH_OSMESATruecxx_compilertoolchain_cxxpython2.7:
-    working_directory: ~/test
-    machine: true
-    environment:
-      - CONFIG: "linux_VTK_WITH_OSMESATruecxx_compilertoolchain_cxxpython2.7"
-    steps:
-      - checkout
-      - run:
-          name: Fast finish outdated PRs and merge PRs
-          command: |
-            ./.circleci/fast_finish_ci_pr_build.sh
-            ./.circleci/checkout_merge_commit.sh
-      - run:
-          command: docker pull condaforge/linux-anvil
-      - run:
-          # Run, test and (if we have a BINSTAR_TOKEN) upload the distributions.
-          command: ./.circleci/run_docker_build.sh
-  build_linux_VTK_WITH_OSMESATruecxx_compilertoolchain_cxxpython3.6:
-    working_directory: ~/test
-    machine: true
-    environment:
-      - CONFIG: "linux_VTK_WITH_OSMESATruecxx_compilertoolchain_cxxpython3.6"
-    steps:
-      - checkout
-      - run:
-          name: Fast finish outdated PRs and merge PRs
-          command: |
-            ./.circleci/fast_finish_ci_pr_build.sh
-            ./.circleci/checkout_merge_commit.sh
-      - run:
-          command: docker pull condaforge/linux-anvil
-      - run:
-          # Run, test and (if we have a BINSTAR_TOKEN) upload the distributions.
-          command: ./.circleci/run_docker_build.sh
-  build_linux_VTK_WITH_OSMESATruecxx_compilertoolchain_cxxpython3.7:
-    working_directory: ~/test
-    machine: true
-    environment:
-      - CONFIG: "linux_VTK_WITH_OSMESATruecxx_compilertoolchain_cxxpython3.7"
-    steps:
-      - checkout
-      - run:
-          name: Fast finish outdated PRs and merge PRs
-          command: |
-            ./.circleci/fast_finish_ci_pr_build.sh
-            ./.circleci/checkout_merge_commit.sh
-      - run:
-          command: docker pull condaforge/linux-anvil
-      - run:
-          # Run, test and (if we have a BINSTAR_TOKEN) upload the distributions.
-          command: ./.circleci/run_docker_build.sh
-  build_osx_cxx_compilerclangxxpython2.7:
+  build_osx_python2.7:
     working_directory: ~/test
     macos:
       xcode: "9.0"
     environment:
-      - CONFIG: "osx_cxx_compilerclangxxpython2.7"
+      - CONFIG: "osx_python2.7"
     steps:
       - checkout
       - run:
@@ -221,12 +123,12 @@ jobs:
       - run:
           # Run, test and (if we have a BINSTAR_TOKEN) upload the distributions.
           command: ./.circleci/run_osx_build.sh
-  build_osx_cxx_compilerclangxxpython3.6:
+  build_osx_python3.6:
     working_directory: ~/test
     macos:
       xcode: "9.0"
     environment:
-      - CONFIG: "osx_cxx_compilerclangxxpython3.6"
+      - CONFIG: "osx_python3.6"
     steps:
       - checkout
       - run:
@@ -237,60 +139,12 @@ jobs:
       - run:
           # Run, test and (if we have a BINSTAR_TOKEN) upload the distributions.
           command: ./.circleci/run_osx_build.sh
-  build_osx_cxx_compilerclangxxpython3.7:
+  build_osx_python3.7:
     working_directory: ~/test
     macos:
       xcode: "9.0"
     environment:
-      - CONFIG: "osx_cxx_compilerclangxxpython3.7"
-    steps:
-      - checkout
-      - run:
-          name: Fast finish outdated PRs and merge PRs
-          command: |
-            ./.circleci/fast_finish_ci_pr_build.sh
-            ./.circleci/checkout_merge_commit.sh
-      - run:
-          # Run, test and (if we have a BINSTAR_TOKEN) upload the distributions.
-          command: ./.circleci/run_osx_build.sh
-  build_osx_cxx_compilertoolchain_cxxpython2.7:
-    working_directory: ~/test
-    macos:
-      xcode: "9.0"
-    environment:
-      - CONFIG: "osx_cxx_compilertoolchain_cxxpython2.7"
-    steps:
-      - checkout
-      - run:
-          name: Fast finish outdated PRs and merge PRs
-          command: |
-            ./.circleci/fast_finish_ci_pr_build.sh
-            ./.circleci/checkout_merge_commit.sh
-      - run:
-          # Run, test and (if we have a BINSTAR_TOKEN) upload the distributions.
-          command: ./.circleci/run_osx_build.sh
-  build_osx_cxx_compilertoolchain_cxxpython3.6:
-    working_directory: ~/test
-    macos:
-      xcode: "9.0"
-    environment:
-      - CONFIG: "osx_cxx_compilertoolchain_cxxpython3.6"
-    steps:
-      - checkout
-      - run:
-          name: Fast finish outdated PRs and merge PRs
-          command: |
-            ./.circleci/fast_finish_ci_pr_build.sh
-            ./.circleci/checkout_merge_commit.sh
-      - run:
-          # Run, test and (if we have a BINSTAR_TOKEN) upload the distributions.
-          command: ./.circleci/run_osx_build.sh
-  build_osx_cxx_compilertoolchain_cxxpython3.7:
-    working_directory: ~/test
-    macos:
-      xcode: "9.0"
-    environment:
-      - CONFIG: "osx_cxx_compilertoolchain_cxxpython3.7"
+      - CONFIG: "osx_python3.7"
     steps:
       - checkout
       - run:
@@ -306,21 +160,12 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-      - build_linux_VTK_WITH_OSMESAFalsecxx_compilergxxpython2.7
-      - build_linux_VTK_WITH_OSMESAFalsecxx_compilergxxpython3.6
-      - build_linux_VTK_WITH_OSMESAFalsecxx_compilergxxpython3.7
-      - build_linux_VTK_WITH_OSMESAFalsecxx_compilertoolchain_cxxpython2.7
-      - build_linux_VTK_WITH_OSMESAFalsecxx_compilertoolchain_cxxpython3.6
-      - build_linux_VTK_WITH_OSMESAFalsecxx_compilertoolchain_cxxpython3.7
-      - build_linux_VTK_WITH_OSMESATruecxx_compilergxxpython2.7
-      - build_linux_VTK_WITH_OSMESATruecxx_compilergxxpython3.6
-      - build_linux_VTK_WITH_OSMESATruecxx_compilergxxpython3.7
-      - build_linux_VTK_WITH_OSMESATruecxx_compilertoolchain_cxxpython2.7
-      - build_linux_VTK_WITH_OSMESATruecxx_compilertoolchain_cxxpython3.6
-      - build_linux_VTK_WITH_OSMESATruecxx_compilertoolchain_cxxpython3.7
-      - build_osx_cxx_compilerclangxxpython2.7
-      - build_osx_cxx_compilerclangxxpython3.6
-      - build_osx_cxx_compilerclangxxpython3.7
-      - build_osx_cxx_compilertoolchain_cxxpython2.7
-      - build_osx_cxx_compilertoolchain_cxxpython3.6
-      - build_osx_cxx_compilertoolchain_cxxpython3.7
+      - build_linux_VTK_WITH_OSMESAFalsepython2.7
+      - build_linux_VTK_WITH_OSMESAFalsepython3.6
+      - build_linux_VTK_WITH_OSMESAFalsepython3.7
+      - build_linux_VTK_WITH_OSMESATruepython2.7
+      - build_linux_VTK_WITH_OSMESATruepython3.6
+      - build_linux_VTK_WITH_OSMESATruepython3.7
+      - build_osx_python2.7
+      - build_osx_python3.6
+      - build_osx_python3.7
