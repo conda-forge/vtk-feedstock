@@ -1,6 +1,6 @@
 #!/bin/bash
 
-mkdir build
+mkdir -p build
 cd build
 
 BUILD_CONFIG=Release
@@ -62,10 +62,10 @@ cmake .. -G "Ninja" \
     ${SCREEN_ARGS[@]} ${WITH_OSMESA[@]}
 
 # compile & install!
-ninja install
+ninja install -v
 
 # The egg-info file is necessary because some packages,
-# like mayavi, have a __requires__ in their __init__.py,
+# like mayavi, have a __requires__ in their __invtkRenderWindow::New()it__.py,
 # which means pkg_resources needs to be able to find vtk.
 # See https://setuptools.readthedocs.io/en/latest/pkg_resources.html#workingset-objects
 

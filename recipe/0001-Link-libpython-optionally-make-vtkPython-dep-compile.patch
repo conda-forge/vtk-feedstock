@@ -1,0 +1,46 @@
+From 24dde6045311e0f208e45fe27f251f8661f48904 Mon Sep 17 00:00:00 2001
+From: Nehal J Wani <nehaljw.kkd1@gmail.com>
+Date: Fri, 16 Mar 2018 13:08:31 -0500
+Subject: [PATCH 1/4] Link libpython optionally, make vtkPython dep compile time only
+
+---
+ Rendering/Matplotlib/module.cmake        |    6 ++++--
+ Utilities/PythonInterpreter/module.cmake |    5 +++--
+ 2 files changed, 7 insertions(+), 4 deletions(-)
+
+diff --git a/Rendering/Matplotlib/module.cmake b/Rendering/Matplotlib/module.cmake
+index 042b6d5..2da4189 100644
+--- a/Rendering/Matplotlib/module.cmake
++++ b/Rendering/Matplotlib/module.cmake
+@@ -28,7 +28,9 @@ vtk_module(vtkRenderingMatplotlib
+     vtkCommonDataModel
+     vtkCommonTransforms
+     vtkImagingCore
+-    vtkPython
+     vtkRenderingCore
+     vtkWrappingPythonCore
+-  )
+\ No newline at end of file
++  COMPILE_DEPENDS
++    vtkPython
++  OPTIONAL_PYTHON_LINK
++  )
+diff --git a/Utilities/PythonInterpreter/module.cmake b/Utilities/PythonInterpreter/module.cmake
+index 2f0a661..43637d8 100644
+--- a/Utilities/PythonInterpreter/module.cmake
++++ b/Utilities/PythonInterpreter/module.cmake
+@@ -3,7 +3,8 @@ vtk_module(vtkPythonInterpreter
+     vtkWrapping
+   DEPENDS
+     vtkCommonCore
+-    vtkPython
+     vtksys
++  COMPILE_DEPENDS
++    vtkPython
+   OPTIONAL_PYTHON_LINK
+-)
+\ No newline at end of file
++)
+-- 
+1.7.1
+
