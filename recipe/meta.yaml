@@ -29,21 +29,20 @@ requirements:
     - {{ compiler("cxx") }}
     - cmake
     - ninja
-    - {{ cdt('libxcb') }}  # [linux]
-    - {{ cdt('libxau') }}  # [linux]
-    - {{ cdt('libxau') }}  # [linux]
-    - {{ cdt('libuuid') }}  # [linux]
-    - {{ cdt('libxext') }}  # [linux]
-    - {{ cdt('libxfixes') }}  # [linux]
-    - {{ cdt('libxxf86vm') }}  # [linux]
-    - {{ cdt('libxdamage') }}  # [linux]
-    - {{ cdt('libselinux') }}  # [linux]
-    - {{ cdt('libsm-devel') }}  # [linux]
-    - {{ cdt('libice-devel') }}  # [linux]
-    - {{ cdt('libx11-devel') }}  # [linux]
-    - {{ cdt('mesa-libgl-devel') }}  # [linux]
-    - {{ cdt('mesa-dri-drivers') }}  # [linux]
-    - {{ cdt('xorg-x11-proto-devel') }}  # [linux]
+    - {{ cdt('libxcb') }}  # [linux and not VTK_WITH_OSMESA]
+    - {{ cdt('libxau') }}  # [linux and not VTK_WITH_OSMESA]
+    - {{ cdt('libuuid') }}  # [linux and not VTK_WITH_OSMESA]
+    - {{ cdt('libxext') }}  # [linux and not VTK_WITH_OSMESA]
+    - {{ cdt('libxfixes') }}  # [linux and not VTK_WITH_OSMESA]
+    - {{ cdt('libxxf86vm') }}  # [linux and not VTK_WITH_OSMESA]
+    - {{ cdt('libxdamage') }}  # [linux and not VTK_WITH_OSMESA]
+    - {{ cdt('libselinux') }}  # [linux and not VTK_WITH_OSMESA]
+    - {{ cdt('libsm-devel') }}  # [linux and not VTK_WITH_OSMESA]
+    - {{ cdt('libice-devel') }}  # [linux and not VTK_WITH_OSMESA]
+    - {{ cdt('libx11-devel') }}  # [linux and not VTK_WITH_OSMESA]
+    - {{ cdt('mesa-libgl-devel') }}  # [linux and not VTK_WITH_OSMESA]
+    - {{ cdt('mesa-dri-drivers') }}  # [linux and not VTK_WITH_OSMESA]
+    - {{ cdt('xorg-x11-proto-devel') }}  # [linux and not VTK_WITH_OSMESA]
     
   host:
     - python
