@@ -5,9 +5,9 @@ channel_sources:
 channel_targets:
 - conda-forge main
 cxx_compiler:
-- toolchain_cxx
+- gxx
 docker_image:
-- condaforge/linux-anvil
+- condaforge/linux-anvil-comp7
 expat:
 - '2.2'
 freetype:
@@ -15,11 +15,11 @@ freetype:
 jpeg:
 - '9'
 jsoncpp:
-- 1.8.1
+- 1.8.4
 libnetcdf:
 - '4.6'
 libpng:
-- 1.6.34
+- 1.6.35
 libtiff:
 - 4.0.9
 libxml2:

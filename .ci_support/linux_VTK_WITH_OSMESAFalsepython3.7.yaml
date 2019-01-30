@@ -5,7 +5,9 @@ channel_sources:
 channel_targets:
 - conda-forge main
 cxx_compiler:
-- vs2015
+- gxx
+docker_image:
+- condaforge/linux-anvil-comp7
 expat:
 - '2.2'
 freetype:
@@ -13,11 +15,11 @@ freetype:
 jpeg:
 - '9'
 jsoncpp:
-- 1.8.1
+- 1.8.4
 libnetcdf:
 - '4.6'
 libpng:
-- 1.6.34
+- 1.6.35
 libtiff:
 - 4.0.9
 libxml2:
@@ -51,11 +53,8 @@ pin_run_as_build:
   zlib:
     max_pin: x.x
 python:
-- '3.5'
+- '3.7'
 vtk:
 - 8.1.1
-zip_keys:
-- - python
-  - cxx_compiler
 zlib:
 - '1.2'
