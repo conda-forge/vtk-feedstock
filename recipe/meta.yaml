@@ -16,6 +16,7 @@ source:
   patches:
     - 0001-Link-libpython-optionally-make-vtkPython-dep-compile.patch
     - 0002-VTKGenerateExportHeader-Prefer-dumpversion-over-vers.patch
+    - 0003_backport_pyside2_support.diff
 
 
 build:
