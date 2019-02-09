@@ -10,23 +10,14 @@ jobs:
   strategy:
     maxParallel: 8
     matrix:
-      linux_VTK_WITH_OSMESAFalsepython2.7:
-        CONFIG: linux_VTK_WITH_OSMESAFalsepython2.7
+      linux_python2.7:
+        CONFIG: linux_python2.7
         UPLOAD_PACKAGES: False
-      linux_VTK_WITH_OSMESAFalsepython3.6:
-        CONFIG: linux_VTK_WITH_OSMESAFalsepython3.6
+      linux_python3.6:
+        CONFIG: linux_python3.6
         UPLOAD_PACKAGES: False
-      linux_VTK_WITH_OSMESAFalsepython3.7:
-        CONFIG: linux_VTK_WITH_OSMESAFalsepython3.7
-        UPLOAD_PACKAGES: False
-      linux_VTK_WITH_OSMESATruepython2.7:
-        CONFIG: linux_VTK_WITH_OSMESATruepython2.7
-        UPLOAD_PACKAGES: False
-      linux_VTK_WITH_OSMESATruepython3.6:
-        CONFIG: linux_VTK_WITH_OSMESATruepython3.6
-        UPLOAD_PACKAGES: False
-      linux_VTK_WITH_OSMESATruepython3.7:
-        CONFIG: linux_VTK_WITH_OSMESATruepython3.7
+      linux_python3.7:
+        CONFIG: linux_python3.7
         UPLOAD_PACKAGES: False
   steps:
   - script: |
