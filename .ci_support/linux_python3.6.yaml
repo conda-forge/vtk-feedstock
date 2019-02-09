@@ -1,25 +1,27 @@
 VTK_WITH_OSMESA:
-- 'True'
+- 'False'
 channel_sources:
 - conda-forge,defaults
 channel_targets:
 - conda-forge main
 cxx_compiler:
-- toolchain_cxx
+- gxx
 docker_image:
-- condaforge/linux-anvil
+- condaforge/linux-anvil-comp7
 expat:
 - '2.2'
 freetype:
 - 2.9.1
+hdf5:
+- 1.10.4
 jpeg:
 - '9'
 jsoncpp:
-- 1.8.1
+- 1.8.4
 libnetcdf:
 - '4.6'
 libpng:
-- 1.6.34
+- 1.6.35
 libtiff:
 - 4.0.9
 libxml2:
@@ -53,7 +55,7 @@ pin_run_as_build:
   zlib:
     max_pin: x.x
 python:
-- '2.7'
+- '3.6'
 vtk:
 - 8.1.1
 zlib:

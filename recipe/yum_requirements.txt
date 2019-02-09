@@ -1,1 +1,1 @@
-mesa-libGLU-devel
+mesa-libGL-devel

@@ -1,0 +1,60 @@
+diff --git a/Wrapping/Python/vtk/qt/QVTKRenderWindowInteractor.py b/Wrapping/Python/vtk/qt/QVTKRenderWindowInteractor.py
+index 9b56ce2d..ba9199e4 100644
+--- a/Wrapping/Python/vtk/qt/QVTKRenderWindowInteractor.py
++++ b/Wrapping/Python/vtk/qt/QVTKRenderWindowInteractor.py
+@@ -63,14 +63,18 @@ if PyQtImpl is None:
+         PyQtImpl = "PyQt5"
+     except ImportError:
+         try:
+-            import PyQt4
+-            PyQtImpl = "PyQt4"
++            import PySide2
++            PyQtImpl = "PySide2"
+         except ImportError:
+             try:
+-                import PySide
+-                PyQtImpl = "PySide"
++                import PyQt4
++                PyQtImpl = "PyQt4"
+             except ImportError:
+-                raise ImportError("Cannot load either PyQt or PySide")
++                try:
++                    import PySide
++                    PyQtImpl = "PySide"
++                except ImportError:
++                    raise ImportError("Cannot load either PyQt or PySide")
+ 
+ if PyQtImpl == "PyQt5":
+     if QVTKRWIBase == "QGLWidget":
+@@ -83,6 +87,18 @@ if PyQtImpl == "PyQt5":
+     from PyQt5.QtCore import QObject
+     from PyQt5.QtCore import QSize
+     from PyQt5.QtCore import QEvent
++elif PyQtImpl == "PySide2":
++    if QVTKRWIBase == "QGLWidget":
++        from PySide2.QtOpenGL import QGLWidget
++    from PySide2.QtWidgets import QWidget
++    from PySide2.QtWidgets import QSizePolicy
++    from PySide2.QtWidgets import QApplication
++    from PySide2.QtGui import QCursor
++    from PySide2.QtCore import Qt
++    from PySide2.QtCore import QTimer
++    from PySide2.QtCore import QObject
++    from PySide2.QtCore import QSize
++    from PySide2.QtCore import QEvent
+ elif PyQtImpl == "PyQt4":
+     if QVTKRWIBase == "QGLWidget":
+         from PyQt4.QtOpenGL import QGLWidget
+diff --git a/Wrapping/Python/vtk/qt/__init__.py b/Wrapping/Python/vtk/qt/__init__.py
+index ada0af31..2e46e6e8 100644
+--- a/Wrapping/Python/vtk/qt/__init__.py
++++ b/Wrapping/Python/vtk/qt/__init__.py
+@@ -25,7 +25,7 @@ import sys
+ PyQtImpl = None
+ 
+ # Has an implementation has been imported yet?
+-for impl in ["PyQt5", "PyQt4", "PySide"]:
++for impl in ["PyQt5", "PySide2", "PyQt4", "PySide"]:
+     if impl in sys.modules:
+         PyQtImpl = impl
+         break

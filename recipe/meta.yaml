@@ -1,5 +1,5 @@
-{% set version = "8.1.1" %}
-{% set build_number = 4 %}
+{% set version = "8.1.2" %}
+{% set build_number = 1000 %}
 
 {% set minor_version = ".".join(version.split(".")[:2]) %}
 
@@ -12,7 +12,12 @@ package:
 source:
   url: http://www.vtk.org/files/release/{{ minor_version }}/VTK-{{ version }}.tar.gz
   fn:  VTK-{{ version }}.tar.gz
-  sha256: 71a09b4340f0a9c58559fe946dc745ab68a866cf20636a41d97b6046cb736324
+  sha256: 0995fb36857dd76ccfb8bb07350c214d9f9099e80b1e66b4a8909311f24ff0db
+  patches:
+    - 0001-Link-libpython-optionally-make-vtkPython-dep-compile.patch
+    - 0002-VTKGenerateExportHeader-Prefer-dumpversion-over-vers.patch
+    - 0003_backport_pyside2_support.diff
+
 
 build:
   skip: True  # [win and py27]
@@ -25,12 +30,27 @@ requirements:
     - {{ compiler("cxx") }}
     - cmake
     - ninja
+    - {{ cdt('libxcb') }}  # [linux and not VTK_WITH_OSMESA]
+    - {{ cdt('libxau') }}  # [linux and not VTK_WITH_OSMESA]
+    - {{ cdt('libuuid') }}  # [linux and not VTK_WITH_OSMESA]
+    - {{ cdt('libxext') }}  # [linux and not VTK_WITH_OSMESA]
+    - {{ cdt('libxfixes') }}  # [linux and not VTK_WITH_OSMESA]
+    - {{ cdt('libxxf86vm') }}  # [linux and not VTK_WITH_OSMESA]
+    - {{ cdt('libxdamage') }}  # [linux and not VTK_WITH_OSMESA]
+    - {{ cdt('libselinux') }}  # [linux and not VTK_WITH_OSMESA]
+    - {{ cdt('libsm-devel') }}  # [linux and not VTK_WITH_OSMESA]
+    - {{ cdt('libice-devel') }}  # [linux and not VTK_WITH_OSMESA]
+    - {{ cdt('libx11-devel') }}  # [linux and not VTK_WITH_OSMESA]
+    - {{ cdt('mesa-libgl-devel') }}  # [linux and not VTK_WITH_OSMESA]
+    - {{ cdt('mesa-dri-drivers') }}  # [linux and not VTK_WITH_OSMESA]
+    - {{ cdt('xorg-x11-proto-devel') }}  # [linux and not VTK_WITH_OSMESA]
+    
   host:
     - python
     # VTK Third Party dependencies
     - zlib
     - freetype
-    - hdf5 1.10.1
+    - hdf5
     - libxml2
     - libpng
     - jpeg
@@ -45,13 +65,14 @@ requirements:
     - libogg      # [unix]
     - libtheora   # [unix]
     - xorg-libxt  # [linux]
+    
   run:
     - python
     - future  # used in the generated python wrappers
     # VTK Third Party dependencies
     - zlib
     - freetype
-    - hdf5 1.10.1
+    - hdf5
     - libxml2
     - libpng
     - jpeg
@@ -82,6 +103,7 @@ test:
     - vtk.vtkViewsCore
     - vtk.vtkRenderingVolume
     - vtk.vtkInteractionWidgets
+    
   requires:
     - setuptools
 
