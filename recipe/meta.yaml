@@ -88,6 +88,7 @@ requirements:
 test:
   imports:
     - vtk
+    - vtkmodules
     - vtk.vtkChartsCore
     - vtk.vtkCommonCore
     - vtk.vtkFiltersCore
