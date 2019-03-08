@@ -1,5 +1,5 @@
-{% set version = "8.1.2" %}
-{% set build_number = 1000 %}
+{% set version = "8.2.0" %}
+{% set build_number = 0 %}
 
 {% set minor_version = ".".join(version.split(".")[:2]) %}
 
@@ -12,12 +12,10 @@ package:
 source:
   url: http://www.vtk.org/files/release/{{ minor_version }}/VTK-{{ version }}.tar.gz
   fn:  VTK-{{ version }}.tar.gz
-  sha256: 0995fb36857dd76ccfb8bb07350c214d9f9099e80b1e66b4a8909311f24ff0db
+  sha256: 34c3dc775261be5e45a8049155f7228b6bd668106c72a3c435d95730d17d57bb
   patches:
     - 0001-Link-libpython-optionally-make-vtkPython-dep-compile.patch
     - 0002-VTKGenerateExportHeader-Prefer-dumpversion-over-vers.patch
-    - 0003_backport_pyside2_support.diff
-
 
 build:
   skip: True  # [win and py27]
@@ -44,7 +42,7 @@ requirements:
     - {{ cdt('mesa-libgl-devel') }}  # [linux and not VTK_WITH_OSMESA]
     - {{ cdt('mesa-dri-drivers') }}  # [linux and not VTK_WITH_OSMESA]
     - {{ cdt('xorg-x11-proto-devel') }}  # [linux and not VTK_WITH_OSMESA]
-    
+
   host:
     - python
     # VTK Third Party dependencies
@@ -62,10 +60,8 @@ requirements:
     - mesalib   # [VTK_WITH_OSMESA]
     - libnetcdf
     - lz4-c
-    - libogg      # [unix]
-    - libtheora   # [unix]
     - xorg-libxt  # [linux]
-    
+
   run:
     - python
     - future  # used in the generated python wrappers
@@ -83,8 +79,6 @@ requirements:
     - mesalib   # [VTK_WITH_OSMESA]
     - libnetcdf
     - lz4-c
-    - libogg      # [unix]
-    - libtheora   # [unix]
     - xorg-libxt  # [linux]
 
 test:
@@ -103,7 +97,21 @@ test:
     - vtk.vtkViewsCore
     - vtk.vtkRenderingVolume
     - vtk.vtkInteractionWidgets
-    
+    - vtkmodules
+    - vtkmodules.vtkChartsCore
+    - vtkmodules.vtkCommonCore
+    - vtkmodules.vtkFiltersCore
+    - vtkmodules.vtkFiltersGeneric
+    - vtkmodules.vtkGeovisCore
+    - vtkmodules.vtkFiltersHybrid
+    - vtkmodules.vtkIOCore
+    - vtkmodules.vtkImagingCore
+    - vtkmodules.vtkInfovisCore
+    - vtkmodules.vtkRenderingCore
+    - vtkmodules.vtkViewsCore
+    - vtkmodules.vtkRenderingVolume
+    - vtkmodules.vtkInteractionWidgets
+
   requires:
     - setuptools
 

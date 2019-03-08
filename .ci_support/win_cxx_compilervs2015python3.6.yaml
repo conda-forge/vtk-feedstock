@@ -17,7 +17,7 @@ jpeg:
 jsoncpp:
 - 1.8.4
 libnetcdf:
-- '4.6'
+- 4.6.2
 libpng:
 - 1.6.35
 libtiff:
@@ -36,7 +36,7 @@ pin_run_as_build:
   jsoncpp:
     max_pin: x.x.x
   libnetcdf:
-    max_pin: x.x
+    max_pin: x.x.x
   libpng:
     max_pin: x.x
   libtiff:
