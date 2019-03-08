@@ -60,8 +60,6 @@ requirements:
     - mesalib   # [VTK_WITH_OSMESA]
     - libnetcdf
     - lz4-c
-    - libogg      # [unix]
-    - libtheora   # [unix]
     - xorg-libxt  # [linux]
 
   run:
@@ -81,8 +79,6 @@ requirements:
     - mesalib   # [VTK_WITH_OSMESA]
     - libnetcdf
     - lz4-c
-    - libogg      # [unix]
-    - libtheora   # [unix]
     - xorg-libxt  # [linux]
 
 test:
