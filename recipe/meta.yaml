@@ -84,7 +84,6 @@ requirements:
 test:
   imports:
     - vtk
-    - vtkmodules
     - vtk.vtkChartsCore
     - vtk.vtkCommonCore
     - vtk.vtkFiltersCore
@@ -98,6 +97,20 @@ test:
     - vtk.vtkViewsCore
     - vtk.vtkRenderingVolume
     - vtk.vtkInteractionWidgets
+    - vtkmodules
+    - vtkmodules.vtkChartsCore
+    - vtkmodules.vtkCommonCore
+    - vtkmodules.vtkFiltersCore
+    - vtkmodules.vtkFiltersGeneric
+    - vtkmodules.vtkGeovisCore
+    - vtkmodules.vtkFiltersHybrid
+    - vtkmodules.vtkIOCore
+    - vtkmodules.vtkImagingCore
+    - vtkmodules.vtkInfovisCore
+    - vtkmodules.vtkRenderingCore
+    - vtkmodules.vtkViewsCore
+    - vtkmodules.vtkRenderingVolume
+    - vtkmodules.vtkInteractionWidgets
 
   requires:
     - setuptools
