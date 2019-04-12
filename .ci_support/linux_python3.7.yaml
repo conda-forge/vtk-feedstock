@@ -6,6 +6,8 @@ channel_targets:
 - conda-forge main
 cxx_compiler:
 - gxx
+cxx_compiler_version:
+- '7'
 docker_image:
 - condaforge/linux-anvil-comp7
 expat:
@@ -27,7 +29,7 @@ libtiff:
 libxml2:
 - '2.9'
 lz4_c:
-- 1.8.1
+- 1.8.3
 pin_run_as_build:
   expat:
     max_pin: x.x
@@ -57,6 +59,6 @@ pin_run_as_build:
 python:
 - '3.7'
 vtk:
-- 8.1.1
+- 8.2.0
 zlib:
 - '1.2'
