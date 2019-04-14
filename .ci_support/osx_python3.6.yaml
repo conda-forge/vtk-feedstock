@@ -8,6 +8,8 @@ channel_targets:
 - conda-forge main
 cxx_compiler:
 - clangxx
+cxx_compiler_version:
+- '4'
 expat:
 - '2.2'
 freetype:
@@ -27,7 +29,7 @@ libtiff:
 libxml2:
 - '2.9'
 lz4_c:
-- 1.8.1
+- 1.8.3
 macos_machine:
 - x86_64-apple-darwin13.4.0
 macos_min_version:
@@ -61,6 +63,6 @@ pin_run_as_build:
 python:
 - '3.6'
 vtk:
-- 8.1.1
+- 8.2.0
 zlib:
 - '1.2'
