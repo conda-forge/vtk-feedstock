@@ -81,6 +81,10 @@ requirements:
     - lz4-c
     - xorg-libxt  # [linux]
 
+  run_constrained:
+    # Paraview bundles its own VTK that has conflicting Python vtkmodules
+    - paraview ==9999999999
+
 test:
   imports:
     - vtk
