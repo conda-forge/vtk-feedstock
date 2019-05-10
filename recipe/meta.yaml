@@ -1,5 +1,5 @@
 {% set version = "8.2.0" %}
-{% set build_number = 1 %}
+{% set build_number = 2 %}
 
 {% set minor_version = ".".join(version.split(".")[:2]) %}
 
@@ -80,6 +80,10 @@ requirements:
     - libnetcdf
     - lz4-c
     - xorg-libxt  # [linux]
+
+  run_constrained:
+    # Paraview bundles its own VTK that has conflicting Python vtkmodules
+    - paraview ==9999999999
 
 test:
   imports:
