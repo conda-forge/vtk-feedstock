@@ -21,11 +21,11 @@ jpeg:
 jsoncpp:
 - 1.8.4
 libnetcdf:
-- 4.6.2
+- 4.7.1
 libpng:
-- 1.6.35
+- '1.6'
 libtiff:
-- 4.0.9
+- 4.0.10
 libxml2:
 - '2.9'
 lz4_c:
