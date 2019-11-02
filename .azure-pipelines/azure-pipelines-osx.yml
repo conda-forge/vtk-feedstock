@@ -19,6 +19,9 @@ jobs:
       osx_python3.7:
         CONFIG: osx_python3.7
         UPLOAD_PACKAGES: False
+      osx_python3.8:
+        CONFIG: osx_python3.8
+        UPLOAD_PACKAGES: False
 
   steps:
   # TODO: Fast finish on azure pipelines?
