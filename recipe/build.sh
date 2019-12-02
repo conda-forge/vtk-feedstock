@@ -59,6 +59,8 @@ cmake .. -G "Ninja" \
     -DVTK_SMP_IMPLEMENTATION_TYPE:STRING=TBB \
     -DVTK_USE_SYSTEM_NETCDF:BOOL=ON \
     -DVTK_USE_SYSTEM_LZ4:BOOL=ON \
+    -DModule_vtkIOXdmf2:INTERNAL=ON \
+    -DModule_vtkIOXdmf3:INTERNAL=ON \
     ${SCREEN_ARGS[@]} ${WITH_OSMESA[@]}
 
 # compile & install!
