@@ -43,7 +43,7 @@ requirements:
     - {{ cdt('mesa-libgl-devel') }}  # [linux and not VTK_WITH_OSMESA]
     - {{ cdt('mesa-dri-drivers') }}  # [linux and not VTK_WITH_OSMESA]
     - {{ cdt('xorg-x11-proto-devel') }}  # [linux and not VTK_WITH_OSMESA]
-    - boost
+    - boost-cpp
 
   host:
     - python
@@ -63,6 +63,7 @@ requirements:
     - libnetcdf
     - lz4-c
     - xorg-libxt  # [linux]
+    - boost-cpp
 
   run:
     - python
