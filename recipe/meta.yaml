@@ -1,5 +1,5 @@
 {% set version = "8.2.0" %}
-{% set build_number = 5 %}
+{% set build_number = 6 %}
 
 {% set minor_version = ".".join(version.split(".")[:2]) %}
 
@@ -62,6 +62,7 @@ requirements:
     - libnetcdf
     - lz4-c
     - xorg-libxt  # [linux]
+    - boost-cpp
 
   run:
     - python
