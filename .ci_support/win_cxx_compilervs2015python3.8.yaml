@@ -1,5 +1,7 @@
 VTK_WITH_OSMESA:
 - 'False'
+boost_cpp:
+- 1.70.0
 channel_sources:
 - conda-forge,defaults
 channel_targets:
@@ -17,7 +19,7 @@ jpeg:
 jsoncpp:
 - 1.8.4
 libnetcdf:
-- 4.7.1
+- 4.7.3
 libpng:
 - '1.6'
 libtiff:
@@ -27,6 +29,8 @@ libxml2:
 lz4_c:
 - 1.8.3
 pin_run_as_build:
+  boost-cpp:
+    max_pin: x.x.x
   expat:
     max_pin: x.x
   freetype:
