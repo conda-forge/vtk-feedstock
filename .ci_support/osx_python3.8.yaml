@@ -2,6 +2,8 @@ MACOSX_DEPLOYMENT_TARGET:
 - '10.9'
 VTK_WITH_OSMESA:
 - 'False'
+boost_cpp:
+- 1.70.0
 channel_sources:
 - conda-forge,defaults
 channel_targets:
@@ -21,7 +23,7 @@ jpeg:
 jsoncpp:
 - 1.8.4
 libnetcdf:
-- 4.7.1
+- 4.7.3
 libpng:
 - '1.6'
 libtiff:
@@ -35,6 +37,8 @@ macos_machine:
 macos_min_version:
 - '10.9'
 pin_run_as_build:
+  boost-cpp:
+    max_pin: x.x.x
   expat:
     max_pin: x.x
   freetype:
