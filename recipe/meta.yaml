@@ -1,5 +1,5 @@
 {% set version = "8.2.0" %}
-{% set build_number = 7 %}
+{% set build_number = 8 %}
 
 {% set minor_version = ".".join(version.split(".")[:2]) %}
 
@@ -29,20 +29,32 @@ requirements:
     - {{ compiler("cxx") }}
     - cmake
     - ninja
-    - {{ cdt('libxcb') }}  # [linux and not VTK_WITH_OSMESA]
-    - {{ cdt('libxau') }}  # [linux and not VTK_WITH_OSMESA]
-    - {{ cdt('libuuid') }}  # [linux and not VTK_WITH_OSMESA]
-    - {{ cdt('libxext') }}  # [linux and not VTK_WITH_OSMESA]
-    - {{ cdt('libxfixes') }}  # [linux and not VTK_WITH_OSMESA]
-    - {{ cdt('libxxf86vm') }}  # [linux and not VTK_WITH_OSMESA]
-    - {{ cdt('libxdamage') }}  # [linux and not VTK_WITH_OSMESA]
-    - {{ cdt('libselinux') }}  # [linux and not VTK_WITH_OSMESA]
-    - {{ cdt('libsm-devel') }}  # [linux and not VTK_WITH_OSMESA]
-    - {{ cdt('libice-devel') }}  # [linux and not VTK_WITH_OSMESA]
-    - {{ cdt('libx11-devel') }}  # [linux and not VTK_WITH_OSMESA]
-    - {{ cdt('mesa-libgl-devel') }}  # [linux and not VTK_WITH_OSMESA]
-    - {{ cdt('mesa-dri-drivers') }}  # [linux and not VTK_WITH_OSMESA]
-    - {{ cdt('xorg-x11-proto-devel') }}  # [linux and not VTK_WITH_OSMESA]
+    - {{ cdt("libxcb") }}  # [linux and not vtk_with_osmesa]
+    - {{ cdt("libxau") }}  # [linux and not vtk_with_osmesa]
+    - {{ cdt("libuuid") }}  # [linux and not vtk_with_osmesa]
+    - {{ cdt("libxext") }}  # [linux and not vtk_with_osmesa]
+    - {{ cdt("libxext-devel") }}  # [linux and not vtk_with_osmesa]
+    - {{ cdt("libXfixes") }}  # [linux and not vtk_with_osmesa]
+    - {{ cdt("libXxf86vm") }}  # [linux and not vtk_with_osmesa]
+    - {{ cdt('libXdamage') }}  # [linux and not VTK_WITH_OSMESA]
+    - {{ cdt("libxt") }}  # [linux and not vtk_with_osmesa]
+    - {{ cdt("libxt-devel") }}  # [linux and not vtk_with_osmesa]
+    - {{ cdt("libxtst") }}  # [linux and not vtk_with_osmesa]
+    - {{ cdt("libxtst-devel") }}  # [linux and not vtk_with_osmesa]
+    - {{ cdt("libselinux") }}  # [linux and not vtk_with_osmesa]    
+    - {{ cdt("libsm") }}  # [linux and not vtk_with_osmesa]
+    - {{ cdt("libsm-devel") }}  # [linux and not vtk_with_osmesa]
+    - {{ cdt("libice") }}  # [linux and not vtk_with_osmesa]
+    - {{ cdt("libice-devel") }}  # [linux and not vtk_with_osmesa]
+    - {{ cdt("libx11") }}  # [linux and not vtk_with_osmesa]
+    - {{ cdt("libx11-common") }}  # [linux and not vtk_with_osmesa]
+    - {{ cdt("libx11-devel") }}  # [linux and not vtk_with_osmesa]
+    - {{ cdt("mesa-libgl-devel") }}  # [linux and not vtk_with_osmesa]
+    - {{ cdt("mesa-libgl") }}  # [linux and not vtk_with_osmesa]
+    - {{ cdt("mesa-dri-drivers") }}  # [linux and not vtk_with_osmesa]
+    - {{ cdt("xorg-x11-proto-devel") }}  # [linux and not vtk_with_osmesa]
+    - {{ cdt("xorg-x11-util-macros") }}  # [linux and not vtk_with_osmesa]
+    - {{ cdt("xorg-x11-server-common") }}  # [linux and not vtk_with_osmesa]
 
   host:
     - python
@@ -63,6 +75,9 @@ requirements:
     - lz4-c
     - xorg-libxt  # [linux]
     - boost-cpp
+    - numpy
+    - ffmpeg
+    - x264
 
   run:
     - python
@@ -82,6 +97,10 @@ requirements:
     - libnetcdf
     - lz4-c
     - xorg-libxt  # [linux]
+    - {{ pin_compatible('numpy') }}
+    - future
+    - ffmpeg
+    - x264
 
   run_constrained:
     # Paraview bundles its own VTK that has conflicting Python vtkmodules
