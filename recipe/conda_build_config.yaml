@@ -1,3 +1,5 @@
 VTK_WITH_OSMESA:
 - False
-# - True            # [linux]
+- True  # [ linux or osx ]
+
+

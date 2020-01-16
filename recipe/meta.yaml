@@ -77,7 +77,7 @@ requirements:
     - boost-cpp
     - numpy
     - ffmpeg
-    - x264
+    - x264  # [ not win ]
 
   run:
     - python
@@ -100,7 +100,7 @@ requirements:
     - {{ pin_compatible('numpy') }}
     - future
     - ffmpeg
-    - x264
+    - x264  # [ not win ]
 
   run_constrained:
     # Paraview bundles its own VTK that has conflicting Python vtkmodules
