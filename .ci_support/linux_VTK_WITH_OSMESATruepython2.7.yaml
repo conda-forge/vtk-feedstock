@@ -1,7 +1,5 @@
-MACOSX_DEPLOYMENT_TARGET:
-- '10.9'
 VTK_WITH_OSMESA:
-- 'False'
+- 'True'
 boost_cpp:
 - 1.70.0
 channel_sources:
@@ -9,11 +7,15 @@ channel_sources:
 channel_targets:
 - conda-forge main
 cxx_compiler:
-- clangxx
+- gxx
 cxx_compiler_version:
-- '9'
+- '7'
+docker_image:
+- condaforge/linux-anvil-comp7
 expat:
 - '2.2'
+ffmpeg:
+- '4.1'
 freetype:
 - 2.9.1
 hdf5:
@@ -32,22 +34,20 @@ libxml2:
 - '2.9'
 lz4_c:
 - 1.8.3
-macos_machine:
-- x86_64-apple-darwin13.4.0
-macos_min_version:
-- '10.9'
+numpy:
+- '1.14'
 pin_run_as_build:
   boost-cpp:
     max_pin: x.x.x
   expat:
+    max_pin: x.x
+  ffmpeg:
     max_pin: x.x
   freetype:
     max_pin: x
   jpeg:
     max_pin: x
   jsoncpp:
-    max_pin: x.x.x
-  libnetcdf:
     max_pin: x.x.x
   libpng:
     max_pin: x.x
@@ -65,8 +65,10 @@ pin_run_as_build:
   zlib:
     max_pin: x.x
 python:
-- '3.6'
+- '2.7'
 vtk:
 - 8.2.0
+x264:
+- 1!152.*
 zlib:
 - '1.2'
