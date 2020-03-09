@@ -1,9 +1,9 @@
-{% set version = "8.2.0" %}
-{% set build_number = 10 %}
+{% set version = "9.0.0.rc1" %}
+{% set build = 0 %}
 
 {% set minor_version = ".".join(version.split(".")[:2]) %}
 
-{% set build_number = build_number + 200 %}   # [not VTK_WITH_OSMESA]
+{% set build = build + 100 %}   # [not VTK_WITH_OSMESA]
 
 package:
   name: vtk
@@ -11,16 +11,18 @@ package:
 
 source:
   url: http://www.vtk.org/files/release/{{ minor_version }}/VTK-{{ version }}.tar.gz
-  fn:  VTK-{{ version }}.tar.gz
-  sha256: 34c3dc775261be5e45a8049155f7228b6bd668106c72a3c435d95730d17d57bb
-  patches:
-    - 0001-Link-libpython-optionally-make-vtkPython-dep-compile.patch
-    - 0002-VTKGenerateExportHeader-Prefer-dumpversion-over-vers.patch
-    - 0003-py38.patch
+  sha256: 7dbedd58a1ae144b98a4534b9badac683c88e5aa4a959a57856680f00258d268
 
 build:
   skip: True  # [win and py27]
-  number: {{ build_number }}
+  number: {{ build }}
+  {% if VTK_WITH_OSMESA == "True" %}
+  {% set prefix = "with_osmesa" %}
+  {% else %}
+  {% set prefix = "no_osmesa" %}
+  {% endif %}
+  string: "{{ prefix }}_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ build }}"
+
   features:
     - mesalib   # [VTK_WITH_OSMESA]
 
@@ -64,6 +66,7 @@ requirements:
     - xorg-libxt  # [linux]
     - boost-cpp
     - tk
+    - ffmpeg
 
   run:
     - python
@@ -84,6 +87,7 @@ requirements:
     - lz4-c
     - xorg-libxt  # [linux]
     - tk
+    - ffmpeg
 
   run_constrained:
     # Paraview bundles its own VTK that has conflicting Python vtkmodules
