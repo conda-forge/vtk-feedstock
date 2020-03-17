@@ -1,3 +1,5 @@
+MACOSX_DEPLOYMENT_TARGET:
+- '10.9'
 VTK_WITH_OSMESA:
 - 'False'
 boost_cpp:
@@ -7,11 +9,9 @@ channel_sources:
 channel_targets:
 - conda-forge main
 cxx_compiler:
-- gxx
+- clangxx
 cxx_compiler_version:
-- '7'
-docker_image:
-- condaforge/linux-anvil-comp7
+- '9'
 expat:
 - '2.2'
 freetype:
@@ -32,6 +32,10 @@ libxml2:
 - '2.9'
 lz4_c:
 - 1.8.3
+macos_machine:
+- x86_64-apple-darwin13.4.0
+macos_min_version:
+- '10.9'
 pin_run_as_build:
   boost-cpp:
     max_pin: x.x.x
@@ -59,7 +63,7 @@ pin_run_as_build:
   zlib:
     max_pin: x.x
 python:
-- '2.7'
+- 3.6.* *_cpython
 vtk:
 - 8.2.0
 zlib:
