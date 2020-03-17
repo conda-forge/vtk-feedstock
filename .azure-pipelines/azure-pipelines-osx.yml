@@ -10,17 +10,29 @@ jobs:
   strategy:
     maxParallel: 8
     matrix:
-      osx_python2.7.____cpython:
-        CONFIG: osx_python2.7.____cpython
+      osx_VTK_WITH_OSMESAFalsepython2.7.____cpython:
+        CONFIG: osx_VTK_WITH_OSMESAFalsepython2.7.____cpython
         UPLOAD_PACKAGES: True
-      osx_python3.6.____cpython:
-        CONFIG: osx_python3.6.____cpython
+      osx_VTK_WITH_OSMESAFalsepython3.6.____cpython:
+        CONFIG: osx_VTK_WITH_OSMESAFalsepython3.6.____cpython
         UPLOAD_PACKAGES: True
-      osx_python3.7.____cpython:
-        CONFIG: osx_python3.7.____cpython
+      osx_VTK_WITH_OSMESAFalsepython3.7.____cpython:
+        CONFIG: osx_VTK_WITH_OSMESAFalsepython3.7.____cpython
         UPLOAD_PACKAGES: True
-      osx_python3.8.____cpython:
-        CONFIG: osx_python3.8.____cpython
+      osx_VTK_WITH_OSMESAFalsepython3.8.____cpython:
+        CONFIG: osx_VTK_WITH_OSMESAFalsepython3.8.____cpython
+        UPLOAD_PACKAGES: True
+      osx_VTK_WITH_OSMESATruepython2.7.____cpython:
+        CONFIG: osx_VTK_WITH_OSMESATruepython2.7.____cpython
+        UPLOAD_PACKAGES: True
+      osx_VTK_WITH_OSMESATruepython3.6.____cpython:
+        CONFIG: osx_VTK_WITH_OSMESATruepython3.6.____cpython
+        UPLOAD_PACKAGES: True
+      osx_VTK_WITH_OSMESATruepython3.7.____cpython:
+        CONFIG: osx_VTK_WITH_OSMESATruepython3.7.____cpython
+        UPLOAD_PACKAGES: True
+      osx_VTK_WITH_OSMESATruepython3.8.____cpython:
+        CONFIG: osx_VTK_WITH_OSMESATruepython3.8.____cpython
         UPLOAD_PACKAGES: True
 
   steps:
