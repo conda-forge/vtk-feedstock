@@ -10,10 +10,6 @@ jobs:
   strategy:
     maxParallel: 8
     matrix:
-      linux_VTK_WITH_OSMESAFalsepython2.7.____cpython:
-        CONFIG: linux_VTK_WITH_OSMESAFalsepython2.7.____cpython
-        UPLOAD_PACKAGES: True
-        DOCKER_IMAGE: condaforge/linux-anvil-comp7
       linux_VTK_WITH_OSMESAFalsepython3.6.____cpython:
         CONFIG: linux_VTK_WITH_OSMESAFalsepython3.6.____cpython
         UPLOAD_PACKAGES: True
@@ -24,10 +20,6 @@ jobs:
         DOCKER_IMAGE: condaforge/linux-anvil-comp7
       linux_VTK_WITH_OSMESAFalsepython3.8.____cpython:
         CONFIG: linux_VTK_WITH_OSMESAFalsepython3.8.____cpython
-        UPLOAD_PACKAGES: True
-        DOCKER_IMAGE: condaforge/linux-anvil-comp7
-      linux_VTK_WITH_OSMESATruepython2.7.____cpython:
-        CONFIG: linux_VTK_WITH_OSMESATruepython2.7.____cpython
         UPLOAD_PACKAGES: True
         DOCKER_IMAGE: condaforge/linux-anvil-comp7
       linux_VTK_WITH_OSMESATruepython3.6.____cpython:

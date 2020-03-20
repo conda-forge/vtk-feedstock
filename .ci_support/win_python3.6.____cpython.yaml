@@ -1,5 +1,5 @@
 VTK_WITH_OSMESA:
-- 'True'
+- 'False'
 boost_cpp:
 - '1.72'
 channel_sources:
@@ -7,11 +7,7 @@ channel_sources:
 channel_targets:
 - conda-forge vtk_dev
 cxx_compiler:
-- gxx
-cxx_compiler_version:
-- '7'
-docker_image:
-- condaforge/linux-anvil-comp7
+- vs2015
 expat:
 - '2.2'
 ffmpeg:
@@ -58,12 +54,16 @@ pin_run_as_build:
   python:
     min_pin: x.x
     max_pin: x.x
+  tk:
+    max_pin: x.x
   vtk:
     max_pin: x.x.x
   zlib:
     max_pin: x.x
 python:
-- 2.7.* *_cpython
+- 3.6.* *_cpython
+tk:
+- '8.6'
 vtk:
 - 8.2.0
 zlib:
