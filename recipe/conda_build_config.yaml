@@ -1,3 +1,6 @@
+channel_targets:
+  - conda-forge vtk_dev
+
 VTK_WITH_OSMESA:
-- False
-# - True            # [linux]
+  - False
+  - True  # [unix]

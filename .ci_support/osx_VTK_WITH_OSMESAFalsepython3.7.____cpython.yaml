@@ -1,0 +1,78 @@
+MACOSX_DEPLOYMENT_TARGET:
+- '10.9'
+VTK_WITH_OSMESA:
+- 'False'
+boost_cpp:
+- '1.72'
+channel_sources:
+- conda-forge,defaults
+channel_targets:
+- conda-forge vtk_dev
+cxx_compiler:
+- clangxx
+cxx_compiler_version:
+- '9'
+expat:
+- '2.2'
+ffmpeg:
+- '4.1'
+freetype:
+- 2.9.1
+hdf5:
+- 1.10.5
+jpeg:
+- '9'
+jsoncpp:
+- 1.8.4
+libnetcdf:
+- 4.7.3
+libpng:
+- '1.6'
+libtiff:
+- 4.1.0
+libxml2:
+- '2.9'
+lz4_c:
+- 1.8.3
+macos_machine:
+- x86_64-apple-darwin13.4.0
+macos_min_version:
+- '10.9'
+pin_run_as_build:
+  boost-cpp:
+    max_pin: x.x.x
+  expat:
+    max_pin: x.x
+  ffmpeg:
+    max_pin: x.x
+  freetype:
+    max_pin: x
+  jpeg:
+    max_pin: x
+  jsoncpp:
+    max_pin: x.x.x
+  libpng:
+    max_pin: x.x
+  libtiff:
+    max_pin: x
+  libxml2:
+    max_pin: x.x
+  lz4-c:
+    max_pin: x.x.x
+  python:
+    min_pin: x.x
+    max_pin: x.x
+  tk:
+    max_pin: x.x
+  vtk:
+    max_pin: x.x.x
+  zlib:
+    max_pin: x.x
+python:
+- 3.7.* *_cpython
+tk:
+- '8.6'
+vtk:
+- 8.2.0
+zlib:
+- '1.2'
