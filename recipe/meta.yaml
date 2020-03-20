@@ -65,7 +65,7 @@ requirements:
     - lz4-c
     - xorg-libxt  # [linux]
     - boost-cpp
-    - tk  # [not VTK_WITH_OSMESA]
+    - tk  # [not win and not VTK_WITH_OSMESA]
     - ffmpeg
 
   run:
@@ -86,7 +86,7 @@ requirements:
     - libnetcdf
     - lz4-c
     - xorg-libxt  # [linux]
-    - tk  # [not VTK_WITH_OSMESA]
+    - tk  # [not win and not VTK_WITH_OSMESA]
     - ffmpeg
 
   run_constrained:
