@@ -48,7 +48,6 @@ requirements:
 
   host:
     - python
-    # VTK Third Party dependencies
     - zlib
     - freetype
     - hdf5
@@ -67,11 +66,21 @@ requirements:
     - boost-cpp
     - tk  # [not win and not VTK_WITH_OSMESA]
     - ffmpeg
+    - utfcpp
+    - eigen
+    - double-conversion
+    - pugixml
+    - glew
+    - libogg
+    - libtheora
+    - proj
+    - loguru
+    - sqlite
+    - gl2ps
+    - pugixml
 
   run:
     - python
-    - future  # used in the generated python wrappers
-    # VTK Third Party dependencies
     - zlib
     - freetype
     - hdf5
@@ -88,6 +97,18 @@ requirements:
     - xorg-libxt  # [linux]
     - tk  # [not win and not VTK_WITH_OSMESA]
     - ffmpeg
+    - utfcpp
+    - eigen
+    - double-conversion
+    - pugixml
+    - glew
+    - libogg
+    - libtheora
+    - proj
+    - loguru
+    - sqlite
+    - gl2ps
+    - pugixml
 
   run_constrained:
     # Paraview bundles its own VTK that has conflicting Python vtkmodules
