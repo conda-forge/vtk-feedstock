@@ -80,7 +80,8 @@ cmake .. -G "Ninja" \
     -DVTK_MODULE_ENABLE_VTK_RenderingContextOpenGL2:STRING=YES \
     -DVTK_MODULE_ENABLE_VTK_RenderingCore:STRING=YES \
     -DVTK_MODULE_ENABLE_VTK_RenderingOpenGL2:STRING=YES \
-    -DVTK_DATA_EXCLUDE_FROM_ALL=ON \
+    -DVTK_DATA_EXCLUDE_FROM_ALL:BOOL=ON \
+    -DVTK_USE_EXTERNAL:BOOL=ON \
     "${VTK_ARGS[@]}"
 
 # compile & install!
