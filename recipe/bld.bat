@@ -47,7 +47,8 @@ cmake .. -G "Ninja" ^
     -DVTK_MODULE_USE_EXTERNAL_vtksqlite:BOOL=ON ^
     -DVTK_MODULE_USE_EXTERNAL_vtkutf8:BOOL=ON ^
     -DVTK_MODULE_USE_EXTERNAL_vtkgl2ps:BOOL=ON ^
-    -DVTK_MODULE_USE_EXTERNAL_vtkpugixml:BOOL=ON
+    -DVTK_MODULE_USE_EXTERNAL_vtkpugixml:BOOL=ON ^
+    -DVTK_MODULE_USE_EXTERNAL_vtklibharu:BOOL=ON
 if errorlevel 1 exit 1
 
 ninja install

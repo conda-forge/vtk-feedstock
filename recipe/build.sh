@@ -104,10 +104,10 @@ cmake .. -G "Ninja" \
     -DVTK_MODULE_USE_EXTERNAL_vtkutf8:BOOL=ON \
     -DVTK_MODULE_USE_EXTERNAL_vtkgl2ps:BOOL=ON \
     -DVTK_MODULE_USE_EXTERNAL_vtkpugixml:BOOL=ON \
+    -DVTK_MODULE_USE_EXTERNAL_vtklibharu:BOOL=ON \
     "${VTK_ARGS[@]}"
 
 # third-party libraries we'd ideally replace but aren't on conda-forge yet
-#-DVTK_MODULE_USE_EXTERNAL_vtklibharu:BOOL=ON \
 #-DVTK_MODULE_USE_EXTERNAL_vtkdiy2:BOOL=ON \
 #-DVTK_MODULE_USE_EXTERNAL_vtkzfp:BOOL=ON \
 #-DVTK_MODULE_USE_EXTERNAL_vtkxdmf2:BOOL=ON \
