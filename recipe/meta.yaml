@@ -1,5 +1,5 @@
 {% set version = "9.0.0.rc1" %}
-{% set build = 2 %}
+{% set build = 3 %}
 
 {% set minor_version = ".".join(version.split(".")[:2]) %}
 
@@ -78,6 +78,7 @@ requirements:
     - sqlite
     - gl2ps
     - pugixml
+    - libharu
 
   run:
     - python
@@ -109,6 +110,7 @@ requirements:
     - sqlite
     - gl2ps
     - pugixml
+    - libharu
 
   run_constrained:
     # Paraview bundles its own VTK that has conflicting Python vtkmodules

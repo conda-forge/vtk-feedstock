@@ -14,6 +14,8 @@ ffmpeg:
 - '4.1'
 freetype:
 - 2.9.1
+glew:
+- 2.0.0
 hdf5:
 - 1.10.5
 jpeg:
@@ -39,6 +41,8 @@ pin_run_as_build:
     max_pin: x.x
   freetype:
     max_pin: x
+  glew:
+    max_pin: x.x
   jpeg:
     max_pin: x
   jsoncpp:
@@ -54,12 +58,18 @@ pin_run_as_build:
   python:
     min_pin: x.x
     max_pin: x.x
+  sqlite:
+    max_pin: x
   vtk:
     max_pin: x.x.x
   zlib:
     max_pin: x.x
+proj:
+- 6.3.1
 python:
 - 3.7.* *_cpython
+sqlite:
+- '3'
 vtk:
 - 8.2.0
 zlib:
