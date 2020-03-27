@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  path: ../test
+  path:  '{{ environ["RECIPE_DIR"] }}/test'
 
 build:
   number: {{ build }}
