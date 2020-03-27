@@ -14,7 +14,7 @@ BUILD_CONFIG=Release
 cmake .. -G "Ninja" \
     -DCMAKE_BUILD_TYPE=$BUILD_CONFIG \
     -DCMAKE_PREFIX_PATH=$PREFIX \
-    -DPNG_PNG_INCLUDE_DIR=${PREFIX}/include
+    -DPNG_PNG_INCLUDE_DIR=${PREFIX}
 
 # compile & install!
 ninja install -v
