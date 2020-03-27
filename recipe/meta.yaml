@@ -1,154 +1,29 @@
 {% set version = "9.0.0.rc1" %}
-{% set build = 3 %}
-
-{% set minor_version = ".".join(version.split(".")[:2]) %}
-
-{% set build = build + 100 %}   # [not VTK_WITH_OSMESA]
+{% set build = 4 %}
 
 package:
   name: vtk
   version: {{ version }}
 
 source:
-  url: http://www.vtk.org/files/release/{{ minor_version }}/VTK-{{ version }}.tar.gz
-  sha256: 7dbedd58a1ae144b98a4534b9badac683c88e5aa4a959a57856680f00258d268
+  path: ../test
 
 build:
-  skip: True  # [win and py27]
   number: {{ build }}
-  {% if VTK_WITH_OSMESA == "True" %}
-  {% set prefix = "with_osmesa" %}
-  {% else %}
-  {% set prefix = "no_osmesa" %}
-  {% endif %}
-  string: "{{ prefix }}_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ build }}"
-
-  features:
-    - mesalib   # [VTK_WITH_OSMESA]
 
 requirements:
   build:
     - {{ compiler("cxx") }}
     - cmake
     - ninja
-    - {{ cdt('libxcb') }}  # [linux and not VTK_WITH_OSMESA]
-    - {{ cdt('libxau') }}  # [linux and not VTK_WITH_OSMESA]
-    - {{ cdt('libuuid') }}  # [linux and not VTK_WITH_OSMESA]
-    - {{ cdt('libxext') }}  # [linux and not VTK_WITH_OSMESA]
-    - {{ cdt('libxfixes') }}  # [linux and not VTK_WITH_OSMESA]
-    - {{ cdt('libxxf86vm') }}  # [linux and not VTK_WITH_OSMESA]
-    - {{ cdt('libxdamage') }}  # [linux and not VTK_WITH_OSMESA]
-    - {{ cdt('libselinux') }}  # [linux and not VTK_WITH_OSMESA]
-    - {{ cdt('libsm-devel') }}  # [linux and not VTK_WITH_OSMESA]
-    - {{ cdt('libice-devel') }}  # [linux and not VTK_WITH_OSMESA]
-    - {{ cdt('libx11-devel') }}  # [linux and not VTK_WITH_OSMESA]
-    - {{ cdt('mesa-libgl-devel') }}  # [linux and not VTK_WITH_OSMESA]
-    - {{ cdt('mesa-dri-drivers') }}  # [linux and not VTK_WITH_OSMESA]
-    - {{ cdt('xorg-x11-proto-devel') }}  # [linux and not VTK_WITH_OSMESA]
 
   host:
-    - python
     - zlib
-    - freetype
-    - hdf5
-    - libxml2
     - libpng
-    - jpeg
-    - libtiff
-    - jsoncpp
-    - expat
-    - tbb
-    - tbb-devel
-    - mesalib   # [VTK_WITH_OSMESA]
-    - libnetcdf
-    - lz4-c
-    - xorg-libxt  # [linux]
-    - boost-cpp
-    - tk  # [not win and not VTK_WITH_OSMESA]
-    - ffmpeg
-    - utfcpp
-    - eigen
-    - double-conversion
-    - pugixml
-    - glew
-    - libogg
-    - libtheora
-    - proj
-    - loguru
-    - sqlite
-    - gl2ps
-    - pugixml
-    - libharu
 
   run:
-    - python
     - zlib
-    - freetype
-    - hdf5
-    - libxml2
     - libpng
-    - jpeg
-    - libtiff
-    - jsoncpp
-    - expat
-    - tbb
-    - mesalib   # [VTK_WITH_OSMESA]
-    - libnetcdf
-    - lz4-c
-    - xorg-libxt  # [linux]
-    - tk  # [not win and not VTK_WITH_OSMESA]
-    - ffmpeg
-    - utfcpp
-    - eigen
-    - double-conversion
-    - pugixml
-    - glew
-    - libogg
-    - libtheora
-    - proj
-    - loguru
-    - sqlite
-    - gl2ps
-    - pugixml
-    - libharu
-
-  run_constrained:
-    # Paraview bundles its own VTK that has conflicting Python vtkmodules
-    - paraview ==9999999999
-
-test:
-  imports:
-    - vtk
-    - vtk.vtkChartsCore
-    - vtk.vtkCommonCore
-    - vtk.vtkFiltersCore
-    - vtk.vtkFiltersGeneric
-    - vtk.vtkGeovisCore
-    - vtk.vtkFiltersHybrid
-    - vtk.vtkIOCore
-    - vtk.vtkImagingCore
-    - vtk.vtkInfovisCore
-    - vtk.vtkRenderingCore
-    - vtk.vtkViewsCore
-    - vtk.vtkRenderingVolume
-    - vtk.vtkInteractionWidgets
-    - vtkmodules
-    - vtkmodules.vtkChartsCore
-    - vtkmodules.vtkCommonCore
-    - vtkmodules.vtkFiltersCore
-    - vtkmodules.vtkFiltersGeneric
-    - vtkmodules.vtkGeovisCore
-    - vtkmodules.vtkFiltersHybrid
-    - vtkmodules.vtkIOCore
-    - vtkmodules.vtkImagingCore
-    - vtkmodules.vtkInfovisCore
-    - vtkmodules.vtkRenderingCore
-    - vtkmodules.vtkViewsCore
-    - vtkmodules.vtkRenderingVolume
-    - vtkmodules.vtkInteractionWidgets
-
-  requires:
-    - setuptools
 
 about:
   home: http://www.vtk.org/
