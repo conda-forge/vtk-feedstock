@@ -3,7 +3,7 @@
 # from opencv-feedstock
 # CMake FindPNG seems to look in libpng not libpng16
 # https://gitlab.kitware.com/cmake/cmake/blob/master/Modules/FindPNG.cmake#L55
-ln -s $PREFIX/include/libpng16 $PREFIX/include/libpng
+#ln -s $PREFIX/include/libpng16 $PREFIX/include/libpng
 
 mkdir build
 cd build || exit
