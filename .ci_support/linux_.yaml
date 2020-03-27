@@ -1,0 +1,19 @@
+channel_sources:
+- conda-forge,defaults
+channel_targets:
+- conda-forge vtk_dev
+cxx_compiler:
+- gxx
+cxx_compiler_version:
+- '7'
+docker_image:
+- condaforge/linux-anvil-comp7
+libpng:
+- '1.6'
+pin_run_as_build:
+  libpng:
+    max_pin: x.x
+  zlib:
+    max_pin: x.x
+zlib:
+- '1.2'
