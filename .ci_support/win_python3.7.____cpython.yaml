@@ -7,7 +7,7 @@ channel_sources:
 channel_targets:
 - conda-forge main
 cxx_compiler:
-- vs2015
+- vs2017
 expat:
 - '2.2'
 freetype:
@@ -27,7 +27,7 @@ libtiff:
 libxml2:
 - '2.9'
 lz4_c:
-- 1.8.3
+- 1.9.2
 pin_run_as_build:
   boost-cpp:
     max_pin: x.x.x
