@@ -23,8 +23,8 @@ Current build status
     <td>
       <details>
         <summary>
-          <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=&branchName=master">
-            <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dev_migrate_proj_hdf5-feedstock?branchName=master">
+          <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=master">
+            <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=master">
           </a>
         </summary>
         <table>
@@ -32,106 +32,106 @@ Current build status
           <tbody><tr>
               <td>linux_VTK_WITH_OSMESAFalsepython3.6.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dev_migrate_proj_hdf5-feedstock?branchName=master&jobName=linux&configuration=linux_VTK_WITH_OSMESAFalsepython3.6.____cpython" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=master&jobName=linux&configuration=linux_VTK_WITH_OSMESAFalsepython3.6.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>linux_VTK_WITH_OSMESAFalsepython3.7.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dev_migrate_proj_hdf5-feedstock?branchName=master&jobName=linux&configuration=linux_VTK_WITH_OSMESAFalsepython3.7.____cpython" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=master&jobName=linux&configuration=linux_VTK_WITH_OSMESAFalsepython3.7.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>linux_VTK_WITH_OSMESAFalsepython3.8.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dev_migrate_proj_hdf5-feedstock?branchName=master&jobName=linux&configuration=linux_VTK_WITH_OSMESAFalsepython3.8.____cpython" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=master&jobName=linux&configuration=linux_VTK_WITH_OSMESAFalsepython3.8.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>linux_VTK_WITH_OSMESATruepython3.6.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dev_migrate_proj_hdf5-feedstock?branchName=master&jobName=linux&configuration=linux_VTK_WITH_OSMESATruepython3.6.____cpython" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=master&jobName=linux&configuration=linux_VTK_WITH_OSMESATruepython3.6.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>linux_VTK_WITH_OSMESATruepython3.7.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dev_migrate_proj_hdf5-feedstock?branchName=master&jobName=linux&configuration=linux_VTK_WITH_OSMESATruepython3.7.____cpython" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=master&jobName=linux&configuration=linux_VTK_WITH_OSMESATruepython3.7.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>linux_VTK_WITH_OSMESATruepython3.8.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dev_migrate_proj_hdf5-feedstock?branchName=master&jobName=linux&configuration=linux_VTK_WITH_OSMESATruepython3.8.____cpython" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=master&jobName=linux&configuration=linux_VTK_WITH_OSMESATruepython3.8.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>osx_VTK_WITH_OSMESAFalsepython3.6.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dev_migrate_proj_hdf5-feedstock?branchName=master&jobName=osx&configuration=osx_VTK_WITH_OSMESAFalsepython3.6.____cpython" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=master&jobName=osx&configuration=osx_VTK_WITH_OSMESAFalsepython3.6.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>osx_VTK_WITH_OSMESAFalsepython3.7.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dev_migrate_proj_hdf5-feedstock?branchName=master&jobName=osx&configuration=osx_VTK_WITH_OSMESAFalsepython3.7.____cpython" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=master&jobName=osx&configuration=osx_VTK_WITH_OSMESAFalsepython3.7.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>osx_VTK_WITH_OSMESAFalsepython3.8.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dev_migrate_proj_hdf5-feedstock?branchName=master&jobName=osx&configuration=osx_VTK_WITH_OSMESAFalsepython3.8.____cpython" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=master&jobName=osx&configuration=osx_VTK_WITH_OSMESAFalsepython3.8.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>osx_VTK_WITH_OSMESATruepython3.6.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dev_migrate_proj_hdf5-feedstock?branchName=master&jobName=osx&configuration=osx_VTK_WITH_OSMESATruepython3.6.____cpython" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=master&jobName=osx&configuration=osx_VTK_WITH_OSMESATruepython3.6.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>osx_VTK_WITH_OSMESATruepython3.7.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dev_migrate_proj_hdf5-feedstock?branchName=master&jobName=osx&configuration=osx_VTK_WITH_OSMESATruepython3.7.____cpython" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=master&jobName=osx&configuration=osx_VTK_WITH_OSMESATruepython3.7.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>osx_VTK_WITH_OSMESATruepython3.8.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dev_migrate_proj_hdf5-feedstock?branchName=master&jobName=osx&configuration=osx_VTK_WITH_OSMESATruepython3.8.____cpython" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=master&jobName=osx&configuration=osx_VTK_WITH_OSMESATruepython3.8.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>win_python3.6.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dev_migrate_proj_hdf5-feedstock?branchName=master&jobName=win&configuration=win_python3.6.____cpython" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=master&jobName=win&configuration=win_python3.6.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>win_python3.7.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dev_migrate_proj_hdf5-feedstock?branchName=master&jobName=win&configuration=win_python3.7.____cpython" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=master&jobName=win&configuration=win_python3.7.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>win_python3.8.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dev_migrate_proj_hdf5-feedstock?branchName=master&jobName=win&configuration=win_python3.8.____cpython" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=master&jobName=win&configuration=win_python3.8.____cpython" alt="variant">
                 </a>
               </td>
             </tr>
