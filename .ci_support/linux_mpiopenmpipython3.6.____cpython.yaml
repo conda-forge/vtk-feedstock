@@ -32,6 +32,8 @@ libxml2:
 - '2.9'
 lz4_c:
 - 1.9.2
+mpi:
+- openmpi
 pin_run_as_build:
   boost-cpp:
     max_pin: x.x.x

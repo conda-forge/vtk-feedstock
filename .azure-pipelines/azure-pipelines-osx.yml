@@ -10,14 +10,32 @@ jobs:
   strategy:
     maxParallel: 8
     matrix:
-      osx_python3.6.____cpython:
-        CONFIG: osx_python3.6.____cpython
+      osx_mpimpichpython3.6.____cpython:
+        CONFIG: osx_mpimpichpython3.6.____cpython
         UPLOAD_PACKAGES: True
-      osx_python3.7.____cpython:
-        CONFIG: osx_python3.7.____cpython
+      osx_mpimpichpython3.7.____cpython:
+        CONFIG: osx_mpimpichpython3.7.____cpython
         UPLOAD_PACKAGES: True
-      osx_python3.8.____cpython:
-        CONFIG: osx_python3.8.____cpython
+      osx_mpimpichpython3.8.____cpython:
+        CONFIG: osx_mpimpichpython3.8.____cpython
+        UPLOAD_PACKAGES: True
+      osx_mpinompipython3.6.____cpython:
+        CONFIG: osx_mpinompipython3.6.____cpython
+        UPLOAD_PACKAGES: True
+      osx_mpinompipython3.7.____cpython:
+        CONFIG: osx_mpinompipython3.7.____cpython
+        UPLOAD_PACKAGES: True
+      osx_mpinompipython3.8.____cpython:
+        CONFIG: osx_mpinompipython3.8.____cpython
+        UPLOAD_PACKAGES: True
+      osx_mpiopenmpipython3.6.____cpython:
+        CONFIG: osx_mpiopenmpipython3.6.____cpython
+        UPLOAD_PACKAGES: True
+      osx_mpiopenmpipython3.7.____cpython:
+        CONFIG: osx_mpiopenmpipython3.7.____cpython
+        UPLOAD_PACKAGES: True
+      osx_mpiopenmpipython3.8.____cpython:
+        CONFIG: osx_mpiopenmpipython3.8.____cpython
         UPLOAD_PACKAGES: True
 
   steps:
@@ -25,14 +43,6 @@ jobs:
   - script: |
       echo "Fast Finish"
       
-
-  - script: |
-      echo "Removing homebrew from Azure to avoid conflicts."
-      curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall > ~/uninstall_homebrew
-      chmod +x ~/uninstall_homebrew
-      ~/uninstall_homebrew -fq
-      rm ~/uninstall_homebrew
-    displayName: Remove homebrew
 
   - bash: |
       echo "##vso[task.prependpath]$CONDA/bin"
@@ -43,6 +53,13 @@ jobs:
       source activate base
       conda install -n base -c conda-forge --quiet --yes conda-forge-ci-setup=2 conda-build
     displayName: 'Add conda-forge-ci-setup=2'
+
+  - script: |
+      echo "Mangling homebrew from Azure to avoid conflicts."
+      source activate base
+      /usr/bin/sudo mangle_homebrew
+      /usr/bin/sudo -k
+    displayName: Mangle homebrew
 
   - script: |
       source activate base

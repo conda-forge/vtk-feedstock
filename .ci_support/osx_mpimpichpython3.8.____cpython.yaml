@@ -36,6 +36,8 @@ macos_machine:
 - x86_64-apple-darwin13.4.0
 macos_min_version:
 - '10.9'
+mpi:
+- mpich
 pin_run_as_build:
   boost-cpp:
     max_pin: x.x.x
@@ -65,7 +67,7 @@ pin_run_as_build:
   zlib:
     max_pin: x.x
 python:
-- 3.6.* *_cpython
+- 3.8.* *_cpython
 tk:
 - '8.6'
 vtk:
