@@ -34,9 +34,9 @@ build:
 
   # add build string so packages can depend on
   # mpi or nompi variants explicitly:
-  # `cdms2 * mpi_mpich_*` for mpich
-  # `cdms2 * mpi_*` for any mpi
-  # `cdms2 * nompi_*` for no mpi
+  # `vtk * mpi_mpich_*` for mpich
+  # `vtk * mpi_*` for any mpi
+  # `vtk * nompi_*` for no mpi
 
   {% if mpi != 'nompi' %}
   {% set mpi_prefix = "mpi_" + mpi %}
