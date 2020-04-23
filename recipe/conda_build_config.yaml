@@ -1,3 +1,12 @@
 VTK_WITH_OSMESA:
-- False
-# - True            # [linux]
+  - False
+#  - True            # [linux]
+
+mpi:
+  - nompi
+  - mpich  # [not win]
+  - openmpi  # [not win]
+
+pin_run_as_build:
+  mpich: x.x
+  openmpi: x.x

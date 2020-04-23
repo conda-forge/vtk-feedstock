@@ -1,9 +1,17 @@
 {% set version = "8.2.0" %}
-{% set build_number = 15 %}
+{% set build = 16 %}
 
 {% set minor_version = ".".join(version.split(".")[:2]) %}
 
-{% set build_number = build_number + 200 %}   # [not VTK_WITH_OSMESA]
+{% set build = build + 200 %}   # [not VTK_WITH_OSMESA]
+
+# ensure mpi is defined (needed for conda-smithy recipe-lint)
+{% set mpi = mpi or 'nompi' %}
+
+{% if mpi == 'nompi' %}
+# prioritize nompi variant
+{% set build = build + 100 %}
+{% endif %}
 
 package:
   name: vtk
@@ -20,9 +28,22 @@ source:
 
 build:
   skip: True  # [win and py27]
-  number: {{ build_number }}
+  number: {{ build }}
   features:
     - mesalib   # [VTK_WITH_OSMESA]
+
+  # add build string so packages can depend on
+  # mpi or nompi variants explicitly:
+  # `cdms2 * mpi_mpich_*` for mpich
+  # `cdms2 * mpi_*` for any mpi
+  # `cdms2 * nompi_*` for no mpi
+
+  {% if mpi != 'nompi' %}
+  {% set mpi_prefix = "mpi_" + mpi %}
+  {% else %}
+  {% set mpi_prefix = "nompi" %}
+  {% endif %}
+  string: "{{ mpi_prefix }}_h{{ PKG_HASH }}_{{ build }}"
 
 requirements:
   build:
@@ -50,6 +71,7 @@ requirements:
     - zlib
     - freetype
     - hdf5
+    - hdf5 * {{ mpi_prefix }}_*
     - libxml2
     - libpng
     - jpeg
@@ -60,6 +82,7 @@ requirements:
     - tbb-devel
     - mesalib   # [VTK_WITH_OSMESA]
     - libnetcdf
+    - libnetcdf * {{ mpi_prefix }}_*
     - lz4-c
     - xorg-libxt  # [linux]
     - boost-cpp
@@ -71,7 +94,7 @@ requirements:
     # VTK Third Party dependencies
     - zlib
     - freetype
-    - hdf5
+    - hdf5  * {{ mpi_prefix }}_*
     - libxml2
     - libpng
     - jpeg
@@ -80,7 +103,7 @@ requirements:
     - expat
     - tbb
     - mesalib   # [VTK_WITH_OSMESA]
-    - libnetcdf
+    - libnetcdf * {{ mpi_prefix }}_*
     - lz4-c
     - xorg-libxt  # [linux]
     - tk
