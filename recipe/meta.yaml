@@ -47,7 +47,7 @@ build:
   {% else %}
   {% set osmesa_prefix = "no_osmesa" %}
   {% endif %}
-  string: "{{mpi_prefix}}_{{ osmesa_prefix }}_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ build }}"
+  string: "{{ mpi_prefix }}_{{ osmesa_prefix }}_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ build }}"
 
   features:
     - mesalib   # [VTK_WITH_OSMESA]
