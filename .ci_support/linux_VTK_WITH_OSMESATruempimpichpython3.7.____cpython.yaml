@@ -36,6 +36,8 @@ libxml2:
 - '2.9'
 lz4_c:
 - 1.9.2
+mpi:
+- mpich
 pin_run_as_build:
   boost-cpp:
     max_pin: x.x.x
@@ -73,7 +75,7 @@ pin_run_as_build:
 proj:
 - 7.0.0
 python:
-- 3.6.* *_cpython
+- 3.7.* *_cpython
 sqlite:
 - '3'
 tk:
