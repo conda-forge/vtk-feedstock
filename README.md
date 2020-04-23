@@ -23,8 +23,8 @@ Current build status
     <td>
       <details>
         <summary>
-          <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=&branchName=master">
-            <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dev_rebuild_with_mpi_variants-feedstock?branchName=master">
+          <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=master">
+            <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=master">
           </a>
         </summary>
         <table>
@@ -32,274 +32,274 @@ Current build status
           <tbody><tr>
               <td>linux_VTK_WITH_OSMESAFalsempimpichpython3.6.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dev_rebuild_with_mpi_variants-feedstock?branchName=master&jobName=linux&configuration=linux_VTK_WITH_OSMESAFalsempimpichpython3.6.____cpython" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=master&jobName=linux&configuration=linux_VTK_WITH_OSMESAFalsempimpichpython3.6.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>linux_VTK_WITH_OSMESAFalsempimpichpython3.7.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dev_rebuild_with_mpi_variants-feedstock?branchName=master&jobName=linux&configuration=linux_VTK_WITH_OSMESAFalsempimpichpython3.7.____cpython" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=master&jobName=linux&configuration=linux_VTK_WITH_OSMESAFalsempimpichpython3.7.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>linux_VTK_WITH_OSMESAFalsempimpichpython3.8.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dev_rebuild_with_mpi_variants-feedstock?branchName=master&jobName=linux&configuration=linux_VTK_WITH_OSMESAFalsempimpichpython3.8.____cpython" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=master&jobName=linux&configuration=linux_VTK_WITH_OSMESAFalsempimpichpython3.8.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>linux_VTK_WITH_OSMESAFalsempinompipython3.6.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dev_rebuild_with_mpi_variants-feedstock?branchName=master&jobName=linux&configuration=linux_VTK_WITH_OSMESAFalsempinompipython3.6.____cpython" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=master&jobName=linux&configuration=linux_VTK_WITH_OSMESAFalsempinompipython3.6.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>linux_VTK_WITH_OSMESAFalsempinompipython3.7.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dev_rebuild_with_mpi_variants-feedstock?branchName=master&jobName=linux&configuration=linux_VTK_WITH_OSMESAFalsempinompipython3.7.____cpython" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=master&jobName=linux&configuration=linux_VTK_WITH_OSMESAFalsempinompipython3.7.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>linux_VTK_WITH_OSMESAFalsempinompipython3.8.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dev_rebuild_with_mpi_variants-feedstock?branchName=master&jobName=linux&configuration=linux_VTK_WITH_OSMESAFalsempinompipython3.8.____cpython" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=master&jobName=linux&configuration=linux_VTK_WITH_OSMESAFalsempinompipython3.8.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>linux_VTK_WITH_OSMESAFalsempiopenmpipython3.6.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dev_rebuild_with_mpi_variants-feedstock?branchName=master&jobName=linux&configuration=linux_VTK_WITH_OSMESAFalsempiopenmpipython3.6.____cpython" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=master&jobName=linux&configuration=linux_VTK_WITH_OSMESAFalsempiopenmpipython3.6.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>linux_VTK_WITH_OSMESAFalsempiopenmpipython3.7.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dev_rebuild_with_mpi_variants-feedstock?branchName=master&jobName=linux&configuration=linux_VTK_WITH_OSMESAFalsempiopenmpipython3.7.____cpython" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=master&jobName=linux&configuration=linux_VTK_WITH_OSMESAFalsempiopenmpipython3.7.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>linux_VTK_WITH_OSMESAFalsempiopenmpipython3.8.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dev_rebuild_with_mpi_variants-feedstock?branchName=master&jobName=linux&configuration=linux_VTK_WITH_OSMESAFalsempiopenmpipython3.8.____cpython" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=master&jobName=linux&configuration=linux_VTK_WITH_OSMESAFalsempiopenmpipython3.8.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>linux_VTK_WITH_OSMESATruempimpichpython3.6.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dev_rebuild_with_mpi_variants-feedstock?branchName=master&jobName=linux&configuration=linux_VTK_WITH_OSMESATruempimpichpython3.6.____cpython" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=master&jobName=linux&configuration=linux_VTK_WITH_OSMESATruempimpichpython3.6.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>linux_VTK_WITH_OSMESATruempimpichpython3.7.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dev_rebuild_with_mpi_variants-feedstock?branchName=master&jobName=linux&configuration=linux_VTK_WITH_OSMESATruempimpichpython3.7.____cpython" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=master&jobName=linux&configuration=linux_VTK_WITH_OSMESATruempimpichpython3.7.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>linux_VTK_WITH_OSMESATruempimpichpython3.8.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dev_rebuild_with_mpi_variants-feedstock?branchName=master&jobName=linux&configuration=linux_VTK_WITH_OSMESATruempimpichpython3.8.____cpython" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=master&jobName=linux&configuration=linux_VTK_WITH_OSMESATruempimpichpython3.8.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>linux_VTK_WITH_OSMESATruempinompipython3.6.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dev_rebuild_with_mpi_variants-feedstock?branchName=master&jobName=linux&configuration=linux_VTK_WITH_OSMESATruempinompipython3.6.____cpython" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=master&jobName=linux&configuration=linux_VTK_WITH_OSMESATruempinompipython3.6.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>linux_VTK_WITH_OSMESATruempinompipython3.7.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dev_rebuild_with_mpi_variants-feedstock?branchName=master&jobName=linux&configuration=linux_VTK_WITH_OSMESATruempinompipython3.7.____cpython" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=master&jobName=linux&configuration=linux_VTK_WITH_OSMESATruempinompipython3.7.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>linux_VTK_WITH_OSMESATruempinompipython3.8.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dev_rebuild_with_mpi_variants-feedstock?branchName=master&jobName=linux&configuration=linux_VTK_WITH_OSMESATruempinompipython3.8.____cpython" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=master&jobName=linux&configuration=linux_VTK_WITH_OSMESATruempinompipython3.8.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>linux_VTK_WITH_OSMESATruempiopenmpipython3.6.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dev_rebuild_with_mpi_variants-feedstock?branchName=master&jobName=linux&configuration=linux_VTK_WITH_OSMESATruempiopenmpipython3.6.____cpython" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=master&jobName=linux&configuration=linux_VTK_WITH_OSMESATruempiopenmpipython3.6.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>linux_VTK_WITH_OSMESATruempiopenmpipython3.7.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dev_rebuild_with_mpi_variants-feedstock?branchName=master&jobName=linux&configuration=linux_VTK_WITH_OSMESATruempiopenmpipython3.7.____cpython" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=master&jobName=linux&configuration=linux_VTK_WITH_OSMESATruempiopenmpipython3.7.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>linux_VTK_WITH_OSMESATruempiopenmpipython3.8.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dev_rebuild_with_mpi_variants-feedstock?branchName=master&jobName=linux&configuration=linux_VTK_WITH_OSMESATruempiopenmpipython3.8.____cpython" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=master&jobName=linux&configuration=linux_VTK_WITH_OSMESATruempiopenmpipython3.8.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>osx_VTK_WITH_OSMESAFalsempimpichpython3.6.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dev_rebuild_with_mpi_variants-feedstock?branchName=master&jobName=osx&configuration=osx_VTK_WITH_OSMESAFalsempimpichpython3.6.____cpython" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=master&jobName=osx&configuration=osx_VTK_WITH_OSMESAFalsempimpichpython3.6.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>osx_VTK_WITH_OSMESAFalsempimpichpython3.7.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dev_rebuild_with_mpi_variants-feedstock?branchName=master&jobName=osx&configuration=osx_VTK_WITH_OSMESAFalsempimpichpython3.7.____cpython" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=master&jobName=osx&configuration=osx_VTK_WITH_OSMESAFalsempimpichpython3.7.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>osx_VTK_WITH_OSMESAFalsempimpichpython3.8.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dev_rebuild_with_mpi_variants-feedstock?branchName=master&jobName=osx&configuration=osx_VTK_WITH_OSMESAFalsempimpichpython3.8.____cpython" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=master&jobName=osx&configuration=osx_VTK_WITH_OSMESAFalsempimpichpython3.8.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>osx_VTK_WITH_OSMESAFalsempinompipython3.6.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dev_rebuild_with_mpi_variants-feedstock?branchName=master&jobName=osx&configuration=osx_VTK_WITH_OSMESAFalsempinompipython3.6.____cpython" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=master&jobName=osx&configuration=osx_VTK_WITH_OSMESAFalsempinompipython3.6.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>osx_VTK_WITH_OSMESAFalsempinompipython3.7.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dev_rebuild_with_mpi_variants-feedstock?branchName=master&jobName=osx&configuration=osx_VTK_WITH_OSMESAFalsempinompipython3.7.____cpython" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=master&jobName=osx&configuration=osx_VTK_WITH_OSMESAFalsempinompipython3.7.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>osx_VTK_WITH_OSMESAFalsempinompipython3.8.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dev_rebuild_with_mpi_variants-feedstock?branchName=master&jobName=osx&configuration=osx_VTK_WITH_OSMESAFalsempinompipython3.8.____cpython" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=master&jobName=osx&configuration=osx_VTK_WITH_OSMESAFalsempinompipython3.8.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>osx_VTK_WITH_OSMESAFalsempiopenmpipython3.6.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dev_rebuild_with_mpi_variants-feedstock?branchName=master&jobName=osx&configuration=osx_VTK_WITH_OSMESAFalsempiopenmpipython3.6.____cpython" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=master&jobName=osx&configuration=osx_VTK_WITH_OSMESAFalsempiopenmpipython3.6.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>osx_VTK_WITH_OSMESAFalsempiopenmpipython3.7.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dev_rebuild_with_mpi_variants-feedstock?branchName=master&jobName=osx&configuration=osx_VTK_WITH_OSMESAFalsempiopenmpipython3.7.____cpython" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=master&jobName=osx&configuration=osx_VTK_WITH_OSMESAFalsempiopenmpipython3.7.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>osx_VTK_WITH_OSMESAFalsempiopenmpipython3.8.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dev_rebuild_with_mpi_variants-feedstock?branchName=master&jobName=osx&configuration=osx_VTK_WITH_OSMESAFalsempiopenmpipython3.8.____cpython" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=master&jobName=osx&configuration=osx_VTK_WITH_OSMESAFalsempiopenmpipython3.8.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>osx_VTK_WITH_OSMESATruempimpichpython3.6.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dev_rebuild_with_mpi_variants-feedstock?branchName=master&jobName=osx&configuration=osx_VTK_WITH_OSMESATruempimpichpython3.6.____cpython" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=master&jobName=osx&configuration=osx_VTK_WITH_OSMESATruempimpichpython3.6.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>osx_VTK_WITH_OSMESATruempimpichpython3.7.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dev_rebuild_with_mpi_variants-feedstock?branchName=master&jobName=osx&configuration=osx_VTK_WITH_OSMESATruempimpichpython3.7.____cpython" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=master&jobName=osx&configuration=osx_VTK_WITH_OSMESATruempimpichpython3.7.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>osx_VTK_WITH_OSMESATruempimpichpython3.8.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dev_rebuild_with_mpi_variants-feedstock?branchName=master&jobName=osx&configuration=osx_VTK_WITH_OSMESATruempimpichpython3.8.____cpython" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=master&jobName=osx&configuration=osx_VTK_WITH_OSMESATruempimpichpython3.8.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>osx_VTK_WITH_OSMESATruempinompipython3.6.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dev_rebuild_with_mpi_variants-feedstock?branchName=master&jobName=osx&configuration=osx_VTK_WITH_OSMESATruempinompipython3.6.____cpython" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=master&jobName=osx&configuration=osx_VTK_WITH_OSMESATruempinompipython3.6.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>osx_VTK_WITH_OSMESATruempinompipython3.7.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dev_rebuild_with_mpi_variants-feedstock?branchName=master&jobName=osx&configuration=osx_VTK_WITH_OSMESATruempinompipython3.7.____cpython" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=master&jobName=osx&configuration=osx_VTK_WITH_OSMESATruempinompipython3.7.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>osx_VTK_WITH_OSMESATruempinompipython3.8.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dev_rebuild_with_mpi_variants-feedstock?branchName=master&jobName=osx&configuration=osx_VTK_WITH_OSMESATruempinompipython3.8.____cpython" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=master&jobName=osx&configuration=osx_VTK_WITH_OSMESATruempinompipython3.8.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>osx_VTK_WITH_OSMESATruempiopenmpipython3.6.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dev_rebuild_with_mpi_variants-feedstock?branchName=master&jobName=osx&configuration=osx_VTK_WITH_OSMESATruempiopenmpipython3.6.____cpython" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=master&jobName=osx&configuration=osx_VTK_WITH_OSMESATruempiopenmpipython3.6.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>osx_VTK_WITH_OSMESATruempiopenmpipython3.7.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dev_rebuild_with_mpi_variants-feedstock?branchName=master&jobName=osx&configuration=osx_VTK_WITH_OSMESATruempiopenmpipython3.7.____cpython" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=master&jobName=osx&configuration=osx_VTK_WITH_OSMESATruempiopenmpipython3.7.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>osx_VTK_WITH_OSMESATruempiopenmpipython3.8.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dev_rebuild_with_mpi_variants-feedstock?branchName=master&jobName=osx&configuration=osx_VTK_WITH_OSMESATruempiopenmpipython3.8.____cpython" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=master&jobName=osx&configuration=osx_VTK_WITH_OSMESATruempiopenmpipython3.8.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>win_python3.6.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dev_rebuild_with_mpi_variants-feedstock?branchName=master&jobName=win&configuration=win_python3.6.____cpython" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=master&jobName=win&configuration=win_python3.6.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>win_python3.7.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dev_rebuild_with_mpi_variants-feedstock?branchName=master&jobName=win&configuration=win_python3.7.____cpython" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=master&jobName=win&configuration=win_python3.7.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>win_python3.8.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dev_rebuild_with_mpi_variants-feedstock?branchName=master&jobName=win&configuration=win_python3.8.____cpython" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=master&jobName=win&configuration=win_python3.8.____cpython" alt="variant">
                 </a>
               </td>
             </tr>
