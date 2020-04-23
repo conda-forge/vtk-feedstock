@@ -10,23 +10,59 @@ jobs:
   strategy:
     maxParallel: 8
     matrix:
-      osx_VTK_WITH_OSMESAFalsepython3.6.____cpython:
-        CONFIG: osx_VTK_WITH_OSMESAFalsepython3.6.____cpython
+      osx_VTK_WITH_OSMESAFalsempimpichpython3.6.____cpython:
+        CONFIG: osx_VTK_WITH_OSMESAFalsempimpichpython3.6.____cpython
         UPLOAD_PACKAGES: True
-      osx_VTK_WITH_OSMESAFalsepython3.7.____cpython:
-        CONFIG: osx_VTK_WITH_OSMESAFalsepython3.7.____cpython
+      osx_VTK_WITH_OSMESAFalsempimpichpython3.7.____cpython:
+        CONFIG: osx_VTK_WITH_OSMESAFalsempimpichpython3.7.____cpython
         UPLOAD_PACKAGES: True
-      osx_VTK_WITH_OSMESAFalsepython3.8.____cpython:
-        CONFIG: osx_VTK_WITH_OSMESAFalsepython3.8.____cpython
+      osx_VTK_WITH_OSMESAFalsempimpichpython3.8.____cpython:
+        CONFIG: osx_VTK_WITH_OSMESAFalsempimpichpython3.8.____cpython
         UPLOAD_PACKAGES: True
-      osx_VTK_WITH_OSMESATruepython3.6.____cpython:
-        CONFIG: osx_VTK_WITH_OSMESATruepython3.6.____cpython
+      osx_VTK_WITH_OSMESAFalsempinompipython3.6.____cpython:
+        CONFIG: osx_VTK_WITH_OSMESAFalsempinompipython3.6.____cpython
         UPLOAD_PACKAGES: True
-      osx_VTK_WITH_OSMESATruepython3.7.____cpython:
-        CONFIG: osx_VTK_WITH_OSMESATruepython3.7.____cpython
+      osx_VTK_WITH_OSMESAFalsempinompipython3.7.____cpython:
+        CONFIG: osx_VTK_WITH_OSMESAFalsempinompipython3.7.____cpython
         UPLOAD_PACKAGES: True
-      osx_VTK_WITH_OSMESATruepython3.8.____cpython:
-        CONFIG: osx_VTK_WITH_OSMESATruepython3.8.____cpython
+      osx_VTK_WITH_OSMESAFalsempinompipython3.8.____cpython:
+        CONFIG: osx_VTK_WITH_OSMESAFalsempinompipython3.8.____cpython
+        UPLOAD_PACKAGES: True
+      osx_VTK_WITH_OSMESAFalsempiopenmpipython3.6.____cpython:
+        CONFIG: osx_VTK_WITH_OSMESAFalsempiopenmpipython3.6.____cpython
+        UPLOAD_PACKAGES: True
+      osx_VTK_WITH_OSMESAFalsempiopenmpipython3.7.____cpython:
+        CONFIG: osx_VTK_WITH_OSMESAFalsempiopenmpipython3.7.____cpython
+        UPLOAD_PACKAGES: True
+      osx_VTK_WITH_OSMESAFalsempiopenmpipython3.8.____cpython:
+        CONFIG: osx_VTK_WITH_OSMESAFalsempiopenmpipython3.8.____cpython
+        UPLOAD_PACKAGES: True
+      osx_VTK_WITH_OSMESATruempimpichpython3.6.____cpython:
+        CONFIG: osx_VTK_WITH_OSMESATruempimpichpython3.6.____cpython
+        UPLOAD_PACKAGES: True
+      osx_VTK_WITH_OSMESATruempimpichpython3.7.____cpython:
+        CONFIG: osx_VTK_WITH_OSMESATruempimpichpython3.7.____cpython
+        UPLOAD_PACKAGES: True
+      osx_VTK_WITH_OSMESATruempimpichpython3.8.____cpython:
+        CONFIG: osx_VTK_WITH_OSMESATruempimpichpython3.8.____cpython
+        UPLOAD_PACKAGES: True
+      osx_VTK_WITH_OSMESATruempinompipython3.6.____cpython:
+        CONFIG: osx_VTK_WITH_OSMESATruempinompipython3.6.____cpython
+        UPLOAD_PACKAGES: True
+      osx_VTK_WITH_OSMESATruempinompipython3.7.____cpython:
+        CONFIG: osx_VTK_WITH_OSMESATruempinompipython3.7.____cpython
+        UPLOAD_PACKAGES: True
+      osx_VTK_WITH_OSMESATruempinompipython3.8.____cpython:
+        CONFIG: osx_VTK_WITH_OSMESATruempinompipython3.8.____cpython
+        UPLOAD_PACKAGES: True
+      osx_VTK_WITH_OSMESATruempiopenmpipython3.6.____cpython:
+        CONFIG: osx_VTK_WITH_OSMESATruempiopenmpipython3.6.____cpython
+        UPLOAD_PACKAGES: True
+      osx_VTK_WITH_OSMESATruempiopenmpipython3.7.____cpython:
+        CONFIG: osx_VTK_WITH_OSMESATruempiopenmpipython3.7.____cpython
+        UPLOAD_PACKAGES: True
+      osx_VTK_WITH_OSMESATruempiopenmpipython3.8.____cpython:
+        CONFIG: osx_VTK_WITH_OSMESATruempiopenmpipython3.8.____cpython
         UPLOAD_PACKAGES: True
 
   steps:

@@ -1,9 +1,17 @@
 {% set version = "9.0.0.rc1" %}
-{% set build = 5 %}
+{% set build = 6 %}
 
 {% set minor_version = ".".join(version.split(".")[:2]) %}
 
-{% set build = build + 100 %}   # [not VTK_WITH_OSMESA]
+{% set build = build + 200 %}   # [not VTK_WITH_OSMESA]
+
+# ensure mpi is defined (needed for conda-smithy recipe-lint)
+{% set mpi = mpi or 'nompi' %}
+
+{% if mpi == 'nompi' %}
+# prioritize nompi variant
+{% set build = build + 100 %}
+{% endif %}
 
 package:
   name: vtk
@@ -16,12 +24,30 @@ source:
 build:
   skip: True  # [win and py27]
   number: {{ build }}
-  {% if VTK_WITH_OSMESA == "True" %}
-  {% set prefix = "with_osmesa" %}
+
+  # add build string so packages can depend on
+  # mpi or nompi variants explicitly:
+  # `vtk * mpi_mpich_*` for mpich
+  # `vtk * mpi_*` for any mpi
+  # `vtk * nompi_*` for no mpi
+
+  {% if mpi != 'nompi' %}
+  {% set mpi_prefix = "mpi_" + mpi %}
   {% else %}
-  {% set prefix = "no_osmesa" %}
+  {% set mpi_prefix = "nompi" %}
   {% endif %}
-  string: "{{ prefix }}_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ build }}"
+
+  # typically, osmesa is selected by installing or not installing
+  # mesalib, but it could also be selected via the build string:
+  # `vtk * *with_osmesa*` for osmesa
+  # `vtk * *no_osmesa*` for no osmesa
+
+  {% if VTK_WITH_OSMESA == "True" %}
+  {% set osmesa_prefix = "with_osmesa" %}
+  {% else %}
+  {% set osmesa_prefix = "no_osmesa" %}
+  {% endif %}
+  string: "{{ mpi_prefix }}_{{ osmesa_prefix }}_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ build }}"
 
   features:
     - mesalib   # [VTK_WITH_OSMESA]
@@ -51,6 +77,7 @@ requirements:
     - zlib
     - freetype
     - hdf5
+    - hdf5 * {{ mpi_prefix }}_*
     - libxml2
     - libpng
     - jpeg
@@ -61,6 +88,7 @@ requirements:
     - tbb-devel
     - mesalib   # [VTK_WITH_OSMESA]
     - libnetcdf
+    - libnetcdf * {{ mpi_prefix }}_*
     - lz4-c
     - xorg-libxt  # [linux]
     - boost-cpp
@@ -84,7 +112,7 @@ requirements:
     - python
     - zlib
     - freetype
-    - hdf5
+    - hdf5 * {{ mpi_prefix }}_*
     - libxml2
     - libpng
     - jpeg
@@ -93,7 +121,7 @@ requirements:
     - expat
     - tbb
     - mesalib   # [VTK_WITH_OSMESA]
-    - libnetcdf
+    - libnetcdf * {{ mpi_prefix }}_*
     - lz4-c
     - xorg-libxt  # [linux]
     - tk  # [not win and not VTK_WITH_OSMESA]
