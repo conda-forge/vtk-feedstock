@@ -1,5 +1,7 @@
+MACOSX_DEPLOYMENT_TARGET:
+- '10.9'
 VTK_WITH_OSMESA:
-- 'False'
+- 'True'
 boost_cpp:
 - '1.72'
 channel_sources:
@@ -7,11 +9,9 @@ channel_sources:
 channel_targets:
 - conda-forge vtk_dev
 cxx_compiler:
-- gxx
+- clangxx
 cxx_compiler_version:
-- '7'
-docker_image:
-- condaforge/linux-anvil-comp7
+- '9'
 expat:
 - '2.2'
 ffmpeg:
@@ -36,8 +36,10 @@ libxml2:
 - '2.9'
 lz4_c:
 - 1.9.2
-mpi:
-- openmpi
+macos_machine:
+- x86_64-apple-darwin13.4.0
+macos_min_version:
+- '10.9'
 pin_run_as_build:
   boost-cpp:
     max_pin: x.x.x
