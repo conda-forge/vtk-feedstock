@@ -4,12 +4,3 @@ channel_targets:
 VTK_WITH_OSMESA:
   - False
   - True  # [unix]
-
-mpi:
-  - nompi
-  - mpich  # [not win]
-  - openmpi  # [not win]
-
-pin_run_as_build:
-  mpich: x.x
-  openmpi: x.x
