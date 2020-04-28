@@ -50,7 +50,7 @@ requirements:
     - zlib
     - freetype
     - hdf5
-    - hdf5 * nompi_
+    - hdf5 * nompi_*
     - libxml2
     - libpng
     - jpeg
@@ -61,7 +61,7 @@ requirements:
     - tbb-devel
     - mesalib   # [VTK_WITH_OSMESA]
     - libnetcdf
-    - libnetcdf * nompi_
+    - libnetcdf * nompi_*
     - lz4-c
     - xorg-libxt  # [linux]
     - boost-cpp
