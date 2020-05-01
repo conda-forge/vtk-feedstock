@@ -1,5 +1,5 @@
 {% set version = "8.2.0" %}
-{% set build_number = 15 %}
+{% set build_number = 16 %}
 
 {% set minor_version = ".".join(version.split(".")[:2]) %}
 
@@ -50,6 +50,7 @@ requirements:
     - zlib
     - freetype
     - hdf5
+    - hdf5 * nompi_*
     - libxml2
     - libpng
     - jpeg
@@ -60,6 +61,7 @@ requirements:
     - tbb-devel
     - mesalib   # [VTK_WITH_OSMESA]
     - libnetcdf
+    - libnetcdf * nompi_*
     - lz4-c
     - xorg-libxt  # [linux]
     - boost-cpp
