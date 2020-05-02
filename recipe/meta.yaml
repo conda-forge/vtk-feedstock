@@ -1,9 +1,9 @@
-{% set version = "8.2.0" %}
-{% set build_number = 18 %}
+{% set version = "9.0.0" %}
+{% set build_number = 0 %}
 
 {% set minor_version = ".".join(version.split(".")[:2]) %}
 
-{% set build_number = build_number + 200 %}   # [not VTK_WITH_OSMESA]
+{% set build_number = build_number + 100 %}   # [not VTK_WITH_OSMESA]
 
 package:
   name: vtk
@@ -11,15 +11,15 @@ package:
 
 source:
   url: http://www.vtk.org/files/release/{{ minor_version }}/VTK-{{ version }}.tar.gz
-  fn:  VTK-{{ version }}.tar.gz
-  sha256: 34c3dc775261be5e45a8049155f7228b6bd668106c72a3c435d95730d17d57bb
+  fn: VTK-{{ version }}.tar.gz
+  sha256: 15def4e6f84d72f82386617fe595ec124dda3cbd13ea19a0dcd91583197d8715
   patches:
     - 0001-Link-libpython-optionally-make-vtkPython-dep-compile.patch
     - 0002-VTKGenerateExportHeader-Prefer-dumpversion-over-vers.patch
     - 0003-py38.patch
 
 build:
-  skip: True  # [win and py27]
+  skip: true  # [win and py27]
   number: {{ build_number }}
   features:
     - mesalib   # [VTK_WITH_OSMESA]
@@ -131,9 +131,7 @@ about:
   license: BSD-3-Clause
   license_file: Copyright.txt
   summary: >
-    The Visualization Toolkit (VTK) is an open-source, freely available software
-    system for 3D computer graphics, modeling, image processing, volume
-    rendering, scientific visualization, and information visualization.
+    The Visualization Toolkit (VTK) is an open-source, freely available software system for 3D computer graphics, modeling, image processing, volume rendering, scientific visualization, and information visualization.
 
 extra:
   recipe-maintainers:
