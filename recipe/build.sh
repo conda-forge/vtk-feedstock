@@ -1,31 +1,55 @@
 #!/bin/bash
 
-mkdir -p build
-cd build
+mkdir build
+cd build || exit
 
 BUILD_CONFIG=Release
+OSNAME=$(uname)
 
-# choose different screen settings for OS X and Linux
-if [ `uname` = "Darwin" ]; then
-    SCREEN_ARGS=(
-        "-DVTK_USE_X:BOOL=OFF"
-        "-DVTK_USE_COCOA:BOOL=ON"
-        "-DVTK_USE_CARBON:BOOL=OFF"
-    )
-else
-    SCREEN_ARGS=(
-        "-DVTK_USE_X:BOOL=ON"
-    )
-fi
+# Use bash "Remove Largest Suffix Pattern" to get rid of all but major version number
+PYTHON_MAJOR_VERSION=${PY_VER%%.*}
 
-if [ -f '$PREFIX/lib/libOSMesa32.so' ]; then
-    WITH_OSMESA=(
+VTK_ARGS=()
+
+if [ -f "$PREFIX/lib/libOSMesa32${SHLIB_EXT}" ]; then
+    VTK_ARGS+=(
+        "-DVTK_DEFAULT_RENDER_WINDOW_OFFSCREEN:BOOL=ON"
         "-DVTK_OPENGL_HAS_OSMESA:BOOL=ON"
-        "-DOSMESA_LIBRARY=${PREFIX}/lib/libOSMesa32.so"
+        "-DOSMESA_INCLUDE_DIR:PATH=${PREFIX}/include"
+        "-DOSMESA_LIBRARY:FILEPATH=${PREFIX}/lib/libOSMesa32${SHLIB_EXT}"
     )
+
+    if [ "${OSNAME}" == Linux ]; then
+        VTK_ARGS+=(
+            "-DVTK_USE_X:BOOL=OFF"
+            "-DCMAKE_TOOLCHAIN_FILE=${RECIPE_DIR}/cross-linux.cmake"
+        )
+    elif [ "${OSNAME}" == Darwin ]; then
+        VTK_ARGS+=(
+            "-DVTK_USE_COCOA:BOOL=OFF"
+            "-DCMAKE_OSX_SYSROOT:PATH=${CONDA_BUILD_SYSROOT}"
+        )
+    fi
 else
-    WITH_OSMESA=()
+    VTK_ARGS+=(
+        "-DVTK_DEFAULT_RENDER_WINDOW_OFFSCREEN:BOOL=OFF"
+        "-DVTK_OPENGL_HAS_OSMESA:BOOL=OFF"
+        "-DVTK_USE_TK:BOOL=ON"
+    )
+    if [ "${OSNAME}" == Linux ]; then
+        VTK_ARGS+=(
+            "-DVTK_USE_X:BOOL=ON"
+            "-DCMAKE_TOOLCHAIN_FILE=${RECIPE_DIR}/cross-linux.cmake"
+        )
+    elif [ "${OSNAME}" == Darwin ]; then
+        VTK_ARGS+=(
+            "-DVTK_USE_COCOA:BOOL=ON"
+            "-DCMAKE_OSX_SYSROOT:PATH=${CONDA_BUILD_SYSROOT}"
+        )
+    fi
 fi
+
+echo "VTK_ARGS:" "${VTK_ARGS[@]}"
 
 # now we can start configuring
 cmake -LAH .. -G "Ninja" \
@@ -36,34 +60,62 @@ cmake -LAH .. -G "Ninja" \
     -DCMAKE_INSTALL_PREFIX:PATH="${PREFIX}" \
     -DCMAKE_INSTALL_RPATH:PATH="${PREFIX}/lib" \
     -DCMAKE_INSTALL_LIBDIR:PATH=lib \
-    -DBUILD_DOCUMENTATION:BOOL=OFF \
-    -DBUILD_TESTING:BOOL=OFF \
-    -DBUILD_EXAMPLES:BOOL=OFF \
+    -DVTK_BUILD_DOCUMENTATION:BOOL=OFF \
+    -DVTK_BUILD_TESTING:BOOL=OFF \
+    -DVTK_BUILD_EXAMPLES:BOOL=OFF \
     -DBUILD_SHARED_LIBS:BOOL=ON \
-    -DVTK_WRAP_PYTHON:BOOL=ON \
-    -DVTK_USE_TK:BOOL=ON \
-    -DModule_vtkPythonInterpreter:BOOL=OFF \
-    -DVTK_PYTHON_VERSION:STRING="${PY_VER}" \
-    -DVTK_INSTALL_PYTHON_MODULES_DIR:PATH="${SP_DIR}" \
+    -DVTK_LEGACY_SILENT:BOOL=OFF \
     -DVTK_HAS_FEENABLEEXCEPT:BOOL=OFF \
-    -DVTK_RENDERING_BACKEND=OpenGL2 \
-    -DModule_vtkRenderingMatplotlib=ON \
-    -DVTK_USE_SYSTEM_ZLIB:BOOL=ON \
-    -DVTK_USE_SYSTEM_FREETYPE:BOOL=ON \
-    -DVTK_USE_SYSTEM_LIBXML2:BOOL=ON \
-    -DVTK_USE_SYSTEM_PNG:BOOL=ON \
-    -DVTK_USE_SYSTEM_JPEG:BOOL=ON \
-    -DVTK_USE_SYSTEM_TIFF:BOOL=ON \
-    -DVTK_USE_SYSTEM_EXPAT:BOOL=ON \
-    -DVTK_USE_SYSTEM_HDF5:BOOL=ON \
-    -DVTK_USE_SYSTEM_JSONCPP:BOOL=ON \
-    -DVTK_SMP_IMPLEMENTATION_TYPE:STRING=TBB \
-    -DVTK_USE_SYSTEM_NETCDF:BOOL=ON \
-    -DVTK_USE_SYSTEM_LZ4:BOOL=ON \
-    -DModule_vtkIOXdmf2:INTERNAL=ON \
-    -DModule_vtkIOXdmf3:INTERNAL=ON \
-    -DModule_vtkWebGLExporter:INTERNAL=ON \
-    ${SCREEN_ARGS[@]} ${WITH_OSMESA[@]}
+    -DVTK_WRAP_PYTHON:BOOL=ON \
+    -DVTK_PYTHON_VERSION:STRING="${PYTHON_MAJOR_VERSION}" \
+    -DPython3_FIND_STRATEGY=LOCATION \
+    -DPython3_ROOT_DIR=${PREFIX} \
+    -DVTK_MODULE_ENABLE_VTK_PythonInterpreter:STRING=NO \
+    -DVTK_MODULE_ENABLE_VTK_RenderingFreeType:STRING=YES \
+    -DVTK_MODULE_ENABLE_VTK_RenderingMatplotlib:STRING=YES \
+    -DVTK_MODULE_ENABLE_VTK_IOFFMPEG:STRING=YES \
+    -DVTK_MODULE_ENABLE_VTK_ViewsCore:STRING=YES \
+    -DVTK_MODULE_ENABLE_VTK_ViewsContext2D:STRING=YES \
+    -DVTK_MODULE_ENABLE_VTK_PythonContext2D:STRING=YES \
+    -DVTK_MODULE_ENABLE_VTK_RenderingContext2D:STRING=YES \
+    -DVTK_MODULE_ENABLE_VTK_RenderingContextOpenGL2:STRING=YES \
+    -DVTK_MODULE_ENABLE_VTK_RenderingCore:STRING=YES \
+    -DVTK_MODULE_ENABLE_VTK_RenderingOpenGL2:STRING=YES \
+    -DVTK_MODULE_ENABLE_VTK_WebGLExporter:STRING=YES \
+    -DVTK_DATA_EXCLUDE_FROM_ALL:BOOL=ON \
+    -DVTK_MODULE_USE_EXTERNAL_vtkeigen:BOOL=ON \
+    -DVTK_MODULE_USE_EXTERNAL_vtkdoubleconversion:BOOL=ON \
+    -DVTK_MODULE_USE_EXTERNAL_vtklz4:BOOL=ON \
+    -DVTK_MODULE_USE_EXTERNAL_vtkzlib:BOOL=ON \
+    -DVTK_MODULE_USE_EXTERNAL_vtkexpat:BOOL=ON \
+    -DVTK_MODULE_USE_EXTERNAL_vtkfreetype:BOOL=ON \
+    -DVTK_MODULE_USE_EXTERNAL_vtkjpeg:BOOL=ON \
+    -DVTK_MODULE_USE_EXTERNAL_vtkpng:BOOL=ON \
+    -DVTK_MODULE_USE_EXTERNAL_vtktiff:BOOL=ON \
+    -DVTK_MODULE_USE_EXTERNAL_vtkglew:BOOL=ON \
+    -DVTK_MODULE_USE_EXTERNAL_vtkhdf5:BOOL=ON \
+    -DVTK_MODULE_USE_EXTERNAL_vtkogg:BOOL=ON \
+    -DVTK_MODULE_USE_EXTERNAL_vtktheora:BOOL=ON \
+    -DVTK_MODULE_USE_EXTERNAL_vtkjsoncpp:BOOL=ON \
+    -DVTK_MODULE_USE_EXTERNAL_vtklibxml2:BOOL=ON \
+    -DVTK_MODULE_USE_EXTERNAL_vtklibproj:BOOL=ON \
+    -DVTK_MODULE_USE_EXTERNAL_vtknetcdf:BOOL=ON \
+    -DVTK_MODULE_USE_EXTERNAL_vtklzma:BOOL=ON \
+    -DVTK_MODULE_USE_EXTERNAL_vtkloguru:BOOL=ON \
+    -DVTK_MODULE_USE_EXTERNAL_vtksqlite:BOOL=ON \
+    -DVTK_MODULE_USE_EXTERNAL_vtkutf8:BOOL=ON \
+    -DVTK_MODULE_USE_EXTERNAL_vtkgl2ps:BOOL=ON \
+    -DVTK_MODULE_USE_EXTERNAL_vtkpugixml:BOOL=ON \
+    -DVTK_MODULE_USE_EXTERNAL_vtklibharu:BOOL=ON \
+    "${VTK_ARGS[@]}"
+
+# third-party libraries we'd ideally replace but aren't on conda-forge yet
+#-DVTK_MODULE_USE_EXTERNAL_vtkdiy2:BOOL=ON \
+#-DVTK_MODULE_USE_EXTERNAL_vtkzfp:BOOL=ON \
+#-DVTK_MODULE_USE_EXTERNAL_vtkxdmf2:BOOL=ON \
+#-DVTK_MODULE_USE_EXTERNAL_vtkxdmf3:BOOL=ON \
+#-DVTK_MODULE_USE_EXTERNAL_vtkpegtl:BOOL=ON \
+#-DVTK_MODULE_USE_EXTERNAL_vtkkissfft:BOOL=ON \
 
 # compile & install!
 ninja install -v

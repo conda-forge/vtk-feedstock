@@ -1,9 +1,9 @@
 {% set version = "9.0.0" %}
-{% set build_number = 0 %}
+{% set build = 0 %}
 
 {% set minor_version = ".".join(version.split(".")[:2]) %}
 
-{% set build_number = build_number + 100 %}   # [not VTK_WITH_OSMESA]
+{% set build = build + 100 %}   # [not VTK_WITH_OSMESA]
 
 package:
   name: vtk
@@ -11,16 +11,24 @@ package:
 
 source:
   url: http://www.vtk.org/files/release/{{ minor_version }}/VTK-{{ version }}.tar.gz
-  fn: VTK-{{ version }}.tar.gz
-  sha256: 15def4e6f84d72f82386617fe595ec124dda3cbd13ea19a0dcd91583197d8715
-  patches:
-    - 0001-Link-libpython-optionally-make-vtkPython-dep-compile.patch
-    - 0002-VTKGenerateExportHeader-Prefer-dumpversion-over-vers.patch
-    - 0003-py38.patch
+  sha256: 7dbedd58a1ae144b98a4534b9badac683c88e5aa4a959a57856680f00258d268
 
 build:
-  skip: true  # [win and py27]
-  number: {{ build_number }}
+  skip: True  # [win and py27]
+  number: {{ build }}
+
+  # typically, osmesa is selected by installing or not installing
+  # mesalib, but it could also be selected via the build string:
+  # `vtk * with_osmesa*` for osmesa
+  # `vtk * no_osmesa*` for no osmesa
+
+  {% if VTK_WITH_OSMESA == "True" %}
+  {% set osmesa_prefix = "with_osmesa" %}
+  {% else %}
+  {% set osmesa_prefix = "no_osmesa" %}
+  {% endif %}
+  string: "{{ osmesa_prefix }}_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ build }}"
+
   features:
     - mesalib   # [VTK_WITH_OSMESA]
 
@@ -46,7 +54,6 @@ requirements:
 
   host:
     - python
-    # VTK Third Party dependencies
     - zlib
     - freetype
     - hdf5
@@ -65,12 +72,24 @@ requirements:
     - lz4-c
     - xorg-libxt  # [linux]
     - boost-cpp
-    - tk
+    - tk  # [not win and not VTK_WITH_OSMESA]
+    - ffmpeg
+    - utfcpp
+    - eigen
+    - double-conversion
+    - pugixml
+    - glew
+    - libogg
+    - libtheora
+    - proj
+    - loguru
+    - sqlite
+    - gl2ps
+    - pugixml
+    - libharu
 
   run:
     - python
-    - future  # used in the generated python wrappers
-    # VTK Third Party dependencies
     - zlib
     - freetype
     - hdf5
@@ -85,7 +104,21 @@ requirements:
     - libnetcdf
     - lz4-c
     - xorg-libxt  # [linux]
-    - tk
+    - tk  # [not win and not VTK_WITH_OSMESA]
+    - ffmpeg
+    - utfcpp
+    - eigen
+    - double-conversion
+    - pugixml
+    - glew
+    - libogg
+    - libtheora
+    - proj
+    - loguru
+    - sqlite
+    - gl2ps
+    - pugixml
+    - libharu
 
   run_constrained:
     # Paraview bundles its own VTK that has conflicting Python vtkmodules
@@ -131,7 +164,9 @@ about:
   license: BSD-3-Clause
   license_file: Copyright.txt
   summary: >
-    The Visualization Toolkit (VTK) is an open-source, freely available software system for 3D computer graphics, modeling, image processing, volume rendering, scientific visualization, and information visualization.
+    The Visualization Toolkit (VTK) is an open-source, freely available software
+    system for 3D computer graphics, modeling, image processing, volume
+    rendering, scientific visualization, and information visualization.
 
 extra:
   recipe-maintainers:
