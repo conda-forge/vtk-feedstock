@@ -1,9 +1,9 @@
-{% set version = "9.0.0.rc1" %}
-{% set build = 7 %}
+{% set version = "9.0.0.rc3" %}
+{% set build = 0 %}
 
 {% set minor_version = ".".join(version.split(".")[:2]) %}
 
-{% set build = build + 200 %}   # [not VTK_WITH_OSMESA]
+{% set build = build + 100 %}   # [not VTK_WITH_OSMESA]
 
 package:
   name: vtk
@@ -11,7 +11,7 @@ package:
 
 source:
   url: http://www.vtk.org/files/release/{{ minor_version }}/VTK-{{ version }}.tar.gz
-  sha256: 7dbedd58a1ae144b98a4534b9badac683c88e5aa4a959a57856680f00258d268
+  sha256: 3a3fc0b15bd1e2416092293f1dd6b21161c0fd2b4af59a85fb5b5333b617e7a9
 
 build:
   skip: True  # [win and py27]
