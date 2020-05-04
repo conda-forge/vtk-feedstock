@@ -28,6 +28,7 @@ requirements:
   build:
     - {{ compiler("cxx") }}
     - cmake
+    - pkg-config
     - ninja
     - {{ cdt('libxcb') }}  # [linux and not VTK_WITH_OSMESA]
     - {{ cdt('libxau') }}  # [linux and not VTK_WITH_OSMESA]
