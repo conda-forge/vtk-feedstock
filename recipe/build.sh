@@ -28,7 +28,7 @@ else
 fi
 
 # now we can start configuring
-cmake .. -G "Ninja" \
+cmake -LAH .. -G "Ninja" \
     -Wno-dev \
     -DCMAKE_BUILD_TYPE=$BUILD_CONFIG \
     -DCMAKE_PREFIX_PATH:PATH="${PREFIX}" \
