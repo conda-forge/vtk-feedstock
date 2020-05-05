@@ -86,7 +86,6 @@ requirements:
     - sqlite
     - gl2ps
     - pugixml
-    - libharu
 
   run:
     - python
@@ -118,7 +117,6 @@ requirements:
     - sqlite
     - gl2ps
     - pugixml
-    - libharu
 
   run_constrained:
     # Paraview bundles its own VTK that has conflicting Python vtkmodules
