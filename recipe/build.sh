@@ -22,7 +22,6 @@ if [ -f "$PREFIX/lib/libOSMesa32${SHLIB_EXT}" ]; then
     if [ "${OSNAME}" == Linux ]; then
         VTK_ARGS+=(
             "-DVTK_USE_X:BOOL=OFF"
-            "-DCMAKE_TOOLCHAIN_FILE=${RECIPE_DIR}/cross-linux.cmake"
         )
     elif [ "${OSNAME}" == Darwin ]; then
         VTK_ARGS+=(
@@ -39,7 +38,6 @@ else
     if [ "${OSNAME}" == Linux ]; then
         VTK_ARGS+=(
             "-DVTK_USE_X:BOOL=ON"
-            "-DCMAKE_TOOLCHAIN_FILE=${RECIPE_DIR}/cross-linux.cmake"
         )
     elif [ "${OSNAME}" == Darwin ]; then
         VTK_ARGS+=(
