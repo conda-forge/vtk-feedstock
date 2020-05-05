@@ -28,10 +28,11 @@ else
 fi
 
 # now we can start configuring
-cmake .. -G "Ninja" \
+cmake -LAH .. -G "Ninja" \
     -Wno-dev \
     -DCMAKE_BUILD_TYPE=$BUILD_CONFIG \
     -DCMAKE_PREFIX_PATH:PATH="${PREFIX}" \
+    -DCMAKE_FIND_FRAMEWORK=LAST \
     -DCMAKE_INSTALL_PREFIX:PATH="${PREFIX}" \
     -DCMAKE_INSTALL_RPATH:PATH="${PREFIX}/lib" \
     -DCMAKE_INSTALL_LIBDIR:PATH=lib \
@@ -52,7 +53,6 @@ cmake .. -G "Ninja" \
     -DVTK_USE_SYSTEM_FREETYPE:BOOL=ON \
     -DVTK_USE_SYSTEM_LIBXML2:BOOL=ON \
     -DVTK_USE_SYSTEM_PNG:BOOL=ON \
-    -DPNG_PNG_INCLUDE_DIR="${PREFIX}" \
     -DVTK_USE_SYSTEM_JPEG:BOOL=ON \
     -DVTK_USE_SYSTEM_TIFF:BOOL=ON \
     -DVTK_USE_SYSTEM_EXPAT:BOOL=ON \
