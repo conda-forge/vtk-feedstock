@@ -203,7 +203,6 @@ Feedstock Maintainers
 * [@dfroger](https://github.com/dfroger/)
 * [@downiec](https://github.com/downiec/)
 * [@grlee77](https://github.com/grlee77/)
-* [@ivoflipse](https://github.com/ivoflipse/)
 * [@jasonb5](https://github.com/jasonb5/)
 * [@marcelotrevisani](https://github.com/marcelotrevisani/)
 * [@msarahan](https://github.com/msarahan/)
