@@ -1,0 +1,66 @@
+VTK_WITH_OSMESA:
+- 'False'
+boost_cpp:
+- '1.72'
+channel_sources:
+- conda-forge,defaults
+channel_targets:
+- conda-forge main
+cxx_compiler:
+- gxx
+cxx_compiler_version:
+- '8'
+docker_image:
+- condaforge/linux-anvil-ppc64le
+expat:
+- '2.2'
+freetype:
+- 2.9.1
+hdf5:
+- 1.10.6
+jpeg:
+- '9'
+jsoncpp:
+- 1.8.4
+libnetcdf:
+- 4.7.4
+libpng:
+- '1.6'
+libtiff:
+- 4.1.0
+libxml2:
+- '2.9'
+lz4_c:
+- 1.9.2
+pin_run_as_build:
+  boost-cpp:
+    max_pin: x.x.x
+  expat:
+    max_pin: x.x
+  freetype:
+    max_pin: x
+  jpeg:
+    max_pin: x
+  jsoncpp:
+    max_pin: x.x.x
+  libpng:
+    max_pin: x.x
+  libtiff:
+    max_pin: x
+  libxml2:
+    max_pin: x.x
+  lz4-c:
+    max_pin: x.x.x
+  python:
+    min_pin: x.x
+    max_pin: x.x
+  vtk:
+    max_pin: x.x.x
+  zlib:
+    max_pin: x.x
+python:
+- 3.6.* *_cpython
+vtk:
+- 8.2.0
+zlib:
+- '1.2'
