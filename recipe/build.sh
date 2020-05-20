@@ -62,6 +62,7 @@ cmake -LAH .. -G "Ninja" \
     -DVTK_USE_SYSTEM_LZ4:BOOL=ON \
     -DModule_vtkIOXdmf2:INTERNAL=ON \
     -DModule_vtkIOXdmf3:INTERNAL=ON \
+    -DModule_vtkWebGLExporter:INTERNAL=ON \
     ${SCREEN_ARGS[@]} ${WITH_OSMESA[@]}
 
 # compile & install!
