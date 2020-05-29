@@ -48,7 +48,6 @@ cmake -LAH .. -G "Ninja" \
     -DVTK_HAS_FEENABLEEXCEPT:BOOL=OFF \
     -DVTK_RENDERING_BACKEND=OpenGL2 \
     -DModule_vtkRenderingMatplotlib=ON \
-    -DModule_vtkIOXdmf2:INTERNAL=ON \
     -DVTK_USE_SYSTEM_ZLIB:BOOL=ON \
     -DVTK_USE_SYSTEM_FREETYPE:BOOL=ON \
     -DVTK_USE_SYSTEM_LIBXML2:BOOL=ON \
@@ -63,6 +62,7 @@ cmake -LAH .. -G "Ninja" \
     -DVTK_USE_SYSTEM_LZ4:BOOL=ON \
     -DModule_vtkIOXdmf2:INTERNAL=ON \
     -DModule_vtkIOXdmf3:INTERNAL=ON \
+    -DModule_vtkWebGLExporter:INTERNAL=ON \
     ${SCREEN_ARGS[@]} ${WITH_OSMESA[@]}
 
 # compile & install!
