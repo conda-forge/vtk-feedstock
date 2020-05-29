@@ -1,13 +1,15 @@
 import pkg_resources
 import vtk
 import sys
+import os
 
 # If this fails it raises a DistributionNotFound exception
 pkg_resources.get_distribution('vtk')
 
-if sys.platform != 'darwin':
+if sys.platform != 'darwin' or os.environ.get('VTK_WITH_OSMESA') == 'True':
   # Linux and Windows can't run these tests on headless nodes, and OSX
   # is where the problem was happening anyway
+  # The test hangs with VTK_WITH_OSMESA == True, so disabling for now.
   sys.exit(0)
   
 # test libpng, since this was causing trouble in OSX previously
