@@ -11,7 +11,7 @@ cxx_compiler:
 expat:
 - '2.2'
 ffmpeg:
-- '4.2'
+- '4.3'
 freetype:
 - 2.9.1
 glew:
