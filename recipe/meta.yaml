@@ -1,5 +1,5 @@
-{% set version = "9.0.0" %}
-{% set build = 2 %}
+{% set version = "9.0.1" %}
+{% set build = 0 %}
 
 {% set minor_version = ".".join(version.split(".")[:2]) %}
 
@@ -11,10 +11,10 @@ package:
 
 source:
   url: http://www.vtk.org/files/release/{{ minor_version }}/VTK-{{ version }}.tar.gz
-  sha256: 15def4e6f84d72f82386617fe595ec124dda3cbd13ea19a0dcd91583197d8715
+  sha256: 1b39a5e191c282861e7af4101eaa8585969a2de05f5646c9199a161213a622c7
 
 build:
-  skip: True  # [win and py27]
+  skip: true  # [win and py27]
   number: {{ build }}
 
   # typically, osmesa is selected by installing or not installing
@@ -27,7 +27,7 @@ build:
   {% else %}
   {% set osmesa_prefix = "no_osmesa" %}
   {% endif %}
-  string: "{{ osmesa_prefix }}_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ build }}"
+  string: {{ osmesa_prefix }}_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ build }}
 
   features:
     - mesalib   # [VTK_WITH_OSMESA]
@@ -164,9 +164,7 @@ about:
   license: BSD-3-Clause
   license_file: Copyright.txt
   summary: >
-    The Visualization Toolkit (VTK) is an open-source, freely available software
-    system for 3D computer graphics, modeling, image processing, volume
-    rendering, scientific visualization, and information visualization.
+    The Visualization Toolkit (VTK) is an open-source, freely available software system for 3D computer graphics, modeling, image processing, volume rendering, scientific visualization, and information visualization.
 
 extra:
   recipe-maintainers:
