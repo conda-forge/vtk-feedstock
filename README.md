@@ -209,5 +209,4 @@ Feedstock Maintainers
 * [@muryanto1](https://github.com/muryanto1/)
 * [@patricksnape](https://github.com/patricksnape/)
 * [@tadeu](https://github.com/tadeu/)
-* [@xylar](https://github.com/xylar/)
 
