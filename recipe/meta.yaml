@@ -12,6 +12,9 @@ package:
 source:
   url: http://www.vtk.org/files/release/{{ minor_version }}/VTK-{{ version }}.tar.gz
   sha256: 2d5cdd048540144d821715c718932591418bb48f5b6bb19becdae62339efa75a
+  patches:
+    - Fix-problem-where-a-wrong-version-for-crosstool-ng-was-being-used.patch
+    - Fix-compilation-issue-due-to-Python3.7-API-change.patch
 
 build:
   skip: true  # [win and py27]
