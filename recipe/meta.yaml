@@ -65,6 +65,7 @@ requirements:
     - jsoncpp
     - expat
     - mesalib   # [VTK_WITH_OSMESA]
+    - xorg-libxt  # [linux]
 
   run:
     - python
@@ -78,6 +79,7 @@ requirements:
     - jsoncpp
     - expat
     - mesalib   # [VTK_WITH_OSMESA]
+    - xorg-libxt  # [linux]
 
   run_constrained:
     # Paraview bundles its own VTK that has conflicting Python vtkmodules
