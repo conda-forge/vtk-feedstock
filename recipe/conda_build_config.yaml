@@ -1,0 +1,3 @@
+VTK_WITH_OSMESA:
+  - False
+  # - True  # [unix]

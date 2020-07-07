@@ -1,51 +1,103 @@
 #!/bin/bash
 
 mkdir build
-cd build
+cd build || exit
 
 BUILD_CONFIG=Release
+OSNAME=$(uname)
 
-# choose different screen settings for OS X and Linux
-if [ `uname` = "Darwin" ]; then
-    SCREEN_ARGS=(
-        "-DVTK_USE_X:BOOL=OFF"
-        "-DVTK_USE_COCOA:BOOL=ON"
-        "-DVTK_USE_CARBON:BOOL=OFF"
+# Use bash "Remove Largest Suffix Pattern" to get rid of all but major version number
+PYTHON_MAJOR_VERSION=${PY_VER%%.*}
+
+VTK_ARGS=()
+
+if [ -f "$PREFIX/lib/libOSMesa32${SHLIB_EXT}" ]; then
+    VTK_ARGS+=(
+        "-DVTK_DEFAULT_RENDER_WINDOW_OFFSCREEN:BOOL=ON"
+        "-DVTK_OPENGL_HAS_OSMESA:BOOL=ON"
+        "-DOSMESA_INCLUDE_DIR:PATH=${PREFIX}/include"
+        "-DOSMESA_LIBRARY:FILEPATH=${PREFIX}/lib/libOSMesa32${SHLIB_EXT}"
     )
+
+    if [ "${OSNAME}" == Linux ]; then
+        VTK_ARGS+=(
+            "-DVTK_USE_X:BOOL=OFF"
+        )
+    elif [ "${OSNAME}" == Darwin ]; then
+        VTK_ARGS+=(
+            "-DVTK_USE_COCOA:BOOL=OFF"
+            "-DCMAKE_OSX_SYSROOT:PATH=${CONDA_BUILD_SYSROOT}"
+        )
+    fi
 else
-    SCREEN_ARGS=(
-        "-DVTK_USE_X:BOOL=ON"
+    VTK_ARGS+=(
+        "-DVTK_DEFAULT_RENDER_WINDOW_OFFSCREEN:BOOL=OFF"
+        "-DVTK_OPENGL_HAS_OSMESA:BOOL=OFF"
+        "-DVTK_USE_TK:BOOL=ON"
     )
+    if [ "${OSNAME}" == Linux ]; then
+        VTK_ARGS+=(
+            "-DVTK_USE_X:BOOL=ON"
+        )
+    elif [ "${OSNAME}" == Darwin ]; then
+        VTK_ARGS+=(
+            "-DVTK_USE_COCOA:BOOL=ON"
+            "-DCMAKE_OSX_SYSROOT:PATH=${CONDA_BUILD_SYSROOT}"
+        )
+    fi
 fi
 
+echo "VTK_ARGS:" "${VTK_ARGS[@]}"
+
 # now we can start configuring
-cmake .. -G "Ninja" \
+cmake -LAH .. -G "Ninja" \
     -Wno-dev \
     -DCMAKE_BUILD_TYPE=$BUILD_CONFIG \
     -DCMAKE_PREFIX_PATH:PATH="${PREFIX}" \
+    -DCMAKE_FIND_FRAMEWORK=LAST \
     -DCMAKE_INSTALL_PREFIX:PATH="${PREFIX}" \
     -DCMAKE_INSTALL_RPATH:PATH="${PREFIX}/lib" \
-    -DBUILD_DOCUMENTATION:BOOL=OFF \
-    -DBUILD_TESTING:BOOL=OFF \
-    -DBUILD_EXAMPLES:BOOL=OFF \
+    -DCMAKE_INSTALL_LIBDIR:PATH=lib \
+    -DVTK_BUILD_DOCUMENTATION:BOOL=OFF \
+    -DVTK_BUILD_TESTING:BOOL=OFF \
+    -DVTK_BUILD_EXAMPLES:BOOL=OFF \
     -DBUILD_SHARED_LIBS:BOOL=ON \
-    -DVTK_ENABLE_VTKPYTHON:BOOL=OFF \
-    -DVTK_WRAP_PYTHON:BOOL=ON \
-    -DVTK_PYTHON_VERSION:STRING="${PY_VER}" \
-    -DVTK_INSTALL_PYTHON_MODULE_DIR:PATH="${SP_DIR}" \
+    -DVTK_LEGACY_SILENT:BOOL=OFF \
     -DVTK_HAS_FEENABLEEXCEPT:BOOL=OFF \
-    -DVTK_RENDERING_BACKEND=OpenGL2 \
-    -DModule_vtkRenderingMatplotlib=ON \
-    -DVTK_USE_SYSTEM_ZLIB:BOOL=ON \
-    -DVTK_USE_SYSTEM_FREETYPE:BOOL=ON \
-    -DVTK_USE_SYSTEM_LIBXML2:BOOL=ON \
-    -DVTK_USE_SYSTEM_PNG:BOOL=ON \
-    -DVTK_USE_SYSTEM_JPEG:BOOL=ON \
-    -DVTK_USE_SYSTEM_TIFF:BOOL=ON \
-    -DVTK_USE_SYSTEM_EXPAT:BOOL=ON \
-    -DVTK_USE_SYSTEM_HDF5:BOOL=ON \
-    -DVTK_USE_SYSTEM_JSONCPP:BOOL=ON \
-    ${SCREEN_ARGS[@]}
+    -DVTK_WRAP_PYTHON:BOOL=ON \
+    -DVTK_PYTHON_VERSION:STRING="${PYTHON_MAJOR_VERSION}" \
+    -DPython3_FIND_STRATEGY=LOCATION \
+    -DPython3_ROOT_DIR=${PREFIX} \
+    -DVTK_MODULE_ENABLE_VTK_PythonInterpreter:STRING=NO \
+    -DVTK_MODULE_ENABLE_VTK_RenderingFreeType:STRING=YES \
+    -DVTK_MODULE_ENABLE_VTK_RenderingMatplotlib:STRING=YES \
+    -DVTK_MODULE_ENABLE_VTK_IOFFMPEG:STRING=YES \
+    -DVTK_MODULE_ENABLE_VTK_ViewsCore:STRING=YES \
+    -DVTK_MODULE_ENABLE_VTK_ViewsContext2D:STRING=YES \
+    -DVTK_MODULE_ENABLE_VTK_PythonContext2D:STRING=YES \
+    -DVTK_MODULE_ENABLE_VTK_RenderingContext2D:STRING=YES \
+    -DVTK_MODULE_ENABLE_VTK_RenderingContextOpenGL2:STRING=YES \
+    -DVTK_MODULE_ENABLE_VTK_RenderingCore:STRING=YES \
+    -DVTK_MODULE_ENABLE_VTK_RenderingOpenGL2:STRING=YES \
+    -DVTK_MODULE_ENABLE_VTK_WebGLExporter:STRING=YES \
+    -DVTK_DATA_EXCLUDE_FROM_ALL:BOOL=ON \
+    -DVTK_USE_EXTERNAL:BOOL=ON \
+    -DVTK_MODULE_USE_EXTERNAL_VTK_libharu:BOOL=OFF \
+    -DVTK_MODULE_USE_EXTERNAL_VTK_pegtl:BOOL=OFF \
+    "${VTK_ARGS[@]}"
 
 # compile & install!
-ninja install
+ninja install -v
+
+# The egg-info file is necessary because some packages,
+# like mayavi, have a __requires__ in their __invtkRenderWindow::New()it__.py,
+# which means pkg_resources needs to be able to find vtk.
+# See https://setuptools.readthedocs.io/en/latest/pkg_resources.html#workingset-objects
+
+cat > $SP_DIR/vtk-$PKG_VERSION.egg-info <<FAKE_EGG
+Metadata-Version: 2.1
+Name: vtk
+Version: $PKG_VERSION
+Summary: VTK is an open-source toolkit for 3D computer graphics, image processing, and visualization
+Platform: UNKNOWN
+FAKE_EGG
