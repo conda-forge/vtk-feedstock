@@ -1,5 +1,5 @@
-{% set version = "9.0.1" %}
-{% set build = 0 %}
+{% set version = "7.1.1" %}
+{% set build = 1 %}
 
 {% set minor_version = ".".join(version.split(".")[:2]) %}
 
@@ -11,7 +11,7 @@ package:
 
 source:
   url: http://www.vtk.org/files/release/{{ minor_version }}/VTK-{{ version }}.tar.gz
-  sha256: 1b39a5e191c282861e7af4101eaa8585969a2de05f5646c9199a161213a622c7
+  sha256: 2d5cdd048540144d821715c718932591418bb48f5b6bb19becdae62339efa75a
 
 build:
   skip: true  # [win and py27]
@@ -64,28 +64,7 @@ requirements:
     - libtiff
     - jsoncpp
     - expat
-    - tbb
-    - tbb-devel
     - mesalib   # [VTK_WITH_OSMESA]
-    - libnetcdf
-    - libnetcdf * nompi_*
-    - lz4-c
-    - xorg-libxt  # [linux]
-    - boost-cpp
-    - tk  # [not win and not VTK_WITH_OSMESA]
-    - ffmpeg
-    - utfcpp
-    - eigen
-    - double-conversion
-    - pugixml
-    - glew
-    - libogg
-    - libtheora
-    - proj
-    - loguru
-    - sqlite
-    - gl2ps
-    - pugixml
 
   run:
     - python
@@ -98,26 +77,7 @@ requirements:
     - libtiff
     - jsoncpp
     - expat
-    - tbb
     - mesalib   # [VTK_WITH_OSMESA]
-    - libnetcdf
-    - lz4-c
-    - xorg-libxt  # [linux]
-    - tk  # [not win and not VTK_WITH_OSMESA]
-    - ffmpeg
-    - utfcpp
-    - eigen
-    - double-conversion
-    - pugixml
-    - glew
-    - libogg
-    - libtheora
-    - proj
-    - loguru
-    - sqlite
-    - gl2ps
-    - pugixml
-    - tbb-devel
 
   run_constrained:
     # Paraview bundles its own VTK that has conflicting Python vtkmodules
@@ -139,22 +99,6 @@ test:
     - vtk.vtkViewsCore
     - vtk.vtkRenderingVolume
     - vtk.vtkInteractionWidgets
-    - vtk.vtkWebGLExporter
-    - vtk.tk.vtkTkRenderWidget  # [not win and not VTK_WITH_OSMESA]
-    - vtkmodules
-    - vtkmodules.vtkChartsCore
-    - vtkmodules.vtkCommonCore
-    - vtkmodules.vtkFiltersCore
-    - vtkmodules.vtkFiltersGeneric
-    - vtkmodules.vtkGeovisCore
-    - vtkmodules.vtkFiltersHybrid
-    - vtkmodules.vtkIOCore
-    - vtkmodules.vtkImagingCore
-    - vtkmodules.vtkInfovisCore
-    - vtkmodules.vtkRenderingCore
-    - vtkmodules.vtkViewsCore
-    - vtkmodules.vtkRenderingVolume
-    - vtkmodules.vtkInteractionWidgets
 
   requires:
     - setuptools
