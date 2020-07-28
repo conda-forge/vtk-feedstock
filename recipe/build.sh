@@ -10,7 +10,7 @@ OSNAME=$(uname)
 PYTHON_MAJOR_VERSION=${PY_VER%%.*}
 
 VTK_ARGS=()
-
+CXXFLAGS="${CXXFLAGS} -lrt"
 if [ -f "$PREFIX/lib/libOSMesa32${SHLIB_EXT}" ]; then
     VTK_ARGS+=(
         "-DVTK_DEFAULT_RENDER_WINDOW_OFFSCREEN:BOOL=ON"
