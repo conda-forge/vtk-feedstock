@@ -34,6 +34,8 @@ else
         "-DVTK_DEFAULT_RENDER_WINDOW_OFFSCREEN:BOOL=OFF"
         "-DVTK_OPENGL_HAS_OSMESA:BOOL=OFF"
         "-DVTK_USE_TK:BOOL=ON"
+        "-DTCL_LIBRARY_PATH=${PREFIX}/lib"
+        "-DTK_LIBRARY_PATH=${PREFIX}/lib"
         "-DTCL_INCLUDE_PATH=${PREFIX}/include"
         "-DTK_INCLUDE_PATH=${PREFIX}/include"
     )
