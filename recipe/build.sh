@@ -30,10 +30,16 @@ if [ -f "$PREFIX/lib/libOSMesa32${SHLIB_EXT}" ]; then
         )
     fi
 else
+    TCLTK_VERSION=`echo 'puts $tcl_version;exit 0' | tclsh`
+
     VTK_ARGS+=(
         "-DVTK_DEFAULT_RENDER_WINDOW_OFFSCREEN:BOOL=OFF"
         "-DVTK_OPENGL_HAS_OSMESA:BOOL=OFF"
         "-DVTK_USE_TK:BOOL=ON"
+        "-DTCL_INCLUDE_PATH=${PREFIX}/include"
+        "-DTK_INCLUDE_PATH=${PREFIX}/include"
+        "-DTCL_LIBRARY:FILEPATH=${PREFIX}/lib/libtcl${TCLTK_VERSION}${SHLIB_EXT}"
+        "-DTK_LIBRARY:FILEPATH=${PREFIX}/lib/libtk${TCLTK_VERSION}${SHLIB_EXT}"
     )
     if [ "${OSNAME}" == Linux ]; then
         VTK_ARGS+=(
