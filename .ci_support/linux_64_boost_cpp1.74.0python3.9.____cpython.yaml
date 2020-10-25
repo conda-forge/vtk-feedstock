@@ -1,7 +1,9 @@
 VTK_WITH_OSMESA:
 - 'False'
 boost_cpp:
-- 1.72.0
+- 1.74.0
+cdt_name:
+- cos6
 channel_sources:
 - conda-forge,defaults
 channel_targets:
@@ -73,7 +75,7 @@ pin_run_as_build:
 proj:
 - 7.1.1
 python:
-- 3.6.* *_cpython
+- 3.9.* *_cpython
 sqlite:
 - '3'
 target_platform:
