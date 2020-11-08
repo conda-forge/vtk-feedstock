@@ -19,7 +19,7 @@ expat:
 ffmpeg:
 - '4.3'
 freetype:
-- 2.9.1
+- '2'
 glew:
 - '2.1'
 hdf5:
