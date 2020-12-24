@@ -1,5 +1,5 @@
 VTK_WITH_OSMESA:
-- 'False'
+- 'True'
 boost_cpp:
 - 1.74.0
 cdt_name:
@@ -11,15 +11,15 @@ channel_targets:
 cxx_compiler:
 - gxx
 cxx_compiler_version:
-- '7'
+- '9'
 docker_image:
-- condaforge/linux-anvil-comp7
+- quay.io/condaforge/linux-anvil-comp7
 expat:
 - '2.2'
 ffmpeg:
 - '4.3'
 freetype:
-- 2.9.1
+- '2'
 glew:
 - '2.1'
 hdf5:
@@ -75,7 +75,7 @@ pin_run_as_build:
 proj:
 - 7.1.1
 python:
-- 3.6.* *_cpython
+- 3.8.* *_cpython
 sqlite:
 - '3'
 target_platform:
