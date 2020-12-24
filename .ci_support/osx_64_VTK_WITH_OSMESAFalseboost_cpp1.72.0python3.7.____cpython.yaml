@@ -1,13 +1,17 @@
+MACOSX_DEPLOYMENT_TARGET:
+- '10.9'
 VTK_WITH_OSMESA:
 - 'False'
 boost_cpp:
-- 1.74.0
+- 1.72.0
 channel_sources:
 - conda-forge,defaults
 channel_targets:
 - conda-forge main
 cxx_compiler:
-- vs2017
+- clangxx
+cxx_compiler_version:
+- '11'
 expat:
 - '2.2'
 ffmpeg:
@@ -32,6 +36,8 @@ libxml2:
 - '2.9'
 lz4_c:
 - 1.9.2
+macos_machine:
+- x86_64-apple-darwin13.4.0
 pin_run_as_build:
   boost-cpp:
     max_pin: x.x.x
@@ -60,6 +66,8 @@ pin_run_as_build:
     max_pin: x.x
   sqlite:
     max_pin: x
+  tk:
+    max_pin: x.x
   vtk:
     max_pin: x.x.x
   zlib:
@@ -67,11 +75,13 @@ pin_run_as_build:
 proj:
 - 7.1.1
 python:
-- 3.9.* *_cpython
+- 3.7.* *_cpython
 sqlite:
 - '3'
 target_platform:
-- win-64
+- osx-64
+tk:
+- '8.6'
 vtk:
 - 8.2.0
 zlib:
