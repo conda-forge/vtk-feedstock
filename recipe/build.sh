@@ -4,7 +4,6 @@ mkdir build
 cd build || exit
 
 BUILD_CONFIG=Release
-OSNAME=$(uname)
 
 # Use bash "Remove Largest Suffix Pattern" to get rid of all but major version number
 PYTHON_MAJOR_VERSION=${PY_VER%%.*}
@@ -19,11 +18,11 @@ if [ -f "$PREFIX/lib/libOSMesa32${SHLIB_EXT}" ]; then
         "-DOSMESA_LIBRARY:FILEPATH=${PREFIX}/lib/libOSMesa32${SHLIB_EXT}"
     )
 
-    if [ "${OSNAME}" == Linux ]; then
+    if [[ "${target_platform}" == linux-* ]]; then
         VTK_ARGS+=(
             "-DVTK_USE_X:BOOL=OFF"
         )
-    elif [ "${OSNAME}" == Darwin ]; then
+    elif [[ "${target_platform}" == osx-* ]]; then
         VTK_ARGS+=(
             "-DVTK_USE_COCOA:BOOL=OFF"
             "-DCMAKE_OSX_SYSROOT:PATH=${CONDA_BUILD_SYSROOT}"
@@ -41,11 +40,11 @@ else
         "-DTCL_LIBRARY:FILEPATH=${PREFIX}/lib/libtcl${TCLTK_VERSION}${SHLIB_EXT}"
         "-DTK_LIBRARY:FILEPATH=${PREFIX}/lib/libtk${TCLTK_VERSION}${SHLIB_EXT}"
     )
-    if [ "${OSNAME}" == Linux ]; then
+    if [[ "${target_platform}" == linux-* ]]; then
         VTK_ARGS+=(
             "-DVTK_USE_X:BOOL=ON"
         )
-    elif [ "${OSNAME}" == Darwin ]; then
+    elif [[ "${target_platform}" == osx-* ]]; then
         VTK_ARGS+=(
             "-DVTK_USE_COCOA:BOOL=ON"
             "-DCMAKE_OSX_SYSROOT:PATH=${CONDA_BUILD_SYSROOT}"
@@ -93,7 +92,11 @@ cmake -LAH .. -G "Ninja" \
     "${VTK_ARGS[@]}"
 
 # compile & install!
-ninja install -v
+if [[ "$CI" == "travis" ]]; then
+  ninja install -j${CPU_COUNT}
+else
+  ninja install -v -j${CPU_COUNT}
+fi
 
 # The egg-info file is necessary because some packages,
 # like mayavi, have a __requires__ in their __invtkRenderWindow::New()it__.py,
