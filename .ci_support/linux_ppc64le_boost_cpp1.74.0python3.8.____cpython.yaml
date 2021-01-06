@@ -2,12 +2,18 @@ VTK_WITH_OSMESA:
 - 'False'
 boost_cpp:
 - 1.74.0
+cdt_name:
+- cos7
 channel_sources:
 - conda-forge,defaults
 channel_targets:
 - conda-forge main
 cxx_compiler:
-- vs2017
+- gxx
+cxx_compiler_version:
+- '9'
+docker_image:
+- quay.io/condaforge/linux-anvil-ppc64le
 expat:
 - '2.2'
 ffmpeg:
@@ -65,11 +71,11 @@ pin_run_as_build:
 proj:
 - 7.1.1
 python:
-- 3.6.* *_cpython
+- 3.8.* *_cpython
 sqlite:
 - '3'
 target_platform:
-- win-64
+- linux-ppc64le
 vtk:
 - 8.2.0
 zlib:
