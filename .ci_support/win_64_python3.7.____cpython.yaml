@@ -1,7 +1,7 @@
 VTK_WITH_OSMESA:
 - 'False'
 boost_cpp:
-- 1.72.0
+- 1.74.0
 channel_sources:
 - conda-forge,defaults
 channel_targets:
@@ -13,7 +13,7 @@ expat:
 ffmpeg:
 - '4.3'
 freetype:
-- 2.9.1
+- '2'
 glew:
 - '2.1'
 hdf5:
@@ -36,8 +36,6 @@ pin_run_as_build:
   boost-cpp:
     max_pin: x.x.x
   expat:
-    max_pin: x.x
-  ffmpeg:
     max_pin: x.x
   freetype:
     max_pin: x
