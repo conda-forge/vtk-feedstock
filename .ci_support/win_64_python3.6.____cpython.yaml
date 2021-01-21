@@ -13,7 +13,7 @@ expat:
 ffmpeg:
 - '4.3'
 freetype:
-- 2.9.1
+- '2'
 glew:
 - '2.1'
 hdf5:
@@ -21,13 +21,13 @@ hdf5:
 jpeg:
 - '9'
 jsoncpp:
-- 1.8.4
+- '1.9'
 libnetcdf:
 - 4.7.4
 libpng:
 - '1.6'
 libtiff:
-- 4.1.0
+- '4'
 libxml2:
 - '2.9'
 lz4_c:
@@ -36,8 +36,6 @@ pin_run_as_build:
   boost-cpp:
     max_pin: x.x.x
   expat:
-    max_pin: x.x
-  ffmpeg:
     max_pin: x.x
   freetype:
     max_pin: x
@@ -67,7 +65,7 @@ pin_run_as_build:
 proj:
 - 7.1.1
 python:
-- 3.8.* *_cpython
+- 3.6.* *_cpython
 sqlite:
 - '3'
 target_platform:
