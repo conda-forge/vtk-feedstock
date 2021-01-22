@@ -1,19 +1,25 @@
 VTK_WITH_OSMESA:
 - 'False'
 boost_cpp:
-- 1.72.0
+- 1.74.0
+cdt_name:
+- cos6
 channel_sources:
 - conda-forge,defaults
 channel_targets:
 - conda-forge main
 cxx_compiler:
-- vs2017
+- gxx
+cxx_compiler_version:
+- '9'
+docker_image:
+- quay.io/condaforge/linux-anvil-comp7
 expat:
 - '2.2'
 ffmpeg:
 - '4.3'
 freetype:
-- 2.9.1
+- '2'
 glew:
 - '2.1'
 hdf5:
@@ -21,13 +27,13 @@ hdf5:
 jpeg:
 - '9'
 jsoncpp:
-- 1.8.4
+- 1.9.4
 libnetcdf:
 - 4.7.4
 libpng:
 - '1.6'
 libtiff:
-- 4.1.0
+- '4'
 libxml2:
 - '2.9'
 lz4_c:
@@ -36,8 +42,6 @@ pin_run_as_build:
   boost-cpp:
     max_pin: x.x.x
   expat:
-    max_pin: x.x
-  ffmpeg:
     max_pin: x.x
   freetype:
     max_pin: x
@@ -60,6 +64,8 @@ pin_run_as_build:
     max_pin: x.x
   sqlite:
     max_pin: x
+  tk:
+    max_pin: x.x
   vtk:
     max_pin: x.x.x
   zlib:
@@ -71,8 +77,13 @@ python:
 sqlite:
 - '3'
 target_platform:
-- win-64
+- linux-64
+tk:
+- '8.6'
 vtk:
 - 8.2.0
+zip_keys:
+- - cdt_name
+  - docker_image
 zlib:
 - '1.2'
