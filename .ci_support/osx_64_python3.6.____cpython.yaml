@@ -25,13 +25,13 @@ hdf5:
 jpeg:
 - '9'
 jsoncpp:
-- 1.8.4
+- 1.9.4
 libnetcdf:
 - 4.7.4
 libpng:
 - '1.6'
 libtiff:
-- 4.1.0
+- '4'
 libxml2:
 - '2.9'
 lz4_c:
