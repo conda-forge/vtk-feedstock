@@ -70,7 +70,11 @@ sqlite:
 - '3'
 target_platform:
 - win-64
+tbb:
+- '2021'
+tbb_devel:
+- '2021'
 vtk:
-- 8.2.0
+- 9.0.1
 zlib:
 - '1.2'
