@@ -19,11 +19,11 @@ if [ -f "$PREFIX/lib/libOSMesa32${SHLIB_EXT}" ]; then
         "-DOSMESA_LIBRARY:FILEPATH=${PREFIX}/lib/libOSMesa32${SHLIB_EXT}"
     )
 
-    if [[ "${OSNAME}" == Linux ]]; then
+    if [[ "${target_platform}" == linux-* ]]; then
         VTK_ARGS+=(
             "-DVTK_USE_X:BOOL=OFF"
         )
-    elif [[ "${OSNAME}" == Darwin ]]; then
+    elif [[ "${target_platform}" == osx-* ]]; then
         VTK_ARGS+=(
             "-DVTK_USE_COCOA:BOOL=OFF"
             "-DCMAKE_OSX_SYSROOT:PATH=${CONDA_BUILD_SYSROOT}"
@@ -41,11 +41,11 @@ else
         "-DTCL_LIBRARY:FILEPATH=${PREFIX}/lib/libtcl${TCLTK_VERSION}${SHLIB_EXT}"
         "-DTK_LIBRARY:FILEPATH=${PREFIX}/lib/libtk${TCLTK_VERSION}${SHLIB_EXT}"
     )
-    if [[ "${OSNAME}" == Linux ]]; then
+    if [[ "${target_platform}" == linux-* ]]; then
         VTK_ARGS+=(
             "-DVTK_USE_X:BOOL=ON"
         )
-    elif [[ "${OSNAME}" == Darwin ]]; then
+    elif [[ "${target_platform}" == osx-* ]]; then
         VTK_ARGS+=(
             "-DVTK_USE_COCOA:BOOL=ON"
             "-DCMAKE_OSX_SYSROOT:PATH=${CONDA_BUILD_SYSROOT}"
