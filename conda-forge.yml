@@ -1,2 +1,4 @@
-provider: {osx: azure, win: azure, linux_ppc64le: default}
+build_platform:
+  linux_ppc64le: linux_64
+  linux_aarch64: linux_64
 conda_forge_output_validation: true
