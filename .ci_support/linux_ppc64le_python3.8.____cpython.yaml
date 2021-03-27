@@ -77,9 +77,9 @@ sqlite:
 target_platform:
 - linux-ppc64le
 tbb:
-- '2020'
+- '2021'
 tbb_devel:
-- '2020'
+- '2021'
 vtk:
 - 9.0.1
 zlib:
