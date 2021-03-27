@@ -13,7 +13,7 @@ cxx_compiler:
 cxx_compiler_version:
 - '11'
 expat:
-- '2.2'
+- '2.3'
 ffmpeg:
 - '4.3'
 freetype:

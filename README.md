@@ -274,6 +274,7 @@ Feedstock Maintainers
 * [@grlee77](https://github.com/grlee77/)
 * [@jasonb5](https://github.com/jasonb5/)
 * [@marcelotrevisani](https://github.com/marcelotrevisani/)
+* [@matthiasdiener](https://github.com/matthiasdiener/)
 * [@msarahan](https://github.com/msarahan/)
 * [@muryanto1](https://github.com/muryanto1/)
 * [@patricksnape](https://github.com/patricksnape/)
