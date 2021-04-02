@@ -13,7 +13,7 @@ cxx_compiler:
 cxx_compiler_version:
 - '11'
 expat:
-- '2.2'
+- '2'
 ffmpeg:
 - '4.3'
 freetype:
@@ -41,8 +41,6 @@ macos_machine:
 pin_run_as_build:
   boost-cpp:
     max_pin: x.x.x
-  expat:
-    max_pin: x.x
   freetype:
     max_pin: x
   glew:
