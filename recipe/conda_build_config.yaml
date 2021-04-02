@@ -1,3 +1,10 @@
 VTK_WITH_OSMESA:
   - False
   # - True  # [unix]
+replacements:
+  all_replacements:
+    - tag: 'CMake build metadata'
+      glob_patterns:
+        - '*.cmake'
+      regex_re: '([^;\s"]+/sysroot)'
+      replacement_re: '$ENV{CONDA_BUILD_SYSROOT}'
