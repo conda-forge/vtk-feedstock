@@ -53,6 +53,13 @@ else
     fi
 fi
 
+if [[ "$target_platform" != "linux-ppc64le" ]]; then
+    VTK_ARGS+=(
+        "-DVTK_MODULE_ENABLE_VTK_GUISupportQt:STRING=YES"
+        "-DVTK_MODULE_ENABLE_VTK_RenderingQt:STRING=YES"
+    )
+fi
+
 if [[ "$CONDA_BUILD_CROSS_COMPILATION" == "1" ]]; then
   if [[ "$CMAKE_CROSSCOMPILING_EMULATOR" == "" ]]; then
      echo "cross compiling without an emulator is not supported yet in the recipe even though the package does."
@@ -83,8 +90,6 @@ cmake -LAH .. -G "Ninja" ${CMAKE_ARGS} \
     -DVTK_PYTHON_VERSION:STRING="${PYTHON_MAJOR_VERSION}" \
     -DPython3_FIND_STRATEGY=LOCATION \
     -DPython3_ROOT_DIR=${PREFIX} \
-    -DVTK_MODULE_ENABLE_VTK_GUISupportQt:STRING=YES \
-    -DVTK_MODULE_ENABLE_VTK_RenderingQt:STRING=YES \
     -DVTK_MODULE_ENABLE_VTK_PythonInterpreter:STRING=NO \
     -DVTK_MODULE_ENABLE_VTK_RenderingFreeType:STRING=YES \
     -DVTK_MODULE_ENABLE_VTK_RenderingMatplotlib:STRING=YES \
