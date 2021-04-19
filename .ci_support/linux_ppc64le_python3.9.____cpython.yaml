@@ -29,7 +29,7 @@ jpeg:
 jsoncpp:
 - 1.9.4
 libnetcdf:
-- 4.7.4
+- 4.8.0
 libpng:
 - '1.6'
 libtiff:
