@@ -63,6 +63,7 @@ if [[ "$CONDA_BUILD_CROSS_COMPILATION" == "1" ]]; then
     export LDFLAGS=${LDFLAGS//$PREFIX/$BUILD_PREFIX}
     cmake -G Ninja -DCMAKE_INSTALL_PREFIX=$SRC_DIR/vtk-compile-tools \
        -DCMAKE_PREFIX_PATH=$BUILD_PREFIX \
+       -DCMAKE_INSTALL_LIBDIR=lib \
        -DVTK_BUILD_COMPILE_TOOLS_ONLY=ON ..
     ninja -j${CPU_COUNT}
     ninja install
