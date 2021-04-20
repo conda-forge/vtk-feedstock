@@ -38,6 +38,8 @@ requirements:
     - {{ compiler("cxx") }}
     - cmake
     - ninja
+    - python                                 # [build_platform != target_platform]
+    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
     - {{ cdt('libxcb') }}  # [linux and not VTK_WITH_OSMESA]
     - {{ cdt('libxau') }}  # [linux and not VTK_WITH_OSMESA]
     - {{ cdt('libuuid') }}  # [linux and not VTK_WITH_OSMESA]

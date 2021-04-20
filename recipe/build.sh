@@ -2,11 +2,7 @@
 
 set -x
 
-mkdir build
-cd build || exit
-
 BUILD_CONFIG=Release
-OSNAME=$(uname)
 
 # Use bash "Remove Largest Suffix Pattern" to get rid of all but major version number
 PYTHON_MAJOR_VERSION=${PY_VER%%.*}
@@ -55,16 +51,30 @@ else
     fi
 fi
 
-CMAKE_CROSSCOMPILING_EMULATOR=sh
-
 if [[ "$CONDA_BUILD_CROSS_COMPILATION" == "1" ]]; then
-  if [[ "$CMAKE_CROSSCOMPILING_EMULATOR" == "" ]]; then
-     echo "cross compiling without an emulator is not supported yet in the recipe even though the package does."
-     echo "see https://github.com/Kitware/VTK/blob/948a48ec545a4489e50c77a27cb5a84a2234fd30/CMake/vtkCrossCompiling.cmake."
-     exit 1
-  fi
-  CMAKE_ARGS="${CMAKE_ARGS} -DCMAKE_CROSSCOMPILING_EMULATOR=${CMAKE_CROSSCOMPILING_EMULATOR}"
+  (
+    mkdir build-native
+    cd build-native
+    export CC=$CC_FOR_BUILD
+    export CXX=$CXX_FOR_BUILD
+    unset CFLAGS
+    unset CXXFLAGS
+    unset CPPFLAGS
+    export LDFLAGS=${LDFLAGS//$PREFIX/$BUILD_PREFIX}
+    cmake -G Ninja -DCMAKE_INSTALL_PREFIX=$SRC_DIR/vtk-compile-tools \
+       -DCMAKE_PREFIX_PATH=$BUILD_PREFIX \
+       -DVTK_BUILD_COMPILE_TOOLS_ONLY=ON ..
+    ninja -j${CPU_COUNT}
+    ninja install
+    cd ..
+  )
+  MAJ_MIN=$(echo $PKG_VERSION | rev | cut -d"." -f2- | rev)
+  CMAKE_ARGS="${CMAKE_ARGS} -DVTKCompileTools_DIR=$SRC_DIR/vtk-compile-tools/lib/cmake/vtkcompiletools-${MAJ_MIN}/"
+  CMAKE_ARGS="${CMAKE_ARGS} -DCMAKE_REQUIRE_LARGE_FILE_SUPPORT=1 -DCMAKE_REQUIRE_LARGE_FILE_SUPPORT__TRYRUN_OUTPUT="
 fi
+
+mkdir build
+cd build || exit
 
 echo "VTK_ARGS:" "${VTK_ARGS[@]}"
 
@@ -87,6 +97,7 @@ cmake -LAH .. -G "Ninja" ${CMAKE_ARGS} \
     -DVTK_PYTHON_VERSION:STRING="${PYTHON_MAJOR_VERSION}" \
     -DPython3_FIND_STRATEGY=LOCATION \
     -DPython3_ROOT_DIR=${PREFIX} \
+    -DPython3_EXECUTABLE=${PREFIX}/bin/python \
     -DVTK_MODULE_ENABLE_VTK_PythonInterpreter:STRING=NO \
     -DVTK_MODULE_ENABLE_VTK_RenderingFreeType:STRING=YES \
     -DVTK_MODULE_ENABLE_VTK_RenderingMatplotlib:STRING=YES \
