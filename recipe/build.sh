@@ -55,13 +55,15 @@ else
     fi
 fi
 
+CMAKE_CROSSCOMPILING_EMULATOR=sh
+
 if [[ "$CONDA_BUILD_CROSS_COMPILATION" == "1" ]]; then
   if [[ "$CMAKE_CROSSCOMPILING_EMULATOR" == "" ]]; then
      echo "cross compiling without an emulator is not supported yet in the recipe even though the package does."
      echo "see https://github.com/Kitware/VTK/blob/948a48ec545a4489e50c77a27cb5a84a2234fd30/CMake/vtkCrossCompiling.cmake."
-     # exit 1
+     exit 1
   fi
-  # CMAKE_ARGS="${CMAKE_ARGS} -DCMAKE_CROSSCOMPILING_EMULATOR=${CMAKE_CROSSCOMPILING_EMULATOR}"
+  CMAKE_ARGS="${CMAKE_ARGS} -DCMAKE_CROSSCOMPILING_EMULATOR=${CMAKE_CROSSCOMPILING_EMULATOR}"
 fi
 
 echo "VTK_ARGS:" "${VTK_ARGS[@]}"
