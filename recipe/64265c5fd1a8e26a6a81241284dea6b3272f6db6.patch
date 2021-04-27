@@ -1,3 +1,39 @@
+From 64265c5fd1a8e26a6a81241284dea6b3272f6db6 Mon Sep 17 00:00:00 2001
+From: Ben Boeckel <ben.boeckel@kitware.com>
+Date: Fri, 17 Apr 2020 15:02:04 -0400
+Subject: [PATCH] Qt: support QT_NO_KEYWORDS builds
+
+---
+ .../GUI/Qt/FourPaneViewer/QtVTKRenderWindows.h |  4 ++--
+ Examples/GUI/Qt/SimpleView/SimpleView.h        |  4 ++--
+ .../Cxx/CustomLinkView/CustomLinkView.h        |  6 +++---
+ Examples/Infovis/Cxx/EasyView/EasyView.h       |  4 ++--
+ Examples/Infovis/Cxx/StatsView/StatsView.h     |  4 ++--
+ GUISupport/Qt/QVTKApplication.cxx              |  2 +-
+ GUISupport/Qt/QVTKInteractorAdapter.cxx        |  4 ++--
+ GUISupport/Qt/QVTKOpenGLNativeWidget.h         |  2 +-
+ GUISupport/Qt/QVTKOpenGLWindow.cxx             |  2 +-
+ GUISupport/Qt/QVTKOpenGLWindow.h               |  4 ++--
+ GUISupport/Qt/QVTKRenderWindowAdapter.h        |  2 +-
+ GUISupport/Qt/vtkQtAbstractModelAdapter.h      |  2 +-
+ .../Qt/vtkQtAnnotationLayersModelAdapter.cxx   | 14 +++++++-------
+ GUISupport/Qt/vtkQtConnection.cxx              |  2 +-
+ GUISupport/Qt/vtkQtConnection.h                |  4 ++--
+ GUISupport/Qt/vtkQtDebugLeaksModel.cxx         |  4 ++--
+ GUISupport/Qt/vtkQtDebugLeaksModel.h           |  4 ++--
+ GUISupport/Qt/vtkQtDebugLeaksView.h            |  2 +-
+ GUISupport/Qt/vtkQtTableModelAdapter.cxx       | 18 +++++++++---------
+ GUISupport/Qt/vtkQtTableModelAdapter.h         |  2 +-
+ GUISupport/Qt/vtkQtTreeModelAdapter.cxx        |  6 +++---
+ GUISupport/Qt/vtkTDxQtUnixDevices.cxx          |  4 ++--
+ GUISupport/Qt/vtkTDxQtUnixDevices.h            |  2 +-
+ Views/Qt/vtkQtAnnotationView.h                 |  2 +-
+ Views/Qt/vtkQtListView.h                       |  2 +-
+ Views/Qt/vtkQtTableView.h                      |  2 +-
+ Views/Qt/vtkQtTreeView.cxx                     |  2 +-
+ Views/Qt/vtkQtTreeView.h                       |  4 ++--
+ 28 files changed, 57 insertions(+), 57 deletions(-)
+
 diff --git a/Examples/GUI/Qt/FourPaneViewer/QtVTKRenderWindows.h b/Examples/GUI/Qt/FourPaneViewer/QtVTKRenderWindows.h
 index 2bf7b225edb..9266493745f 100644
 --- a/Examples/GUI/Qt/FourPaneViewer/QtVTKRenderWindows.h
