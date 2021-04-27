@@ -88,7 +88,7 @@ requirements:
     - sqlite
     - gl2ps
     - pugixml
-    - qt  # [not ppc64le]
+    - qt  # [not ppc64le and not arm64]
 
   run:
     - python
