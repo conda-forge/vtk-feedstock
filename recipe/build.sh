@@ -51,6 +51,13 @@ else
     fi
 fi
 
+if [[ "$target_platform" != "linux-ppc64le" && "$target_platform" != "osx-arm64" ]]; then
+    VTK_ARGS+=(
+        "-DVTK_MODULE_ENABLE_VTK_GUISupportQt:STRING=YES"
+        "-DVTK_MODULE_ENABLE_VTK_RenderingQt:STRING=YES"
+    )
+fi
+
 if [[ "$CONDA_BUILD_CROSS_COMPILATION" == "1" ]]; then
   (
     mkdir build-native
