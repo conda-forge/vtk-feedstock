@@ -1,0 +1,22 @@
+From e708c46381a8f5a6f46af9263a9f8160e949df26 Mon Sep 17 00:00:00 2001
+From: Silvio Traversaro <silvio@traversaro.it>
+Date: Fri, 30 Apr 2021 10:52:36 +0200
+Subject: [PATCH] OpenGL Utilities: Remove use of unnecessary and not
+ relocatable OPENGL_INCLUDE_DIR variable
+
+---
+ Utilities/OpenGL/CMakeLists.txt | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/Utilities/OpenGL/CMakeLists.txt b/Utilities/OpenGL/CMakeLists.txt
+index 8452b5ad2bd..3023286fc65 100644
+--- a/Utilities/OpenGL/CMakeLists.txt
++++ b/Utilities/OpenGL/CMakeLists.txt
+@@ -60,7 +60,6 @@ else ()
+     COMPONENTS          ${opengl_components}
+     OPTIONAL_COMPONENTS ${opengl_optional_components}
+     TARGETS             ${opengl_targets}
+-    INCLUDE_DIRS        OPENGL_INCLUDE_DIR
+     LIBRARIES           OPENGL_LIBRARIES)
+ 
+   cmake_policy(POP)
