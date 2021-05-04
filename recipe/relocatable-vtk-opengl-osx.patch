@@ -12,14 +12,11 @@ diff --git a/Utilities/OpenGL/CMakeLists.txt b/Utilities/OpenGL/CMakeLists.txt
 index 8452b5ad2bd..3023286fc65 100644
 --- a/Utilities/OpenGL/CMakeLists.txt
 +++ b/Utilities/OpenGL/CMakeLists.txt
-@@ -59,9 +59,7 @@ else ()
-     PACKAGE             OpenGL
+@@ -60,7 +60,6 @@ else ()
      COMPONENTS          ${opengl_components}
      OPTIONAL_COMPONENTS ${opengl_optional_components}
--    TARGETS             ${opengl_targets}
+     TARGETS             ${opengl_targets}
 -    INCLUDE_DIRS        OPENGL_INCLUDE_DIR
--    LIBRARIES           OPENGL_LIBRARIES)
-+    TARGETS             ${opengl_targets})
+     LIBRARIES           OPENGL_LIBRARIES)
  
    cmake_policy(POP)
- 
