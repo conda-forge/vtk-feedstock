@@ -18,6 +18,8 @@ source:
 
 build:
   number: {{ build }}
+  run_exports:
+    - {{ pin_subpackage(name, max_pin='x.x.x') }}
 
   # typically, osmesa is selected by installing or not installing
   # mesalib, but it could also be selected via the build string:
