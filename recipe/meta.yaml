@@ -75,7 +75,8 @@ requirements:
     - lz4-c
     - xorg-libxt  # [linux]
     - boost-cpp
-    - tk  # [not win and not VTK_WITH_OSMESA]
+    - tk  # [not win and not VTK_WITH_OSMESA and not osx]
+    - tk <8.6.11  # [osx and not VTK_WITH_OSMESA]
     - ffmpeg
     - utfcpp
     - eigen
@@ -107,7 +108,8 @@ requirements:
     - libnetcdf
     - lz4-c
     - xorg-libxt  # [linux]
-    - tk  # [not win and not VTK_WITH_OSMESA]
+    - tk  # [not win and not VTK_WITH_OSMESA and not osx]
+    - tk <8.6.11  # [osx and not VTK_WITH_OSMESA]
     - ffmpeg
     - utfcpp
     - eigen
