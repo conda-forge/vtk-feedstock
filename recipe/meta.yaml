@@ -1,5 +1,5 @@
-{% set version = "9.0.1" %}
-{% set build = 3 %}
+{% set version = "9.0.3" %}
+{% set build = 0 %}
 
 {% set minor_version = ".".join(version.split(".")[:2]) %}
 
@@ -11,11 +11,12 @@ package:
 
 source:
   url: http://www.vtk.org/files/release/{{ minor_version }}/VTK-{{ version }}.tar.gz
-  sha256: 1b39a5e191c282861e7af4101eaa8585969a2de05f5646c9199a161213a622c7
+  sha256: bc3eb9625b2b8dbfecb6052a2ab091fc91405de4333b0ec68f3323815154ed8a
 
 build:
-  skip: true  # [win and py27]
   number: {{ build }}
+  run_exports:
+    - {{ pin_subpackage('vtk', max_pin='x.x.x') }}
 
   # typically, osmesa is selected by installing or not installing
   # mesalib, but it could also be selected via the build string:
@@ -37,6 +38,8 @@ requirements:
     - {{ compiler("cxx") }}
     - cmake
     - ninja
+    - python                                 # [build_platform != target_platform]
+    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
     - {{ cdt('libxcb') }}  # [linux and not VTK_WITH_OSMESA]
     - {{ cdt('libxau') }}  # [linux and not VTK_WITH_OSMESA]
     - {{ cdt('libuuid') }}  # [linux and not VTK_WITH_OSMESA]
@@ -86,6 +89,7 @@ requirements:
     - sqlite
     - gl2ps
     - pugixml
+    - qt  # [not ppc64le and not arm64]
 
   run:
     - python
@@ -179,3 +183,4 @@ extra:
     - muryanto1
     - downiec
     - jasonb5
+    - matthiasdiener

@@ -27,7 +27,7 @@ jpeg:
 jsoncpp:
 - 1.9.4
 libnetcdf:
-- 4.7.4
+- 4.8.0
 libpng:
 - '1.6'
 libtiff:
@@ -60,6 +60,8 @@ pin_run_as_build:
   python:
     min_pin: x.x
     max_pin: x.x
+  qt:
+    max_pin: x.x
   sqlite:
     max_pin: x
   tk:
@@ -69,9 +71,11 @@ pin_run_as_build:
   zlib:
     max_pin: x.x
 proj:
-- 8.0.1
+- 7.2.0
 python:
 - 3.9.* *_cpython
+qt:
+- '5.12'
 sqlite:
 - '3'
 target_platform:

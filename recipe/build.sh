@@ -1,10 +1,8 @@
 #!/bin/bash
 
-mkdir build
-cd build || exit
+set -x
 
 BUILD_CONFIG=Release
-OSNAME=$(uname)
 
 # Use bash "Remove Largest Suffix Pattern" to get rid of all but major version number
 PYTHON_MAJOR_VERSION=${PY_VER%%.*}
@@ -19,11 +17,11 @@ if [ -f "$PREFIX/lib/libOSMesa32${SHLIB_EXT}" ]; then
         "-DOSMESA_LIBRARY:FILEPATH=${PREFIX}/lib/libOSMesa32${SHLIB_EXT}"
     )
 
-    if [ "${OSNAME}" == Linux ]; then
+    if [[ "${target_platform}" == linux-* ]]; then
         VTK_ARGS+=(
             "-DVTK_USE_X:BOOL=OFF"
         )
-    elif [ "${OSNAME}" == Darwin ]; then
+    elif [[ "${target_platform}" == osx-* ]]; then
         VTK_ARGS+=(
             "-DVTK_USE_COCOA:BOOL=OFF"
             "-DCMAKE_OSX_SYSROOT:PATH=${CONDA_BUILD_SYSROOT}"
@@ -41,11 +39,11 @@ else
         "-DTCL_LIBRARY:FILEPATH=${PREFIX}/lib/libtcl${TCLTK_VERSION}${SHLIB_EXT}"
         "-DTK_LIBRARY:FILEPATH=${PREFIX}/lib/libtk${TCLTK_VERSION}${SHLIB_EXT}"
     )
-    if [ "${OSNAME}" == Linux ]; then
+    if [[ "${target_platform}" == linux-* ]]; then
         VTK_ARGS+=(
             "-DVTK_USE_X:BOOL=ON"
         )
-    elif [ "${OSNAME}" == Darwin ]; then
+    elif [[ "${target_platform}" == osx-* ]]; then
         VTK_ARGS+=(
             "-DVTK_USE_COCOA:BOOL=ON"
             "-DCMAKE_OSX_SYSROOT:PATH=${CONDA_BUILD_SYSROOT}"
@@ -53,10 +51,43 @@ else
     fi
 fi
 
+if [[ "$target_platform" != "linux-ppc64le" && "$target_platform" != "osx-arm64" ]]; then
+    VTK_ARGS+=(
+        "-DVTK_MODULE_ENABLE_VTK_GUISupportQt:STRING=YES"
+        "-DVTK_MODULE_ENABLE_VTK_RenderingQt:STRING=YES"
+    )
+fi
+
+if [[ "$CONDA_BUILD_CROSS_COMPILATION" == "1" ]]; then
+  (
+    mkdir build-native
+    cd build-native
+    export CC=$CC_FOR_BUILD
+    export CXX=$CXX_FOR_BUILD
+    unset CFLAGS
+    unset CXXFLAGS
+    unset CPPFLAGS
+    export LDFLAGS=${LDFLAGS//$PREFIX/$BUILD_PREFIX}
+    cmake -G Ninja -DCMAKE_INSTALL_PREFIX=$SRC_DIR/vtk-compile-tools \
+       -DCMAKE_PREFIX_PATH=$BUILD_PREFIX \
+       -DCMAKE_INSTALL_LIBDIR=lib \
+       -DVTK_BUILD_COMPILE_TOOLS_ONLY=ON ..
+    ninja -j${CPU_COUNT}
+    ninja install
+    cd ..
+  )
+  MAJ_MIN=$(echo $PKG_VERSION | rev | cut -d"." -f2- | rev)
+  CMAKE_ARGS="${CMAKE_ARGS} -DVTKCompileTools_DIR=$SRC_DIR/vtk-compile-tools/lib/cmake/vtkcompiletools-${MAJ_MIN}/"
+  CMAKE_ARGS="${CMAKE_ARGS} -DCMAKE_REQUIRE_LARGE_FILE_SUPPORT=1 -DCMAKE_REQUIRE_LARGE_FILE_SUPPORT__TRYRUN_OUTPUT="
+fi
+
+mkdir build
+cd build || exit
+
 echo "VTK_ARGS:" "${VTK_ARGS[@]}"
 
 # now we can start configuring
-cmake -LAH .. -G "Ninja" \
+cmake -LAH .. -G "Ninja" ${CMAKE_ARGS} \
     -Wno-dev \
     -DCMAKE_BUILD_TYPE=$BUILD_CONFIG \
     -DCMAKE_PREFIX_PATH:PATH="${PREFIX}" \
@@ -74,6 +105,7 @@ cmake -LAH .. -G "Ninja" \
     -DVTK_PYTHON_VERSION:STRING="${PYTHON_MAJOR_VERSION}" \
     -DPython3_FIND_STRATEGY=LOCATION \
     -DPython3_ROOT_DIR=${PREFIX} \
+    -DPython3_EXECUTABLE=${PREFIX}/bin/python \
     -DVTK_MODULE_ENABLE_VTK_PythonInterpreter:STRING=NO \
     -DVTK_MODULE_ENABLE_VTK_RenderingFreeType:STRING=YES \
     -DVTK_MODULE_ENABLE_VTK_RenderingMatplotlib:STRING=YES \
