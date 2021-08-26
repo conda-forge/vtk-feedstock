@@ -12,6 +12,8 @@ package:
 source:
   url: http://www.vtk.org/files/release/{{ minor_version }}/VTK-{{ version }}.tar.gz
   sha256: bc3eb9625b2b8dbfecb6052a2ab091fc91405de4333b0ec68f3323815154ed8a
+  patches:
+    - patches/module_scope.patch  # https://github.com/tcltk/tk/commit/c498076fc9cb8a1ae2db1bc90edfbc1a8a45fc57.patch
 
 build:
   number: {{ build }}
