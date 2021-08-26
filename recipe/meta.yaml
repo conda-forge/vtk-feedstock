@@ -58,7 +58,7 @@ requirements:
   host:
     - python
     - zlib
-    - freetype <2.10.0
+    - freetype
     - hdf5
     - hdf5 * nompi_*
     - libxml2
