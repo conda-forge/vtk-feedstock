@@ -52,8 +52,6 @@ fi
 
 ( endgroup "Configuring conda" ) 2> /dev/null
 
-( endgroup "Configuring conda" ) 2> /dev/null
-
 if [[ "${BUILD_WITH_CONDA_DEBUG:-0}" == 1 ]]; then
     if [[ "x${BUILD_OUTPUT_ID:-}" != "x" ]]; then
         EXTRA_CB_OPTIONS="${EXTRA_CB_OPTIONS:-} --output-id ${BUILD_OUTPUT_ID}"
