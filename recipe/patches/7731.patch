@@ -27,7 +27,7 @@ index 7ff6526a5d3..0a0d06eba19 100644
    delete this->Internals;
    this->Internals = nullptr;
 @@ -185,13 +189,21 @@ int vtkGeoProjection::UpdateProjection()
- 
+
    if (this->Projection)
    {
 +#if PROJ_VERSION_MAJOR >= 5
@@ -37,7 +37,7 @@ index 7ff6526a5d3..0a0d06eba19 100644
 +#endif
      this->Projection = nullptr;
    }
- 
+
    if (this->PROJ4String && strlen(this->PROJ4String))
    {
 +#if PROJ_VERSION_MAJOR >= 5
@@ -45,9 +45,9 @@ index 7ff6526a5d3..0a0d06eba19 100644
 +#else
      this->Projection = pj_init_plus(this->PROJ4String);
 +#endif
-     if (!this->Projection)
-     {
-       vtkErrorMacro("Cannot set projection with string " << this->PROJ4String);
+   }
+   else
+   {
 @@ -234,8 +246,11 @@ int vtkGeoProjection::UpdateProjection()
        stringHolder[i] = param.str();
        pjArgs[3 + i] = stringHolder[i].c_str();
@@ -144,6 +144,6 @@ index 4d8ffc3c5d5..c4182c4db2b 100644
  # include <geodesic.h>
  #else
  # include <vtklibproj/src/projects.h>
--- 
+--
 GitLab
 
