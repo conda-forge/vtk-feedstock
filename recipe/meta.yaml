@@ -1,5 +1,5 @@
 {% set version = "9.0.3" %}
-{% set build = 1 %}
+{% set build = 2 %}
 
 {% set minor_version = ".".join(version.split(".")[:2]) %}
 
@@ -75,8 +75,7 @@ requirements:
     - lz4-c
     - xorg-libxt  # [linux]
     - boost-cpp
-    - tk  # [not win and not VTK_WITH_OSMESA and not osx]
-    - tk <8.6.11  # [osx and not VTK_WITH_OSMESA]
+    - tk  # [not win and not VTK_WITH_OSMESA]
     - ffmpeg
     - utfcpp
     - eigen
@@ -108,8 +107,7 @@ requirements:
     - libnetcdf
     - lz4-c
     - xorg-libxt  # [linux]
-    - tk  # [not win and not VTK_WITH_OSMESA and not osx]
-    - tk <8.6.11  # [osx and not VTK_WITH_OSMESA]
+    - tk  # [not win and not VTK_WITH_OSMESA]
     - ffmpeg
     - utfcpp
     - eigen
