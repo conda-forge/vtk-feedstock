@@ -12,7 +12,7 @@ Summary: The Visualization Toolkit (VTK) is an open-source, freely available sof
 
 Development: https://gitlab.kitware.com/vtk/vtk
 
-Documentation: https://vtk.org/documentation/
+Documentation: https://vtk.org/documentation
 
 Current build status
 ====================
