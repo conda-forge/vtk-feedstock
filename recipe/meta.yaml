@@ -13,8 +13,10 @@ source:
   url: http://www.vtk.org/files/release/{{ minor_version }}/VTK-{{ version }}.tar.gz
   sha256: bc3eb9625b2b8dbfecb6052a2ab091fc91405de4333b0ec68f3323815154ed8a
   patches:
+    # Note: these patches might be unnecessary post 9.0.3
     - patches/7731.patch
     - patches/tbb.patch
+    - patches/FindTBB.patch
 
 build:
   number: {{ build }}
