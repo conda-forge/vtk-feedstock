@@ -132,35 +132,6 @@ requirements:
 test:
   imports:
     - vtk
-    - vtk.vtkChartsCore
-    - vtk.vtkCommonCore
-    - vtk.vtkFiltersCore
-    - vtk.vtkFiltersGeneric
-    - vtk.vtkGeovisCore
-    - vtk.vtkFiltersHybrid
-    - vtk.vtkIOCore
-    - vtk.vtkImagingCore
-    - vtk.vtkInfovisCore
-    - vtk.vtkRenderingCore
-    - vtk.vtkViewsCore
-    - vtk.vtkRenderingVolume
-    - vtk.vtkInteractionWidgets
-    - vtk.vtkWebGLExporter
-    - vtk.tk.vtkTkRenderWidget  # [not win and not VTK_WITH_OSMESA]
-    - vtkmodules
-    - vtkmodules.vtkChartsCore
-    - vtkmodules.vtkCommonCore
-    - vtkmodules.vtkFiltersCore
-    - vtkmodules.vtkFiltersGeneric
-    - vtkmodules.vtkGeovisCore
-    - vtkmodules.vtkFiltersHybrid
-    - vtkmodules.vtkIOCore
-    - vtkmodules.vtkImagingCore
-    - vtkmodules.vtkInfovisCore
-    - vtkmodules.vtkRenderingCore
-    - vtkmodules.vtkViewsCore
-    - vtkmodules.vtkRenderingVolume
-    - vtkmodules.vtkInteractionWidgets
   commands:
     - python -c "from vtk import *"
 
