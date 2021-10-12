@@ -161,6 +161,8 @@ test:
     - vtkmodules.vtkViewsCore
     - vtkmodules.vtkRenderingVolume
     - vtkmodules.vtkInteractionWidgets
+  commands:
+    - python -c "from vtk import *"
 
   requires:
     - setuptools
