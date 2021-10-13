@@ -132,6 +132,7 @@ requirements:
 test:
   imports:
     - vtk
+    - vtk.vtkIONetCDF
   commands:
     - python -c "from vtk import *"
 
