@@ -1,3 +1,7 @@
 build_platform: {osx_arm64: osx_64, linux_ppc64le: linux_64, linux_aarch64: linux_64}
 conda_forge_output_validation: true
 test_on_native_only: true
+azure:
+  # toggle for storing the conda build_artifacts directory (including the
+  # built packages) as an Azure pipeline artifact that can be downloaded
+  store_build_artifacts: False
