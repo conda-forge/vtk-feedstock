@@ -62,7 +62,7 @@ requirements:
     - zlib
     - freetype
     - hdf5
-    - hdf5 * nompi_*
+    - hdf5 1.10.6 nompi_*101
     - libxml2
     - libpng
     - jpeg
