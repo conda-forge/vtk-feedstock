@@ -3,7 +3,7 @@ VTK_WITH_OSMESA:
 boost_cpp:
 - 1.74.0
 channel_sources:
-- conda-forge,defaults
+- conda-forge
 channel_targets:
 - conda-forge main
 cxx_compiler:
