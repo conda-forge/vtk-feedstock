@@ -1,0 +1,55 @@
+From 0fe82d6054bbdd84b4ca0c57fe7ee56d0c9cbdcd Mon Sep 17 00:00:00 2001
+From: XDMF Upstream <kwrobot@kitware.com>
+Date: Sun, 22 Aug 2021 13:46:39 -0400
+Subject: [PATCH] xdmf3 2021-08-22 (5069dea3)
+
+Code extracted from:
+
+    https://gitlab.kitware.com/third-party/xdmf.git
+
+at commit 5069dea305c437423efb820021be2d9bad2a4b79 (for/vtk-20210822-master-gfe7dd1ca).
+---
+ core/XdmfHDF5Controller.hpp | 9 +--------
+ core/XdmfHDF5Writer.hpp     | 9 +--------
+ 2 files changed, 2 insertions(+), 16 deletions(-)
+
+diff --git a/core/XdmfHDF5Controller.hpp b/core/XdmfHDF5Controller.hpp
+index c5c15d0af3b..485c3cb4ecf 100644
+--- a/core/XdmfHDF5Controller.hpp
++++ b/core/XdmfHDF5Controller.hpp
+@@ -28,14 +28,7 @@
+ #include "XdmfCore.hpp"
+ #include "XdmfHeavyDataController.hpp"
+ 
+-// So that hdf5 does not need to be included in the header files
+-// It would add a dependancy to programs that use Xdmf
+-#ifndef _H5Ipublic_H
+-  #ifndef XDMF_HID_T
+-  #define XDMF_HID_T
+-    typedef int hid_t;
+-  #endif
+-#endif
++#include "vtk_hdf5.h"
+ 
+ #ifdef __cplusplus
+ 
+diff --git a/core/XdmfHDF5Writer.hpp b/core/XdmfHDF5Writer.hpp
+index cfbec6f4542..2c716edf510 100644
+--- a/core/XdmfHDF5Writer.hpp
++++ b/core/XdmfHDF5Writer.hpp
+@@ -29,14 +29,7 @@
+ #include "XdmfHeavyDataWriter.hpp"
+ #include "XdmfHeavyDataController.hpp"
+ 
+-// So that hdf5 does not need to be included in the header files
+-// It would add a dependancy to programs that use Xdmf
+-#ifndef _H5Ipublic_H
+-  #ifndef XDMF_HID_T
+-  #define XDMF_HID_T
+-    typedef int hid_t;
+-  #endif
+-#endif
++#include "vtk_hdf5.h"
+ 
+ #ifdef __cplusplus
+ 
