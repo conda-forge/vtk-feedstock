@@ -15,8 +15,8 @@ at commit 5069dea305c437423efb820021be2d9bad2a4b79 (for/vtk-20210822-master-gfe7
 
 diff --git a/core/XdmfHDF5Controller.hpp b/core/XdmfHDF5Controller.hpp
 index c5c15d0af3b..485c3cb4ecf 100644
---- a/core/XdmfHDF5Controller.hpp
-+++ b/core/XdmfHDF5Controller.hpp
+--- a/ThirdParty/xdmf3/vtkxdmf3/core/XdmfHDF5Controller.hpp
++++ b/ThirdParty/xdmf3/vtkxdmf3/core/XdmfHDF5Controller.hpp
 @@ -28,14 +28,7 @@
  #include "XdmfCore.hpp"
  #include "XdmfHeavyDataController.hpp"
@@ -35,8 +35,8 @@ index c5c15d0af3b..485c3cb4ecf 100644
  
 diff --git a/core/XdmfHDF5Writer.hpp b/core/XdmfHDF5Writer.hpp
 index cfbec6f4542..2c716edf510 100644
---- a/core/XdmfHDF5Writer.hpp
-+++ b/core/XdmfHDF5Writer.hpp
+--- a/ThirdParty/xdmf3/vtkxdmf3/core/XdmfHDF5Writer.hpp
++++ b/ThirdParty/xdmf3/vtkxdmf3/core/XdmfHDF5Writer.hpp
 @@ -29,14 +29,7 @@
  #include "XdmfHeavyDataWriter.hpp"
  #include "XdmfHeavyDataController.hpp"
