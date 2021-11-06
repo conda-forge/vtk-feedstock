@@ -124,6 +124,7 @@ cmake -LAH .. -G "Ninja" ${CMAKE_ARGS} \
     -DVTK_USE_EXTERNAL:BOOL=ON \
     -DVTK_MODULE_USE_EXTERNAL_VTK_libharu:BOOL=OFF \
     -DVTK_MODULE_USE_EXTERNAL_VTK_pegtl:BOOL=OFF \
+    -DVTK_MODULE_USE_EXTERNAL_VTK_exprtk:BOOL=OFF \
     "${VTK_ARGS[@]}"
 
 # compile & install!
