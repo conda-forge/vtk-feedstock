@@ -90,6 +90,7 @@ requirements:
     - gl2ps
     - pugixml
     - qt  # [not ppc64le and not arm64]
+    - fmt
 
   run:
     - python
@@ -122,6 +123,7 @@ requirements:
     - gl2ps
     - pugixml
     - tbb-devel
+    - fmt
 
   run_constrained:
     # Paraview bundles its own VTK that has conflicting Python vtkmodules
