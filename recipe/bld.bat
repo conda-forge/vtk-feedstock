@@ -28,6 +28,7 @@ cmake .. -G "Ninja" ^
     -DVTK_USE_EXTERNAL:BOOL=ON ^
     -DVTK_MODULE_USE_EXTERNAL_VTK_libharu:BOOL=OFF ^
     -DVTK_MODULE_USE_EXTERNAL_VTK_pegtl:BOOL=OFF ^
+    -DVTK_MODULE_USE_EXTERNAL_VTK_exprtk:BOOL=OFF ^
     -DLZMA_LIBRARY="%LIBRARY_PREFIX%/lib/liblzma.lib"
 if errorlevel 1 exit 1
 
