@@ -1,11 +1,11 @@
 MACOSX_DEPLOYMENT_TARGET:
 - '10.9'
 VTK_WITH_OSMESA:
-- 'True'
+- 'False'
 boost_cpp:
-- 1.72.0
+- 1.74.0
 channel_sources:
-- conda-forge,defaults
+- conda-forge
 channel_targets:
 - conda-forge main
 cxx_compiler:
@@ -13,7 +13,7 @@ cxx_compiler:
 cxx_compiler_version:
 - '11'
 expat:
-- '2.2'
+- '2'
 ffmpeg:
 - '4.3'
 freetype:
@@ -25,26 +25,22 @@ hdf5:
 jpeg:
 - '9'
 jsoncpp:
-- 1.8.4
+- 1.9.4
 libnetcdf:
 - 4.7.4
 libpng:
 - '1.6'
 libtiff:
-- 4.1.0
+- '4'
 libxml2:
 - '2.9'
 lz4_c:
-- 1.9.2
+- 1.9.3
 macos_machine:
 - x86_64-apple-darwin13.4.0
 pin_run_as_build:
   boost-cpp:
     max_pin: x.x.x
-  expat:
-    max_pin: x.x
-  ffmpeg:
-    max_pin: x.x
   freetype:
     max_pin: x
   glew:
@@ -73,16 +69,20 @@ pin_run_as_build:
   zlib:
     max_pin: x.x
 proj:
-- 7.1.1
+- 8.0.1
 python:
-- 3.6.* *_cpython
+- 3.7.* *_cpython
 sqlite:
 - '3'
 target_platform:
 - osx-64
+tbb:
+- '2020'
+tbb_devel:
+- '2020'
 tk:
 - '8.6'
 vtk:
-- 8.2.0
+- 9.0.1
 zlib:
 - '1.2'

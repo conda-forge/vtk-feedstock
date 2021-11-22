@@ -5,71 +5,31 @@
 jobs:
 - job: linux
   pool:
-    vmImage: ubuntu-16.04
+    vmImage: ubuntu-latest
   strategy:
     matrix:
-      linux_64_VTK_WITH_OSMESAFalseboost_cpp1.72.0python3.6.____cpython:
-        CONFIG: linux_64_VTK_WITH_OSMESAFalseboost_cpp1.72.0python3.6.____cpython
+      linux_64_VTK_WITH_OSMESAFalsepython3.7.____cpython:
+        CONFIG: linux_64_VTK_WITH_OSMESAFalsepython3.7.____cpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
-      linux_64_VTK_WITH_OSMESAFalseboost_cpp1.72.0python3.7.____cpython:
-        CONFIG: linux_64_VTK_WITH_OSMESAFalseboost_cpp1.72.0python3.7.____cpython
+      linux_64_VTK_WITH_OSMESAFalsepython3.8.____cpython:
+        CONFIG: linux_64_VTK_WITH_OSMESAFalsepython3.8.____cpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
-      linux_64_VTK_WITH_OSMESAFalseboost_cpp1.72.0python3.8.____cpython:
-        CONFIG: linux_64_VTK_WITH_OSMESAFalseboost_cpp1.72.0python3.8.____cpython
+      linux_64_VTK_WITH_OSMESAFalsepython3.9.____cpython:
+        CONFIG: linux_64_VTK_WITH_OSMESAFalsepython3.9.____cpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
-      linux_64_VTK_WITH_OSMESAFalseboost_cpp1.72.0python3.9.____cpython:
-        CONFIG: linux_64_VTK_WITH_OSMESAFalseboost_cpp1.72.0python3.9.____cpython
+      linux_64_VTK_WITH_OSMESATruepython3.7.____cpython:
+        CONFIG: linux_64_VTK_WITH_OSMESATruepython3.7.____cpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
-      linux_64_VTK_WITH_OSMESAFalseboost_cpp1.74.0python3.6.____cpython:
-        CONFIG: linux_64_VTK_WITH_OSMESAFalseboost_cpp1.74.0python3.6.____cpython
+      linux_64_VTK_WITH_OSMESATruepython3.8.____cpython:
+        CONFIG: linux_64_VTK_WITH_OSMESATruepython3.8.____cpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
-      linux_64_VTK_WITH_OSMESAFalseboost_cpp1.74.0python3.7.____cpython:
-        CONFIG: linux_64_VTK_WITH_OSMESAFalseboost_cpp1.74.0python3.7.____cpython
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
-      linux_64_VTK_WITH_OSMESAFalseboost_cpp1.74.0python3.8.____cpython:
-        CONFIG: linux_64_VTK_WITH_OSMESAFalseboost_cpp1.74.0python3.8.____cpython
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
-      linux_64_VTK_WITH_OSMESAFalseboost_cpp1.74.0python3.9.____cpython:
-        CONFIG: linux_64_VTK_WITH_OSMESAFalseboost_cpp1.74.0python3.9.____cpython
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
-      linux_64_VTK_WITH_OSMESATrueboost_cpp1.72.0python3.6.____cpython:
-        CONFIG: linux_64_VTK_WITH_OSMESATrueboost_cpp1.72.0python3.6.____cpython
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
-      linux_64_VTK_WITH_OSMESATrueboost_cpp1.72.0python3.7.____cpython:
-        CONFIG: linux_64_VTK_WITH_OSMESATrueboost_cpp1.72.0python3.7.____cpython
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
-      linux_64_VTK_WITH_OSMESATrueboost_cpp1.72.0python3.8.____cpython:
-        CONFIG: linux_64_VTK_WITH_OSMESATrueboost_cpp1.72.0python3.8.____cpython
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
-      linux_64_VTK_WITH_OSMESATrueboost_cpp1.72.0python3.9.____cpython:
-        CONFIG: linux_64_VTK_WITH_OSMESATrueboost_cpp1.72.0python3.9.____cpython
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
-      linux_64_VTK_WITH_OSMESATrueboost_cpp1.74.0python3.6.____cpython:
-        CONFIG: linux_64_VTK_WITH_OSMESATrueboost_cpp1.74.0python3.6.____cpython
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
-      linux_64_VTK_WITH_OSMESATrueboost_cpp1.74.0python3.7.____cpython:
-        CONFIG: linux_64_VTK_WITH_OSMESATrueboost_cpp1.74.0python3.7.____cpython
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
-      linux_64_VTK_WITH_OSMESATrueboost_cpp1.74.0python3.8.____cpython:
-        CONFIG: linux_64_VTK_WITH_OSMESATrueboost_cpp1.74.0python3.8.____cpython
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
-      linux_64_VTK_WITH_OSMESATrueboost_cpp1.74.0python3.9.____cpython:
-        CONFIG: linux_64_VTK_WITH_OSMESATrueboost_cpp1.74.0python3.9.____cpython
+      linux_64_VTK_WITH_OSMESATruepython3.9.____cpython:
+        CONFIG: linux_64_VTK_WITH_OSMESATruepython3.9.____cpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
   timeoutInMinutes: 360
@@ -92,6 +52,11 @@ jobs:
         export CI=azure
         export GIT_BRANCH=$BUILD_SOURCEBRANCHNAME
         export FEEDSTOCK_NAME=$(basename ${BUILD_REPOSITORY_NAME})
+        if [[ "${BUILD_REASON:-}" == "PullRequest" ]]; then
+          export IS_PR_BUILD="True"
+        else
+          export IS_PR_BUILD="False"
+        fi
         .scripts/run_docker_build.sh
     displayName: Run docker build
     env:
