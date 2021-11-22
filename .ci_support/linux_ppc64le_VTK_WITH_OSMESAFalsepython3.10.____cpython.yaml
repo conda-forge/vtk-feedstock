@@ -1,11 +1,7 @@
-BUILD:
-- aarch64-conda_cos7-linux-gnu
 VTK_WITH_OSMESA:
 - 'False'
 boost_cpp:
 - 1.74.0
-cdt_arch:
-- aarch64
 cdt_name:
 - cos7
 channel_sources:
@@ -64,12 +60,8 @@ pin_run_as_build:
   python:
     min_pin: x.x
     max_pin: x.x
-  qt:
-    max_pin: x.x
   sqlite:
     max_pin: x
-  tk:
-    max_pin: x.x
   vtk:
     max_pin: x.x.x
   zlib:
@@ -78,18 +70,14 @@ proj:
 - 8.2.0
 python:
 - 3.10.* *_cpython
-qt:
-- '5.12'
 sqlite:
 - '3'
 target_platform:
-- linux-aarch64
+- linux-ppc64le
 tbb:
-- '2020'
+- '2021'
 tbb_devel:
-- '2020'
-tk:
-- '8.6'
+- '2021'
 vtk:
 - 9.0.1
 zlib:

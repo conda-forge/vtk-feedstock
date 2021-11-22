@@ -1,6 +1,6 @@
 VTK_WITH_OSMESA:
   - False
-  # - True  # [unix]
+  - True  # [unix]
 replacements:
   all_replacements:
     - tag: 'CMake build metadata'

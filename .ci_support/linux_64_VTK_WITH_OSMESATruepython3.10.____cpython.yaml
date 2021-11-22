@@ -1,5 +1,5 @@
 VTK_WITH_OSMESA:
-- 'False'
+- 'True'
 boost_cpp:
 - 1.74.0
 cdt_name:
@@ -81,9 +81,9 @@ sqlite:
 target_platform:
 - linux-64
 tbb:
-- '2020'
+- '2021'
 tbb_devel:
-- '2020'
+- '2021'
 tk:
 - '8.6'
 vtk:
