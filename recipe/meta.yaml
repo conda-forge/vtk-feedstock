@@ -42,21 +42,22 @@ requirements:
     - ninja
     - python                                 # [build_platform != target_platform]
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
-    - {{ cdt('libxcb') }}  # [linux and build_variant != "osmesa"]
-    - {{ cdt('libxau') }}  # [linux and build_variant != "osmesa"]
-    - {{ cdt('libuuid') }}  # [linux and build_variant != "osmesa"]
-    - {{ cdt('libxext') }}  # [linux and build_variant != "osmesa"]
-    - {{ cdt('libxfixes') }}  # [linux and build_variant != "osmesa"]
-    - {{ cdt('libxxf86vm') }}  # [linux and build_variant != "osmesa"]
-    - {{ cdt('libxdamage') }}  # [linux and build_variant != "osmesa"]
-    - {{ cdt('libselinux') }}  # [linux and build_variant != "osmesa"]
-    - {{ cdt('libsm-devel') }}  # [linux and build_variant != "osmesa"]
-    - {{ cdt('libice-devel') }}  # [linux and build_variant != "osmesa"]
-    - {{ cdt('libx11-devel') }}  # [linux and build_variant != "osmesa"]
-    - {{ cdt('mesa-libgl-devel') }}  # [linux and build_variant != "osmesa"]
-    - {{ cdt('mesa-dri-drivers') }}  # [linux and build_variant != "osmesa"]
-    - {{ cdt('xorg-x11-proto-devel') }}  # [linux and build_variant != "osmesa"]
-    - {{ cdt('mesa-libgbm') }}  # [linux and build_variant != "egl"]
+    - {{ cdt('libxcb') }}  # [linux and (build_variant != "osmesa")]
+    - {{ cdt('libxau') }}  # [linux and (build_variant != "osmesa")]
+    - {{ cdt('libuuid') }}  # [linux and (build_variant != "osmesa")]
+    - {{ cdt('libxext') }}  # [linux and (build_variant != "osmesa")]
+    - {{ cdt('libxfixes') }}  # [linux and (build_variant != "osmesa")]
+    - {{ cdt('libxxf86vm') }}  # [linux and (build_variant != "osmesa")]
+    - {{ cdt('libxdamage') }}  # [linux and (build_variant != "osmesa")]
+    - {{ cdt('libselinux') }}  # [linux and (build_variant != "osmesa")]
+    - {{ cdt('libsm-devel') }}  # [linux and (build_variant != "osmesa")]
+    - {{ cdt('libice-devel') }}  # [linux and (build_variant != "osmesa")]
+    - {{ cdt('libx11-devel') }}  # [linux and (build_variant != "osmesa")]
+    - {{ cdt('mesa-libgl-devel') }}  # [linux and (build_variant != "osmesa")]
+    - {{ cdt('mesa-dri-drivers') }}  # [linux and (build_variant != "osmesa")]
+    - {{ cdt('xorg-x11-proto-devel') }}  # [linux and (build_variant != "osmesa")]
+    - {{ cdt('mesa-libegl-devel') }}  # [build_variant == "egl"]
+    - {{ cdt('mesa-libgbm') }}  # [build_variant == "egl"]
 
   host:
     - python
@@ -78,7 +79,7 @@ requirements:
     - lz4-c
     - xorg-libxt  # [linux]
     - boost-cpp
-    - tk  # [not win and build_variant == "qt"]
+    - tk  # [not win and (build_variant == "qt")]
     - ffmpeg
     - utfcpp
     - eigen
@@ -92,7 +93,7 @@ requirements:
     - sqlite
     - gl2ps
     - pugixml
-    - qt  # [not ppc64le and not arm64 and build_variant == "qt"]
+    - qt  # [not ppc64le and not arm64 and (build_variant == "qt")]
 
   run:
     - python
@@ -110,7 +111,7 @@ requirements:
     - libnetcdf
     - lz4-c
     - xorg-libxt  # [linux]
-    - tk  # [not win and build_variant == "qt"]
+    - tk  # [not win and (build_variant == "qt")]
     - ffmpeg
     - utfcpp
     - eigen
@@ -147,7 +148,7 @@ test:
     - vtk.vtkRenderingVolume
     - vtk.vtkInteractionWidgets
     - vtk.vtkWebGLExporter
-    - vtk.tk.vtkTkRenderWidget  # [not win and build_variant == "qt"]
+    - vtk.tk.vtkTkRenderWidget  # [not win and (build_variant == "qt")]
     - vtkmodules
     - vtkmodules.vtkChartsCore
     - vtkmodules.vtkCommonCore

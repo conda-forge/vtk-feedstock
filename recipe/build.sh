@@ -15,7 +15,7 @@ if [[ "$build_variant" == "osmesa" ]]; then
         "-DVTK_OPENGL_HAS_OSMESA:BOOL=ON"
         "-DOSMESA_INCLUDE_DIR:PATH=${PREFIX}/include"
         "-DOSMESA_LIBRARY:FILEPATH=${PREFIX}/lib/libOSMesa32${SHLIB_EXT}"
-        "-DOPENGL_opengl_LIBRARY=${BUILD_PREFIX}/${HOST}/sysroot/usr/lib64/libGL.so"
+        "-DOPENGL_opengl_LIBRARY:FILEPATH=${BUILD_PREFIX}/${HOST}/sysroot/usr/lib64/libGL.so"
     )
 
     if [[ "${target_platform}" == linux-* ]]; then
@@ -30,13 +30,13 @@ if [[ "$build_variant" == "osmesa" ]]; then
     fi
 elif [[ "$build_variant" == "egl" ]]; then
     VTK_ARGS+=(
-        "-DVTK_USE_X=OFF"
-        "-DVTK_OPENGL_HAS_EGL=ON"
-        "-DVTK_MODULE_USE_EXTERNAL_VTK_glew=OFF"
-        "-DEGL_INCLUDE_DIR=${BUILD_PREFIX}/${HOST}/sysroot/usr/include"
-        "-DEGL_LIBRARY=${BUILD_PREFIX}/${HOST}/sysroot/usr/lib/libEGL.so.1"
-        "-DEGL_opengl_LIBRARY=${BUILD_PREFIX}/${HOST}/sysroot/usr/lib64/libGL.so"
-        "-DOPENGL_opengl_LIBRARY=${BUILD_PREFIX}/${HOST}/sysroot/usr/lib64/libGL.so"
+        "-DVTK_USE_X:BOOL=OFF"
+        "-DVTK_OPENGL_HAS_EGL:BOOL=ON"
+        "-DVTK_MODULE_USE_EXTERNAL_VTK_glew:BOOL=OFF"
+        "-DEGL_INCLUDE_DIR:PATH=${BUILD_PREFIX}/${HOST}/sysroot/usr/include"
+        "-DEGL_LIBRARY:FILEPATH=${BUILD_PREFIX}/${HOST}/sysroot/usr/lib/libEGL.so.1"
+        "-DEGL_opengl_LIBRARY:FILEPATH=${BUILD_PREFIX}/${HOST}/sysroot/usr/lib64/libGL.so"
+        "-DOPENGL_opengl_LIBRARY:FILEPATH=${BUILD_PREFIX}/${HOST}/sysroot/usr/lib64/libGL.so"
     )
 elif [[ "$build_variant" == "qt" ]]; then
     TCLTK_VERSION=`echo 'puts $tcl_version;exit 0' | tclsh`
@@ -62,7 +62,9 @@ elif [[ "$build_variant" == "qt" ]]; then
     fi
 fi
 
-if [[ "$target_platform" != "linux-ppc64le" && "$target_platform" != "osx-arm64" ]]; then
+if [[ "$target_platform" != "linux-ppc64le"
+        && "$target_platform" != "osx-arm64"
+        && "$build_variant" != "egl" ]]; then
     VTK_ARGS+=(
         "-DVTK_MODULE_ENABLE_VTK_GUISupportQt:STRING=YES"
         "-DVTK_MODULE_ENABLE_VTK_RenderingQt:STRING=YES"
