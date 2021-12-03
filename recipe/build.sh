@@ -64,7 +64,7 @@ fi
 
 if [[ "$target_platform" != "linux-ppc64le"
         && "$target_platform" != "osx-arm64"
-        && "$build_variant" != "egl" ]]; then
+        && "$build_variant" == "qt" ]]; then
     VTK_ARGS+=(
         "-DVTK_MODULE_ENABLE_VTK_GUISupportQt:STRING=YES"
         "-DVTK_MODULE_ENABLE_VTK_RenderingQt:STRING=YES"

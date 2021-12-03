@@ -85,7 +85,7 @@ requirements:
     - eigen
     - double-conversion
     - pugixml
-    - glew  # [build_variant == "qt"]
+    - glew  # [build_variant != "egl"]
     - libogg
     - libtheora
     - proj
@@ -117,7 +117,7 @@ requirements:
     - eigen
     - double-conversion
     - pugixml
-    - glew  # [build_variant == "qt"]
+    - glew  # [build_variant != "egl"]
     - libogg
     - libtheora
     - proj
