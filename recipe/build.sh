@@ -15,8 +15,8 @@ if [[ "$build_variant" == "osmesa" ]]; then
         "-DVTK_OPENGL_HAS_OSMESA:BOOL=ON"
         "-DOSMESA_INCLUDE_DIR:PATH=${PREFIX}/include"
         "-DOSMESA_LIBRARY:FILEPATH=${PREFIX}/lib/libOSMesa32${SHLIB_EXT}"
+        "-DOPENGL_opengl_LIBRARY=${BUILD_PREFIX}/${HOST}/sysroot/usr/lib64/libGL.so"
     )
-    CMAKE_ARGS="${CMAKE_ARGS} -DOPENGL_opengl_LIBRARY=${BUILD_PREFIX}/${HOST}/sysroot/usr/lib64/libGL.so"
 
     if [[ "${target_platform}" == linux-* ]]; then
         VTK_ARGS+=(
