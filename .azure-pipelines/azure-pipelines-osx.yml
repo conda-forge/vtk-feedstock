@@ -8,48 +8,49 @@ jobs:
     vmImage: macOS-10.15
   strategy:
     matrix:
-      osx_64_VTK_WITH_OSMESAFalsepython3.10.____cpython:
-        CONFIG: osx_64_VTK_WITH_OSMESAFalsepython3.10.____cpython
+      osx_64_build_variantosmesapython3.10.____cpython:
+        CONFIG: osx_64_build_variantosmesapython3.10.____cpython
         UPLOAD_PACKAGES: 'True'
-      osx_64_VTK_WITH_OSMESAFalsepython3.7.____cpython:
-        CONFIG: osx_64_VTK_WITH_OSMESAFalsepython3.7.____cpython
+      osx_64_build_variantosmesapython3.7.____cpython:
+        CONFIG: osx_64_build_variantosmesapython3.7.____cpython
         UPLOAD_PACKAGES: 'True'
-      osx_64_VTK_WITH_OSMESAFalsepython3.8.____cpython:
-        CONFIG: osx_64_VTK_WITH_OSMESAFalsepython3.8.____cpython
+      osx_64_build_variantosmesapython3.8.____cpython:
+        CONFIG: osx_64_build_variantosmesapython3.8.____cpython
         UPLOAD_PACKAGES: 'True'
-      osx_64_VTK_WITH_OSMESAFalsepython3.9.____cpython:
-        CONFIG: osx_64_VTK_WITH_OSMESAFalsepython3.9.____cpython
+      osx_64_build_variantosmesapython3.9.____cpython:
+        CONFIG: osx_64_build_variantosmesapython3.9.____cpython
         UPLOAD_PACKAGES: 'True'
-      osx_64_VTK_WITH_OSMESATruepython3.10.____cpython:
-        CONFIG: osx_64_VTK_WITH_OSMESATruepython3.10.____cpython
+      osx_64_build_variantqtpython3.10.____cpython:
+        CONFIG: osx_64_build_variantqtpython3.10.____cpython
         UPLOAD_PACKAGES: 'True'
-      osx_64_VTK_WITH_OSMESATruepython3.7.____cpython:
-        CONFIG: osx_64_VTK_WITH_OSMESATruepython3.7.____cpython
+      osx_64_build_variantqtpython3.7.____cpython:
+        CONFIG: osx_64_build_variantqtpython3.7.____cpython
         UPLOAD_PACKAGES: 'True'
-      osx_64_VTK_WITH_OSMESATruepython3.8.____cpython:
-        CONFIG: osx_64_VTK_WITH_OSMESATruepython3.8.____cpython
+      osx_64_build_variantqtpython3.8.____cpython:
+        CONFIG: osx_64_build_variantqtpython3.8.____cpython
         UPLOAD_PACKAGES: 'True'
-      osx_64_VTK_WITH_OSMESATruepython3.9.____cpython:
-        CONFIG: osx_64_VTK_WITH_OSMESATruepython3.9.____cpython
+      osx_64_build_variantqtpython3.9.____cpython:
+        CONFIG: osx_64_build_variantqtpython3.9.____cpython
         UPLOAD_PACKAGES: 'True'
-      osx_arm64_VTK_WITH_OSMESAFalsepython3.10.____cpython:
-        CONFIG: osx_arm64_VTK_WITH_OSMESAFalsepython3.10.____cpython
+      osx_arm64_build_variantosmesapython3.10.____cpython:
+        CONFIG: osx_arm64_build_variantosmesapython3.10.____cpython
         UPLOAD_PACKAGES: 'True'
-      osx_arm64_VTK_WITH_OSMESAFalsepython3.8.____cpython:
-        CONFIG: osx_arm64_VTK_WITH_OSMESAFalsepython3.8.____cpython
+      osx_arm64_build_variantosmesapython3.8.____cpython:
+        CONFIG: osx_arm64_build_variantosmesapython3.8.____cpython
         UPLOAD_PACKAGES: 'True'
-      osx_arm64_VTK_WITH_OSMESAFalsepython3.9.____cpython:
-        CONFIG: osx_arm64_VTK_WITH_OSMESAFalsepython3.9.____cpython
+      osx_arm64_build_variantosmesapython3.9.____cpython:
+        CONFIG: osx_arm64_build_variantosmesapython3.9.____cpython
         UPLOAD_PACKAGES: 'True'
-      osx_arm64_VTK_WITH_OSMESATruepython3.10.____cpython:
-        CONFIG: osx_arm64_VTK_WITH_OSMESATruepython3.10.____cpython
+      osx_arm64_build_variantqtpython3.10.____cpython:
+        CONFIG: osx_arm64_build_variantqtpython3.10.____cpython
         UPLOAD_PACKAGES: 'True'
-      osx_arm64_VTK_WITH_OSMESATruepython3.8.____cpython:
-        CONFIG: osx_arm64_VTK_WITH_OSMESATruepython3.8.____cpython
+      osx_arm64_build_variantqtpython3.8.____cpython:
+        CONFIG: osx_arm64_build_variantqtpython3.8.____cpython
         UPLOAD_PACKAGES: 'True'
-      osx_arm64_VTK_WITH_OSMESATruepython3.9.____cpython:
-        CONFIG: osx_arm64_VTK_WITH_OSMESATruepython3.9.____cpython
+      osx_arm64_build_variantqtpython3.9.____cpython:
+        CONFIG: osx_arm64_build_variantqtpython3.9.____cpython
         UPLOAD_PACKAGES: 'True'
+    maxParallel: 13
   timeoutInMinutes: 360
 
   steps:
