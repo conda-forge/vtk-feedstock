@@ -1,11 +1,7 @@
-BUILD:
-- aarch64-conda_cos7-linux-gnu
 boost_cpp:
 - 1.74.0
 build_variant:
 - qt
-cdt_arch:
-- aarch64
 cdt_name:
 - cos7
 channel_sources:
@@ -22,10 +18,6 @@ expat:
 - '2'
 ffmpeg:
 - '4.3'
-fortran_compiler:
-- gfortran
-fortran_compiler_version:
-- '9'
 freetype:
 - '2'
 glew:
@@ -68,12 +60,8 @@ pin_run_as_build:
   python:
     min_pin: x.x
     max_pin: x.x
-  qt:
-    max_pin: x.x
   sqlite:
     max_pin: x
-  tk:
-    max_pin: x.x
   vtk:
     max_pin: x.x.x
   zlib:
@@ -82,22 +70,15 @@ proj:
 - 8.2.0
 python:
 - 3.9.* *_cpython
-qt:
-- '5.12'
 sqlite:
 - '3'
 target_platform:
-- linux-aarch64
+- linux-ppc64le
 tbb:
 - '2021'
 tbb_devel:
 - '2021'
-tk:
-- '8.6'
 vtk:
 - 9.0.1
-zip_keys:
-- - cxx_compiler_version
-  - fortran_compiler_version
 zlib:
 - '1.2'
