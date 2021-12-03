@@ -32,7 +32,7 @@ elif [[ "$build_variant" == "egl" ]]; then
     VTK_ARGS+=(
         "-DVTK_USE_X=OFF"
         "-DVTK_OPENGL_HAS_EGL=ON"
-        "-DVTK_MODULE_USE_EXTERNAL_vtkglew=OFF"
+        "-DVTK_MODULE_USE_EXTERNAL_VTK_glew=OFF"
         "-DEGL_INCLUDE_DIR=${BUILD_PREFIX}/${HOST}/sysroot/usr/include"
         "-DEGL_LIBRARY=${BUILD_PREFIX}/${HOST}/sysroot/usr/lib/libEGL.so.1"
         "-DEGL_opengl_LIBRARY=${BUILD_PREFIX}/${HOST}/sysroot/usr/lib64/libGL.so"
