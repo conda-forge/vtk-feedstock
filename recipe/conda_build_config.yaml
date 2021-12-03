@@ -1,6 +1,7 @@
-VTK_WITH_OSMESA:
-  - False
-  # - True  # [unix]
+build_variant:
+  - "qt"
+  - "osmesa"  # [unix]
+  - "egl"  # [linux]
 replacements:
   all_replacements:
     - tag: 'CMake build metadata'

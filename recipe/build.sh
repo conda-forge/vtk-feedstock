@@ -9,13 +9,14 @@ PYTHON_MAJOR_VERSION=${PY_VER%%.*}
 
 VTK_ARGS=()
 
-if [ -f "$PREFIX/lib/libOSMesa32${SHLIB_EXT}" ]; then
+if [[ "$build_variant" == "osmesa" ]]; then
     VTK_ARGS+=(
         "-DVTK_DEFAULT_RENDER_WINDOW_OFFSCREEN:BOOL=ON"
         "-DVTK_OPENGL_HAS_OSMESA:BOOL=ON"
         "-DOSMESA_INCLUDE_DIR:PATH=${PREFIX}/include"
         "-DOSMESA_LIBRARY:FILEPATH=${PREFIX}/lib/libOSMesa32${SHLIB_EXT}"
     )
+    CMAKE_ARGS="${CMAKE_ARGS} -DOPENGL_opengl_LIBRARY=${BUILD_PREFIX}/${HOST}/sysroot/usr/lib64/libGL.so"
 
     if [[ "${target_platform}" == linux-* ]]; then
         VTK_ARGS+=(
@@ -27,7 +28,17 @@ if [ -f "$PREFIX/lib/libOSMesa32${SHLIB_EXT}" ]; then
             "-DCMAKE_OSX_SYSROOT:PATH=${CONDA_BUILD_SYSROOT}"
         )
     fi
-else
+elif [[ "$build_variant" == "egl" ]]; then
+    VTK_ARGS+=(
+        "-DVTK_USE_X=OFF"
+        "-DVTK_OPENGL_HAS_EGL=ON"
+        "-DVTK_MODULE_USE_EXTERNAL_vtkglew=OFF"
+        "-DEGL_INCLUDE_DIR=${BUILD_PREFIX}/${HOST}/sysroot/usr/include"
+        "-DEGL_LIBRARY=${BUILD_PREFIX}/${HOST}/sysroot/usr/lib/libEGL.so.1"
+        "-DEGL_opengl_LIBRARY=${BUILD_PREFIX}/${HOST}/sysroot/usr/lib64/libGL.so"
+        "-DOPENGL_opengl_LIBRARY=${BUILD_PREFIX}/${HOST}/sysroot/usr/lib64/libGL.so"
+    )
+elif [[ "$build_variant" == "qt" ]]; then
     TCLTK_VERSION=`echo 'puts $tcl_version;exit 0' | tclsh`
 
     VTK_ARGS+=(

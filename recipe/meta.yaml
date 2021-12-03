@@ -1,9 +1,10 @@
 {% set version = "9.1.0" %}
-{% set build = 2 %}
+{% set build = 3 %}
 
 {% set minor_version = ".".join(version.split(".")[:2]) %}
 
-{% set build = build + 100 %}   # [not VTK_WITH_OSMESA]
+{% set build = build + 100 %}   # [build_variant == "osmesa"]
+{% set build = build + 200 %}   # [build_variant == "qt"]
 
 package:
   name: vtk
@@ -20,40 +21,41 @@ build:
 
   # typically, osmesa is selected by installing or not installing
   # mesalib, but it could also be selected via the build string:
-  # `vtk * with_osmesa*` for osmesa
-  # `vtk * no_osmesa*` for no osmesa
+  # `vtk * osmesa*` for osmesa
+  # `vtk * egl*` for egl
+  # `vtk * qt*` for qt
 
-  {% if VTK_WITH_OSMESA == "True" %}
-  {% set osmesa_prefix = "with_osmesa" %}
-  {% else %}
-  {% set osmesa_prefix = "no_osmesa" %}
-  {% endif %}
-  string: {{ osmesa_prefix }}_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ build }}
+  string: {{ build_variant }}_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ build }}
+
+  track_features:
+    - vtk-egl  # [build_variant == "egl"]
+    - vtk-osmesa  # [build_variant == "osmesa"]
 
   features:
-    - mesalib   # [VTK_WITH_OSMESA]
+    - mesalib  # [build_variant == "osmesa"]
 
 requirements:
   build:
     - {{ compiler("cxx") }}
+    - {{ compiler('fortran') }}  # [build_variant != "qt"]
     - cmake
     - ninja
     - python                                 # [build_platform != target_platform]
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
-    - {{ cdt('libxcb') }}  # [linux and not VTK_WITH_OSMESA]
-    - {{ cdt('libxau') }}  # [linux and not VTK_WITH_OSMESA]
-    - {{ cdt('libuuid') }}  # [linux and not VTK_WITH_OSMESA]
-    - {{ cdt('libxext') }}  # [linux and not VTK_WITH_OSMESA]
-    - {{ cdt('libxfixes') }}  # [linux and not VTK_WITH_OSMESA]
-    - {{ cdt('libxxf86vm') }}  # [linux and not VTK_WITH_OSMESA]
-    - {{ cdt('libxdamage') }}  # [linux and not VTK_WITH_OSMESA]
-    - {{ cdt('libselinux') }}  # [linux and not VTK_WITH_OSMESA]
-    - {{ cdt('libsm-devel') }}  # [linux and not VTK_WITH_OSMESA]
-    - {{ cdt('libice-devel') }}  # [linux and not VTK_WITH_OSMESA]
-    - {{ cdt('libx11-devel') }}  # [linux and not VTK_WITH_OSMESA]
-    - {{ cdt('mesa-libgl-devel') }}  # [linux and not VTK_WITH_OSMESA]
-    - {{ cdt('mesa-dri-drivers') }}  # [linux and not VTK_WITH_OSMESA]
-    - {{ cdt('xorg-x11-proto-devel') }}  # [linux and not VTK_WITH_OSMESA]
+    - {{ cdt('libxcb') }}  # [linux and build_variant != "osmesa"]
+    - {{ cdt('libxau') }}  # [linux and build_variant == "qt"]
+    - {{ cdt('libuuid') }}  # [linux and build_variant == "qt"]
+    - {{ cdt('libxext') }}  # [linux and build_variant == "qt"]
+    - {{ cdt('libxfixes') }}  # [linux and build_variant == "qt"]
+    - {{ cdt('libxxf86vm') }}  # [linux and build_variant == "qt"]
+    - {{ cdt('libxdamage') }}  # [linux and build_variant == "qt"]
+    - {{ cdt('libselinux') }}  # [linux and build_variant == "qt"]
+    - {{ cdt('libsm-devel') }}  # [linux and build_variant == "qt"]
+    - {{ cdt('libice-devel') }}  # [linux and build_variant == "qt"]
+    - {{ cdt('libx11-devel') }}  # [linux and build_variant == "qt"]
+    - {{ cdt('mesa-libgl-devel') }}  # [linux and build_variant == "qt"]
+    - {{ cdt('mesa-dri-drivers') }}  # [linux and build_variant == "qt"]
+    - {{ cdt('xorg-x11-proto-devel') }}  # [linux and build_variant == "qt"]
 
   host:
     - python
@@ -69,19 +71,19 @@ requirements:
     - expat
     - tbb
     - tbb-devel
-    - mesalib   # [VTK_WITH_OSMESA]
+    - mesalib   # [build_variant == "osmesa"]
     - libnetcdf
     - libnetcdf * nompi_*
     - lz4-c
     - xorg-libxt  # [linux]
     - boost-cpp
-    - tk  # [not win and not VTK_WITH_OSMESA]
+    - tk  # [not win and build_variant == "qt"]
     - ffmpeg
     - utfcpp
     - eigen
     - double-conversion
     - pugixml
-    - glew
+    - glew  # [build_variant == "qt"]
     - libogg
     - libtheora
     - proj
@@ -89,7 +91,7 @@ requirements:
     - sqlite
     - gl2ps
     - pugixml
-    - qt  # [not ppc64le and not arm64]
+    - qt  # [not ppc64le and not arm64 and build_variant == "qt"]
 
   run:
     - python
@@ -103,17 +105,17 @@ requirements:
     - jsoncpp
     - expat
     - tbb
-    - mesalib   # [VTK_WITH_OSMESA]
+    - mesalib   # [build_variant == "osmesa"]
     - libnetcdf
     - lz4-c
     - xorg-libxt  # [linux]
-    - tk  # [not win and not VTK_WITH_OSMESA]
+    - tk  # [not win and build_variant == "qt"]
     - ffmpeg
     - utfcpp
     - eigen
     - double-conversion
     - pugixml
-    - glew
+    - glew  # [build_variant == "qt"]
     - libogg
     - libtheora
     - proj
@@ -144,7 +146,7 @@ test:
     - vtk.vtkRenderingVolume
     - vtk.vtkInteractionWidgets
     - vtk.vtkWebGLExporter
-    - vtk.tk.vtkTkRenderWidget  # [not win and not VTK_WITH_OSMESA]
+    - vtk.tk.vtkTkRenderWidget  # [not win and build_variant == "qt"]
     - vtkmodules
     - vtkmodules.vtkChartsCore
     - vtkmodules.vtkCommonCore
