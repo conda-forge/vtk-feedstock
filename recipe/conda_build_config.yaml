@@ -1,7 +1,7 @@
 build_variant:
   - "qt"
   - "osmesa"  # [linux]
-  - "egl"  # [linux-64]
+  - "egl"  # [linux]
 replacements:
   all_replacements:
     - tag: 'CMake build metadata'
