@@ -16,10 +16,6 @@ expat:
 - '2'
 ffmpeg:
 - '4.3'
-fortran_compiler:
-- gfortran
-fortran_compiler_version:
-- '11'
 freetype:
 - '2'
 glew:
@@ -88,8 +84,5 @@ tk:
 - '8.6'
 vtk:
 - 9.0.1
-zip_keys:
-- - cxx_compiler_version
-  - fortran_compiler_version
 zlib:
 - '1.2'

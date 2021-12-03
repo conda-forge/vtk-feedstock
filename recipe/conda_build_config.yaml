@@ -1,6 +1,6 @@
 build_variant:
   - "qt"
-  - "osmesa"  # [unix]
+  - "osmesa"  # [linux]
   - "egl"  # [linux]
 replacements:
   all_replacements:
