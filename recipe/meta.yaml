@@ -42,22 +42,22 @@ requirements:
     - ninja
     - python                                 # [build_platform != target_platform]
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
-    - {{ cdt('libxcb') }}  # [linux and (build_variant != "osmesa")]
-    - {{ cdt('libxau') }}  # [linux and (build_variant != "osmesa")]
-    - {{ cdt('libuuid') }}  # [linux and (build_variant != "osmesa")]
-    - {{ cdt('libxext') }}  # [linux and (build_variant != "osmesa")]
-    - {{ cdt('libxfixes') }}  # [linux and (build_variant != "osmesa")]
-    - {{ cdt('libxxf86vm') }}  # [linux and (build_variant != "osmesa")]
-    - {{ cdt('libxdamage') }}  # [linux and (build_variant != "osmesa")]
-    - {{ cdt('libselinux') }}  # [linux and (build_variant != "osmesa")]
-    - {{ cdt('libsm-devel') }}  # [linux and (build_variant != "osmesa")]
-    - {{ cdt('libice-devel') }}  # [linux and (build_variant != "osmesa")]
-    - {{ cdt('libx11-devel') }}  # [linux and (build_variant != "osmesa")]
-    - {{ cdt('mesa-libgl-devel') }}  # [linux and (build_variant != "osmesa")]
-    - {{ cdt('mesa-dri-drivers') }}  # [linux and (build_variant != "osmesa")]
-    - {{ cdt('xorg-x11-proto-devel') }}  # [linux and (build_variant != "osmesa")]
+    - {{ cdt('libxcb') }}  # [linux]
+    - {{ cdt('libxau') }}  # [linux]
+    - {{ cdt('libuuid') }}  # [linux]
+    - {{ cdt('libxext') }}  # [linux]
+    - {{ cdt('libxfixes') }}  # [linux]
+    - {{ cdt('libxxf86vm') }}  # [linux]
+    - {{ cdt('libxdamage') }}  # [linux]
+    - {{ cdt('libselinux') }}  # [linux]
+    - {{ cdt('libsm-devel') }}  # [linux]
+    - {{ cdt('libice-devel') }}  # [linux]
+    - {{ cdt('libx11-devel') }}  # [linux]
+    - {{ cdt('mesa-libgl-devel') }}  # [linux]
+    - {{ cdt('mesa-dri-drivers') }}  # [linux]
+    - {{ cdt('xorg-x11-proto-devel') }}  # [linux]
     - {{ cdt('mesa-libegl-devel') }}  # [build_variant == "egl"]
-    - {{ cdt('mesa-libgbm') }}  # [build_variant == "egl"]
+    - {{ cdt('mesa-libgbm') }}  # [build_variant != "qt"]
 
   host:
     - python
@@ -85,7 +85,7 @@ requirements:
     - eigen
     - double-conversion
     - pugixml
-    - glew  # [build_variant != "egl"]
+    - glew  # [build_variant == "qt"]
     - libogg
     - libtheora
     - proj
@@ -117,7 +117,7 @@ requirements:
     - eigen
     - double-conversion
     - pugixml
-    - glew  # [build_variant != "egl"]
+    - glew  # [build_variant == "qt"]
     - libogg
     - libtheora
     - proj

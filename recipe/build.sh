@@ -16,6 +16,7 @@ if [[ "$build_variant" == "osmesa" ]]; then
         "-DOSMESA_INCLUDE_DIR:PATH=${PREFIX}/include"
         "-DOSMESA_LIBRARY:FILEPATH=${PREFIX}/lib/libOSMesa32${SHLIB_EXT}"
         "-DOPENGL_opengl_LIBRARY:FILEPATH=${BUILD_PREFIX}/${HOST}/sysroot/usr/lib64/libGL.so"
+        "-DVTK_MODULE_USE_EXTERNAL_VTK_glew:BOOL=OFF"
     )
 
     if [[ "${target_platform}" == linux-* ]]; then
