@@ -1,17 +1,19 @@
-MACOSX_DEPLOYMENT_TARGET:
-- '11.0'
 VTK_WITH_OSMESA:
 - 'False'
 boost_cpp:
 - 1.74.0
+cdt_name:
+- cos7
 channel_sources:
 - conda-forge
 channel_targets:
 - conda-forge main
 cxx_compiler:
-- clangxx
+- gxx
 cxx_compiler_version:
-- '11'
+- '9'
+docker_image:
+- quay.io/condaforge/linux-anvil-cos7-x86_64
 expat:
 - '2'
 ffmpeg:
@@ -36,8 +38,6 @@ libxml2:
 - '2.9'
 lz4_c:
 - 1.9.3
-macos_machine:
-- arm64-apple-darwin20.0.0
 pin_run_as_build:
   boost-cpp:
     max_pin: x.x.x
@@ -62,8 +62,6 @@ pin_run_as_build:
     max_pin: x.x
   sqlite:
     max_pin: x
-  tk:
-    max_pin: x.x
   vtk:
     max_pin: x.x.x
   zlib:
@@ -71,17 +69,15 @@ pin_run_as_build:
 proj:
 - 8.2.0
 python:
-- 3.10.* *_cpython
+- 3.9.* *_cpython
 sqlite:
 - '3'
 target_platform:
-- osx-arm64
+- linux-ppc64le
 tbb:
-- '2020'
+- '2021'
 tbb_devel:
-- '2020'
-tk:
-- '8.6'
+- '2021'
 vtk:
 - 9.0.1
 zlib:

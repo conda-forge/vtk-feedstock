@@ -1,13 +1,9 @@
-BUILD:
-- aarch64-conda_cos7-linux-gnu
 VTK_WITH_OSMESA:
 - 'False'
 boost_cpp:
 - 1.74.0
-cdt_arch:
-- aarch64
 cdt_name:
-- cos7
+- cos6
 channel_sources:
 - conda-forge
 channel_targets:
@@ -17,7 +13,7 @@ cxx_compiler:
 cxx_compiler_version:
 - '9'
 docker_image:
-- quay.io/condaforge/linux-anvil-comp7
+- quay.io/condaforge/linux-anvil-cos7-x86_64
 expat:
 - '2'
 ffmpeg:
@@ -77,13 +73,13 @@ pin_run_as_build:
 proj:
 - 8.2.0
 python:
-- 3.9.* *_cpython
+- 3.8.* *_cpython
 qt:
 - '5.12'
 sqlite:
 - '3'
 target_platform:
-- linux-aarch64
+- linux-64
 tbb:
 - '2021'
 tbb_devel:

@@ -3,7 +3,7 @@ VTK_WITH_OSMESA:
 boost_cpp:
 - 1.74.0
 cdt_name:
-- cos6
+- cos7
 channel_sources:
 - conda-forge
 channel_targets:
@@ -13,7 +13,7 @@ cxx_compiler:
 cxx_compiler_version:
 - '9'
 docker_image:
-- quay.io/condaforge/linux-anvil-comp7
+- quay.io/condaforge/linux-anvil-cos7-x86_64
 expat:
 - '2'
 ffmpeg:
@@ -60,12 +60,8 @@ pin_run_as_build:
   python:
     min_pin: x.x
     max_pin: x.x
-  qt:
-    max_pin: x.x
   sqlite:
     max_pin: x
-  tk:
-    max_pin: x.x
   vtk:
     max_pin: x.x.x
   zlib:
@@ -73,23 +69,16 @@ pin_run_as_build:
 proj:
 - 8.2.0
 python:
-- 3.8.* *_cpython
-qt:
-- '5.12'
+- 3.7.* *_cpython
 sqlite:
 - '3'
 target_platform:
-- linux-64
+- linux-ppc64le
 tbb:
 - '2021'
 tbb_devel:
 - '2021'
-tk:
-- '8.6'
 vtk:
 - 9.0.1
-zip_keys:
-- - cdt_name
-  - docker_image
 zlib:
 - '1.2'
