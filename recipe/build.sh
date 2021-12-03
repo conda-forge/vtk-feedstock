@@ -10,11 +10,14 @@ PYTHON_MAJOR_VERSION=${PY_VER%%.*}
 VTK_ARGS=()
 
 if [[ "$build_variant" == "osmesa" ]]; then
+    if [ -f "$PREFIX/lib/libOSMesa32${SHLIB_EXT}" ]; then
+        OSMESA_VERSION="32"
+    fi
     VTK_ARGS+=(
         "-DVTK_DEFAULT_RENDER_WINDOW_OFFSCREEN:BOOL=ON"
         "-DVTK_OPENGL_HAS_OSMESA:BOOL=ON"
         "-DOSMESA_INCLUDE_DIR:PATH=${PREFIX}/include"
-        "-DOSMESA_LIBRARY:FILEPATH=${PREFIX}/lib/libOSMesa32${SHLIB_EXT}"
+        "-DOSMESA_LIBRARY:FILEPATH=${PREFIX}/lib/libOSMesa${OSMESA_VERSION}${SHLIB_EXT}"
         "-DOPENGL_opengl_LIBRARY:FILEPATH=${BUILD_PREFIX}/${HOST}/sysroot/usr/lib64/libGL.so"
         "-DVTK_MODULE_USE_EXTERNAL_VTK_glew:BOOL=OFF"
     )
