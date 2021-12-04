@@ -57,7 +57,7 @@ requirements:
     - {{ cdt('mesa-dri-drivers') }}  # [linux]
     - {{ cdt('xorg-x11-proto-devel') }}  # [linux]
     - {{ cdt('mesa-libegl-devel') }}  # [build_variant == "egl"]
-    - {{ cdt('mesa-libgbm') }}  # [build_variant != "qt"]
+    - {{ cdt('mesa-libgbm') }}  # [build_variant == "egl"]
 
   host:
     - python
