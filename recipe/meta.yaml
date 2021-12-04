@@ -132,6 +132,8 @@ requirements:
     - paraview ==9999999999
 
 test:
+  requires:
+    - {{ cdt('mesa-libgl-devel') }}  # [linux]
   imports:
     - vtk
     - vtk.vtkChartsCore
