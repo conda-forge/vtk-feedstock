@@ -351,6 +351,7 @@ Feedstock Maintainers
 =====================
 
 * [@Maxyme](https://github.com/Maxyme/)
+* [@basnijholt](https://github.com/basnijholt/)
 * [@ccordoba12](https://github.com/ccordoba12/)
 * [@dfroger](https://github.com/dfroger/)
 * [@downiec](https://github.com/downiec/)
