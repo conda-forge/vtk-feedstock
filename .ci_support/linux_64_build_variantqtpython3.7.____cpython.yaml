@@ -1,7 +1,7 @@
-VTK_WITH_OSMESA:
-- 'False'
 boost_cpp:
 - 1.74.0
+build_variant:
+- qt
 cdt_name:
 - cos6
 channel_sources:
@@ -13,11 +13,15 @@ cxx_compiler:
 cxx_compiler_version:
 - '9'
 docker_image:
-- quay.io/condaforge/linux-anvil-comp7
+- quay.io/condaforge/linux-anvil-cos7-x86_64
 expat:
 - '2'
 ffmpeg:
 - '4.3'
+fortran_compiler:
+- gfortran
+fortran_compiler_version:
+- '9'
 freetype:
 - '2'
 glew:
@@ -73,7 +77,7 @@ pin_run_as_build:
 proj:
 - 8.2.0
 python:
-- 3.10.* *_cpython
+- 3.7.* *_cpython
 qt:
 - '5.12'
 sqlite:
@@ -81,15 +85,15 @@ sqlite:
 target_platform:
 - linux-64
 tbb:
-- '2020'
+- '2021'
 tbb_devel:
-- '2020'
+- '2021'
 tk:
 - '8.6'
 vtk:
 - 9.0.1
 zip_keys:
-- - cdt_name
-  - docker_image
+- - cxx_compiler_version
+  - fortran_compiler_version
 zlib:
 - '1.2'

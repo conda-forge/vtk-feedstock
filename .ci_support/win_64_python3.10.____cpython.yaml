@@ -1,7 +1,7 @@
-VTK_WITH_OSMESA:
-- 'False'
 boost_cpp:
 - 1.74.0
+build_variant:
+- qt
 channel_sources:
 - conda-forge
 channel_targets:
@@ -73,9 +73,9 @@ sqlite:
 target_platform:
 - win-64
 tbb:
-- '2020'
+- '2021'
 tbb_devel:
-- '2020'
+- '2021'
 vtk:
 - 9.0.1
 zlib:

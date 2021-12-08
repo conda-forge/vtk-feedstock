@@ -1,7 +1,7 @@
-VTK_WITH_OSMESA:
-- 'False'
 boost_cpp:
 - 1.74.0
+build_variant:
+- qt
 cdt_name:
 - cos7
 channel_sources:
@@ -13,7 +13,7 @@ cxx_compiler:
 cxx_compiler_version:
 - '9'
 docker_image:
-- quay.io/condaforge/linux-anvil-comp7
+- quay.io/condaforge/linux-anvil-cos7-x86_64
 expat:
 - '2'
 ffmpeg:

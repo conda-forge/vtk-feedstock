@@ -9,12 +9,17 @@ PYTHON_MAJOR_VERSION=${PY_VER%%.*}
 
 VTK_ARGS=()
 
-if [ -f "$PREFIX/lib/libOSMesa32${SHLIB_EXT}" ]; then
+if [[ "$build_variant" == "osmesa" ]]; then
+    if [ -f "$PREFIX/lib/libOSMesa32${SHLIB_EXT}" ]; then
+        OSMESA_VERSION="32"
+    fi
     VTK_ARGS+=(
         "-DVTK_DEFAULT_RENDER_WINDOW_OFFSCREEN:BOOL=ON"
         "-DVTK_OPENGL_HAS_OSMESA:BOOL=ON"
         "-DOSMESA_INCLUDE_DIR:PATH=${PREFIX}/include"
-        "-DOSMESA_LIBRARY:FILEPATH=${PREFIX}/lib/libOSMesa32${SHLIB_EXT}"
+        "-DOSMESA_LIBRARY:FILEPATH=${PREFIX}/lib/libOSMesa${OSMESA_VERSION}${SHLIB_EXT}"
+        "-DOPENGL_opengl_LIBRARY:FILEPATH=${BUILD_PREFIX}/${HOST}/sysroot/usr/lib64/libGL.so"
+        "-DVTK_MODULE_USE_EXTERNAL_VTK_glew:BOOL=OFF"
     )
 
     if [[ "${target_platform}" == linux-* ]]; then
@@ -27,7 +32,18 @@ if [ -f "$PREFIX/lib/libOSMesa32${SHLIB_EXT}" ]; then
             "-DCMAKE_OSX_SYSROOT:PATH=${CONDA_BUILD_SYSROOT}"
         )
     fi
-else
+elif [[ "$build_variant" == "egl" ]]; then
+    VTK_ARGS+=(
+        "-DVTK_USE_X:BOOL=OFF"
+        "-DVTK_OPENGL_HAS_EGL:BOOL=ON"
+        "-DVTK_MODULE_USE_EXTERNAL_VTK_glew:BOOL=OFF"
+        "-DEGL_INCLUDE_DIR:PATH=${BUILD_PREFIX}/${HOST}/sysroot/usr/include"
+        "-DEGL_LIBRARY:FILEPATH=${BUILD_PREFIX}/${HOST}/sysroot/usr/lib/libEGL.so.1"
+        "-DOPENGL_egl_LIBRARY:FILEPATH=${BUILD_PREFIX}/${HOST}/sysroot/usr/lib/libEGL.so.1"
+        "-DEGL_opengl_LIBRARY:FILEPATH=${BUILD_PREFIX}/${HOST}/sysroot/usr/lib64/libGL.so"
+        "-DOPENGL_opengl_LIBRARY:FILEPATH=${BUILD_PREFIX}/${HOST}/sysroot/usr/lib64/libGL.so"
+    )
+elif [[ "$build_variant" == "qt" ]]; then
     TCLTK_VERSION=`echo 'puts $tcl_version;exit 0' | tclsh`
 
     VTK_ARGS+=(
@@ -51,7 +67,9 @@ else
     fi
 fi
 
-if [[ "$target_platform" != "linux-ppc64le" && "$target_platform" != "osx-arm64" ]]; then
+if [[ "$target_platform" != "linux-ppc64le"
+        && "$target_platform" != "osx-arm64"
+        && "$build_variant" == "qt" ]]; then
     VTK_ARGS+=(
         "-DVTK_MODULE_ENABLE_VTK_GUISupportQt:STRING=YES"
         "-DVTK_MODULE_ENABLE_VTK_RenderingQt:STRING=YES"

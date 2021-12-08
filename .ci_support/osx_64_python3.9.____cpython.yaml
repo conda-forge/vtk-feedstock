@@ -1,9 +1,9 @@
 MACOSX_DEPLOYMENT_TARGET:
 - '10.9'
-VTK_WITH_OSMESA:
-- 'False'
 boost_cpp:
 - 1.74.0
+build_variant:
+- qt
 channel_sources:
 - conda-forge
 channel_targets:
