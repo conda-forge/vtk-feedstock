@@ -13,6 +13,9 @@ package:
 source:
   url: http://www.vtk.org/files/release/{{ minor_version }}/VTK-{{ version }}.tar.gz
   sha256: 1b39a5e191c282861e7af4101eaa8585969a2de05f5646c9199a161213a622c7
+  patches:
+    - 3edc0de2b04ae1e100c229e592d6b9fa94f2915a.patch
+    - 64265c5fd1a8e26a6a81241284dea6b3272f6db6.patch
 
 build:
   number: {{ build }}
