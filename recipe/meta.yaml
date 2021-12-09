@@ -31,9 +31,6 @@ build:
     - vtk-egl  # [build_variant == "egl"]
     - vtk-osmesa  # [build_variant == "osmesa"]
 
-  features:
-    - mesalib  # [build_variant == "osmesa"]
-
 requirements:
   build:
     - {{ compiler("cxx") }}
