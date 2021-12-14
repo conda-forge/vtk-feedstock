@@ -21,7 +21,7 @@ freetype:
 glew:
 - '2.1'
 hdf5:
-- 1.12.1
+- 1.10.6
 jpeg:
 - '9'
 jsoncpp:
@@ -71,7 +71,7 @@ pin_run_as_build:
   zlib:
     max_pin: x.x
 proj:
-- 8.2.0
+- 7.2.0
 python:
 - 3.8.* *_cpython
 qt:
@@ -81,9 +81,9 @@ sqlite:
 target_platform:
 - osx-64
 tbb:
-- '2021'
+- '2020'
 tbb_devel:
-- '2021'
+- '2020'
 tk:
 - '8.6'
 vtk:

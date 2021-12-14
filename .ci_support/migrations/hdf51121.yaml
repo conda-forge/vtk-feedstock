@@ -3,5 +3,5 @@ __migrator:
   kind: version
   migration_number: 1
 hdf5:
-- 1.12.1
+- 1.10.6
 migrator_ts: 1625881538.220744
