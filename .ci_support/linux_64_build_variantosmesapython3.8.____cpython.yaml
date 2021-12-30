@@ -3,7 +3,7 @@ boost_cpp:
 build_variant:
 - osmesa
 cdt_name:
-- cos6
+- cos7
 channel_sources:
 - conda-forge
 channel_targets:
@@ -31,7 +31,7 @@ hdf5:
 jpeg:
 - '9'
 jsoncpp:
-- 1.9.4
+- 1.9.5
 libnetcdf:
 - 4.8.1
 libpng:

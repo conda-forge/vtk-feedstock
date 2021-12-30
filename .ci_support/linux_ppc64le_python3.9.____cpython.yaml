@@ -27,7 +27,7 @@ hdf5:
 jpeg:
 - '9'
 jsoncpp:
-- 1.9.4
+- 1.9.5
 libnetcdf:
 - 4.8.1
 libpng:
