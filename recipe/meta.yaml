@@ -59,7 +59,6 @@ requirements:
     - {{ cdt('xorg-x11-proto-devel') }}  # [linux and build_variant != "osmesa"]
     - {{ cdt('mesa-libegl-devel') }}  # [build_variant == "egl"]
     - {{ cdt('mesa-libgbm') }}  # [build_variant == "egl"]
-    - {{ cdt('pcre') }}  # [build_variant == "egl"]
 
   host:
     - python
