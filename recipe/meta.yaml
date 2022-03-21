@@ -1,5 +1,5 @@
 {% set version = "9.1.0" %}
-{% set build = 5 %}
+{% set build = 6 %}
 
 {% set minor_version = ".".join(version.split(".")[:2]) %}
 
@@ -57,6 +57,7 @@ requirements:
     - {{ cdt('mesa-libgl-devel') }}  # [linux and build_variant != "osmesa"]
     - {{ cdt('mesa-dri-drivers') }}  # [linux and build_variant != "osmesa"]
     - {{ cdt('xorg-x11-proto-devel') }}  # [linux and build_variant != "osmesa"]
+    - {{ cdt('libglvnd-egl') }}  # [build_variant == "egl" and cdt_name == "cos7"]
     - {{ cdt('mesa-libegl-devel') }}  # [build_variant == "egl"]
     - {{ cdt('mesa-libgbm') }}  # [build_variant == "egl"]
 
