@@ -21,7 +21,7 @@ docker_image:
 expat:
 - '2'
 ffmpeg:
-- '4.3'
+- '4.4'
 freetype:
 - '2'
 glew:
