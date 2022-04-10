@@ -17,7 +17,7 @@ docker_image:
 expat:
 - '2'
 ffmpeg:
-- '4.4'
+- '5'
 fortran_compiler:
 - gfortran
 fortran_compiler_version:
