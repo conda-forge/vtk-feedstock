@@ -1,5 +1,5 @@
 {% set version = "9.1.0" %}
-{% set build = 8 %}
+{% set build = 9 %}
 
 {% set minor_version = ".".join(version.split(".")[:2]) %}
 
@@ -23,7 +23,7 @@ build:
   # mesalib, but it could also be selected via the build string:
   # `vtk * osmesa*` for osmesa
   # `vtk * egl*` for egl
-  # `vtk * qt*` for qt
+  # `vtk * qt-main*` for qt-main
 
   string: {{ build_variant }}_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ build }}
 
@@ -95,7 +95,7 @@ requirements:
     - sqlite
     - gl2ps
     - pugixml
-    - qt  # [not ppc64le and not arm64 and (build_variant == "qt")]
+    - qt-main  # [not ppc64le and not arm64 and (build_variant == "qt")]
 
   run:
     - python
