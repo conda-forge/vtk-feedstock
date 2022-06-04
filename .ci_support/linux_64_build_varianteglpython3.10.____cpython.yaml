@@ -62,8 +62,6 @@ pin_run_as_build:
   python:
     min_pin: x.x
     max_pin: x.x
-  qt:
-    max_pin: x.x
   sqlite:
     max_pin: x
   tk:
@@ -76,8 +74,8 @@ proj:
 - 9.0.0
 python:
 - 3.10.* *_cpython
-qt:
-- '5.12'
+qt_main:
+- '5.15'
 sqlite:
 - '3'
 target_platform:
