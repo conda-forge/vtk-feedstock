@@ -16,8 +16,16 @@ jobs:
         CONFIG: linux_64_build_varianteglpython3.7.____cpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
+      linux_64_build_varianteglpython3.8.____73_pypy:
+        CONFIG: linux_64_build_varianteglpython3.8.____73_pypy
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
       linux_64_build_varianteglpython3.8.____cpython:
         CONFIG: linux_64_build_varianteglpython3.8.____cpython
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
+      linux_64_build_varianteglpython3.9.____73_pypy:
+        CONFIG: linux_64_build_varianteglpython3.9.____73_pypy
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
       linux_64_build_varianteglpython3.9.____cpython:
@@ -32,8 +40,16 @@ jobs:
         CONFIG: linux_64_build_variantosmesapython3.7.____cpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
+      linux_64_build_variantosmesapython3.8.____73_pypy:
+        CONFIG: linux_64_build_variantosmesapython3.8.____73_pypy
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
       linux_64_build_variantosmesapython3.8.____cpython:
         CONFIG: linux_64_build_variantosmesapython3.8.____cpython
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
+      linux_64_build_variantosmesapython3.9.____73_pypy:
+        CONFIG: linux_64_build_variantosmesapython3.9.____73_pypy
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
       linux_64_build_variantosmesapython3.9.____cpython:
@@ -48,8 +64,16 @@ jobs:
         CONFIG: linux_64_build_variantqtpython3.7.____cpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
+      linux_64_build_variantqtpython3.8.____73_pypy:
+        CONFIG: linux_64_build_variantqtpython3.8.____73_pypy
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
       linux_64_build_variantqtpython3.8.____cpython:
         CONFIG: linux_64_build_variantqtpython3.8.____cpython
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
+      linux_64_build_variantqtpython3.9.____73_pypy:
+        CONFIG: linux_64_build_variantqtpython3.9.____73_pypy
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
       linux_64_build_variantqtpython3.9.____cpython:
@@ -64,8 +88,16 @@ jobs:
         CONFIG: linux_aarch64_python3.7.____cpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
+      linux_aarch64_python3.8.____73_pypy:
+        CONFIG: linux_aarch64_python3.8.____73_pypy
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
       linux_aarch64_python3.8.____cpython:
         CONFIG: linux_aarch64_python3.8.____cpython
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
+      linux_aarch64_python3.9.____73_pypy:
+        CONFIG: linux_aarch64_python3.9.____73_pypy
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
       linux_aarch64_python3.9.____cpython:
@@ -80,8 +112,16 @@ jobs:
         CONFIG: linux_ppc64le_python3.7.____cpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
+      linux_ppc64le_python3.8.____73_pypy:
+        CONFIG: linux_ppc64le_python3.8.____73_pypy
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
       linux_ppc64le_python3.8.____cpython:
         CONFIG: linux_ppc64le_python3.8.____cpython
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
+      linux_ppc64le_python3.9.____73_pypy:
+        CONFIG: linux_ppc64le_python3.9.____73_pypy
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
       linux_ppc64le_python3.9.____cpython:
