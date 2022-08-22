@@ -142,6 +142,7 @@ test:
     - vtk.vtkFiltersGeneric
     - vtk.vtkGeovisCore
     - vtk.vtkFiltersHybrid
+    - vtk.vtkFiltersParallelDIY2
     - vtk.vtkIOCore
     - vtk.vtkImagingCore
     - vtk.vtkInfovisCore
