@@ -1,5 +1,5 @@
 {% set version = "9.1.0" %}
-{% set build = 13 %}
+{% set build = 14 %}
 
 {% set minor_version = ".".join(version.split(".")[:2]) %}
 
@@ -142,6 +142,7 @@ test:
     - vtk.vtkFiltersGeneric
     - vtk.vtkGeovisCore
     - vtk.vtkFiltersHybrid
+    - vtk.vtkFiltersParallelDIY2
     - vtk.vtkIOCore
     - vtk.vtkImagingCore
     - vtk.vtkInfovisCore
@@ -158,6 +159,7 @@ test:
     - vtkmodules.vtkFiltersGeneric
     - vtkmodules.vtkGeovisCore
     - vtkmodules.vtkFiltersHybrid
+    - vtkmodules.vtkFiltersParallelDIY2
     - vtkmodules.vtkIOCore
     - vtkmodules.vtkImagingCore
     - vtkmodules.vtkInfovisCore
