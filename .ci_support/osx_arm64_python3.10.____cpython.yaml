@@ -11,7 +11,7 @@ channel_targets:
 cxx_compiler:
 - clangxx
 cxx_compiler_version:
-- '13'
+- '14'
 expat:
 - '2'
 ffmpeg:
@@ -70,6 +70,8 @@ proj:
 - 9.0.1
 python:
 - 3.10.* *_cpython
+qt_main:
+- '5.15'
 sqlite:
 - '3'
 target_platform:

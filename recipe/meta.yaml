@@ -1,5 +1,5 @@
 {% set version = "9.1.0" %}
-{% set build = 12 %}
+{% set build = 13 %}
 
 {% set minor_version = ".".join(version.split(".")[:2]) %}
 
@@ -95,7 +95,7 @@ requirements:
     - sqlite
     - gl2ps
     - pugixml
-    - qt-main  # [not ppc64le and not arm64 and (build_variant == "qt")]
+    - qt-main  # [not ppc64le and (build_variant == "qt")]
 
   run:
     - python
