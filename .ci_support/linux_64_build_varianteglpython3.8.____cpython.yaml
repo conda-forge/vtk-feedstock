@@ -1,5 +1,5 @@
 boost_cpp:
-- 1.74.0
+- 1.78.0
 build_variant:
 - egl
 cdt_name:
