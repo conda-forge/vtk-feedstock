@@ -167,6 +167,9 @@ test:
     - vtkmodules.vtkViewsCore
     - vtkmodules.vtkRenderingVolume
     - vtkmodules.vtkInteractionWidgets
+    - vtkmodules.vtkWebCore
+    - vtkmodules.web
+    - vtkmodules.web.utils
 
   requires:
     - pip
