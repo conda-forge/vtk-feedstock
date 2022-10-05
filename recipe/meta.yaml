@@ -90,6 +90,7 @@ requirements:
     - glew  # [build_variant == "qt"]
     - libogg
     - libtheora
+    - nlohmann_json
     - proj
     - loguru
     - sqlite
@@ -122,6 +123,7 @@ requirements:
     - glew  # [build_variant == "qt"]
     - libogg
     - libtheora
+    - nlohmann_json
     - proj
     - loguru
     - sqlite
