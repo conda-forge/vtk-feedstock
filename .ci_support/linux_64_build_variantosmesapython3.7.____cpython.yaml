@@ -45,30 +45,8 @@ lz4_c:
 pin_run_as_build:
   boost-cpp:
     max_pin: x.x.x
-  freetype:
-    max_pin: x
-  glew:
-    max_pin: x.x
-  jpeg:
-    max_pin: x
-  jsoncpp:
-    max_pin: x.x.x
-  libpng:
-    max_pin: x.x
-  libtiff:
-    max_pin: x
-  libxml2:
-    max_pin: x.x
   python:
     min_pin: x.x
-    max_pin: x.x
-  sqlite:
-    max_pin: x
-  tk:
-    max_pin: x.x
-  vtk:
-    max_pin: x.x.x
-  zlib:
     max_pin: x.x
 proj:
 - 9.0.1
