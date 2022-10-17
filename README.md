@@ -378,6 +378,7 @@ Feedstock Maintainers
 =====================
 
 * [@Maxyme](https://github.com/Maxyme/)
+* [@Tobias-Fischer](https://github.com/Tobias-Fischer/)
 * [@basnijholt](https://github.com/basnijholt/)
 * [@ccordoba12](https://github.com/ccordoba12/)
 * [@dfroger](https://github.com/dfroger/)
