@@ -1,5 +1,5 @@
-{% set version = "9.1.0" %}
-{% set build = 16 %}
+{% set version = "9.2.2" %}
+{% set build = 1 %}
 
 {% set minor_version = ".".join(version.split(".")[:2]) %}
 
@@ -12,7 +12,7 @@ package:
 
 source:
   url: http://www.vtk.org/files/release/{{ minor_version }}/VTK-{{ version }}.tar.gz
-  sha256: 8fed42f4f8f1eb8083107b68eaa9ad71da07110161a3116ad807f43e5ca5ce96
+  sha256: 1c5b0a2be71fac96ff4831af69e350f7a0ea3168981f790c000709dcf9121075
 
 build:
   number: {{ build }}
@@ -90,6 +90,7 @@ requirements:
     - glew  # [build_variant == "qt"]
     - libogg
     - libtheora
+    - nlohmann_json
     - proj
     - loguru
     - sqlite
@@ -122,6 +123,7 @@ requirements:
     - glew  # [build_variant == "qt"]
     - libogg
     - libtheora
+    - nlohmann_json
     - proj
     - loguru
     - sqlite
@@ -202,3 +204,4 @@ extra:
     - jasonb5
     - matthiasdiener
     - basnijholt
+    - Tobias-Fischer
