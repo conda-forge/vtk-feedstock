@@ -130,6 +130,7 @@ requirements:
     - gl2ps
     - pugixml
     - tbb-devel
+    - numpy
 
   run_constrained:
     # Paraview bundles its own VTK that has conflicting Python vtkmodules
