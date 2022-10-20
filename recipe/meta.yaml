@@ -131,6 +131,7 @@ requirements:
     - pugixml
     - tbb-devel
     - numpy
+    - wslink
 
   run_constrained:
     # Paraview bundles its own VTK that has conflicting Python vtkmodules
