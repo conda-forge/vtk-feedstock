@@ -1,7 +1,7 @@
 boost_cpp:
 - 1.78.0
 build_variant:
-- egl
+- qt
 cdt_name:
 - cos7
 channel_sources:
@@ -18,10 +18,6 @@ expat:
 - '2'
 ffmpeg:
 - '5'
-fortran_compiler:
-- gfortran
-fortran_compiler_version:
-- '10'
 freetype:
 - '2'
 glew:
@@ -51,23 +47,16 @@ pin_run_as_build:
 proj:
 - 9.1.0
 python:
-- 3.7.* *_cpython
-qt_main:
-- '5.15'
+- 3.11.* *_cpython
 sqlite:
 - '3'
 target_platform:
-- linux-64
+- linux-ppc64le
 tbb:
 - '2021'
 tbb_devel:
 - '2021'
-tk:
-- '8.6'
 vtk:
 - 9.1.0
-zip_keys:
-- - cxx_compiler_version
-  - fortran_compiler_version
 zlib:
 - '1.2'
