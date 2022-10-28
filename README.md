@@ -395,7 +395,6 @@ Feedstock Maintainers
 * [@marcelotrevisani](https://github.com/marcelotrevisani/)
 * [@matthiasdiener](https://github.com/matthiasdiener/)
 * [@msarahan](https://github.com/msarahan/)
-* [@muryanto1](https://github.com/muryanto1/)
 * [@patricksnape](https://github.com/patricksnape/)
 * [@tadeu](https://github.com/tadeu/)
 
