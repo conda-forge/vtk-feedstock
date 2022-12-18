@@ -49,7 +49,7 @@ REM See https://setuptools.readthedocs.io/en/latest/pkg_resources.html#workingse
 
 set egg_info=%SP_DIR%\vtk-%PKG_VERSION%.egg-info
 echo>%egg_info% Metadata-Version: 2.1
-echo>>%egg_info% Version: $PKG_VERSION
+echo>>%egg_info% Version: %PKG_VERSION%
 echo>>%egg_info% Summary: VTK is an open-source toolkit for 3D computer graphics, image processing, and visualization
 echo>>%egg_info% Platform: UNKNOWN
 
