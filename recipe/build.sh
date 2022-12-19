@@ -125,6 +125,7 @@ cmake -LAH .. -G "Ninja" ${CMAKE_ARGS} \
     -DPython3_FIND_STRATEGY=LOCATION \
     -DPython3_ROOT_DIR=${PREFIX} \
     -DPython3_EXECUTABLE=${PREFIX}/bin/python \
+    -DVTK_BUILD_PYI_FILES:BOOL=ON \
     -DVTK_MODULE_ENABLE_VTK_PythonInterpreter:STRING=NO \
     -DVTK_MODULE_ENABLE_VTK_RenderingFreeType:STRING=YES \
     -DVTK_MODULE_ENABLE_VTK_RenderingMatplotlib:STRING=YES \
