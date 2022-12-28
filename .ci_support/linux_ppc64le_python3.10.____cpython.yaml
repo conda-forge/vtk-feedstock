@@ -11,7 +11,7 @@ channel_targets:
 cxx_compiler:
 - gxx
 cxx_compiler_version:
-- '10'
+- '11'
 docker_image:
 - quay.io/condaforge/linux-anvil-cos7-x86_64
 expat:
@@ -33,7 +33,7 @@ libnetcdf:
 libpng:
 - '1.6'
 libtiff:
-- '4'
+- '4.5'
 libxml2:
 - '2.10'
 lz4_c:
