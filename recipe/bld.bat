@@ -37,9 +37,7 @@ cmake .. -G "Ninja" ^
     -DVTK_MODULE_USE_EXTERNAL_VTK_cgns:BOOL=OFF ^
     -DVTK_MODULE_USE_EXTERNAL_VTK_ioss:BOOL=OFF ^
     -DVTK_MODULE_USE_EXTERNAL_VTK_verdict:BOOL=OFF ^
-    -DLZMA_LIBRARY="%LIBRARY_PREFIX%/lib/liblzma.lib" ^
-    -DCMAKE_USE_PTHREADS_INIT=OFF ^
-    -DCMAKE_USE_WIN32_THREADS_INIT=ON
+    -DLZMA_LIBRARY="%LIBRARY_PREFIX%/lib/liblzma.lib"
 if errorlevel 1 exit 1
 
 ninja install
