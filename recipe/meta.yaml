@@ -1,5 +1,5 @@
-{% set version = "9.2.2" %}
-{% set build = 5 %}
+{% set version = "9.2.5" %}
+{% set build = 0 %}
 
 {% set minor_version = ".".join(version.split(".")[:2]) %}
 
@@ -12,7 +12,7 @@ package:
 
 source:
   url: http://www.vtk.org/files/release/{{ minor_version }}/VTK-{{ version }}.tar.gz
-  sha256: 1c5b0a2be71fac96ff4831af69e350f7a0ea3168981f790c000709dcf9121075
+  sha256: 128d601baa980e98ee034207974b33fb38d2c98ab9cf4a5756efdb09ed6c0949
   patches:
     - fix-threads-windows.patch  # [win]
 
