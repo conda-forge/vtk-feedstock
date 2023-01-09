@@ -31,7 +31,7 @@ libnetcdf:
 libpng:
 - '1.6'
 libtiff:
-- '4.4'
+- '4.5'
 libxml2:
 - '2.10'
 lz4_c:
