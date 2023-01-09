@@ -1,0 +1,58 @@
+boost_cpp:
+- 1.78.0
+build_variant:
+- qt
+channel_sources:
+- conda-forge
+channel_targets:
+- conda-forge main
+cxx_compiler:
+- vs2019
+expat:
+- '2'
+ffmpeg:
+- '5'
+freetype:
+- '2'
+glew:
+- '2.1'
+hdf5:
+- 1.12.2
+jpeg:
+- '9'
+jsoncpp:
+- 1.9.5
+libnetcdf:
+- 4.8.1
+libpng:
+- '1.6'
+libtiff:
+- '4.4'
+libxml2:
+- '2.10'
+lz4_c:
+- 1.9.3
+pin_run_as_build:
+  boost-cpp:
+    max_pin: x.x.x
+  python:
+    min_pin: x.x
+    max_pin: x.x
+proj:
+- 9.1.0
+python:
+- 3.8.* *_73_pypy
+qt_main:
+- '5.15'
+sqlite:
+- '3'
+target_platform:
+- win-64
+tbb:
+- '2021'
+tbb_devel:
+- '2021'
+vtk:
+- 9.1.0
+zlib:
+- '1.2'
