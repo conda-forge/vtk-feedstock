@@ -27,7 +27,7 @@ build:
   # `vtk * egl*` for egl
   # `vtk * qt-main*` for qt-main
 
-  string: {{ build_variant }}_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ build }}
+  string: {{ build_variant }}_{{ ffmpeg }}_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ build }}
 
   track_features:
     - vtk-egl  # [build_variant == "egl"]
@@ -117,7 +117,7 @@ requirements:
     - lz4-c
     - xorg-libxt  # [linux]
     - tk  # [not win and (build_variant == "qt")]
-    - ffmpeg
+    - ffmpeg  # [ffmpeg != "noffmpeg"]
     - utfcpp
     - eigen
     - double-conversion

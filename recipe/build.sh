@@ -75,6 +75,12 @@ if [[ "$target_platform" != "linux-ppc64le"
     )
 fi
 
+if [[ "$ffmpeg" == "ffmpeg" ]]; then
+    VTK_ARGS+=(
+        "-DVTK_MODULE_ENABLE_VTK_IOFFMPEG:STRING=YES"
+    )
+fi
+
 if [[ "$CONDA_BUILD_CROSS_COMPILATION" == "1" ]]; then
   (
     mkdir build-native
@@ -134,7 +140,6 @@ cmake -LAH .. -G "Ninja" ${CMAKE_ARGS} \
     -DVTK_MODULE_ENABLE_VTK_RenderingFreeType:STRING=YES \
     -DVTK_MODULE_ENABLE_VTK_RenderingMatplotlib:STRING=YES \
     -DVTK_MODULE_ENABLE_VTK_FiltersParallelDIY2:STRING=YES \
-    -DVTK_MODULE_ENABLE_VTK_IOFFMPEG:STRING=YES \
     -DVTK_MODULE_ENABLE_VTK_IOXdmf2:STRING=YES \
     -DVTK_MODULE_ENABLE_VTK_IOXdmf3:STRING=YES \
     -DVTK_MODULE_ENABLE_VTK_ViewsCore:STRING=YES \
