@@ -1,10 +1,17 @@
 {% set version = "9.2.5" %}
-{% set build = 2 %}
+{% set build = 3 %}
 
 {% set minor_version = ".".join(version.split(".")[:2]) %}
 
 {% set build = build + 100 %}   # [build_variant == "osmesa"]
 {% set build = build + 200 %}   # [build_variant == "qt"]
+
+# Do not include ffmpeg in the build string if it is not used
+{% if ffmpeg == "ffmpeg" %}
+  {% set ffmpeg_str = "" %}
+{% else %}
+  {% set ffmpeg_str = "noffmpeg_" %}
+{% endif %}
 
 package:
   name: vtk
@@ -27,7 +34,7 @@ build:
   # `vtk * egl*` for egl
   # `vtk * qt-main*` for qt-main
 
-  string: {{ build_variant }}_{{ ffmpeg }}_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ build }}
+  string: {{ build_variant }}_{{ ffmpeg_str }}py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ build }}
 
   track_features:
     - vtk-egl  # [build_variant == "egl"]
@@ -84,7 +91,7 @@ requirements:
     - xorg-libxt  # [linux]
     - boost-cpp
     - tk  # [not win and (build_variant == "qt")]
-    - ffmpeg
+    - ffmpeg  # [ffmpeg != "noffmpeg"]
     - utfcpp
     - eigen
     - double-conversion

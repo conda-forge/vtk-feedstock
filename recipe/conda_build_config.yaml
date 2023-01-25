@@ -3,8 +3,8 @@ build_variant:
   - "osmesa"  # [linux64]
   - "egl"  # [linux64]
 ffmpeg:
-  - "ffmpeg"
-  - "noffmpeg"
+  - "ffmpeg"  # [not win]
+  - "noffmpeg"  # [not win]
 replacements:
   all_replacements:
     - tag: 'CMake build metadata'

@@ -79,6 +79,10 @@ if [[ "$ffmpeg" == "ffmpeg" ]]; then
     VTK_ARGS+=(
         "-DVTK_MODULE_ENABLE_VTK_IOFFMPEG:STRING=YES"
     )
+else
+    VTK_ARGS+=(
+        "-DVTK_MODULE_ENABLE_VTK_IOFFMPEG:STRING=NO"
+    )
 fi
 
 if [[ "$CONDA_BUILD_CROSS_COMPILATION" == "1" ]]; then
