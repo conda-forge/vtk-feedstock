@@ -168,7 +168,7 @@ jobs:
         CONFIG: linux_ppc64le_ffmpegnoffmpegpython3.9.____cpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-    maxParallel: 31
+    maxParallel: 33
   timeoutInMinutes: 360
 
   steps:

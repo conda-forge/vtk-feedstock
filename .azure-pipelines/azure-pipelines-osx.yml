@@ -56,7 +56,7 @@ jobs:
       osx_arm64_ffmpegnoffmpegpython3.9.____cpython:
         CONFIG: osx_arm64_ffmpegnoffmpegpython3.9.____cpython
         UPLOAD_PACKAGES: 'True'
-    maxParallel: 12
+    maxParallel: 13
   timeoutInMinutes: 360
 
   steps:

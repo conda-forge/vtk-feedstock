@@ -8,31 +8,19 @@ jobs:
     vmImage: windows-2019
   strategy:
     matrix:
-      win_64_ffmpeg5python3.10.____cpython:
-        CONFIG: win_64_ffmpeg5python3.10.____cpython
+      win_64_python3.10.____cpython:
+        CONFIG: win_64_python3.10.____cpython
         UPLOAD_PACKAGES: 'True'
-      win_64_ffmpeg5python3.11.____cpython:
-        CONFIG: win_64_ffmpeg5python3.11.____cpython
+      win_64_python3.11.____cpython:
+        CONFIG: win_64_python3.11.____cpython
         UPLOAD_PACKAGES: 'True'
-      win_64_ffmpeg5python3.8.____cpython:
-        CONFIG: win_64_ffmpeg5python3.8.____cpython
+      win_64_python3.8.____cpython:
+        CONFIG: win_64_python3.8.____cpython
         UPLOAD_PACKAGES: 'True'
-      win_64_ffmpeg5python3.9.____cpython:
-        CONFIG: win_64_ffmpeg5python3.9.____cpython
+      win_64_python3.9.____cpython:
+        CONFIG: win_64_python3.9.____cpython
         UPLOAD_PACKAGES: 'True'
-      win_64_ffmpegnoffmpegpython3.10.____cpython:
-        CONFIG: win_64_ffmpegnoffmpegpython3.10.____cpython
-        UPLOAD_PACKAGES: 'True'
-      win_64_ffmpegnoffmpegpython3.11.____cpython:
-        CONFIG: win_64_ffmpegnoffmpegpython3.11.____cpython
-        UPLOAD_PACKAGES: 'True'
-      win_64_ffmpegnoffmpegpython3.8.____cpython:
-        CONFIG: win_64_ffmpegnoffmpegpython3.8.____cpython
-        UPLOAD_PACKAGES: 'True'
-      win_64_ffmpegnoffmpegpython3.9.____cpython:
-        CONFIG: win_64_ffmpegnoffmpegpython3.9.____cpython
-        UPLOAD_PACKAGES: 'True'
-    maxParallel: 6
+    maxParallel: 3
   timeoutInMinutes: 360
   variables:
     CONDA_BLD_PATH: D:\\bld\\
