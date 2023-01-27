@@ -3,7 +3,7 @@ build_variant:
   - "osmesa"  # [linux64]
   - "egl"  # [linux64]
 ffmpeg:
-  - "ffmpeg"  # [not win]
+  - "ffmpeg"
   - "noffmpeg"  # [not win]
 replacements:
   all_replacements:
