@@ -6,13 +6,6 @@
 {% set build = build + 100 %}   # [build_variant == "osmesa"]
 {% set build = build + 200 %}   # [build_variant == "qt"]
 
-# Do not include ffmpeg in the build string if it is not used
-{% if ffmpeg == "ffmpeg" %}
-  {% set ffmpeg_str = "" %}
-{% else %}
-  {% set ffmpeg_str = "noffmpeg_" %}
-{% endif %}
-
 package:
   name: vtk
   version: {{ version }}
@@ -34,7 +27,9 @@ build:
   # `vtk * egl*` for egl
   # `vtk * qt-main*` for qt-main
 
-  string: {{ build_variant }}_{{ ffmpeg_str }}py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ build }}
+  # We not include "ffmpeg" in the build string if it is not used
+  string: {{ build_variant }}_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ build }}  # [ffmpeg == "ffmpeg"]
+  string: {{ build_variant }}_noffmpeg_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ build }}  # [ffmpeg == "noffmpeg"]
 
   track_features:
     - vtk-egl  # [build_variant == "egl"]
