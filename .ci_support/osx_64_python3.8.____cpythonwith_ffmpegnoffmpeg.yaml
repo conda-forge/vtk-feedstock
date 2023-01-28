@@ -1,3 +1,5 @@
+MACOSX_DEPLOYMENT_TARGET:
+- '10.9'
 boost_cpp:
 - 1.78.0
 build_variant:
@@ -7,7 +9,9 @@ channel_sources:
 channel_targets:
 - conda-forge main
 cxx_compiler:
-- vs2019
+- clangxx
+cxx_compiler_version:
+- '14'
 expat:
 - '2'
 ffmpeg:
@@ -32,6 +36,8 @@ libxml2:
 - '2.10'
 lz4_c:
 - 1.9.3
+macos_machine:
+- x86_64-apple-darwin13.4.0
 pin_run_as_build:
   boost-cpp:
     max_pin: x.x.x
@@ -47,14 +53,16 @@ qt_main:
 sqlite:
 - '3'
 target_platform:
-- win-64
+- osx-64
 tbb:
 - '2021'
 tbb_devel:
 - '2021'
+tk:
+- '8.6'
 vtk:
 - 9.2.2
 with_ffmpeg:
-- ffmpeg
+- noffmpeg
 zlib:
 - '1.2'

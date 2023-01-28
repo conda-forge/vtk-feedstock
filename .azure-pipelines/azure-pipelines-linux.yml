@@ -8,164 +8,164 @@ jobs:
     vmImage: ubuntu-latest
   strategy:
     matrix:
-      linux_64_build_varianteglffmpeg5python3.10.____cpython:
-        CONFIG: linux_64_build_varianteglffmpeg5python3.10.____cpython
+      linux_64_build_varianteglpython3.10.____cpythonwith_ffmpegffmpeg:
+        CONFIG: linux_64_build_varianteglpython3.10.____cpythonwith_ffmpegffmpeg
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_64_build_varianteglffmpeg5python3.11.____cpython:
-        CONFIG: linux_64_build_varianteglffmpeg5python3.11.____cpython
+      linux_64_build_varianteglpython3.10.____cpythonwith_ffmpegnoffmpeg:
+        CONFIG: linux_64_build_varianteglpython3.10.____cpythonwith_ffmpegnoffmpeg
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_64_build_varianteglffmpeg5python3.8.____cpython:
-        CONFIG: linux_64_build_varianteglffmpeg5python3.8.____cpython
+      linux_64_build_varianteglpython3.11.____cpythonwith_ffmpegffmpeg:
+        CONFIG: linux_64_build_varianteglpython3.11.____cpythonwith_ffmpegffmpeg
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_64_build_varianteglffmpeg5python3.9.____cpython:
-        CONFIG: linux_64_build_varianteglffmpeg5python3.9.____cpython
+      linux_64_build_varianteglpython3.11.____cpythonwith_ffmpegnoffmpeg:
+        CONFIG: linux_64_build_varianteglpython3.11.____cpythonwith_ffmpegnoffmpeg
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_64_build_varianteglffmpegnoffmpegpython3.10.____cpython:
-        CONFIG: linux_64_build_varianteglffmpegnoffmpegpython3.10.____cpython
+      linux_64_build_varianteglpython3.8.____cpythonwith_ffmpegffmpeg:
+        CONFIG: linux_64_build_varianteglpython3.8.____cpythonwith_ffmpegffmpeg
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_64_build_varianteglffmpegnoffmpegpython3.11.____cpython:
-        CONFIG: linux_64_build_varianteglffmpegnoffmpegpython3.11.____cpython
+      linux_64_build_varianteglpython3.8.____cpythonwith_ffmpegnoffmpeg:
+        CONFIG: linux_64_build_varianteglpython3.8.____cpythonwith_ffmpegnoffmpeg
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_64_build_varianteglffmpegnoffmpegpython3.8.____cpython:
-        CONFIG: linux_64_build_varianteglffmpegnoffmpegpython3.8.____cpython
+      linux_64_build_varianteglpython3.9.____cpythonwith_ffmpegffmpeg:
+        CONFIG: linux_64_build_varianteglpython3.9.____cpythonwith_ffmpegffmpeg
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_64_build_varianteglffmpegnoffmpegpython3.9.____cpython:
-        CONFIG: linux_64_build_varianteglffmpegnoffmpegpython3.9.____cpython
+      linux_64_build_varianteglpython3.9.____cpythonwith_ffmpegnoffmpeg:
+        CONFIG: linux_64_build_varianteglpython3.9.____cpythonwith_ffmpegnoffmpeg
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_64_build_variantosmesaffmpeg5python3.10.____cpython:
-        CONFIG: linux_64_build_variantosmesaffmpeg5python3.10.____cpython
+      linux_64_build_variantosmesapython3.10.____cpythonwith_ffmpegffmpeg:
+        CONFIG: linux_64_build_variantosmesapython3.10.____cpythonwith_ffmpegffmpeg
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_64_build_variantosmesaffmpeg5python3.11.____cpython:
-        CONFIG: linux_64_build_variantosmesaffmpeg5python3.11.____cpython
+      linux_64_build_variantosmesapython3.10.____cpythonwith_ffmpegnoffmpeg:
+        CONFIG: linux_64_build_variantosmesapython3.10.____cpythonwith_ffmpegnoffmpeg
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_64_build_variantosmesaffmpeg5python3.8.____cpython:
-        CONFIG: linux_64_build_variantosmesaffmpeg5python3.8.____cpython
+      linux_64_build_variantosmesapython3.11.____cpythonwith_ffmpegffmpeg:
+        CONFIG: linux_64_build_variantosmesapython3.11.____cpythonwith_ffmpegffmpeg
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_64_build_variantosmesaffmpeg5python3.9.____cpython:
-        CONFIG: linux_64_build_variantosmesaffmpeg5python3.9.____cpython
+      linux_64_build_variantosmesapython3.11.____cpythonwith_ffmpegnoffmpeg:
+        CONFIG: linux_64_build_variantosmesapython3.11.____cpythonwith_ffmpegnoffmpeg
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_64_build_variantosmesaffmpegnoffmpegpython3.10.____cpython:
-        CONFIG: linux_64_build_variantosmesaffmpegnoffmpegpython3.10.____cpython
+      linux_64_build_variantosmesapython3.8.____cpythonwith_ffmpegffmpeg:
+        CONFIG: linux_64_build_variantosmesapython3.8.____cpythonwith_ffmpegffmpeg
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_64_build_variantosmesaffmpegnoffmpegpython3.11.____cpython:
-        CONFIG: linux_64_build_variantosmesaffmpegnoffmpegpython3.11.____cpython
+      linux_64_build_variantosmesapython3.8.____cpythonwith_ffmpegnoffmpeg:
+        CONFIG: linux_64_build_variantosmesapython3.8.____cpythonwith_ffmpegnoffmpeg
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_64_build_variantosmesaffmpegnoffmpegpython3.8.____cpython:
-        CONFIG: linux_64_build_variantosmesaffmpegnoffmpegpython3.8.____cpython
+      linux_64_build_variantosmesapython3.9.____cpythonwith_ffmpegffmpeg:
+        CONFIG: linux_64_build_variantosmesapython3.9.____cpythonwith_ffmpegffmpeg
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_64_build_variantosmesaffmpegnoffmpegpython3.9.____cpython:
-        CONFIG: linux_64_build_variantosmesaffmpegnoffmpegpython3.9.____cpython
+      linux_64_build_variantosmesapython3.9.____cpythonwith_ffmpegnoffmpeg:
+        CONFIG: linux_64_build_variantosmesapython3.9.____cpythonwith_ffmpegnoffmpeg
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_64_build_variantqtffmpeg5python3.10.____cpython:
-        CONFIG: linux_64_build_variantqtffmpeg5python3.10.____cpython
+      linux_64_build_variantqtpython3.10.____cpythonwith_ffmpegffmpeg:
+        CONFIG: linux_64_build_variantqtpython3.10.____cpythonwith_ffmpegffmpeg
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_64_build_variantqtffmpeg5python3.11.____cpython:
-        CONFIG: linux_64_build_variantqtffmpeg5python3.11.____cpython
+      linux_64_build_variantqtpython3.10.____cpythonwith_ffmpegnoffmpeg:
+        CONFIG: linux_64_build_variantqtpython3.10.____cpythonwith_ffmpegnoffmpeg
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_64_build_variantqtffmpeg5python3.8.____cpython:
-        CONFIG: linux_64_build_variantqtffmpeg5python3.8.____cpython
+      linux_64_build_variantqtpython3.11.____cpythonwith_ffmpegffmpeg:
+        CONFIG: linux_64_build_variantqtpython3.11.____cpythonwith_ffmpegffmpeg
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_64_build_variantqtffmpeg5python3.9.____cpython:
-        CONFIG: linux_64_build_variantqtffmpeg5python3.9.____cpython
+      linux_64_build_variantqtpython3.11.____cpythonwith_ffmpegnoffmpeg:
+        CONFIG: linux_64_build_variantqtpython3.11.____cpythonwith_ffmpegnoffmpeg
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_64_build_variantqtffmpegnoffmpegpython3.10.____cpython:
-        CONFIG: linux_64_build_variantqtffmpegnoffmpegpython3.10.____cpython
+      linux_64_build_variantqtpython3.8.____cpythonwith_ffmpegffmpeg:
+        CONFIG: linux_64_build_variantqtpython3.8.____cpythonwith_ffmpegffmpeg
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_64_build_variantqtffmpegnoffmpegpython3.11.____cpython:
-        CONFIG: linux_64_build_variantqtffmpegnoffmpegpython3.11.____cpython
+      linux_64_build_variantqtpython3.8.____cpythonwith_ffmpegnoffmpeg:
+        CONFIG: linux_64_build_variantqtpython3.8.____cpythonwith_ffmpegnoffmpeg
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_64_build_variantqtffmpegnoffmpegpython3.8.____cpython:
-        CONFIG: linux_64_build_variantqtffmpegnoffmpegpython3.8.____cpython
+      linux_64_build_variantqtpython3.9.____cpythonwith_ffmpegffmpeg:
+        CONFIG: linux_64_build_variantqtpython3.9.____cpythonwith_ffmpegffmpeg
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_64_build_variantqtffmpegnoffmpegpython3.9.____cpython:
-        CONFIG: linux_64_build_variantqtffmpegnoffmpegpython3.9.____cpython
+      linux_64_build_variantqtpython3.9.____cpythonwith_ffmpegnoffmpeg:
+        CONFIG: linux_64_build_variantqtpython3.9.____cpythonwith_ffmpegnoffmpeg
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_aarch64_ffmpeg5python3.10.____cpython:
-        CONFIG: linux_aarch64_ffmpeg5python3.10.____cpython
+      linux_aarch64_python3.10.____cpythonwith_ffmpegffmpeg:
+        CONFIG: linux_aarch64_python3.10.____cpythonwith_ffmpegffmpeg
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_aarch64_ffmpeg5python3.11.____cpython:
-        CONFIG: linux_aarch64_ffmpeg5python3.11.____cpython
+      linux_aarch64_python3.10.____cpythonwith_ffmpegnoffmpeg:
+        CONFIG: linux_aarch64_python3.10.____cpythonwith_ffmpegnoffmpeg
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_aarch64_ffmpeg5python3.8.____cpython:
-        CONFIG: linux_aarch64_ffmpeg5python3.8.____cpython
+      linux_aarch64_python3.11.____cpythonwith_ffmpegffmpeg:
+        CONFIG: linux_aarch64_python3.11.____cpythonwith_ffmpegffmpeg
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_aarch64_ffmpeg5python3.9.____cpython:
-        CONFIG: linux_aarch64_ffmpeg5python3.9.____cpython
+      linux_aarch64_python3.11.____cpythonwith_ffmpegnoffmpeg:
+        CONFIG: linux_aarch64_python3.11.____cpythonwith_ffmpegnoffmpeg
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_aarch64_ffmpegnoffmpegpython3.10.____cpython:
-        CONFIG: linux_aarch64_ffmpegnoffmpegpython3.10.____cpython
+      linux_aarch64_python3.8.____cpythonwith_ffmpegffmpeg:
+        CONFIG: linux_aarch64_python3.8.____cpythonwith_ffmpegffmpeg
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_aarch64_ffmpegnoffmpegpython3.11.____cpython:
-        CONFIG: linux_aarch64_ffmpegnoffmpegpython3.11.____cpython
+      linux_aarch64_python3.8.____cpythonwith_ffmpegnoffmpeg:
+        CONFIG: linux_aarch64_python3.8.____cpythonwith_ffmpegnoffmpeg
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_aarch64_ffmpegnoffmpegpython3.8.____cpython:
-        CONFIG: linux_aarch64_ffmpegnoffmpegpython3.8.____cpython
+      linux_aarch64_python3.9.____cpythonwith_ffmpegffmpeg:
+        CONFIG: linux_aarch64_python3.9.____cpythonwith_ffmpegffmpeg
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_aarch64_ffmpegnoffmpegpython3.9.____cpython:
-        CONFIG: linux_aarch64_ffmpegnoffmpegpython3.9.____cpython
+      linux_aarch64_python3.9.____cpythonwith_ffmpegnoffmpeg:
+        CONFIG: linux_aarch64_python3.9.____cpythonwith_ffmpegnoffmpeg
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_ppc64le_ffmpeg5python3.10.____cpython:
-        CONFIG: linux_ppc64le_ffmpeg5python3.10.____cpython
+      linux_ppc64le_python3.10.____cpythonwith_ffmpegffmpeg:
+        CONFIG: linux_ppc64le_python3.10.____cpythonwith_ffmpegffmpeg
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_ppc64le_ffmpeg5python3.11.____cpython:
-        CONFIG: linux_ppc64le_ffmpeg5python3.11.____cpython
+      linux_ppc64le_python3.10.____cpythonwith_ffmpegnoffmpeg:
+        CONFIG: linux_ppc64le_python3.10.____cpythonwith_ffmpegnoffmpeg
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_ppc64le_ffmpeg5python3.8.____cpython:
-        CONFIG: linux_ppc64le_ffmpeg5python3.8.____cpython
+      linux_ppc64le_python3.11.____cpythonwith_ffmpegffmpeg:
+        CONFIG: linux_ppc64le_python3.11.____cpythonwith_ffmpegffmpeg
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_ppc64le_ffmpeg5python3.9.____cpython:
-        CONFIG: linux_ppc64le_ffmpeg5python3.9.____cpython
+      linux_ppc64le_python3.11.____cpythonwith_ffmpegnoffmpeg:
+        CONFIG: linux_ppc64le_python3.11.____cpythonwith_ffmpegnoffmpeg
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_ppc64le_ffmpegnoffmpegpython3.10.____cpython:
-        CONFIG: linux_ppc64le_ffmpegnoffmpegpython3.10.____cpython
+      linux_ppc64le_python3.8.____cpythonwith_ffmpegffmpeg:
+        CONFIG: linux_ppc64le_python3.8.____cpythonwith_ffmpegffmpeg
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_ppc64le_ffmpegnoffmpegpython3.11.____cpython:
-        CONFIG: linux_ppc64le_ffmpegnoffmpegpython3.11.____cpython
+      linux_ppc64le_python3.8.____cpythonwith_ffmpegnoffmpeg:
+        CONFIG: linux_ppc64le_python3.8.____cpythonwith_ffmpegnoffmpeg
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_ppc64le_ffmpegnoffmpegpython3.8.____cpython:
-        CONFIG: linux_ppc64le_ffmpegnoffmpegpython3.8.____cpython
+      linux_ppc64le_python3.9.____cpythonwith_ffmpegffmpeg:
+        CONFIG: linux_ppc64le_python3.9.____cpythonwith_ffmpegffmpeg
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_ppc64le_ffmpegnoffmpegpython3.9.____cpython:
-        CONFIG: linux_ppc64le_ffmpegnoffmpegpython3.9.____cpython
+      linux_ppc64le_python3.9.____cpythonwith_ffmpegnoffmpeg:
+        CONFIG: linux_ppc64le_python3.9.____cpythonwith_ffmpegnoffmpeg
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
     maxParallel: 33
