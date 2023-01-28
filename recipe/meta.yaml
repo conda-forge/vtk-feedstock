@@ -28,8 +28,8 @@ build:
   # `vtk * qt-main*` for qt-main
 
   # We not include "ffmpeg" in the build string if it is not used
-  string: {{ build_variant }}_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ build }}  # [ffmpeg == "ffmpeg"]
-  string: {{ build_variant }}_noffmpeg_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ build }}  # [ffmpeg == "noffmpeg"]
+  string: {{ build_variant }}_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ build }}  # [with_ffmpeg == "ffmpeg"]
+  string: {{ build_variant }}_noffmpeg_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ build }}  # [with_ffmpeg == "noffmpeg"]
 
   track_features:
     - vtk-egl  # [build_variant == "egl"]
@@ -86,7 +86,7 @@ requirements:
     - xorg-libxt  # [linux]
     - boost-cpp
     - tk  # [not win and (build_variant == "qt")]
-    - ffmpeg  # [ffmpeg != "noffmpeg"]
+    - ffmpeg  # [with_ffmpeg != "noffmpeg"]
     - utfcpp
     - eigen
     - double-conversion
@@ -119,7 +119,7 @@ requirements:
     - lz4-c
     - xorg-libxt  # [linux]
     - tk  # [not win and (build_variant == "qt")]
-    - ffmpeg  # [ffmpeg != "noffmpeg"]
+    - ffmpeg  # [with_ffmpeg != "noffmpeg"]
     - utfcpp
     - eigen
     - double-conversion

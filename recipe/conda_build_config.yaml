@@ -2,7 +2,7 @@ build_variant:
   - "qt"
   - "osmesa"  # [linux64]
   - "egl"  # [linux64]
-ffmpeg:
+with_ffmpeg:
   - "ffmpeg"
   - "noffmpeg"  # [not win]
 replacements:

@@ -75,7 +75,7 @@ if [[ "$target_platform" != "linux-ppc64le"
     )
 fi
 
-if [[ "$ffmpeg" == "ffmpeg" ]]; then
+if [[ "$with_ffmpeg" == "ffmpeg" ]]; then
     VTK_ARGS+=(
         "-DVTK_MODULE_ENABLE_VTK_IOFFMPEG:STRING=YES"
     )
