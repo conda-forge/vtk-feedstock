@@ -29,7 +29,7 @@ jpeg:
 jsoncpp:
 - 1.9.5
 libnetcdf:
-- 4.8.1
+- 4.9.1
 libpng:
 - '1.6'
 libtiff:
@@ -57,6 +57,6 @@ tbb:
 tbb_devel:
 - '2021'
 vtk:
-- 9.1.0
+- 9.2.2
 zlib:
 - '1.2'
