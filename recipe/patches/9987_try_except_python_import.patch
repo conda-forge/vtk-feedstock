@@ -1,0 +1,66 @@
+From b9c10a45adb4585d2a897984e3cfcfdb566cc431 Mon Sep 17 00:00:00 2001
+From: David Gobbi <david.gobbi@gmail.com>
+Date: Mon, 20 Feb 2023 20:19:39 -0700
+Subject: [PATCH] Apply try/except to importing most python modules
+
+In order to make it easier for package managers to build VTK with
+everything and then split it into smaller binary packages, use
+a try/except for importing all but the StandAlone and Rendering
+modules.  This allows "import vtk" to work even if not all of the
+built modules are installed.
+---
+ CMake/vtkModule.cmake          |  3 +++
+ Wrapping/Python/CMakeLists.txt | 15 +++++++++++++--
+ 2 files changed, 16 insertions(+), 2 deletions(-)
+
+diff --git a/CMake/vtkModule.cmake b/CMake/vtkModule.cmake
+index 21b0dda2a95..d93d96e03fe 100644
+--- a/CMake/vtkModule.cmake
++++ b/CMake/vtkModule.cmake
+@@ -829,6 +829,9 @@ function (vtk_module_scan)
+     set_property(GLOBAL
+       PROPERTY
+         "_vtk_module_${_vtk_scan_module_name}_kit" "${${_vtk_scan_module_name}_KIT}")
++    set_property(GLOBAL
++      PROPERTY
++        "_vtk_module_${_vtk_scan_module_name}_groups" "${${_vtk_scan_module_name}_GROUPS}")
+     set_property(GLOBAL
+       PROPERTY
+         "_vtk_module_${_vtk_scan_module_name}_depends" "${${_vtk_scan_module_name}_DEPENDS}")
+diff --git a/Wrapping/Python/CMakeLists.txt b/Wrapping/Python/CMakeLists.txt
+index e5340d3ea3c..e5adeca946b 100644
+--- a/Wrapping/Python/CMakeLists.txt
++++ b/Wrapping/Python/CMakeLists.txt
+@@ -74,16 +74,27 @@ endif ()
+ set(_vtkmodules_all)
+ set(_vtk_python_imports)
+ set(_vtk_python_external_imports)
++set(_vtk_python_unconditional_groups StandAlone Rendering)
+ foreach (_vtk_python_module IN LISTS vtk_python_wrapped_modules)
++  get_property(_vtk_python_module_groups
++    GLOBAL PROPERTY "_vtk_module_${_vtk_python_module}_groups")
++  set(_try "try:\n  ")
++  set(_except "except ImportError:\n  pass\n")
++  foreach (_vtk_python_module_group IN LISTS _vtk_python_module_groups)
++    if (_vtk_python_module_group IN_LIST _vtk_python_unconditional_groups)
++      set(_try)
++      set(_except)
++    endif ()
++  endforeach ()
+   get_property(_vtk_python_library_name
+     TARGET    "${_vtk_python_module}"
+     PROPERTY  "INTERFACE_vtk_module_library_name")
+   string(APPEND _vtkmodules_all
+     "    \'${_vtk_python_library_name}\',\n")
+   string(APPEND _vtk_python_imports
+-    "from .${_vtk_python_library_name} import *\n")
++    "${_try}from .${_vtk_python_library_name} import *\n${_except}")
+   string(APPEND _vtk_python_external_imports
+-    "from vtkmodules.${_vtk_python_library_name} import *\n")
++    "${_try}from vtkmodules.${_vtk_python_library_name} import *\n${_except}")
+ endforeach ()
+ 
+ set(_vtk_python_files)
+-- 
+GitLab
+
