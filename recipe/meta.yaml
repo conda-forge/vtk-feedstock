@@ -204,6 +204,7 @@ outputs:
       build: []
       host:
         - vtk-base
+        - ffmpeg
     test:
       imports:
         - vtk.vtkIOFFMPEG
