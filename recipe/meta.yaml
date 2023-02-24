@@ -95,7 +95,7 @@ outputs:
         - xorg-libxt  # [linux]
         - boost-cpp
         - tk  # [not win and (build_variant == "qt")]
-        - ffmpeg
+        - ffmpeg  # [not win]
         - utfcpp
         - eigen
         - double-conversion
@@ -196,7 +196,7 @@ outputs:
   - name: vtk-io-ffmpeg
     build:
       script: ${RECIPE_DIR}/build-io-ffmpeg.sh  # [not win]
-      script: "%RECIPE_DIR%\\bld-io-ffmpeg.bat"  # [win]
+      skip: true  # [win]
       run_exports:
         - {{ pin_subpackage('vtk', max_pin='x.x.x') }}
       string: py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ build }}
@@ -222,11 +222,11 @@ outputs:
       build: []
       host:
         - vtk-base
-        - vtk-io-ffmpeg
+        - vtk-io-ffmpeg  # [not win]
     test:
       imports:
         - vtk
-        - vtk.vtkIOFFMPEG
+        - vtk.vtkIOFFMPEG  # [not win]
 
 about:
   home: http://www.vtk.org/
