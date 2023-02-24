@@ -99,7 +99,6 @@ outputs:
         - utfcpp
         - eigen
         - double-conversion
-        - pugixml
         - glew  # [build_variant == "qt"]
         - libogg
         - libtheora
@@ -140,7 +139,6 @@ outputs:
         - loguru
         - sqlite
         - gl2ps
-        - pugixml
         - tbb-devel
         - numpy
         - wslink
