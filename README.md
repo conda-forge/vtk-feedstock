@@ -269,6 +269,8 @@ Current release info
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-vtk-green.svg)](https://anaconda.org/conda-forge/vtk) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/vtk.svg)](https://anaconda.org/conda-forge/vtk) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/vtk.svg)](https://anaconda.org/conda-forge/vtk) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/vtk.svg)](https://anaconda.org/conda-forge/vtk) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-vtk--base-green.svg)](https://anaconda.org/conda-forge/vtk-base) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/vtk-base.svg)](https://anaconda.org/conda-forge/vtk-base) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/vtk-base.svg)](https://anaconda.org/conda-forge/vtk-base) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/vtk-base.svg)](https://anaconda.org/conda-forge/vtk-base) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-vtk--io--ffmpeg-green.svg)](https://anaconda.org/conda-forge/vtk-io-ffmpeg) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/vtk-io-ffmpeg.svg)](https://anaconda.org/conda-forge/vtk-io-ffmpeg) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/vtk-io-ffmpeg.svg)](https://anaconda.org/conda-forge/vtk-io-ffmpeg) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/vtk-io-ffmpeg.svg)](https://anaconda.org/conda-forge/vtk-io-ffmpeg) |
 
 Installing vtk
 ==============
@@ -280,16 +282,16 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `vtk` can be installed with `conda`:
+Once the `conda-forge` channel has been enabled, `vtk, vtk-base, vtk-io-ffmpeg` can be installed with `conda`:
 
 ```
-conda install vtk
+conda install vtk vtk-base vtk-io-ffmpeg
 ```
 
 or with `mamba`:
 
 ```
-mamba install vtk
+mamba install vtk vtk-base vtk-io-ffmpeg
 ```
 
 It is possible to list all of the versions of `vtk` available on your platform with `conda`:
