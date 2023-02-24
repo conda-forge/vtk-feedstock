@@ -201,7 +201,7 @@ outputs:
     requirements:
       build: []
       host:
-        - vtk-base
+        - {{ pin_subpackage("vtk-base", exact=True) }}
         - ffmpeg
     test:
       imports:
@@ -220,8 +220,8 @@ outputs:
     requirements:
       build: []
       host:
-        - vtk-base
-        - vtk-io-ffmpeg  # [not win]
+        - {{ pin_subpackage("vtk-base", exact=True) }}
+        - {{ pin_subpackage("vtk-io-ffmpeg", exact=True) }}  # [not win]
     test:
       imports:
         - vtk
