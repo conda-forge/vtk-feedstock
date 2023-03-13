@@ -114,6 +114,7 @@ requirements:
     - expat
     - tbb
     - mesalib >=21.0  # [build_variant == "osmesa"]
+    - llvmdev         # [build_variant == "osmesa"]
     - libnetcdf
     - lz4-c
     - xorg-libxt  # [linux]
