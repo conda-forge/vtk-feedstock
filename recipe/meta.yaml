@@ -78,7 +78,6 @@ requirements:
     - tbb
     - tbb-devel
     - mesalib >=21.0  # [build_variant == "osmesa"]
-    - llvmdev         # [build_variant == "osmesa"]
     - libnetcdf
     - libnetcdf * nompi_*
     - lz4-c
