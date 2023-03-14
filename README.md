@@ -1,11 +1,11 @@
-About vtk
-=========
+About vtk-feedstock
+===================
+
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/vtk-feedstock/blob/main/LICENSE.txt)
 
 Home: http://www.vtk.org/
 
 Package license: BSD-3-Clause
-
-Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/vtk-feedstock/blob/main/LICENSE.txt)
 
 Summary: The Visualization Toolkit (VTK) is an open-source, freely available software system for 3D computer graphics, modeling, image processing, volume rendering, scientific visualization, and information visualization.
 
