@@ -1,7 +1,8 @@
-# Copy:
-# $PREFIX/include/vtk-9.2/vtkIOFFMPEGModule.h
-# $PREFIX/lib/libvtkIOFFMPEG-*.so.*
-# $PREFIX/lib/python3.11/site-packages/vtkmodules/vtkIOFFMPEG
-# $PREFIX/lib/python3.11/site-packages/vtkmodules/vtkIOFFMPEG.*.so
-# $PREFIX/lib/python3.11/site-packages/vtkmodules/vtkIOFFMPEG.pyi
-# $PREFIX/lib/vtk-9.2/hierarchy/VTK/vtkIOFFMPEG-hierarchy.txt
+#!/bin/bash
+
+set -x
+
+PARENT_DIR=$(dirname $PREFIX)
+FFMPEG_DIR="$PARENT_DIR/ffmpeg_dir"
+# Move vtkIOFFMPEG files to $PREFIX
+find $FFMPEG_DIR -name "*vtkIOFFMPEG*" -print0 | xargs -0 -I {} rsync -av --remove-source-files {} $PREFIX/{}
