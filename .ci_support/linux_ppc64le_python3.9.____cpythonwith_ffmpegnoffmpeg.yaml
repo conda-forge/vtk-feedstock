@@ -57,7 +57,7 @@ tbb:
 tbb_devel:
 - '2021'
 vtk:
-- 9.2.2
+- 9.2.5
 with_ffmpeg:
 - noffmpeg
 zlib:

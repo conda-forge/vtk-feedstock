@@ -65,7 +65,7 @@ tbb_devel:
 tk:
 - '8.6'
 vtk:
-- 9.2.2
+- 9.2.5
 with_ffmpeg:
 - ffmpeg
 zlib:
