@@ -198,7 +198,7 @@ outputs:
       skip: true  # [win]
       run_exports:
         - {{ pin_subpackage('vtk', max_pin='x.x.x') }}
-      string: py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ build }}
+      string: {{ build_variant }}_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ build }}
     requirements:
       build: []
       host:
