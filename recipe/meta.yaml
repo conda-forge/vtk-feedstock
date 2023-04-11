@@ -31,7 +31,7 @@ outputs:
       ignore_run_exports_from:
         - ffmpeg
       run_exports:
-        - {{ pin_subpackage('vtk', max_pin='x.x.x') }}
+        - {{ pin_subpackage('vtk-base', max_pin='x.x.x') }}
 
       # typically, osmesa is selected by installing or not installing
       # mesalib, but it could also be selected via the build string:
@@ -197,7 +197,7 @@ outputs:
       script: ${RECIPE_DIR}/build-io-ffmpeg.sh  # [not win]
       skip: true  # [win]
       run_exports:
-        - {{ pin_subpackage('vtk', max_pin='x.x.x') }}
+        - {{ pin_subpackage('vtk-io-ffmpeg', max_pin='x.x.x') }}
       string: {{ build_variant }}_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ build }}
     requirements:
       build: []
