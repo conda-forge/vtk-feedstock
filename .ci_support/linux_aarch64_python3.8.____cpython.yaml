@@ -27,13 +27,13 @@ freetype:
 glew:
 - '2.1'
 hdf5:
-- 1.12.2
-jpeg:
-- '9'
+- 1.14.0
 jsoncpp:
 - 1.9.5
+libjpeg_turbo:
+- 2.1.5
 libnetcdf:
-- 4.9.1
+- 4.9.2
 libpng:
 - '1.6'
 libtiff:
@@ -65,6 +65,6 @@ tbb_devel:
 tk:
 - '8.6'
 vtk:
-- 9.2.2
+- 9.2.5
 zlib:
 - '1.2'
