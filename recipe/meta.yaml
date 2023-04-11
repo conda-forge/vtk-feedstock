@@ -73,7 +73,7 @@ outputs:
         - {{ cdt('libglvnd-egl') }}  # [build_variant == "egl" and cdt_name == "cos7"]
         - {{ cdt('mesa-libegl-devel') }}  # [build_variant == "egl"]
         - {{ cdt('mesa-libgbm') }}  # [build_variant == "egl"]
-        - rsync # [linux]
+        - rsync  # [linux]
 
       host:
         - python
