@@ -22,25 +22,22 @@ source:
 
 build:
   number: {{ build }}
-  # typically, osmesa is selected by installing or not installing
-  # mesalib, but it could also be selected via the build string:
-  # `vtk * osmesa*` for osmesa
-  # `vtk * egl*` for egl
-  # `vtk * qt-main*` for qt-main
-  string: {{ build_variant }}_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ build }}
 
 outputs:
   - name: vtk-base
     build:
+      # typically, osmesa is selected by installing or not installing
+      # mesalib, but it could also be selected via the build string:
+      # `vtk * osmesa*` for osmesa
+      # `vtk * egl*` for egl
+      # `vtk * qt-main*` for qt-main
+      string: {{ build_variant }}_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ build }}
       script: ${RECIPE_DIR}/build-base.sh  # [not win]
       script: "%RECIPE_DIR%\\bld-base.bat"  # [win]
       ignore_run_exports_from:
         - ffmpeg
       run_exports:
         - {{ pin_subpackage('vtk-base', max_pin='x.x.x') }}
-
-      
-
       track_features:
         - vtk-egl  # [build_variant == "egl"]
         - vtk-osmesa  # [build_variant == "osmesa"]
@@ -74,7 +71,6 @@ outputs:
         - {{ cdt('libglvnd-egl') }}  # [build_variant == "egl" and cdt_name == "cos7"]
         - {{ cdt('mesa-libegl-devel') }}  # [build_variant == "egl"]
         - {{ cdt('mesa-libgbm') }}  # [build_variant == "egl"]
-        - rsync  # [linux]
 
       host:
         - python
@@ -196,6 +192,12 @@ outputs:
 
   - name: vtk-io-ffmpeg
     build:
+      # typically, osmesa is selected by installing or not installing
+      # mesalib, but it could also be selected via the build string:
+      # `vtk * osmesa*` for osmesa
+      # `vtk * egl*` for egl
+      # `vtk * qt-main*` for qt-main
+      string: {{ build_variant }}_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ build }}
       script: ${RECIPE_DIR}/build-io-ffmpeg.sh  # [not win]
       skip: true  # [win]
       run_exports:
@@ -206,11 +208,20 @@ outputs:
         - {{ pin_subpackage("vtk-base", exact=True) }}
         - ffmpeg
     test:
+      requires:
+        - pip
+        - setuptools
       imports:
         - vtk.vtkIOFFMPEG
 
   - name: vtk
     build:
+      # typically, osmesa is selected by installing or not installing
+      # mesalib, but it could also be selected via the build string:
+      # `vtk * osmesa*` for osmesa
+      # `vtk * egl*` for egl
+      # `vtk * qt-main*` for qt-main
+      string: {{ build_variant }}_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ build }}
       run_exports:
         - {{ pin_subpackage('vtk', max_pin='x.x.x') }}
     requirements:
@@ -219,6 +230,9 @@ outputs:
         - {{ pin_subpackage("vtk-base", exact=True) }}
         - {{ pin_subpackage("vtk-io-ffmpeg", exact=True) }}  # [not win]
     test:
+      requires:
+        - pip
+        - setuptools
       imports:
         - vtk
         - vtk.vtkIOFFMPEG  # [not win]
