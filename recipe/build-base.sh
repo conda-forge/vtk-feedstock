@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -x
+set -ex
 
 # Create a directory for the vtk-io-ffmpeg package
 PARENT_DIR=$(dirname $PREFIX)

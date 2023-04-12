@@ -22,6 +22,12 @@ source:
 
 build:
   number: {{ build }}
+  # typically, osmesa is selected by installing or not installing
+  # mesalib, but it could also be selected via the build string:
+  # `vtk * osmesa*` for osmesa
+  # `vtk * egl*` for egl
+  # `vtk * qt-main*` for qt-main
+  string: {{ build_variant }}_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ build }}
 
 outputs:
   - name: vtk-base
@@ -33,12 +39,7 @@ outputs:
       run_exports:
         - {{ pin_subpackage('vtk-base', max_pin='x.x.x') }}
 
-      # typically, osmesa is selected by installing or not installing
-      # mesalib, but it could also be selected via the build string:
-      # `vtk * osmesa*` for osmesa
-      # `vtk * egl*` for egl
-      # `vtk * qt-main*` for qt-main
-      string: {{ build_variant }}_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ build }}
+      
 
       track_features:
         - vtk-egl  # [build_variant == "egl"]
@@ -192,35 +193,29 @@ outputs:
 
       commands:
         - pip check
+
   - name: vtk-io-ffmpeg
     build:
       script: ${RECIPE_DIR}/build-io-ffmpeg.sh  # [not win]
       skip: true  # [win]
       run_exports:
         - {{ pin_subpackage('vtk-io-ffmpeg', max_pin='x.x.x') }}
-      string: {{ build_variant }}_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ build }}
     requirements:
       build: []
-      host:
+      run:
         - {{ pin_subpackage("vtk-base", exact=True) }}
         - ffmpeg
     test:
       imports:
         - vtk.vtkIOFFMPEG
+
   - name: vtk
     build:
       run_exports:
         - {{ pin_subpackage('vtk', max_pin='x.x.x') }}
-      # typically, osmesa is selected by installing or not installing
-      # mesalib, but it could also be selected via the build string:
-      # `vtk * osmesa*` for osmesa
-      # `vtk * egl*` for egl
-      # `vtk * qt-main*` for qt-main
-      string: {{ build_variant }}_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ build }}
-
     requirements:
       build: []
-      host:
+      run:
         - {{ pin_subpackage("vtk-base", exact=True) }}
         - {{ pin_subpackage("vtk-io-ffmpeg", exact=True) }}  # [not win]
     test:
