@@ -35,7 +35,7 @@ outputs:
       script: ${RECIPE_DIR}/build-base.sh  # [not win]
       script: "%RECIPE_DIR%\\bld-base.bat"  # [win]
       ignore_run_exports_from:
-        - ffmpeg
+        - ffmpeg  # [not win]
       run_exports:
         - {{ pin_subpackage('vtk-base', max_pin='x.x.x') }}
       track_features:
@@ -93,10 +93,11 @@ outputs:
         - xorg-libxt  # [linux]
         - boost-cpp
         - tk  # [not win and (build_variant == "qt")]
-        - ffmpeg  # [not win]
+        - ffmpeg
         - utfcpp
         - eigen
         - double-conversion
+        - pugixml
         - glew  # [build_variant == "qt"]
         - libogg
         - libtheora
@@ -137,6 +138,7 @@ outputs:
         - loguru
         - sqlite
         - gl2ps
+        - pugixml
         - tbb-devel
         - numpy
         - wslink
@@ -154,7 +156,6 @@ outputs:
         - vtk.vtkFiltersGeneric
         - vtk.vtkGeovisCore
         - vtk.vtkFiltersHybrid
-        - vtk.vtkFiltersParallelDIY2
         - vtk.vtkIOCore
         - vtk.vtkImagingCore
         - vtk.vtkInfovisCore
@@ -171,7 +172,6 @@ outputs:
         - vtkmodules.vtkFiltersGeneric
         - vtkmodules.vtkGeovisCore
         - vtkmodules.vtkFiltersHybrid
-        - vtkmodules.vtkFiltersParallelDIY2
         - vtkmodules.vtkIOCore
         - vtkmodules.vtkImagingCore
         - vtkmodules.vtkInfovisCore
@@ -236,6 +236,8 @@ outputs:
       imports:
         - vtk
         - vtk.vtkIOFFMPEG  # [not win]
+      commands:
+        - python test_vtk.py
 
 about:
   home: http://www.vtk.org/
