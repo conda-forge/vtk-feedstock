@@ -1,10 +1,6 @@
-# import pkg_resources
 import vtk
 import sys
 import os
-
-# If this fails it raises a DistributionNotFound exception
-# pkg_resources.get_distribution('vtk')
 
 if sys.platform != 'darwin' or os.environ.get('build_variant') == 'osmesa':
   # Linux and Windows can't run these tests on headless nodes, and OSX
