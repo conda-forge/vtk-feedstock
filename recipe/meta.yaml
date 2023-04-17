@@ -22,6 +22,12 @@ source:
 
 build:
   number: {{ build }}
+  # typically, osmesa is selected by installing or not installing
+  # mesalib, but it could also be selected via the build string:
+  # `vtk * osmesa*` for osmesa
+  # `vtk * egl*` for egl
+  # `vtk * qt-main*` for qt-main
+  string: {{ build_variant }}_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ build }}
 
 outputs:
   - name: vtk-base
