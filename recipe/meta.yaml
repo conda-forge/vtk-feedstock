@@ -7,7 +7,7 @@
 {% set build = build + 200 %}   # [build_variant == "qt"]
 
 package:
-  name: vtk
+  name: vtk-split
   version: {{ version }}
 
 source:
