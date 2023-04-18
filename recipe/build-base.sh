@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -x
+set -ex
 
 BUILD_CONFIG=Release
 
@@ -160,6 +160,17 @@ cmake -LAH .. -G "Ninja" ${CMAKE_ARGS} \
 
 # compile & install!
 ninja install -v
+
+# Create a directory for the vtk-io-ffmpeg package
+# and find the ffmpeg-related files and process each of them
+FFMPEG_DIR="$(dirname $PREFIX)/ffmpeg_dir"
+mkdir -p "$FFMPEG_DIR"
+find $PREFIX -name "*vtkIOFFMPEG*" -print0 | while IFS= read -r -d '' file; do
+    dest_dir="$FFMPEG_DIR/${file#$PREFIX/}"
+    mkdir -p "$(dirname "$dest_dir")"
+    mv "$file" "$dest_dir"
+done
+
 
 # The egg-info file is necessary because some packages,
 # like mayavi, have a __requires__ in their __invtkRenderWindow::New()it__.py,

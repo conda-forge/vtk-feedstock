@@ -5,6 +5,15 @@
 
 {% set build = build + 100 %}   # [build_variant == "osmesa"]
 {% set build = build + 200 %}   # [build_variant == "qt"]
+# typically, osmesa is selected by installing or not installing
+# mesalib, but it could also be selected via the build string:
+# `vtk * osmesa*` for osmesa
+# `vtk * egl*` for egl
+# `vtk * qt-main*` for qt-main
+{% set build_string = '{}_py{}h{}_{}'.format(build_variant, CONDA_PY, PKG_HASH, build) %}
+
+# The 'build: string: ...' needs to be set in each output and the top-level
+# otherwise it won't be correct in the final build.
 
 package:
   name: vtk
@@ -15,174 +24,219 @@ source:
   sha256: 06fc8d49c4e56f498c40fcb38a563ed8d4ec31358d0101e8988f0bb4d539dd12
   patches:
     - fix-threads-windows.patch  # [win]
+    # https://github.com/conda-forge/vtk-feedstock/pull/282
+    # https://gitlab.kitware.com/vtk/vtk/-/issues/18365#note_1079278
+    # https://gitlab.kitware.com/vtk/vtk/-/merge_requests/9987
+    - patches/9987_try_except_python_import.patch  # [not win]
 
 build:
   number: {{ build }}
-  run_exports:
-    - {{ pin_subpackage('vtk', max_pin='x.x.x') }}
+  string: {{ build_string }}
 
-  # typically, osmesa is selected by installing or not installing
-  # mesalib, but it could also be selected via the build string:
-  # `vtk * osmesa*` for osmesa
-  # `vtk * egl*` for egl
-  # `vtk * qt-main*` for qt-main
+outputs:
+  - name: vtk-base
+    build:
+      string: {{ build_string }}
+      script: ${RECIPE_DIR}/build-base.sh  # [not win]
+      script: "%RECIPE_DIR%\\bld-base.bat"  # [win]
+      ignore_run_exports_from:
+        - ffmpeg  # [not win]
+      run_exports:
+        - {{ pin_subpackage('vtk-base', max_pin='x.x.x') }}
+      track_features:
+        - vtk-egl  # [build_variant == "egl"]
+        - vtk-osmesa  # [build_variant == "osmesa"]
 
-  string: {{ build_variant }}_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ build }}
+      features:
+        - mesalib  # [build_variant == "osmesa"]
 
-  track_features:
-    - vtk-egl  # [build_variant == "egl"]
-    - vtk-osmesa  # [build_variant == "osmesa"]
+    requirements:
+      build:
+        - {{ compiler("cxx") }}
+        - {{ compiler('fortran') }}  # [build_variant != "qt"]
+        - sysroot_linux-64 2.17  # [build_variant == "osmesa"]
+        - cmake
+        - ninja
+        - python                                 # [build_platform != target_platform]
+        - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+        - {{ cdt('libxcb') }}  # [linux and build_variant != "osmesa"]
+        - {{ cdt('libxau') }}  # [linux and build_variant != "osmesa"]
+        - {{ cdt('libuuid') }}  # [linux and build_variant != "osmesa"]
+        - {{ cdt('libxext') }}  # [linux and build_variant != "osmesa"]
+        - {{ cdt('libxfixes') }}  # [linux and build_variant != "osmesa"]
+        - {{ cdt('libxxf86vm') }}  # [linux and build_variant != "osmesa"]
+        - {{ cdt('libxdamage') }}  # [linux and build_variant != "osmesa"]
+        - {{ cdt('libselinux') }}  # [linux and build_variant != "osmesa"]
+        - {{ cdt('libsm-devel') }}  # [linux and build_variant != "osmesa"]
+        - {{ cdt('libice-devel') }}  # [linux and build_variant != "osmesa"]
+        - {{ cdt('libx11-devel') }}  # [linux and build_variant != "osmesa"]
+        - {{ cdt('mesa-libgl-devel') }}  # [linux and build_variant != "osmesa"]
+        - {{ cdt('mesa-dri-drivers') }}  # [linux and build_variant != "osmesa"]
+        - {{ cdt('xorg-x11-proto-devel') }}  # [linux and build_variant != "osmesa"]
+        - {{ cdt('libglvnd-egl') }}  # [build_variant == "egl" and cdt_name == "cos7"]
+        - {{ cdt('mesa-libegl-devel') }}  # [build_variant == "egl"]
+        - {{ cdt('mesa-libgbm') }}  # [build_variant == "egl"]
 
-  features:
-    - mesalib  # [build_variant == "osmesa"]
+      host:
+        - python
+        - zlib
+        - freetype
+        - hdf5
+        - hdf5 * nompi_*
+        - libxml2
+        - libpng
+        - libjpeg-turbo
+        - libtiff
+        - jsoncpp
+        - expat
+        - tbb
+        - tbb-devel
+        - mesalib >=21.0  # [build_variant == "osmesa"]
+        - libnetcdf
+        - libnetcdf * nompi_*
+        - lz4-c
+        - xorg-libxt  # [linux]
+        - boost-cpp
+        - tk  # [not win and (build_variant == "qt")]
+        - ffmpeg
+        - utfcpp
+        - eigen
+        - double-conversion
+        - pugixml
+        - glew  # [build_variant == "qt"]
+        - libogg
+        - libtheora
+        - nlohmann_json
+        - proj
+        - loguru
+        - sqlite
+        - gl2ps
+        - pugixml
+        - qt-main  # [not ppc64le and (build_variant == "qt")]
 
-requirements:
-  build:
-    - {{ compiler("cxx") }}
-    - {{ compiler('fortran') }}  # [build_variant != "qt"]
-    - sysroot_linux-64 2.17  # [build_variant == "osmesa"]
-    - cmake
-    - ninja
-    - python                                 # [build_platform != target_platform]
-    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
-    - {{ cdt('libxcb') }}  # [linux and build_variant != "osmesa"]
-    - {{ cdt('libxau') }}  # [linux and build_variant != "osmesa"]
-    - {{ cdt('libuuid') }}  # [linux and build_variant != "osmesa"]
-    - {{ cdt('libxext') }}  # [linux and build_variant != "osmesa"]
-    - {{ cdt('libxfixes') }}  # [linux and build_variant != "osmesa"]
-    - {{ cdt('libxxf86vm') }}  # [linux and build_variant != "osmesa"]
-    - {{ cdt('libxdamage') }}  # [linux and build_variant != "osmesa"]
-    - {{ cdt('libselinux') }}  # [linux and build_variant != "osmesa"]
-    - {{ cdt('libsm-devel') }}  # [linux and build_variant != "osmesa"]
-    - {{ cdt('libice-devel') }}  # [linux and build_variant != "osmesa"]
-    - {{ cdt('libx11-devel') }}  # [linux and build_variant != "osmesa"]
-    - {{ cdt('mesa-libgl-devel') }}  # [linux and build_variant != "osmesa"]
-    - {{ cdt('mesa-dri-drivers') }}  # [linux and build_variant != "osmesa"]
-    - {{ cdt('xorg-x11-proto-devel') }}  # [linux and build_variant != "osmesa"]
-    - {{ cdt('libglvnd-egl') }}  # [build_variant == "egl" and cdt_name == "cos7"]
-    - {{ cdt('mesa-libegl-devel') }}  # [build_variant == "egl"]
-    - {{ cdt('mesa-libgbm') }}  # [build_variant == "egl"]
+      run:
+        - python
+        - zlib
+        - freetype
+        - hdf5
+        - libxml2
+        - libpng
+        - libjpeg-turbo
+        - libtiff
+        - jsoncpp
+        - expat
+        - tbb
+        - mesalib >=21.0  # [build_variant == "osmesa"]
+        - libnetcdf
+        - lz4-c
+        - xorg-libxt  # [linux]
+        - tk  # [not win and (build_variant == "qt")]
+        - utfcpp
+        - eigen
+        - double-conversion
+        - pugixml
+        - glew  # [build_variant == "qt"]
+        - libogg
+        - libtheora
+        - nlohmann_json
+        - proj
+        - loguru
+        - sqlite
+        - gl2ps
+        - pugixml
+        - tbb-devel
+        - numpy
+        - wslink
 
-  host:
-    - python
-    - zlib
-    - freetype
-    - hdf5
-    - hdf5 * nompi_*
-    - libxml2
-    - libpng
-    - libjpeg-turbo
-    - libtiff
-    - jsoncpp
-    - expat
-    - tbb
-    - tbb-devel
-    - mesalib >=21.0  # [build_variant == "osmesa"]
-    - libnetcdf
-    - libnetcdf * nompi_*
-    - lz4-c
-    - xorg-libxt  # [linux]
-    - boost-cpp
-    - tk  # [not win and (build_variant == "qt")]
-    - ffmpeg
-    - utfcpp
-    - eigen
-    - double-conversion
-    - pugixml
-    - glew  # [build_variant == "qt"]
-    - libogg
-    - libtheora
-    - nlohmann_json
-    - proj
-    - loguru
-    - sqlite
-    - gl2ps
-    - pugixml
-    - qt-main  # [not ppc64le and (build_variant == "qt")]
+      run_constrained:
+        # Paraview bundles its own VTK that has conflicting Python vtkmodules
+        - paraview ==9999999999
 
-  run:
-    - python
-    - zlib
-    - freetype
-    - hdf5
-    - libxml2
-    - libpng
-    - libjpeg-turbo
-    - libtiff
-    - jsoncpp
-    - expat
-    - tbb
-    - mesalib >=21.0  # [build_variant == "osmesa"]
-    - libnetcdf
-    - lz4-c
-    - xorg-libxt  # [linux]
-    - tk  # [not win and (build_variant == "qt")]
-    - ffmpeg
-    - utfcpp
-    - eigen
-    - double-conversion
-    - pugixml
-    - glew  # [build_variant == "qt"]
-    - libogg
-    - libtheora
-    - nlohmann_json
-    - proj
-    - loguru
-    - sqlite
-    - gl2ps
-    - pugixml
-    - tbb-devel
-    - numpy
-    - wslink
+    test:
+      imports:
+        - vtk
+        - vtk.vtkChartsCore
+        - vtk.vtkCommonCore
+        - vtk.vtkFiltersCore
+        - vtk.vtkFiltersGeneric
+        - vtk.vtkGeovisCore
+        - vtk.vtkFiltersHybrid
+        - vtk.vtkIOCore
+        - vtk.vtkImagingCore
+        - vtk.vtkInfovisCore
+        - vtk.vtkRenderingCore
+        - vtk.vtkViewsCore
+        - vtk.vtkRenderingVolume
+        - vtk.vtkInteractionWidgets
+        - vtk.vtkWebGLExporter
+        - vtk.tk.vtkTkRenderWidget  # [not win and (build_variant == "qt")]
+        - vtkmodules
+        - vtkmodules.vtkChartsCore
+        - vtkmodules.vtkCommonCore
+        - vtkmodules.vtkFiltersCore
+        - vtkmodules.vtkFiltersGeneric
+        - vtkmodules.vtkGeovisCore
+        - vtkmodules.vtkFiltersHybrid
+        - vtkmodules.vtkIOCore
+        - vtkmodules.vtkImagingCore
+        - vtkmodules.vtkInfovisCore
+        - vtkmodules.vtkRenderingCore
+        - vtkmodules.vtkViewsCore
+        - vtkmodules.vtkRenderingVolume
+        - vtkmodules.vtkInteractionWidgets
+        - vtkmodules.vtkWebCore
+        - vtkmodules.web
+        - vtkmodules.web.utils
 
-  run_constrained:
-    # Paraview bundles its own VTK that has conflicting Python vtkmodules
-    - paraview ==9999999999
+      requires:
+        - pip
+        - setuptools
 
-test:
-  imports:
-    - vtk
-    - vtk.vtkChartsCore
-    - vtk.vtkCommonCore
-    - vtk.vtkFiltersCore
-    - vtk.vtkFiltersGeneric
-    - vtk.vtkGeovisCore
-    - vtk.vtkFiltersHybrid
-    - vtk.vtkFiltersParallelDIY2
-    - vtk.vtkIOCore
-    - vtk.vtkImagingCore
-    - vtk.vtkInfovisCore
-    - vtk.vtkRenderingCore
-    - vtk.vtkViewsCore
-    - vtk.vtkRenderingVolume
-    - vtk.vtkInteractionWidgets
-    - vtk.vtkWebGLExporter
-    - vtk.tk.vtkTkRenderWidget  # [not win and (build_variant == "qt")]
-    - vtkmodules
-    - vtkmodules.vtkChartsCore
-    - vtkmodules.vtkCommonCore
-    - vtkmodules.vtkFiltersCore
-    - vtkmodules.vtkFiltersGeneric
-    - vtkmodules.vtkGeovisCore
-    - vtkmodules.vtkFiltersHybrid
-    - vtkmodules.vtkFiltersParallelDIY2
-    - vtkmodules.vtkIOCore
-    - vtkmodules.vtkImagingCore
-    - vtkmodules.vtkInfovisCore
-    - vtkmodules.vtkRenderingCore
-    - vtkmodules.vtkViewsCore
-    - vtkmodules.vtkRenderingVolume
-    - vtkmodules.vtkInteractionWidgets
-    - vtkmodules.vtkWebCore
-    - vtkmodules.web
-    - vtkmodules.web.utils
+      commands:
+        - pip check
 
-  requires:
-    - pip
-    - setuptools
+  - name: vtk-io-ffmpeg
+    build:
+      string: {{ build_string }}
+      script: ${RECIPE_DIR}/build-io-ffmpeg.sh  # [not win]
+      skip: true  # [win]
+      run_exports:
+        - {{ pin_subpackage('vtk-io-ffmpeg', max_pin='x.x.x') }}
+    requirements:
+      build: []
+      host:
+          # We use ffmpeg here in the host section so that conda build
+          # uses the global pinnings and ensures ffmpeg compatibility.
+          - ffmpeg
+      run:
+        - {{ pin_subpackage("vtk-base", exact=True) }}
+        - ffmpeg
+    test:
+      requires:
+        - pip
+        - setuptools
+      imports:
+        - vtk.vtkIOFFMPEG
 
-  commands:
-    - pip check
+  - name: vtk
+    build:
+      string: {{ build_string }}
+      run_exports:
+        - {{ pin_subpackage('vtk', max_pin='x.x.x') }}
+    requirements:
+      build: []
+      run:
+        - {{ pin_subpackage("vtk-base", exact=True) }}
+        - {{ pin_subpackage("vtk-io-ffmpeg", exact=True) }}  # [not win]
+    test:
+      requires:
+        - pip
+        - setuptools
+      imports:
+        - vtk
+        - vtk.vtkIOFFMPEG  # [not win]
+      commands:
+        - python test_vtk.py
 
 about:
   home: http://www.vtk.org/
