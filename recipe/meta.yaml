@@ -5,6 +5,12 @@
 
 {% set build = build + 100 %}   # [build_variant == "osmesa"]
 {% set build = build + 200 %}   # [build_variant == "qt"]
+# typically, osmesa is selected by installing or not installing
+# mesalib, but it could also be selected via the build string:
+# `vtk * osmesa*` for osmesa
+# `vtk * egl*` for egl
+# `vtk * qt-main*` for qt-main
+{% set build_string = '{}_py{}h{}_{}'.format(build_variant, CONDA_PY, PKG_HASH, build) %}
 
 package:
   name: vtk
@@ -22,16 +28,12 @@ source:
 
 build:
   number: {{ build }}
-  # typically, osmesa is selected by installing or not installing
-  # mesalib, but it could also be selected via the build string:
-  # `vtk * osmesa*` for osmesa
-  # `vtk * egl*` for egl
-  # `vtk * qt-main*` for qt-main
-  string: {{ build_variant }}_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ build }}
+  string: {{ build_string }}
 
 outputs:
   - name: vtk-base
     build:
+      string: {{ build_string }}
       script: ${RECIPE_DIR}/build-base.sh  # [not win]
       script: "%RECIPE_DIR%\\bld-base.bat"  # [win]
       ignore_run_exports_from:
@@ -192,6 +194,7 @@ outputs:
 
   - name: vtk-io-ffmpeg
     build:
+      string: {{ build_string }}
       script: ${RECIPE_DIR}/build-io-ffmpeg.sh  # [not win]
       skip: true  # [win]
       run_exports:
@@ -214,6 +217,7 @@ outputs:
 
   - name: vtk
     build:
+      string: {{ build_string }}
       run_exports:
         - {{ pin_subpackage('vtk', max_pin='x.x.x') }}
     requirements:
