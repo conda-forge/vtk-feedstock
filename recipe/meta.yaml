@@ -12,6 +12,9 @@
 # `vtk * qt-main*` for qt-main
 {% set build_string = '{}_py{}h{}_{}'.format(build_variant, CONDA_PY, PKG_HASH, build) %}
 
+# The 'build: string: ...' needs to be set in each output and the top-level
+# otherwise it won't be correct in the final build.
+
 package:
   name: vtk
   version: {{ version }}
