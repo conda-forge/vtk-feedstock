@@ -33,7 +33,7 @@ libpng:
 libtiff:
 - '4.5'
 libxml2:
-- '2.10'
+- '2.11'
 lz4_c:
 - 1.9.3
 macos_machine:
