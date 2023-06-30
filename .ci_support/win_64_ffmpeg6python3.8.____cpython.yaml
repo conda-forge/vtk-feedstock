@@ -17,7 +17,7 @@ freetype:
 glew:
 - '2.1'
 hdf5:
-- 1.14.0
+- 1.14.1
 jsoncpp:
 - 1.9.5
 libjpeg_turbo:
