@@ -59,23 +59,25 @@ outputs:
         - ninja
         - python                                 # [build_platform != target_platform]
         - cross-python_{{ target_platform }}     # [build_platform != target_platform]
-        - {{ cdt('libxcb') }}  # [linux and build_variant != "osmesa"]
-        - {{ cdt('libxau') }}  # [linux and build_variant != "osmesa"]
-        - {{ cdt('libuuid') }}  # [linux and build_variant != "osmesa"]
-        - {{ cdt('libxext') }}  # [linux and build_variant != "osmesa"]
-        - {{ cdt('libxfixes') }}  # [linux and build_variant != "osmesa"]
-        - {{ cdt('libxxf86vm') }}  # [linux and build_variant != "osmesa"]
-        - {{ cdt('libxdamage') }}  # [linux and build_variant != "osmesa"]
         - {{ cdt('libselinux') }}  # [linux and build_variant != "osmesa"]
-        - {{ cdt('libsm-devel') }}  # [linux and build_variant != "osmesa"]
-        - {{ cdt('libice-devel') }}  # [linux and build_variant != "osmesa"]
-        - {{ cdt('libx11-devel') }}  # [linux and build_variant != "osmesa"]
         - {{ cdt('mesa-libgl-devel') }}  # [linux and build_variant != "osmesa"]
         - {{ cdt('mesa-dri-drivers') }}  # [linux and build_variant != "osmesa"]
         - {{ cdt('xorg-x11-proto-devel') }}  # [linux and build_variant != "osmesa"]
         - {{ cdt('libglvnd-egl') }}  # [build_variant == "egl" and cdt_name == "cos7"]
         - {{ cdt('mesa-libegl-devel') }}  # [build_variant == "egl"]
         - {{ cdt('mesa-libgbm') }}  # [build_variant == "egl"]
+        # These packages are not CDT to help with compat with other builds
+        # (e.g., tensorflow, qt-main)
+        - xorg-libxcb  # [linux and build_variant != "osmesa"]
+        - xorg-libxau  # [linux and build_variant != "osmesa"]
+        - libuuid  # [linux and build_variant != "osmesa"]
+        - xorg-libxext  # [linux and build_variant != "osmesa"]
+        - xorg-libxfixes  # [linux and build_variant != "osmesa"]
+        - xorg-libxxf86vm  # [linux and build_variant != "osmesa"]
+        - xorg-libxdamage  # [linux and build_variant != "osmesa"]
+        - xorg-libsm  # [linux and build_variant != "osmesa"]
+        - xorg-libice  # [linux and build_variant != "osmesa"]
+        - xorg-libx11  # [linux and build_variant != "osmesa"]
 
       host:
         - python
