@@ -38,6 +38,8 @@ libpng:
 - '1.6'
 libtiff:
 - '4.5'
+libuuid:
+- '2'
 libxml2:
 - '2.11'
 lz4_c:
