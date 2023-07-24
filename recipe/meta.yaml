@@ -62,7 +62,6 @@ outputs:
         - {{ cdt('libselinux') }}  # [linux and build_variant != "osmesa"]
         - {{ cdt('mesa-libgl-devel') }}  # [linux and build_variant != "osmesa"]
         - {{ cdt('mesa-dri-drivers') }}  # [linux and build_variant != "osmesa"]
-        - {{ cdt('xorg-x11-proto-devel') }}  # [linux and build_variant != "osmesa"]
         - {{ cdt('libglvnd-egl') }}  # [build_variant == "egl" and cdt_name == "cos7"]
         - {{ cdt('mesa-libegl-devel') }}  # [build_variant == "egl"]
         - {{ cdt('mesa-libgbm') }}  # [build_variant == "egl"]
@@ -78,6 +77,7 @@ outputs:
         - xorg-libsm  # [linux and build_variant != "osmesa"]
         - xorg-libice  # [linux and build_variant != "osmesa"]
         - xorg-libx11  # [linux and build_variant != "osmesa"]
+        - xorg-xorg-xf86vidmodeproto  # [linux and build_variant != "osmesa"]
 
       host:
         - python
