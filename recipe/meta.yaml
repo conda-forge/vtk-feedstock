@@ -88,7 +88,7 @@ outputs:
         # These packages are not CDT to help with compat with other builds
         # (e.g., tensorflow, qt-main), e.g.
         # https://github.com/conda-forge/qt-main-feedstock/blob/2b166b35e9e1a2d897640ac28ae4b00491d9e310/recipe/meta.yaml#L134-L138
-        - xorg-libxcb  # [linux and build_variant != "osmesa"]
+        - libxcb  # [linux and build_variant != "osmesa"]
         - xorg-libxau  # [linux and build_variant != "osmesa"]
         - libuuid  # [linux and build_variant != "osmesa"]
         - xorg-libxext  # [linux and build_variant != "osmesa"]
