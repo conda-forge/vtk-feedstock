@@ -65,19 +65,6 @@ outputs:
         - {{ cdt('libglvnd-egl') }}  # [build_variant == "egl" and cdt_name == "cos7"]
         - {{ cdt('mesa-libegl-devel') }}  # [build_variant == "egl"]
         - {{ cdt('mesa-libgbm') }}  # [build_variant == "egl"]
-        # These packages are not CDT to help with compat with other builds
-        # (e.g., tensorflow, qt-main)
-        - xorg-libxcb  # [linux and build_variant != "osmesa"]
-        - xorg-libxau  # [linux and build_variant != "osmesa"]
-        - libuuid  # [linux and build_variant != "osmesa"]
-        - xorg-libxext  # [linux and build_variant != "osmesa"]
-        - xorg-libxfixes  # [linux and build_variant != "osmesa"]
-        - xorg-libxxf86vm  # [linux and build_variant != "osmesa"]
-        - xorg-libxdamage  # [linux and build_variant != "osmesa"]
-        - xorg-libsm  # [linux and build_variant != "osmesa"]
-        - xorg-libice  # [linux and build_variant != "osmesa"]
-        - xorg-libx11  # [linux and build_variant != "osmesa"]
-        - xorg-xf86vidmodeproto  # [linux and build_variant != "osmesa"]
 
       host:
         - python
@@ -98,6 +85,20 @@ outputs:
         - libnetcdf * nompi_*
         - lz4-c
         - xorg-libxt  # [linux]
+        # These packages are not CDT to help with compat with other builds
+        # (e.g., tensorflow, qt-main), e.g.
+        # https://github.com/conda-forge/qt-main-feedstock/blob/2b166b35e9e1a2d897640ac28ae4b00491d9e310/recipe/meta.yaml#L134-L138
+        - xorg-libxcb  # [linux and build_variant != "osmesa"]
+        - xorg-libxau  # [linux and build_variant != "osmesa"]
+        - libuuid  # [linux and build_variant != "osmesa"]
+        - xorg-libxext  # [linux and build_variant != "osmesa"]
+        - xorg-libxfixes  # [linux and build_variant != "osmesa"]
+        - xorg-libxxf86vm  # [linux and build_variant != "osmesa"]
+        - xorg-libxdamage  # [linux and build_variant != "osmesa"]
+        - xorg-libsm  # [linux and build_variant != "osmesa"]
+        - xorg-libice  # [linux and build_variant != "osmesa"]
+        - xorg-libx11  # [linux and build_variant != "osmesa"]
+        - xorg-xf86vidmodeproto  # [linux and build_variant != "osmesa"]
         - boost-cpp
         - tk  # [not win and (build_variant == "qt")]
         - ffmpeg
