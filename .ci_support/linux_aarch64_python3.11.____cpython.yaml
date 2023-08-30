@@ -54,6 +54,8 @@ pin_run_as_build:
     max_pin: x.x
 proj:
 - 9.2.1
+pugixml:
+- '1.13'
 python:
 - 3.11.* *_cpython
 qt_main:
