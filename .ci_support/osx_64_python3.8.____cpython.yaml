@@ -1,7 +1,5 @@
 MACOSX_DEPLOYMENT_TARGET:
 - '10.9'
-boost_cpp:
-- 1.78.0
 build_variant:
 - qt
 channel_sources:
@@ -39,8 +37,6 @@ lz4_c:
 macos_machine:
 - x86_64-apple-darwin13.4.0
 pin_run_as_build:
-  boost-cpp:
-    max_pin: x.x.x
   python:
     min_pin: x.x
     max_pin: x.x
