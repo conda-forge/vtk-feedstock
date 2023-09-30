@@ -1,5 +1,5 @@
 {% set version = "9.2.6" %}
-{% set build = 14 %}
+{% set build = 15 %}
 
 {% set minor_version = ".".join(version.split(".")[:2]) %}
 
@@ -99,7 +99,7 @@ outputs:
         - xorg-libice  # [linux and build_variant != "osmesa"]
         - xorg-libx11  # [linux and build_variant != "osmesa"]
         - xorg-xf86vidmodeproto  # [linux and build_variant != "osmesa"]
-        - boost-cpp
+        - libboost-headers
         - tk  # [not win and (build_variant == "qt")]
         - ffmpeg
         - utfcpp
