@@ -1,15 +1,21 @@
-MACOSX_DEPLOYMENT_TARGET:
-- '11.0'
+BUILD:
+- aarch64-conda_cos7-linux-gnu
 build_variant:
 - qt
+cdt_arch:
+- aarch64
+cdt_name:
+- cos7
 channel_sources:
 - conda-forge
 channel_targets:
 - conda-forge main
 cxx_compiler:
-- clangxx
+- gxx
 cxx_compiler_version:
-- '16'
+- '12'
+docker_image:
+- quay.io/condaforge/linux-anvil-cos7-x86_64
 expat:
 - '2'
 ffmpeg:
@@ -30,12 +36,14 @@ libpng:
 - '1.6'
 libtiff:
 - '4.6'
+libuuid:
+- '2'
+libxcb:
+- '1.15'
 libxml2:
 - '2.11'
 lz4_c:
 - 1.9.3
-macos_machine:
-- arm64-apple-darwin20.0.0
 pin_run_as_build:
   python:
     min_pin: x.x
@@ -45,13 +53,13 @@ proj:
 pugixml:
 - '1.13'
 python:
-- 3.9.* *_cpython
+- 3.9.* *_73_pypy
 qt_main:
 - '5.15'
 sqlite:
 - '3'
 target_platform:
-- osx-arm64
+- linux-aarch64
 tbb:
 - '2021'
 tbb_devel:

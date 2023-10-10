@@ -1,5 +1,5 @@
 MACOSX_DEPLOYMENT_TARGET:
-- '11.0'
+- '10.9'
 build_variant:
 - qt
 channel_sources:
@@ -35,7 +35,7 @@ libxml2:
 lz4_c:
 - 1.9.3
 macos_machine:
-- arm64-apple-darwin20.0.0
+- x86_64-apple-darwin13.4.0
 pin_run_as_build:
   python:
     min_pin: x.x
@@ -45,13 +45,13 @@ proj:
 pugixml:
 - '1.13'
 python:
-- 3.9.* *_cpython
+- 3.9.* *_73_pypy
 qt_main:
 - '5.15'
 sqlite:
 - '3'
 target_platform:
-- osx-arm64
+- osx-64
 tbb:
 - '2021'
 tbb_devel:
