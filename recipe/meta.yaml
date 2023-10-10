@@ -1,5 +1,5 @@
 {% set version = "9.2.6" %}
-{% set build = 15 %}
+{% set build = 16 %}
 
 {% set minor_version = ".".join(version.split(".")[:2]) %}
 
@@ -225,7 +225,7 @@ outputs:
     build:
       string: {{ build_string }}
       run_exports:
-        - {{ pin_subpackage('vtk', max_pin='x.x.x') }}
+        - {{ pin_subpackage('vtk-base', max_pin='x.x.x') }}
     requirements:
       build: []
       run:
