@@ -26,7 +26,7 @@ conda activate base
 mamba install --update-specs --quiet --yes --channel conda-forge --strict-channel-priority \
     pip mamba conda-build boa liblief=0.11.5 conda-forge-ci-setup=3
 mamba update --update-specs --yes --quiet --channel conda-forge --strict-channel-priority \
-    pip mamba conda-build boa liblief conda-forge-ci-setup
+    pip mamba conda-build boa liblief=0.11.5 conda-forge-ci-setup=3
 
 
 
