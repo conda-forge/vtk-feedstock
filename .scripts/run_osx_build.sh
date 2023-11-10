@@ -26,9 +26,9 @@ export CONDA_SOLVER="libmamba"
 export CONDA_LIBMAMBA_SOLVER_NO_CHANNELS_FROM_INSTALLED=1
 
 mamba install --update-specs --quiet --yes --channel conda-forge --strict-channel-priority \
-    pip mamba conda-build liblief=0.11.5 conda-forge-ci-setup=3
+    pip mamba conda-build conda-forge-ci-setup=4
 mamba update --update-specs --yes --quiet --channel conda-forge --strict-channel-priority \
-    pip mamba conda-build liblief=0.11.5 conda-forge-ci-setup=3
+    pip mamba conda-build conda-forge-ci-setup=4
 
 
 
