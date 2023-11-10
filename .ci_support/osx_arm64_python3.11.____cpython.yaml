@@ -43,7 +43,7 @@ pin_run_as_build:
 proj:
 - 9.3.0
 pugixml:
-- '1.13'
+- '1.14'
 python:
 - 3.11.* *_cpython
 qt_main:
@@ -59,6 +59,6 @@ tbb_devel:
 tk:
 - '8.6'
 vtk:
-- 9.2.5
+- 9.2.6
 zlib:
 - '1.2'
