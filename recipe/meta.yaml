@@ -115,7 +115,7 @@ outputs:
         - sqlite
         - gl2ps
         - pugixml
-        - qt-main  # [not ppc64le and (build_variant == "qt")]
+        - qt6-main  # [not ppc64le and (build_variant == "qt")]
 
       run:
         - python
