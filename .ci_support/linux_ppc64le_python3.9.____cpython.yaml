@@ -21,7 +21,7 @@ freetype:
 glew:
 - '2.1'
 hdf5:
-- 1.14.2
+- 1.14.3
 jsoncpp:
 - 1.9.5
 libjpeg_turbo:
@@ -45,7 +45,7 @@ pin_run_as_build:
     min_pin: x.x
     max_pin: x.x
 proj:
-- 9.3.0
+- 9.3.1
 pugixml:
 - '1.14'
 python:
