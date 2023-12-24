@@ -1,3 +1,7 @@
+MACOSX_DEPLOYMENT_TARGET:  # [osx and x86_64]
+  - '10.15'                # [osx and x86_64]
+MACOSX_SDK_VERSION:        # [osx and x86_64]
+  - '11.0'                 # [osx and x86_64]
 # clang 16 errors on incompatible function pointers
 c_compiler_version:     # [osx]
   - 15                  # [osx]

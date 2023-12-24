@@ -7,6 +7,18 @@ BUILD_CONFIG=Release
 # Use bash "Remove Largest Suffix Pattern" to get rid of all but major version number
 PYTHON_MAJOR_VERSION=${PY_VER%%.*}
 
+if [[ "${target_platform}" =~ osx-arm64 ]]; then
+    rm -f "${PREFIX}/lib/qt6/moc"
+    ln -s "${BUILD_PREFIX}/lib/qt6/moc" "${PREFIX}/lib/qt6/moc"
+    
+    # Additional debugging information
+    echo "Adjusted Qt tools for osx-arm64 with build variant qt6"
+    echo "Removed: ${PREFIX}/lib/qt6/moc"
+    echo "Linked to: ${BUILD_PREFIX}/lib/qt6/moc"
+else
+    echo "Skipping Qt tools adjustment. Target platform: ${target_platform}, Build variant: $build_variant"
+fi
+
 VTK_ARGS=()
 
 if [[ "$build_variant" == "osmesa" ]]; then
