@@ -1,5 +1,7 @@
 MACOSX_DEPLOYMENT_TARGET:
-- '10.9'
+- '10.15'
+MACOSX_SDK_VERSION:
+- '11.0'
 build_variant:
 - qt
 channel_sources:
@@ -46,8 +48,8 @@ pugixml:
 - '1.14'
 python:
 - 3.10.* *_cpython
-qt_main:
-- '5.15'
+qt6_main:
+- '6.5'
 sqlite:
 - '3'
 target_platform:
