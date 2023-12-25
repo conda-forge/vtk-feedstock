@@ -16,7 +16,7 @@
 # otherwise it won't be correct in the final build.
 
 package:
-  name: vtk
+  name: vtk_qt6
   version: {{ version }}
 
 source:
