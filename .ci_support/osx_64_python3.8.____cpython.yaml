@@ -7,7 +7,7 @@ build_variant:
 channel_sources:
 - conda-forge
 channel_targets:
-- conda-forge main
+- conda-forge vtk_qt6
 cxx_compiler:
 - clangxx
 cxx_compiler_version:

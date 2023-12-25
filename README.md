@@ -1,5 +1,5 @@
-About vtk-feedstock
-===================
+About vtk_qt6-feedstock
+=======================
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/vtk-feedstock/blob/main/LICENSE.txt)
 
@@ -328,17 +328,17 @@ Current release info
 | [![Conda Recipe](https://img.shields.io/badge/recipe-vtk--base-green.svg)](https://anaconda.org/conda-forge/vtk-base) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/vtk-base.svg)](https://anaconda.org/conda-forge/vtk-base) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/vtk-base.svg)](https://anaconda.org/conda-forge/vtk-base) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/vtk-base.svg)](https://anaconda.org/conda-forge/vtk-base) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-vtk--io--ffmpeg-green.svg)](https://anaconda.org/conda-forge/vtk-io-ffmpeg) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/vtk-io-ffmpeg.svg)](https://anaconda.org/conda-forge/vtk-io-ffmpeg) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/vtk-io-ffmpeg.svg)](https://anaconda.org/conda-forge/vtk-io-ffmpeg) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/vtk-io-ffmpeg.svg)](https://anaconda.org/conda-forge/vtk-io-ffmpeg) |
 
-Installing vtk
-==============
+Installing vtk_qt6
+==================
 
-Installing `vtk` from the `conda-forge` channel can be achieved by adding `conda-forge` to your channels with:
+Installing `vtk_qt6` from the `conda-forge/label/vtk_qt6` channel can be achieved by adding `conda-forge/label/vtk_qt6` to your channels with:
 
 ```
-conda config --add channels conda-forge
+conda config --add channels conda-forge/label/vtk_qt6
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `vtk, vtk-base, vtk-io-ffmpeg` can be installed with `conda`:
+Once the `conda-forge/label/vtk_qt6` channel has been enabled, `vtk, vtk-base, vtk-io-ffmpeg` can be installed with `conda`:
 
 ```
 conda install vtk vtk-base vtk-io-ffmpeg
@@ -353,26 +353,26 @@ mamba install vtk vtk-base vtk-io-ffmpeg
 It is possible to list all of the versions of `vtk` available on your platform with `conda`:
 
 ```
-conda search vtk --channel conda-forge
+conda search vtk --channel conda-forge/label/vtk_qt6
 ```
 
 or with `mamba`:
 
 ```
-mamba search vtk --channel conda-forge
+mamba search vtk --channel conda-forge/label/vtk_qt6
 ```
 
 Alternatively, `mamba repoquery` may provide more information:
 
 ```
 # Search all versions available on your platform:
-mamba repoquery search vtk --channel conda-forge
+mamba repoquery search vtk --channel conda-forge/label/vtk_qt6
 
 # List packages depending on `vtk`:
-mamba repoquery whoneeds vtk --channel conda-forge
+mamba repoquery whoneeds vtk --channel conda-forge/label/vtk_qt6
 
 # List dependencies of `vtk`:
-mamba repoquery depends vtk --channel conda-forge
+mamba repoquery depends vtk --channel conda-forge/label/vtk_qt6
 ```
 
 
@@ -417,17 +417,17 @@ Terminology
                   produce the finished article (built conda distributions)
 
 
-Updating vtk-feedstock
-======================
+Updating vtk_qt6-feedstock
+==========================
 
-If you would like to improve the vtk recipe or build a new
+If you would like to improve the vtk_qt6 recipe or build a new
 package version, please fork this repository and submit a PR. Upon submission,
 your changes will be run on the appropriate platforms to give the reviewer an
 opportunity to confirm that the changes result in a successful build. Once
 merged, the recipe will be re-built and uploaded automatically to the
 `conda-forge` channel, whereupon the built conda packages will be available for
 everybody to install and use from the `conda-forge` channel.
-Note that all branches in the conda-forge/vtk-feedstock are
+Note that all branches in the conda-forge/vtk_qt6-feedstock are
 immediately built and any created packages are uploaded, so PRs should be based
 on branches in forks and branches in the main repository should only be used to
 build distinct package versions.
