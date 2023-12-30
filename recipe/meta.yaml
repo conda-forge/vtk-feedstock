@@ -209,8 +209,8 @@ outputs:
     requirements:
       build: []
       host:
-          # We use ffmpeg here in the host section so that conda build
-          # uses the global pinnings and ensures ffmpeg compatibility.
+        # We use ffmpeg here in the host section so that conda build
+        # uses the global pinnings and ensures ffmpeg compatibility.
         - ffmpeg
       run:
         - {{ pin_subpackage("vtk-base", exact=True) }}
