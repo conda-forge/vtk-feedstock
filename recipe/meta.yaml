@@ -32,6 +32,7 @@ source:
 build:
   number: {{ build }}
   string: {{ build_string }}
+  skip: true # [py<312]
 
 outputs:
   - name: vtk-base
@@ -39,6 +40,7 @@ outputs:
       string: {{ build_string }}
       script: ${RECIPE_DIR}/build-base.sh  # [not win]
       script: "%RECIPE_DIR%\\bld-base.bat"  # [win]
+      skip: true # [py<312]
       ignore_run_exports_from:
         - ffmpeg  # [not win]
       run_exports:
@@ -205,15 +207,18 @@ outputs:
       string: {{ build_string }}
       script: ${RECIPE_DIR}/build-io-ffmpeg.sh  # [not win]
       skip: true  # [win]
+      skip: true # [py<312]
       run_exports:
         - {{ pin_subpackage('vtk-io-ffmpeg', max_pin='x.x.x') }}
     requirements:
       build: []
       host:
-          # We use ffmpeg here in the host section so that conda build
-          # uses the global pinnings and ensures ffmpeg compatibility.
+        - python
+        # We use ffmpeg here in the host section so that conda build
+        # uses the global pinnings and ensures ffmpeg compatibility.
         - ffmpeg
       run:
+        - python
         - {{ pin_subpackage("vtk-base", exact=True) }}
         - ffmpeg
     test:
@@ -228,9 +233,12 @@ outputs:
       string: {{ build_string }}
       run_exports:
         - {{ pin_subpackage('vtk-base', max_pin='x.x.x') }}
+      skip: true # [py<312]
     requirements:
-      build: []
+      host:
+         - python
       run:
+        - python
         - {{ pin_subpackage("vtk-base", exact=True) }}
         - {{ pin_subpackage("vtk-io-ffmpeg", exact=True) }}  # [not win]
     test:
