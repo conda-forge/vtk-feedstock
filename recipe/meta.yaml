@@ -81,7 +81,8 @@ outputs:
         - expat <2.6  # https://gitlab.kitware.com/vtk/vtk/-/issues/19258
         - tbb
         - tbb-devel
-        - mesalib >=21.0  # [build_variant == "osmesa"]
+        # temporary pin: mesalib 24 fails
+        - mesalib >=21.0,<24  # [build_variant == "osmesa"]
         - libnetcdf
         - libnetcdf * nompi_*
         - lz4-c
