@@ -37,3 +37,13 @@ writer = vtk.vtkPNGWriter()
 writer.SetFileName('cube.png')
 writer.SetInputData(window_filter.GetOutput())
 writer.Write()
+
+# test for https://gitlab.kitware.com/vtk/vtk/-/issues/19258
+# test from https://gitlab.archlinux.org/archlinux/packaging/packages/paraview/-/issues/4#note_166231
+reader = vtk.vtkXMLUnstructuredGridReader()
+reader.SetFileName(os.environ["RECIPE_DIR"] + "/tests/ref.vtu")
+reader.Update()
+points = reader.GetOutput().GetPoints()
+# this will be None with expat 2.6
+assert points is not None
+assert points.GetNumberOfPoints() == 500

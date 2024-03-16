@@ -37,7 +37,7 @@ libuuid:
 libxcb:
 - '1.15'
 libxml2:
-- '2.11'
+- '2'
 lz4_c:
 - 1.9.3
 pin_run_as_build:
