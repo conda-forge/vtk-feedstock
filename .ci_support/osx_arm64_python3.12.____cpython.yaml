@@ -5,7 +5,7 @@ build_variant:
 channel_sources:
 - conda-forge
 channel_targets:
-- conda-forge main
+- conda-forge vtk_qt6
 cxx_compiler:
 - clangxx
 cxx_compiler_version:
@@ -31,7 +31,7 @@ libpng:
 libtiff:
 - '4.6'
 libxml2:
-- '2.11'
+- '2'
 lz4_c:
 - 1.9.3
 macos_machine:
@@ -46,8 +46,8 @@ pugixml:
 - '1.14'
 python:
 - 3.12.* *_cpython
-qt_main:
-- '5.15'
+qt6_main:
+- '6.6'
 sqlite:
 - '3'
 target_platform:
