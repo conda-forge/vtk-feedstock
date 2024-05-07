@@ -33,3 +33,6 @@ docker_image:                                     # [linux64]
   - quay.io/condaforge/linux-anvil-cos7-x86_64    # [linux64]
 cdt_name:                                         # [linux64]
   - cos7                                          # [linux64]
+
+c_stdlib_version:   # [linux]
+  - "2.17"          # [linux]

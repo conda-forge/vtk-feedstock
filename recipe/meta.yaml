@@ -56,7 +56,7 @@ outputs:
       build:
         - {{ compiler("cxx") }}
         - {{ compiler('fortran') }}  # [build_variant != "qt"]
-        - sysroot_linux-64 2.17  # [build_variant == "osmesa"]
+        - {{ stdlib("c") }}    # [build_variant != "qt"]
         - cmake
         - ninja
         - python                                 # [build_platform != target_platform]
