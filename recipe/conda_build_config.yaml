@@ -1,3 +1,8 @@
+# clang 16 errors on incompatible function pointers
+c_compiler_version:     # [osx]
+  - 15                  # [osx]
+cxx_compiler_version:   # [osx]
+  - 15                  # [osx]
 build_variant:
   - "qt"
   - "osmesa"  # [linux64]
@@ -14,3 +19,14 @@ replacements:
         - '*.cmake'
       regex_re: '([^;\s"]+/MacOSX\d*\.?\d*\.sdk)'
       replacement_re: '$ENV{CONDA_BUILD_SYSROOT}'
+cudnn:                                            # [linux64]
+  - undefined                                     # [linux64]
+cuda_compiler_version:                            # [linux64]
+  - None                                          # [linux64]
+docker_image:                                     # [linux64]
+  - quay.io/condaforge/linux-anvil-cos7-x86_64    # [linux64]
+cdt_name:                                         # [linux64]
+  - cos7                                          # [linux64]
+
+c_stdlib_version:   # [linux]
+  - "2.17"          # [linux]
