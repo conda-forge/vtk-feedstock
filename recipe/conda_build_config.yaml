@@ -11,8 +11,6 @@ cxx_compiler_version:   # [osx]
   - 15                  # [osx]
 build_variant:
   - "qt"
-  - "osmesa"  # [linux64]
-  - "egl"  # [linux64]
 replacements:
   all_replacements:
     - tag: 'CMake build metadata'
