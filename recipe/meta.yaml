@@ -33,6 +33,7 @@ build:
   number: {{ build }}
   string: {{ build_string }}
   skip: true  # [py<312]
+  skip: true  # [ppc64le]
 
 outputs:
   - name: vtk-base
