@@ -7,7 +7,7 @@ build_variant:
 channel_sources:
 - conda-forge
 channel_targets:
-- freecad qt6
+- conda-forge main
 cxx_compiler:
 - clangxx
 cxx_compiler_version:
