@@ -1,5 +1,5 @@
 {% set version = "9.2.6" %}
-{% set build = 20 %}
+{% set build = 21 %}
 
 {% set minor_version = ".".join(version.split(".")[:2]) %}
 
@@ -78,9 +78,11 @@ outputs:
         - libtiff
         - jsoncpp
         - expat
+        - expat <2.6  # https://gitlab.kitware.com/vtk/vtk/-/issues/19258
         - tbb
         - tbb-devel
-        - mesalib >=21.0  # [build_variant == "osmesa"]
+        # temporary pin: mesalib 24 fails
+        - mesalib >=21.0,<24  # [build_variant == "osmesa"]
         - libnetcdf
         - libnetcdf * nompi_*
         - lz4-c
@@ -128,6 +130,9 @@ outputs:
         - libtiff
         - jsoncpp
         - expat
+        # expat run_exports accepts minor revisions
+        # but vtk is incompatible with 2.6: https://gitlab.kitware.com/vtk/vtk/-/issues/19258
+        - libexpat <2.6
         - tbb
         - mesalib >=21.0  # [build_variant == "osmesa"]
         - libnetcdf
