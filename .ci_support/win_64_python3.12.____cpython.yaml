@@ -1,5 +1,7 @@
 build_variant:
 - qt
+c_stdlib:
+- vs
 channel_sources:
 - conda-forge
 channel_targets:
@@ -53,4 +55,4 @@ tbb_devel:
 vtk:
 - 9.2.6
 zlib:
-- '1.2'
+- '1'
