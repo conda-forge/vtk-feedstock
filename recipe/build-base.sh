@@ -7,7 +7,7 @@ BUILD_CONFIG=Release
 # Use bash "Remove Largest Suffix Pattern" to get rid of all but major version number
 PYTHON_MAJOR_VERSION=${PY_VER%%.*}
 
-if [[ "${target_platform}" =~ osx-arm64 ]]; then
+if [[ "${target_platform}" =~ osx-arm64 && "${target_platform}" != "${build_platform}" ]]; then
     rm -f "${PREFIX}/lib/qt6/moc"
     ln -s "${BUILD_PREFIX}/lib/qt6/moc" "${PREFIX}/lib/qt6/moc"
     
@@ -174,6 +174,7 @@ cmake -LAH .. -G "Ninja" ${CMAKE_ARGS} \
     -DVTK_MODULE_USE_EXTERNAL_VTK_cgns:BOOL=OFF \
     -DVTK_MODULE_USE_EXTERNAL_VTK_ioss:BOOL=OFF \
     -DVTK_MODULE_USE_EXTERNAL_VTK_verdict:BOOL=OFF \
+    -DQT_HOST_PATH:STRING="${PREFIX}" \
     "${VTK_ARGS[@]}"
 
 # compile & install!
