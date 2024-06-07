@@ -1,5 +1,9 @@
 build_variant:
 - qt
+c_stdlib:
+- sysroot
+c_stdlib_version:
+- '2.17'
 cdt_name:
 - cos7
 channel_sources:
@@ -34,8 +38,6 @@ libtiff:
 - '4.6'
 libuuid:
 - '2'
-libxcb:
-- '1.15'
 libxml2:
 - '2'
 lz4_c:
@@ -60,5 +62,8 @@ tbb_devel:
 - '2021'
 vtk:
 - 9.2.6
+zip_keys:
+- - c_stdlib_version
+  - cdt_name
 zlib:
-- '1.2'
+- '1'

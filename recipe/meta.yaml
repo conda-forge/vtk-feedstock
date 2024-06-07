@@ -1,5 +1,5 @@
 {% set version = "9.2.6" %}
-{% set build = 21 %}
+{% set build = 22 %}
 
 {% set minor_version = ".".join(version.split(".")[:2]) %}
 
@@ -54,7 +54,7 @@ outputs:
       build:
         - {{ compiler("cxx") }}
         - {{ compiler('fortran') }}  # [build_variant != "qt"]
-        - sysroot_linux-64 2.17  # [build_variant == "osmesa"]
+        - {{ stdlib("c") }}
         - cmake
         - ninja
         - python                                 # [build_platform != target_platform]

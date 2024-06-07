@@ -8,4 +8,6 @@ conda_forge_output_validation: true
 github:
   branch_name: main
   tooling_branch_name: main
+os_version:
+  linux_64: cos7
 test: native_and_emulated
