@@ -75,6 +75,12 @@ if [[ "$target_platform" != "linux-ppc64le"
     )
 fi
 
+if [[ "$target_platform" == osx-* ]]; then
+    # incompatible function pointers become errors in clang >=16
+    export CFLAGS="${CFLAGS} -Wno-incompatible-pointer-types"
+    export CXXFLAGS="${CXXFLAGS} -Wno-incompatible-pointer-types"
+fi
+
 if [[ "$CONDA_BUILD_CROSS_COMPILATION" == "1" ]]; then
   (
     mkdir build-native
