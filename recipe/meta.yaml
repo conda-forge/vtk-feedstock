@@ -119,7 +119,6 @@ outputs:
         - gl2ps
         - pugixml
         - qt6-main  # [not ppc64le and (build_variant == "qt")]
-        - fast_float
 
       run:
         - python
