@@ -59,6 +59,7 @@ outputs:
         - ninja
         - python                                 # [build_platform != target_platform]
         - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+        - qt6-main                               # [build_platform != target_platform]
         - {{ cdt('libselinux') }}  # [linux and build_variant != "osmesa"]
         - {{ cdt('mesa-libgl-devel') }}  # [linux and build_variant != "osmesa"]
         - {{ cdt('mesa-dri-drivers') }}  # [linux and build_variant != "osmesa"]
@@ -117,7 +118,7 @@ outputs:
         - sqlite
         - gl2ps
         - pugixml
-        - qt-main  # [not ppc64le and (build_variant == "qt")]
+        - qt6-main  # [not ppc64le and (build_variant == "qt")]
         - fast_float
 
       run:
