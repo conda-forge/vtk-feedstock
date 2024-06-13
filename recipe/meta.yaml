@@ -1,5 +1,5 @@
-{% set version = "9.2.6" %}
-{% set build = 23 %}
+{% set version = "9.3.0" %}
+{% set build = 0 %}
 
 {% set minor_version = ".".join(version.split(".")[:2]) %}
 
@@ -21,13 +21,16 @@ package:
 
 source:
   url: http://www.vtk.org/files/release/{{ minor_version }}/VTK-{{ version }}.tar.gz
-  sha256: 06fc8d49c4e56f498c40fcb38a563ed8d4ec31358d0101e8988f0bb4d539dd12
+  sha256: fdc7b9295225b34e4fdddc49cd06e66e94260cb00efee456e0f66568c9681be9
   patches:
     - fix-threads-windows.patch  # [win]
     # https://github.com/conda-forge/vtk-feedstock/pull/282
     # https://gitlab.kitware.com/vtk/vtk/-/issues/18365#note_1079278
     # https://gitlab.kitware.com/vtk/vtk/-/merge_requests/9987
     - patches/9987_try_except_python_import.patch  # [not win]
+    # https://gitlab.kitware.com/vtk/vtk/-/issues/19258
+    # https://gitlab.kitware.com/vtk/vtk/-/commit/db8f9efca220c9d16a30958e179abae3379d0011
+    - patches/expat-backport.patch
 
 build:
   number: {{ build }}
@@ -59,6 +62,7 @@ outputs:
         - ninja
         - python                                 # [build_platform != target_platform]
         - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+        - qt6-main                               # [build_platform != target_platform]
         - {{ cdt('libselinux') }}  # [linux and build_variant != "osmesa"]
         - {{ cdt('mesa-libgl-devel') }}  # [linux and build_variant != "osmesa"]
         - {{ cdt('mesa-dri-drivers') }}  # [linux and build_variant != "osmesa"]
@@ -78,7 +82,6 @@ outputs:
         - libtiff
         - jsoncpp
         - expat
-        - expat <2.6  # https://gitlab.kitware.com/vtk/vtk/-/issues/19258
         - tbb
         - tbb-devel
         # temporary pin: mesalib 24 fails
@@ -117,7 +120,7 @@ outputs:
         - sqlite
         - gl2ps
         - pugixml
-        - qt-main  # [not ppc64le and (build_variant == "qt")]
+        - qt6-main  # [not ppc64le and (build_variant == "qt")]
 
       run:
         - python
@@ -130,9 +133,6 @@ outputs:
         - libtiff
         - jsoncpp
         - expat
-        # expat run_exports accepts minor revisions
-        # but vtk is incompatible with 2.6: https://gitlab.kitware.com/vtk/vtk/-/issues/19258
-        - libexpat <2.6
         - tbb
         - mesalib >=21.0  # [build_variant == "osmesa"]
         - libnetcdf
@@ -215,7 +215,7 @@ outputs:
       host:
           # We use ffmpeg here in the host section so that conda build
           # uses the global pinnings and ensures ffmpeg compatibility.
-          - ffmpeg
+        - ffmpeg
       run:
         - {{ pin_subpackage("vtk-base", exact=True) }}
         - ffmpeg
