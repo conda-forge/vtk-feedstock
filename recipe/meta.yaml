@@ -28,9 +28,6 @@ source:
     # https://gitlab.kitware.com/vtk/vtk/-/issues/18365#note_1079278
     # https://gitlab.kitware.com/vtk/vtk/-/merge_requests/9987
     - patches/9987_try_except_python_import.patch  # [not win]
-    # https://gitlab.kitware.com/vtk/vtk/-/issues/19258
-    # https://gitlab.kitware.com/vtk/vtk/-/commit/db8f9efca220c9d16a30958e179abae3379d0011
-    - patches/expat-backport.patch
 
 build:
   number: {{ build }}
