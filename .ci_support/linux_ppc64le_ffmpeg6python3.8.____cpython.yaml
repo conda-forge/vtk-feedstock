@@ -38,6 +38,8 @@ libtiff:
 - '4.6'
 libuuid:
 - '2'
+libxcb:
+- '1.16'
 libxml2:
 - '2'
 lz4_c:
