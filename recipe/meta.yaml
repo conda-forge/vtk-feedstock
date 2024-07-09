@@ -9,7 +9,7 @@
 # mesalib, but it could also be selected via the build string:
 # `vtk * osmesa*` for osmesa
 # `vtk * egl*` for egl
-# `vtk * qt-main*` for qt-main
+# `vtk * qt*` for qt-main
 {% set build_string = '{}_py{}h{}_{}'.format(build_variant, CONDA_PY, PKG_HASH, build) %}
 
 # The 'build: string: ...' needs to be set in each output and the top-level
