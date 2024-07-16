@@ -1,5 +1,5 @@
 {% set version = "9.3.1" %}
-{% set build = 0 %}
+{% set build = 1 %}
 
 {% set minor_version = ".".join(version.split(".")[:2]) %}
 
@@ -10,8 +10,6 @@
 # `vtk * osmesa*` for osmesa
 # `vtk * egl*` for egl
 # `vtk * qt-main*` for qt-main
-{% set build_string = '{}_py{}h{}_{}'.format(build_variant, CONDA_PY, PKG_HASH, build) %}
-
 # The 'build: string: ...' needs to be set in each output and the top-level
 # otherwise it won't be correct in the final build.
 
@@ -31,12 +29,12 @@ source:
 
 build:
   number: {{ build }}
-  string: {{ build_string }}
+  string: "{{ build_variant }}_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ build }}"
 
 outputs:
   - name: vtk-base
     build:
-      string: {{ build_string }}
+      string: "{{ build_variant }}_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ build }}"
       script: ${RECIPE_DIR}/build-base.sh  # [not win]
       script: "%RECIPE_DIR%\\bld-base.bat"  # [win]
       ignore_run_exports_from:
@@ -202,7 +200,7 @@ outputs:
 
   - name: vtk-io-ffmpeg
     build:
-      string: {{ build_string }}
+      string: "{{ build_variant }}_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ build }}"
       script: ${RECIPE_DIR}/build-io-ffmpeg.sh  # [not win]
       skip: true  # [win]
       run_exports:
@@ -225,7 +223,7 @@ outputs:
 
   - name: vtk
     build:
-      string: {{ build_string }}
+      string: "{{ build_variant }}_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ build }}"
       run_exports:
         - {{ pin_subpackage('vtk-base', max_pin='x.x.x') }}
     requirements:
