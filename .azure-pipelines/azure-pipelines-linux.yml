@@ -168,47 +168,7 @@ jobs:
         CONFIG: linux_aarch64_ffmpeg7python3.9.____cpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_ppc64le_ffmpeg6python3.10.____cpython:
-        CONFIG: linux_ppc64le_ffmpeg6python3.10.____cpython
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_ppc64le_ffmpeg6python3.11.____cpython:
-        CONFIG: linux_ppc64le_ffmpeg6python3.11.____cpython
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_ppc64le_ffmpeg6python3.12.____cpython:
-        CONFIG: linux_ppc64le_ffmpeg6python3.12.____cpython
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_ppc64le_ffmpeg6python3.8.____cpython:
-        CONFIG: linux_ppc64le_ffmpeg6python3.8.____cpython
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_ppc64le_ffmpeg6python3.9.____cpython:
-        CONFIG: linux_ppc64le_ffmpeg6python3.9.____cpython
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_ppc64le_ffmpeg7python3.10.____cpython:
-        CONFIG: linux_ppc64le_ffmpeg7python3.10.____cpython
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_ppc64le_ffmpeg7python3.11.____cpython:
-        CONFIG: linux_ppc64le_ffmpeg7python3.11.____cpython
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_ppc64le_ffmpeg7python3.12.____cpython:
-        CONFIG: linux_ppc64le_ffmpeg7python3.12.____cpython
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_ppc64le_ffmpeg7python3.8.____cpython:
-        CONFIG: linux_ppc64le_ffmpeg7python3.8.____cpython
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_ppc64le_ffmpeg7python3.9.____cpython:
-        CONFIG: linux_ppc64le_ffmpeg7python3.9.____cpython
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-    maxParallel: 31
+    maxParallel: 29
   timeoutInMinutes: 360
   variables: {}
 
