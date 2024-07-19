@@ -1,3 +1,5 @@
+setlocal EnableDelayedExpansion
+
 mkdir build
 cd build
 
@@ -5,6 +7,11 @@ cd build
 set "CXXFLAGS=-MD"
 
 set PYTHON_MAJOR_VERSION=%PY_VER:~0,1%
+
+if "%build_variant%"=="qt" (
+    set VTK_ARGS=!VTK_ARGS! -DVTK_MODULE_ENABLE_VTK_GUISupportQt:STRING=YES
+    set VTK_ARGS=!VTK_ARGS! -DVTK_MODULE_ENABLE_VTK_RenderingQt:STRING=YES
+)
 
 cmake .. -G "Ninja" ^
     -Wno-dev ^
@@ -38,7 +45,8 @@ cmake .. -G "Ninja" ^
     -DVTK_MODULE_USE_EXTERNAL_VTK_cgns:BOOL=OFF ^
     -DVTK_MODULE_USE_EXTERNAL_VTK_ioss:BOOL=OFF ^
     -DVTK_MODULE_USE_EXTERNAL_VTK_verdict:BOOL=OFF ^
-    -DLZMA_LIBRARY="%LIBRARY_PREFIX%/lib/liblzma.lib"
+    -DLZMA_LIBRARY="%LIBRARY_PREFIX%/lib/liblzma.lib" ^
+    !VTK_ARGS!
 if errorlevel 1 exit 1
 
 ninja install
