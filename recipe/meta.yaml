@@ -100,6 +100,7 @@ outputs:
         - xorg-libx11  # [linux and build_variant != "osmesa"]
         - xorg-xf86vidmodeproto  # [linux and build_variant != "osmesa"]
         - libboost-headers
+        - libboost-devel
         - tk  # [not win and (build_variant == "qt")]
         - ffmpeg
         - utfcpp
@@ -119,16 +120,7 @@ outputs:
 
       run:
         - python
-        - zlib
-        - freetype
-        - hdf5
-        - libxml2
-        - libpng
-        - libjpeg-turbo
-        - libtiff
-        - jsoncpp
         - expat
-        - tbb
         - mesalib >=21.0  # [build_variant == "osmesa"]
         - libnetcdf
         - lz4-c
@@ -144,7 +136,6 @@ outputs:
         - nlohmann_json
         - proj
         - loguru
-        - sqlite
         - gl2ps
         - pugixml
         - tbb-devel
