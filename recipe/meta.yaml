@@ -9,7 +9,7 @@
 # mesalib, but it could also be selected via the build string:
 # `vtk * osmesa*` for osmesa
 # `vtk * egl*` for egl
-# `vtk * qt-main*` for qt-main
+# `vtk * qt*` for qt-main
 # The 'build: string: ...' needs to be set in each output and the top-level
 # otherwise it won't be correct in the final build.
 
