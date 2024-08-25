@@ -15,7 +15,7 @@ channel_targets:
 cxx_compiler:
 - clangxx
 cxx_compiler_version:
-- '16'
+- '17'
 expat:
 - '2'
 ffmpeg:
@@ -28,6 +28,8 @@ hdf5:
 - 1.14.3
 jsoncpp:
 - 1.9.5
+libboost_devel:
+- '1.84'
 libjpeg_turbo:
 - '3'
 libnetcdf:
