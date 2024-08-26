@@ -154,6 +154,7 @@ outputs:
       run_constrained:
         # Paraview bundles its own VTK that has conflicting Python vtkmodules
         - paraview ==9999999999
+        - {{ pin_compatible('libboost_headers', max_pin='x.x') }}
 
     test:
       imports:
