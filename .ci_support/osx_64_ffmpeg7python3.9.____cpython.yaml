@@ -15,7 +15,7 @@ channel_targets:
 cxx_compiler:
 - clangxx
 cxx_compiler_version:
-- '16'
+- '17'
 expat:
 - '2'
 ffmpeg:
@@ -28,6 +28,8 @@ hdf5:
 - 1.14.3
 jsoncpp:
 - 1.9.5
+libboost_headers:
+- '1.86'
 libjpeg_turbo:
 - '3'
 libnetcdf:
@@ -47,7 +49,7 @@ pin_run_as_build:
     min_pin: x.x
     max_pin: x.x
 proj:
-- 9.3.1
+- '9.4'
 pugixml:
 - '1.14'
 python:

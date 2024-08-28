@@ -20,6 +20,8 @@ hdf5:
 - 1.14.3
 jsoncpp:
 - 1.9.5
+libboost_headers:
+- '1.86'
 libjpeg_turbo:
 - '3'
 libnetcdf:
@@ -37,7 +39,7 @@ pin_run_as_build:
     min_pin: x.x
     max_pin: x.x
 proj:
-- 9.3.1
+- '9.4'
 pugixml:
 - '1.14'
 python:
