@@ -21,7 +21,7 @@ hdf5:
 jsoncpp:
 - 1.9.5
 libboost_headers:
-- '1.84'
+- '1.86'
 libjpeg_turbo:
 - '3'
 libnetcdf:
