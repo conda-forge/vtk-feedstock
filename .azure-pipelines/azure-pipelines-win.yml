@@ -17,9 +17,6 @@ jobs:
       win_64_ffmpeg6python3.12.____cpython:
         CONFIG: win_64_ffmpeg6python3.12.____cpython
         UPLOAD_PACKAGES: 'True'
-      win_64_ffmpeg6python3.8.____cpython:
-        CONFIG: win_64_ffmpeg6python3.8.____cpython
-        UPLOAD_PACKAGES: 'True'
       win_64_ffmpeg6python3.9.____cpython:
         CONFIG: win_64_ffmpeg6python3.9.____cpython
         UPLOAD_PACKAGES: 'True'
@@ -31,9 +28,6 @@ jobs:
         UPLOAD_PACKAGES: 'True'
       win_64_ffmpeg7python3.12.____cpython:
         CONFIG: win_64_ffmpeg7python3.12.____cpython
-        UPLOAD_PACKAGES: 'True'
-      win_64_ffmpeg7python3.8.____cpython:
-        CONFIG: win_64_ffmpeg7python3.8.____cpython
         UPLOAD_PACKAGES: 'True'
       win_64_ffmpeg7python3.9.____cpython:
         CONFIG: win_64_ffmpeg7python3.9.____cpython
