@@ -1,5 +1,5 @@
 {% set version = "9.3.1" %}
-{% set build = 4 %}
+{% set build = 5 %}
 
 {% set minor_version = ".".join(version.split(".")[:2]) %}
 
@@ -186,6 +186,7 @@ outputs:
         - vtkmodules.vtkInfovisCore
         - vtkmodules.vtkRenderingCore
         - vtkmodules.vtkViewsCore
+        - vtkmodules.vtkRenderingQt  # [build_variant == "qt"]
         - vtkmodules.vtkRenderingVolume
         - vtkmodules.vtkInteractionWidgets
         - vtkmodules.vtkWebCore
@@ -198,6 +199,15 @@ outputs:
 
       commands:
         - pip check
+        {% set vtk_qt_libs = [
+            "vtkGUISupportQt",
+            "vtkRenderingQt"
+        ] %}
+        {% for vtk_lib in vtk_qt_libs %}
+        - test -f $PREFIX/lib/lib{{ vtk_lib }}-{{ minor_version }}${SHLIB_EXT}  # [not win and (build_variant == "qt")]
+        - if not exist %PREFIX%\\Library\\lib\\{{ vtk_lib }}-{{ minor_version }}.lib exit 1  # [win and (build_variant == "qt")]
+        - if not exist %PREFIX%\\Library\\bin\\{{ vtk_lib }}-{{ minor_version }}.dll exit 1  # [win and (build_variant == "qt")]
+        {% endfor %}
 
   - name: vtk-io-ffmpeg
     build:
