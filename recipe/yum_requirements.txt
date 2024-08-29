@@ -5,3 +5,4 @@ mesa-dri-drivers
 libX11-devel
 libglvnd-glx
 libglvnd-egl
+libglvnd-opengl
