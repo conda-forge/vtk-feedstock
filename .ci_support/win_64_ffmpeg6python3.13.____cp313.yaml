@@ -1,21 +1,13 @@
-MACOSX_DEPLOYMENT_TARGET:
-- '11.0'
-MACOSX_SDK_VERSION:
-- '11.0'
 build_variant:
 - qt
 c_stdlib:
-- macosx_deployment_target
-c_stdlib_version:
-- '11.0'
+- vs
 channel_sources:
-- conda-forge
+- conda-forge/label/python_rc,conda-forge
 channel_targets:
 - conda-forge main
 cxx_compiler:
-- clangxx
-cxx_compiler_version:
-- '17'
+- vs2019
 expat:
 - '2'
 ffmpeg:
@@ -42,8 +34,6 @@ libxml2:
 - '2'
 lz4_c:
 - 1.9.3
-macos_machine:
-- arm64-apple-darwin20.0.0
 pin_run_as_build:
   python:
     min_pin: x.x
@@ -53,19 +43,17 @@ proj:
 pugixml:
 - '1.14'
 python:
-- 3.11.* *_cpython
+- 3.13.* *_cp313
 qt6_main:
 - '6.7'
 sqlite:
 - '3'
 target_platform:
-- osx-arm64
+- win-64
 tbb:
 - '2021'
 tbb_devel:
 - '2021'
-tk:
-- '8.6'
 vtk:
 - 9.2.6
 zip_keys:
