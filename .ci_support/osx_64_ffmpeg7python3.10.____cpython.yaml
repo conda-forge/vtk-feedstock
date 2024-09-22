@@ -37,7 +37,7 @@ libnetcdf:
 libpng:
 - '1.6'
 libtiff:
-- '4.6'
+- '4.7'
 libxml2:
 - '2'
 lz4_c:
@@ -67,6 +67,6 @@ tbb_devel:
 tk:
 - '8.6'
 vtk:
-- 9.2.6
+- 9.3.0
 zlib:
 - '1'
