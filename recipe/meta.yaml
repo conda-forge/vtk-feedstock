@@ -21,11 +21,13 @@ source:
   url: http://www.vtk.org/files/release/{{ minor_version }}/VTK-{{ version }}.tar.gz
   sha256: 8354ec084ea0d2dc3d23dbe4243823c4bfc270382d0ce8d658939fd50061cab8
   patches:
-    - fix-threads-windows.patch  # [win]
+    - patches/fix-threads-windows.patch  # [win]
     # https://github.com/conda-forge/vtk-feedstock/pull/282
     # https://gitlab.kitware.com/vtk/vtk/-/issues/18365#note_1079278
     # https://gitlab.kitware.com/vtk/vtk/-/merge_requests/9987
     - patches/9987_try_except_python_import.patch  # [not win]
+    # https://gitlab.kitware.com/vtk/vtk/-/merge_requests/11486
+    - patches/11486.patch
 
 build:
   number: {{ build }}
