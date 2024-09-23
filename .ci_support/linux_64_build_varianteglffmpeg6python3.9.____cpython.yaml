@@ -31,7 +31,7 @@ glew:
 hdf5:
 - 1.14.3
 jsoncpp:
-- 1.9.5
+- 1.9.6
 libboost_headers:
 - '1.86'
 libjpeg_turbo:
@@ -41,7 +41,7 @@ libnetcdf:
 libpng:
 - '1.6'
 libtiff:
-- '4.6'
+- '4.7'
 libuuid:
 - '2'
 libxcb:
@@ -73,7 +73,7 @@ tbb_devel:
 tk:
 - '8.6'
 vtk:
-- 9.2.6
+- 9.3.0
 zip_keys:
 - - c_stdlib_version
   - cdt_name
