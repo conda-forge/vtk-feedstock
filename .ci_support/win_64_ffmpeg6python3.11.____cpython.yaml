@@ -19,7 +19,7 @@ glew:
 hdf5:
 - 1.14.3
 jsoncpp:
-- 1.9.5
+- 1.9.6
 libboost_headers:
 - '1.86'
 libjpeg_turbo:
