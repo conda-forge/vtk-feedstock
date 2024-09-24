@@ -1,5 +1,5 @@
 build_variant:
-- osmesa
+- qt
 c_stdlib:
 - sysroot
 c_stdlib_version:
@@ -7,7 +7,7 @@ c_stdlib_version:
 cdt_name:
 - cos7
 channel_sources:
-- conda-forge
+- conda-forge/label/python_rc,conda-forge
 channel_targets:
 - conda-forge main
 cxx_compiler:
@@ -31,7 +31,7 @@ glew:
 hdf5:
 - 1.14.3
 jsoncpp:
-- 1.9.6
+- 1.9.5
 libboost_headers:
 - '1.86'
 libjpeg_turbo:
@@ -59,7 +59,7 @@ proj:
 pugixml:
 - '1.14'
 python:
-- 3.12.* *_cpython
+- 3.13.* *_cp313
 qt6_main:
 - '6.7'
 sqlite:
