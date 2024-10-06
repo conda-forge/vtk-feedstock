@@ -17,7 +17,7 @@ freetype:
 glew:
 - '2.1'
 hdf5:
-- 1.14.3
+- 1.14.4
 jsoncpp:
 - 1.9.6
 libboost_headers:
