@@ -1,0 +1,74 @@
+From b1a09529f3ab381494f3eecb53b2ce4adc5b55e9 Mon Sep 17 00:00:00 2001
+From: Laurent Rineau <laurent.rineau@cgal.org>
+Date: Tue, 17 Jan 2023 16:18:53 +0100
+Subject: [PATCH 1/2] Add #include <cstdint> to compile with gcc13
+
+The `vtkSEPReader` was introduced by MRs !4909 (from my former
+collaborator Maxime) and !4938. Then it was highly modified by
+!7516. The later MR is the one that introduced the uses of
+`std::uint8_t` and `std::uint32_t`.
+
+Those types needs the inclusion of `<cstdint>`.
+---
+ IO/Image/vtkSEPReader.h | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/IO/Image/vtkSEPReader.h b/IO/Image/vtkSEPReader.h
+index 83d127a41e4..b9110780f26 100644
+--- a/IO/Image/vtkSEPReader.h
++++ b/IO/Image/vtkSEPReader.h
+@@ -25,8 +25,9 @@
+ #include "vtkImageAlgorithm.h"
+ #include "vtkNew.h" // for ivars
+ 
+-#include <array>  // for std::array
+-#include <string> // for std::string
++#include <array>   // for std::array
++#include <cstdint> // for std::uint8_t and std::uint32_t
++#include <string>  // for std::string
+ 
+ namespace details
+ {
+-- 
+GitLab
+
+
+From 890f7574f01cf58cb1522772a62ca07deb438479 Mon Sep 17 00:00:00 2001
+From: Mathieu Westphal <mathieu.westphal@kitware.com>
+Date: Thu, 23 Feb 2023 18:06:07 +0100
+Subject: [PATCH 2/2] More #include <cstdint> to compile with gcc13
+
+---
+ IO/PIO/PIOData.h                                      | 1 +
+ Rendering/Matplotlib/vtkMatplotlibMathTextUtilities.h | 3 ++-
+ 2 files changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/IO/PIO/PIOData.h b/IO/PIO/PIOData.h
+index 98137f44c1c..03e59f7c832 100644
+--- a/IO/PIO/PIOData.h
++++ b/IO/PIO/PIOData.h
+@@ -1,6 +1,7 @@
+ #if !defined(_PIODATA_H)
+ #define _PIODATA_H
+ 
++#include <cstdint>
+ #include <fstream>
+ #include <iostream>
+ #include <list>
+diff --git a/Rendering/Matplotlib/vtkMatplotlibMathTextUtilities.h b/Rendering/Matplotlib/vtkMatplotlibMathTextUtilities.h
+index ca5445ddf4b..d0ba449a3c0 100644
+--- a/Rendering/Matplotlib/vtkMatplotlibMathTextUtilities.h
++++ b/Rendering/Matplotlib/vtkMatplotlibMathTextUtilities.h
+@@ -49,7 +49,8 @@
+ #include "vtkMathTextUtilities.h"
+ #include "vtkRenderingMatplotlibModule.h" // For export macro
+ 
+-#include <vector> // for std::vector
++#include <cstdint> // for std::uint64_t
++#include <vector>  // for std::vector
+ 
+ struct _object;
+ typedef struct _object PyObject;
+-- 
+GitLab
+
