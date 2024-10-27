@@ -15,11 +15,11 @@ channel_targets:
 cxx_compiler:
 - clangxx
 cxx_compiler_version:
-- '16'
+- '17'
 expat:
 - '2'
 ffmpeg:
-- '6'
+- '7'
 freetype:
 - '2'
 glew:
@@ -27,7 +27,9 @@ glew:
 hdf5:
 - 1.14.3
 jsoncpp:
-- 1.9.5
+- 1.9.6
+libboost_headers:
+- '1.84'
 libjpeg_turbo:
 - '3'
 libnetcdf:
@@ -35,7 +37,7 @@ libnetcdf:
 libpng:
 - '1.6'
 libtiff:
-- '4.6'
+- '4.7'
 libxml2:
 - '2'
 lz4_c:
@@ -47,13 +49,13 @@ pin_run_as_build:
     min_pin: x.x
     max_pin: x.x
 proj:
-- 9.3.1
+- '9.5'
 pugixml:
 - '1.14'
 python:
 - 3.9.* *_cpython
 qt_main:
-- '5.15'
+- 5.15.8
 sqlite:
 - '3'
 target_platform:
@@ -65,6 +67,6 @@ tbb_devel:
 tk:
 - '8.6'
 vtk:
-- 9.2.6
+- 9.3.0
 zlib:
 - '1'
