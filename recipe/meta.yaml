@@ -26,8 +26,6 @@ source:
     # https://gitlab.kitware.com/vtk/vtk/-/issues/18365#note_1079278
     # https://gitlab.kitware.com/vtk/vtk/-/merge_requests/9987
     - patches/9987_try_except_python_import.patch  # [not win]
-    # https://gitlab.kitware.com/vtk/vtk/-/merge_requests/11486
-    - patches/11486.patch
 
 build:
   number: {{ build }}
@@ -108,7 +106,7 @@ outputs:
         - eigen
         - double-conversion
         - pugixml
-        - glew  # [build_variant == "qt"]
+        - glad2-cmake
         - libogg
         - libtheora
         - nlohmann_json
@@ -116,40 +114,15 @@ outputs:
         - loguru
         - sqlite
         - gl2ps
-        - pugixml
         - qt6-main  # [not ppc64le and (build_variant == "qt")]
 
       run:
         - python
-        - zlib
-        - freetype
-        - hdf5
-        - libxml2
-        - libpng
-        - libjpeg-turbo
-        - libtiff
-        - jsoncpp
-        - expat
-        - tbb
         - mesalib >=21.0  # [build_variant == "osmesa"]
-        - libnetcdf
-        - lz4-c
-        - xorg-libxt  # [linux]
-        - tk  # [not win and (build_variant == "qt")]
         - utfcpp
-        - eigen
-        - double-conversion
-        - pugixml
-        - glew  # [build_variant == "qt"]
-        - libogg
-        - libtheora
+        - glad2
         - nlohmann_json
-        - proj
         - loguru
-        - sqlite
-        - gl2ps
-        - pugixml
-        - tbb-devel
         - numpy
         - wslink
 
