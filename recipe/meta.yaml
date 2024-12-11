@@ -63,7 +63,7 @@ outputs:
         - {{ cdt('libselinux') }}  # [linux and build_variant != "osmesa"]
         - {{ cdt('mesa-libgl-devel') }}  # [linux and build_variant != "osmesa"]
         - {{ cdt('mesa-dri-drivers') }}  # [linux and build_variant != "osmesa"]
-        - {{ cdt('libglvnd-egl') }}  # [build_variant == "egl" and cdt_name == "cos7"]
+        - {{ cdt('libglvnd-egl') }}  # [build_variant == "egl"]
         - {{ cdt('mesa-libegl-devel') }}  # [build_variant == "egl"]
         - {{ cdt('mesa-libgbm') }}  # [build_variant == "egl"]
 
