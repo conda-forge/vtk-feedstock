@@ -66,13 +66,11 @@ elif [[ "$build_variant" == "qt" ]]; then
         "-DTK_INCLUDE_PATH=${PREFIX}/include"
         "-DTCL_LIBRARY:FILEPATH=${PREFIX}/lib/libtcl${TCLTK_VERSION}${SHLIB_EXT}"
         "-DTK_LIBRARY:FILEPATH=${PREFIX}/lib/libtk${TCLTK_VERSION}${SHLIB_EXT}"
-        "-DOPENGL_egl_LIBRARY:FILEPATH=${PREFIX}/lib/libEGL.so.1"
-        "-DEGL_opengl_LIBRARY:FILEPATH=${PREFIX}/lib/libGL.so.1"
-        "-DOPENGL_opengl_LIBRARY:FILEPATH=${PREFIX}/lib/libGL.so.1"
     )
     if [[ "${target_platform}" == linux-* ]]; then
         VTK_ARGS+=(
             "-DVTK_USE_X:BOOL=ON"
+            "-DOPENGL_opengl_LIBRARY:FILEPATH=${PREFIX}/lib/libGL.so.1"
         )
     elif [[ "${target_platform}" == osx-* ]]; then
         VTK_ARGS+=(
