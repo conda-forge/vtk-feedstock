@@ -30,7 +30,7 @@ if [[ "$build_variant" == "osmesa" ]]; then
         "-DVTK_OPENGL_HAS_OSMESA:BOOL=ON"
         "-DOSMESA_INCLUDE_DIR:PATH=${PREFIX}/include"
         "-DOSMESA_LIBRARY:FILEPATH=${PREFIX}/lib/libOSMesa${OSMESA_VERSION}${SHLIB_EXT}"
-        "-DOPENGL_opengl_LIBRARY:FILEPATH=${BUILD_PREFIX}/${HOST}/sysroot/usr/lib64/libGL.so"
+        "-DOPENGL_opengl_LIBRARY:FILEPATH=${PREFIX}/lib/libGL.so.1"
         "-DVTK_MODULE_USE_EXTERNAL_VTK_glew:BOOL=OFF"
     )
 
@@ -49,11 +49,11 @@ elif [[ "$build_variant" == "egl" ]]; then
         "-DVTK_USE_X:BOOL=OFF"
         "-DVTK_OPENGL_HAS_EGL:BOOL=ON"
         "-DVTK_MODULE_USE_EXTERNAL_VTK_glew:BOOL=OFF"
-        "-DEGL_INCLUDE_DIR:PATH=${BUILD_PREFIX}/${HOST}/sysroot/usr/include"
-        "-DEGL_LIBRARY:FILEPATH=${BUILD_PREFIX}/${HOST}/sysroot/usr/lib/libEGL.so.1"
-        "-DOPENGL_egl_LIBRARY:FILEPATH=${BUILD_PREFIX}/${HOST}/sysroot/usr/lib/libEGL.so.1"
-        "-DEGL_opengl_LIBRARY:FILEPATH=${BUILD_PREFIX}/${HOST}/sysroot/usr/lib64/libGL.so"
-        "-DOPENGL_opengl_LIBRARY:FILEPATH=${BUILD_PREFIX}/${HOST}/sysroot/usr/lib64/libGL.so"
+        "-DEGL_INCLUDE_DIR:PATH=${PREFIX}/include"
+        "-DEGL_LIBRARY:FILEPATH=${PREFIX}/lib/libEGL.so.1"
+        "-DOPENGL_egl_LIBRARY:FILEPATH=${PREFIX}/lib/libEGL.so.1"
+        "-DEGL_opengl_LIBRARY:FILEPATH=${PREFIX}/lib/libGL.so.1"
+        "-DOPENGL_opengl_LIBRARY:FILEPATH=${PREFIX}/lib/libGL.so.1"
     )
 elif [[ "$build_variant" == "qt" ]]; then
     TCLTK_VERSION=`echo 'puts $tcl_version;exit 0' | tclsh`
