@@ -85,6 +85,7 @@ outputs:
         # https://github.com/conda-forge/qt-main-feedstock/blob/2b166b35e9e1a2d897640ac28ae4b00491d9e310/recipe/meta.yaml#L134-L138
         - libgl-devel  # [linux and build_variant != "osmesa"]
         - libegl-devel  # [build_variant == "egl"]
+        - libglvnd-devel  # [linux and build_variant != "osmesa"]
         - libxcb  # [linux and build_variant != "osmesa"]
         - xorg-libxau  # [linux and build_variant != "osmesa"]
         - libuuid  # [linux and build_variant != "osmesa"]
