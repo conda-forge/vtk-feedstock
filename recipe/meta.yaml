@@ -63,6 +63,7 @@ outputs:
       host:
         - python
         - zlib
+        - liblzma-devel
         - freetype
         - hdf5
         - hdf5 * nompi_*
