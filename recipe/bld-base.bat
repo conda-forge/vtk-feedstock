@@ -47,7 +47,7 @@ cmake .. -G "Ninja" ^
     -DVTK_MODULE_USE_EXTERNAL_VTK_verdict:BOOL=OFF ^
     -DVTK_MODULE_ENABLE_VTK_IOXdmf2:STRING=YES ^
     -DVTK_MODULE_ENABLE_VTK_IOXdmf3:STRING=YES ^
-    -DLZMA_LIBRARY="%LIBRARY_PREFIX%/lib/liblzma.lib" ^
+    -DLZMA_LIBRARY="%LIBRARY_PREFIX%/lib/lzma.lib" ^
     !VTK_ARGS!
 if errorlevel 1 exit 1
 
