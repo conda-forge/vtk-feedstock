@@ -32,6 +32,8 @@ libboost_headers:
 - '1.86'
 libjpeg_turbo:
 - '3'
+liblzma_devel:
+- '5'
 libnetcdf:
 - 4.9.2
 libpng:
