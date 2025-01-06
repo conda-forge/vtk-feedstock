@@ -57,7 +57,7 @@ pugixml:
 python:
 - 3.13.* *_cp313
 qt6_main:
-- '6.7'
+- '6.8'
 sqlite:
 - '3'
 target_platform:
