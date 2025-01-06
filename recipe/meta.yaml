@@ -1,5 +1,5 @@
 {% set version = "9.3.1" %}
-{% set build = 12 %}
+{% set build = 13 %}
 
 {% set minor_version = ".".join(version.split(".")[:2]) %}
 
@@ -28,6 +28,8 @@ source:
     - patches/9987_try_except_python_import.patch  # [not win]
     # https://gitlab.kitware.com/vtk/vtk/-/merge_requests/11486
     - patches/11486.patch
+    # https://github.com/nigels-com/glew/blob/3da315c23aa80b5727e51f21bbe33823bf4c0511
+    - patches/define-apientry.patch
 
 build:
   number: {{ build }}
@@ -75,8 +77,7 @@ outputs:
         - expat
         - tbb
         - tbb-devel
-        # temporary pin: mesalib 24 fails
-        - mesalib >=21.0,<24  # [build_variant == "osmesa"]
+        - mesalib  # [build_variant == "osmesa"]
         - libnetcdf
         - libnetcdf * nompi_*
         - lz4-c
