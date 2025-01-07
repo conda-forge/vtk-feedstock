@@ -1,0 +1,76 @@
+build_variant:
+- qt
+c_stdlib:
+- sysroot
+c_stdlib_version:
+- '2.17'
+cdt_name:
+- conda
+channel_sources:
+- conda-forge
+channel_targets:
+- conda-forge main
+cxx_compiler:
+- gxx
+cxx_compiler_version:
+- '13'
+docker_image:
+- quay.io/condaforge/linux-anvil-x86_64:cos7
+expat:
+- '2'
+ffmpeg:
+- '7'
+freetype:
+- '2'
+glew:
+- '2.1'
+hdf5:
+- 1.14.3
+jsoncpp:
+- 1.9.6
+libboost_headers:
+- '1.86'
+libjpeg_turbo:
+- '3'
+liblzma_devel:
+- '5'
+libnetcdf:
+- 4.9.2
+libpng:
+- '1.6'
+libtiff:
+- '4.7'
+libuuid:
+- '2'
+libxcb:
+- '1'
+libxml2:
+- '2'
+lz4_c:
+- '1.10'
+pin_run_as_build:
+  python:
+    min_pin: x.x
+    max_pin: x.x
+proj:
+- '9.5'
+pugixml:
+- '1.14'
+python:
+- 3.9.* *_cpython
+qt6_main:
+- '6.8'
+sqlite:
+- '3'
+target_platform:
+- linux-aarch64
+tbb:
+- '2021'
+tbb_devel:
+- '2021'
+tk:
+- '8.6'
+vtk:
+- 9.3.1
+zlib:
+- '1'
