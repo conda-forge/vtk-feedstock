@@ -73,7 +73,7 @@ REM The INSTALLER file is necessary to ensure that pip list shows that the packa
 REM See https://packaging.python.org/specifications/recording-installed-packages/
 REM and https://packaging.python.org/en/latest/specifications/core-metadata/#core-metadata
 
-mkdir %SP_DIR%/vtk-%PKG_VERSION%.dist-info
+mkdir "%SP_DIR%/vtk-%PKG_VERSION%.dist-info"
 
 set metadata_file=%SP_DIR%\vtk-%PKG_VERSION%.dist-info\METADATA
 echo>%metadata_file% Metadata-Version: 2.1
