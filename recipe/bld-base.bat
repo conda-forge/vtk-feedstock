@@ -67,3 +67,19 @@ echo>>%egg_info% Summary: VTK is an open-source toolkit for 3D computer graphics
 echo>>%egg_info% Platform: UNKNOWN
 
 if errorlevel 1 exit 1
+
+REM The METADATA file is necessary to ensure that pip list shows the pip package installed by conda
+REM The INSTALLER file is necessary to ensure that pip list shows that the package is installed by conda
+REM See https://packaging.python.org/specifications/recording-installed-packages/
+REM and https://packaging.python.org/en/latest/specifications/core-metadata/#core-metadata
+
+mkdir "%SP_DIR%/vtk-%PKG_VERSION%.dist-info"
+
+set metadata_file=%SP_DIR%\vtk-%PKG_VERSION%.dist-info\METADATA
+echo>%metadata_file% Metadata-Version: 2.1
+echo>>%metadata_file% Name: vtk
+echo>>%metadata_file% Version: %PKG_VERSION%
+echo>>%metadata_file% Summary: VTK is an open-source toolkit for 3D computer graphics, image processing, and visualization
+
+set installer_file=%SP_DIR%\vtk-%PKG_VERSION%.dist-info\INSTALLER
+echo>%installer_file% conda
