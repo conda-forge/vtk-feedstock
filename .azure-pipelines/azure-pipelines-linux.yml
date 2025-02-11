@@ -88,6 +88,7 @@ jobs:
         CONFIG: linux_aarch64_python3.9.____cpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:cos7
+    maxParallel: 14
   timeoutInMinutes: 360
   variables: {}
 
