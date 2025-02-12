@@ -16,10 +16,6 @@ source:
     # https://gitlab.kitware.com/vtk/vtk/-/issues/18365#note_1079278
     # https://gitlab.kitware.com/vtk/vtk/-/merge_requests/9987
     - patches/9987_try_except_python_import.patch  # [not win]
-    # https://gitlab.kitware.com/vtk/vtk/-/merge_requests/11486
-    - patches/11486.patch
-    # https://github.com/nigels-com/glew/blob/3da315c23aa80b5727e51f21bbe33823bf4c0511
-    - patches/define-apientry.patch
 
 build:
   number: {{ build }}
@@ -91,6 +87,7 @@ outputs:
         - eigen
         - double-conversion
         - pugixml
+        - glad2-cmake
         - libogg
         - libtheora
         - nlohmann_json
@@ -102,6 +99,7 @@ outputs:
       run:
         - python
         - utfcpp
+        - glad2
         - nlohmann_json
         - loguru
         - numpy
