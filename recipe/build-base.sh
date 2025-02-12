@@ -23,16 +23,9 @@ VTK_ARGS=()
 
 # TODO: Remove conditional and indentation (preserved to minimize diff on GH for now)
 if [[ "qt" == "qt" ]]; then
-    TCLTK_VERSION=`echo 'puts $tcl_version;exit 0' | tclsh`
-
     VTK_ARGS+=(
         "-DVTK_DEFAULT_RENDER_WINDOW_OFFSCREEN:BOOL=OFF"
-        "-DVTK_OPENGL_HAS_OSMESA:BOOL=OFF"
         "-DVTK_USE_TK:BOOL=ON"
-        "-DTCL_INCLUDE_PATH=${PREFIX}/include"
-        "-DTK_INCLUDE_PATH=${PREFIX}/include"
-        "-DTCL_LIBRARY:FILEPATH=${PREFIX}/lib/libtcl${TCLTK_VERSION}${SHLIB_EXT}"
-        "-DTK_LIBRARY:FILEPATH=${PREFIX}/lib/libtk${TCLTK_VERSION}${SHLIB_EXT}"
     )
     if [[ "${target_platform}" == linux-* ]]; then
         VTK_ARGS+=(
@@ -139,7 +132,6 @@ cmake -LAH .. -G "Ninja" ${CMAKE_ARGS} \
     -DVTK_MODULE_ENABLE_VTK_WebCore:STRING=YES \
     -DVTK_MODULE_ENABLE_VTK_WebGLExporter:STRING=YES \
     -DVTK_MODULE_ENABLE_VTK_WebPython:STRING=YES \
-    -DVTK_DATA_EXCLUDE_FROM_ALL:BOOL=ON \
     -DVTK_USE_EXTERNAL:BOOL=ON \
     -DVTK_MODULE_USE_EXTERNAL_VTK_fast_float:BOOL=OFF \
     -DVTK_MODULE_USE_EXTERNAL_VTK_libharu:BOOL=OFF \
