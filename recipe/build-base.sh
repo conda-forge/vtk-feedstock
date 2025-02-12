@@ -32,11 +32,7 @@ if [[ "qt" == "qt" ]]; then
             "-DVTK_USE_X:BOOL=ON"
             "-DOPENGL_opengl_LIBRARY:FILEPATH=${PREFIX}/lib/libGL.so.1"
             "-DVTK_OPENGL_HAS_EGL:BOOL=ON"
-            "-DVTK_MODULE_USE_EXTERNAL_VTK_glew:BOOL=OFF"
-            "-DEGL_INCLUDE_DIR:PATH=${PREFIX}/include"
-            "-DEGL_LIBRARY:FILEPATH=${PREFIX}/lib/libEGL.so.1"
             "-DOPENGL_egl_LIBRARY:FILEPATH=${PREFIX}/lib/libEGL.so.1"
-            "-DEGL_opengl_LIBRARY:FILEPATH=${PREFIX}/lib/libGL.so.1"
             "-DOPENGL_opengl_LIBRARY:FILEPATH=${PREFIX}/lib/libGL.so.1"
         )
     elif [[ "${target_platform}" == osx-* ]]; then
