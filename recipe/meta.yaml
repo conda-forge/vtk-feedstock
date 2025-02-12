@@ -9,7 +9,7 @@ package:
 
 source:
   url: http://www.vtk.org/files/release/{{ minor_version }}/VTK-{{ version }}.tar.gz
-  sha256: 8354ec084ea0d2dc3d23dbe4243823c4bfc270382d0ce8d658939fd50061cab8
+  sha256: c253b0c8d002aaf98871c6d0cb76afc4936c301b72358a08d5f3f72ef8bc4529
   patches:
     - patches/fix-threads-windows.patch  # [win]
     # https://github.com/conda-forge/vtk-feedstock/pull/282
@@ -70,7 +70,7 @@ outputs:
         # (e.g., tensorflow, qt-main), e.g.
         # https://github.com/conda-forge/qt-main-feedstock/blob/2b166b35e9e1a2d897640ac28ae4b00491d9e310/recipe/meta.yaml#L134-L138
         - libgl-devel  # [linux]
-        - libegl-devel
+        - libegl-devel  # [linux]
         - libglvnd-devel  # [linux]
         - libxcb  # [linux]
         - xorg-libxau  # [linux]
