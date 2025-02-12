@@ -55,7 +55,7 @@ pin_run_as_build:
 proj:
 - '9.5'
 pugixml:
-- '1.14'
+- '1.15'
 python:
 - 3.12.* *_cpython
 qt6_main:
