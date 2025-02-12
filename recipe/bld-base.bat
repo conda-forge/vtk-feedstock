@@ -8,10 +8,8 @@ set "CXXFLAGS=-MD"
 
 set PYTHON_MAJOR_VERSION=%PY_VER:~0,1%
 
-if "%build_variant%"=="qt" (
-    set VTK_ARGS=!VTK_ARGS! -DVTK_MODULE_ENABLE_VTK_GUISupportQt:STRING=YES
-    set VTK_ARGS=!VTK_ARGS! -DVTK_MODULE_ENABLE_VTK_RenderingQt:STRING=YES
-)
+set VTK_ARGS=!VTK_ARGS! -DVTK_MODULE_ENABLE_VTK_GUISupportQt:STRING=YES
+set VTK_ARGS=!VTK_ARGS! -DVTK_MODULE_ENABLE_VTK_RenderingQt:STRING=YES
 
 cmake .. -G "Ninja" ^
     -Wno-dev ^

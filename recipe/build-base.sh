@@ -10,52 +10,19 @@ PYTHON_MAJOR_VERSION=${PY_VER%%.*}
 if [[ "${target_platform}" =~ osx-arm64 && "${target_platform}" != "${build_platform}" ]]; then
     rm -f "${PREFIX}/lib/qt6/moc"
     ln -s "${BUILD_PREFIX}/lib/qt6/moc" "${PREFIX}/lib/qt6/moc"
-    
+
     # Additional debugging information
     echo "Adjusted Qt tools for osx-arm64 with build variant qt6"
     echo "Removed: ${PREFIX}/lib/qt6/moc"
     echo "Linked to: ${BUILD_PREFIX}/lib/qt6/moc"
 else
-    echo "Skipping Qt tools adjustment. Target platform: ${target_platform}, Build variant: $build_variant"
+    echo "Skipping Qt tools adjustment. Target platform: ${target_platform}"
 fi
 
 VTK_ARGS=()
 
-if [[ "$build_variant" == "osmesa" ]]; then
-    if [ -f "$PREFIX/lib/libOSMesa32${SHLIB_EXT}" ]; then
-        OSMESA_VERSION="32"
-    fi
-    VTK_ARGS+=(
-        "-DVTK_DEFAULT_RENDER_WINDOW_OFFSCREEN:BOOL=ON"
-        "-DVTK_OPENGL_HAS_OSMESA:BOOL=ON"
-        "-DOSMESA_INCLUDE_DIR:PATH=${PREFIX}/include"
-        "-DOSMESA_LIBRARY:FILEPATH=${PREFIX}/lib/libOSMesa${OSMESA_VERSION}${SHLIB_EXT}"
-        "-DOPENGL_opengl_LIBRARY:FILEPATH=${PREFIX}/lib/libGL.so.1"
-        "-DVTK_MODULE_USE_EXTERNAL_VTK_glew:BOOL=OFF"
-    )
-
-    if [[ "${target_platform}" == linux-* ]]; then
-        VTK_ARGS+=(
-            "-DVTK_USE_X:BOOL=OFF"
-        )
-    elif [[ "${target_platform}" == osx-* ]]; then
-        VTK_ARGS+=(
-            "-DVTK_USE_COCOA:BOOL=OFF"
-            "-DCMAKE_OSX_SYSROOT:PATH=${CONDA_BUILD_SYSROOT}"
-        )
-    fi
-elif [[ "$build_variant" == "egl" ]]; then
-    VTK_ARGS+=(
-        "-DVTK_USE_X:BOOL=OFF"
-        "-DVTK_OPENGL_HAS_EGL:BOOL=ON"
-        "-DVTK_MODULE_USE_EXTERNAL_VTK_glew:BOOL=OFF"
-        "-DEGL_INCLUDE_DIR:PATH=${PREFIX}/include"
-        "-DEGL_LIBRARY:FILEPATH=${PREFIX}/lib/libEGL.so.1"
-        "-DOPENGL_egl_LIBRARY:FILEPATH=${PREFIX}/lib/libEGL.so.1"
-        "-DEGL_opengl_LIBRARY:FILEPATH=${PREFIX}/lib/libGL.so.1"
-        "-DOPENGL_opengl_LIBRARY:FILEPATH=${PREFIX}/lib/libGL.so.1"
-    )
-elif [[ "$build_variant" == "qt" ]]; then
+# TODO: Remove conditional and indentation (preserved to minimize diff on GH for now)
+if [[ "qt" == "qt" ]]; then
     TCLTK_VERSION=`echo 'puts $tcl_version;exit 0' | tclsh`
 
     VTK_ARGS+=(
@@ -71,6 +38,13 @@ elif [[ "$build_variant" == "qt" ]]; then
         VTK_ARGS+=(
             "-DVTK_USE_X:BOOL=ON"
             "-DOPENGL_opengl_LIBRARY:FILEPATH=${PREFIX}/lib/libGL.so.1"
+            "-DVTK_OPENGL_HAS_EGL:BOOL=ON"
+            "-DVTK_MODULE_USE_EXTERNAL_VTK_glew:BOOL=OFF"
+            "-DEGL_INCLUDE_DIR:PATH=${PREFIX}/include"
+            "-DEGL_LIBRARY:FILEPATH=${PREFIX}/lib/libEGL.so.1"
+            "-DOPENGL_egl_LIBRARY:FILEPATH=${PREFIX}/lib/libEGL.so.1"
+            "-DEGL_opengl_LIBRARY:FILEPATH=${PREFIX}/lib/libGL.so.1"
+            "-DOPENGL_opengl_LIBRARY:FILEPATH=${PREFIX}/lib/libGL.so.1"
         )
     elif [[ "${target_platform}" == osx-* ]]; then
         VTK_ARGS+=(
@@ -80,8 +54,7 @@ elif [[ "$build_variant" == "qt" ]]; then
     fi
 fi
 
-if [[ "$target_platform" != "linux-ppc64le"
-        && "$build_variant" == "qt" ]]; then
+if [[ "$target_platform" != "linux-ppc64le" ]]; then
     VTK_ARGS+=(
         "-DVTK_MODULE_ENABLE_VTK_GUISupportQt:STRING=YES"
         "-DVTK_MODULE_ENABLE_VTK_RenderingQt:STRING=YES"

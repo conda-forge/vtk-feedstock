@@ -3,16 +3,6 @@
 
 {% set minor_version = ".".join(version.split(".")[:2]) %}
 
-{% set build = build + 100 %}   # [build_variant == "osmesa"]
-{% set build = build + 200 %}   # [build_variant == "qt"]
-# typically, osmesa is selected by installing or not installing
-# mesalib, but it could also be selected via the build string:
-# `vtk * osmesa*` for osmesa
-# `vtk * egl*` for egl
-# `vtk * qt*` for qt-main
-# The 'build: string: ...' needs to be set in each output and the top-level
-# otherwise it won't be correct in the final build.
-
 package:
   name: vtk
   version: {{ version }}
@@ -33,29 +23,24 @@ source:
 
 build:
   number: {{ build }}
-  string: "{{ build_variant }}_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ build }}"
+  string: "py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ build }}"
+  # TODO: REMOVE THIS LINE ONCE THE LINUX BUILD IS WORKING
+  skip: true  # [not (linux and py == 312 and x86_64)]
 
 outputs:
   - name: vtk-base
     build:
-      string: "{{ build_variant }}_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ build }}"
+      string: "py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ build }}"
       script: ${RECIPE_DIR}/build-base.sh  # [not win]
       script: "%RECIPE_DIR%\\bld-base.bat"  # [win]
       ignore_run_exports_from:
         - ffmpeg  # [not win]
       run_exports:
         - {{ pin_subpackage('vtk-base', max_pin='x.x.x') }}
-      track_features:
-        - vtk-egl  # [build_variant == "egl"]
-        - vtk-osmesa  # [build_variant == "osmesa"]
-
-      features:
-        - mesalib  # [build_variant == "osmesa"]
 
     requirements:
       build:
         - {{ compiler("cxx") }}
-        - {{ compiler('fortran') }}  # [build_variant != "qt"]
         - {{ stdlib("c") }}
         - cmake
         - ninja
@@ -77,7 +62,6 @@ outputs:
         - expat
         - tbb
         - tbb-devel
-        - mesalib  # [build_variant == "osmesa"]
         - libnetcdf
         - libnetcdf * nompi_*
         - lz4-c
@@ -85,29 +69,28 @@ outputs:
         # These packages are not CDT to help with compat with other builds
         # (e.g., tensorflow, qt-main), e.g.
         # https://github.com/conda-forge/qt-main-feedstock/blob/2b166b35e9e1a2d897640ac28ae4b00491d9e310/recipe/meta.yaml#L134-L138
-        - libgl-devel  # [linux and build_variant != "osmesa"]
-        - libegl-devel  # [build_variant == "egl"]
-        - libglvnd-devel  # [linux and build_variant != "osmesa"]
-        - libxcb  # [linux and build_variant != "osmesa"]
-        - xorg-libxau  # [linux and build_variant != "osmesa"]
-        - libuuid  # [linux and build_variant != "osmesa"]
-        - xorg-xproto  # [linux and build_variant != "osmesa"]
-        - xorg-libxext  # [linux and build_variant != "osmesa"]
-        - xorg-libxfixes  # [linux and build_variant != "osmesa"]
-        - xorg-libxxf86vm  # [linux and build_variant != "osmesa"]
-        - xorg-libxdamage  # [linux and build_variant != "osmesa"]
-        - xorg-libsm  # [linux and build_variant != "osmesa"]
-        - xorg-libice  # [linux and build_variant != "osmesa"]
-        - xorg-libx11  # [linux and build_variant != "osmesa"]
-        - xorg-xf86vidmodeproto  # [linux and build_variant != "osmesa"]
+        - libgl-devel  # [linux]
+        - libegl-devel
+        - libglvnd-devel  # [linux]
+        - libxcb  # [linux]
+        - xorg-libxau  # [linux]
+        - libuuid  # [linux]
+        - xorg-xproto  # [linux]
+        - xorg-libxext  # [linux]
+        - xorg-libxfixes  # [linux]
+        - xorg-libxxf86vm  # [linux]
+        - xorg-libxdamage  # [linux]
+        - xorg-libsm  # [linux]
+        - xorg-libice  # [linux]
+        - xorg-libx11  # [linux]
+        - xorg-xf86vidmodeproto  # [linux]
         - libboost-headers
-        - tk  # [not win and (build_variant == "qt")]
+        - tk  # [not win]
         - ffmpeg
         - utfcpp
         - eigen
         - double-conversion
         - pugixml
-        - glew  # [build_variant == "qt"]
         - libogg
         - libtheora
         - nlohmann_json
@@ -115,10 +98,9 @@ outputs:
         - loguru
         - sqlite
         - gl2ps
-        - qt6-main  # [not ppc64le and (build_variant == "qt")]
+        - qt6-main  # [not ppc64le]
       run:
         - python
-        - mesalib >=21.0  # [build_variant == "osmesa"]
         - utfcpp
         - nlohmann_json
         - loguru
@@ -147,7 +129,7 @@ outputs:
         - vtk.vtkRenderingVolume
         - vtk.vtkInteractionWidgets
         - vtk.vtkWebGLExporter
-        - vtk.tk.vtkTkRenderWidget  # [not win and (build_variant == "qt")]
+        - vtk.tk.vtkTkRenderWidget  # [not win]
         - vtkmodules
         - vtkmodules.vtkChartsCore
         - vtkmodules.vtkCommonCore
@@ -160,7 +142,7 @@ outputs:
         - vtkmodules.vtkInfovisCore
         - vtkmodules.vtkRenderingCore
         - vtkmodules.vtkViewsCore
-        - vtkmodules.vtkRenderingQt  # [build_variant == "qt"]
+        - vtkmodules.vtkRenderingQt
         - vtkmodules.vtkRenderingVolume
         - vtkmodules.vtkInteractionWidgets
         - vtkmodules.vtkWebCore
@@ -180,14 +162,14 @@ outputs:
             "vtkRenderingQt"
         ] %}
         {% for vtk_lib in vtk_qt_libs %}
-        - test -f $PREFIX/lib/lib{{ vtk_lib }}-{{ minor_version }}${SHLIB_EXT}  # [not win and (build_variant == "qt")]
-        - if not exist %PREFIX%\\Library\\lib\\{{ vtk_lib }}-{{ minor_version }}.lib exit 1  # [win and (build_variant == "qt")]
-        - if not exist %PREFIX%\\Library\\bin\\{{ vtk_lib }}-{{ minor_version }}.dll exit 1  # [win and (build_variant == "qt")]
+        - test -f $PREFIX/lib/lib{{ vtk_lib }}-{{ minor_version }}${SHLIB_EXT}  # [not win]
+        - if not exist %PREFIX%\\Library\\lib\\{{ vtk_lib }}-{{ minor_version }}.lib exit 1  # [win]
+        - if not exist %PREFIX%\\Library\\bin\\{{ vtk_lib }}-{{ minor_version }}.dll exit 1  # [win]
         {% endfor %}
 
   - name: vtk-io-ffmpeg
     build:
-      string: "{{ build_variant }}_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ build }}"
+      string: "py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ build }}"
       script: ${RECIPE_DIR}/build-io-ffmpeg.sh  # [not win]
       skip: true  # [win]
       run_exports:
@@ -212,7 +194,7 @@ outputs:
     build:
       ignore_run_exports_from:
         - ffmpeg
-      string: "{{ build_variant }}_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ build }}"
+      string: "py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ build }}"
       run_exports:
         - {{ pin_subpackage('vtk-base', max_pin='x.x.x') }}
     requirements:
