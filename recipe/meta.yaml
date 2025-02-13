@@ -26,9 +26,9 @@ build:
 outputs:
   - name: vtk-base
     build:
-      string: "py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ build }}"
-      script: ${RECIPE_DIR}/build-base.sh  # [not win]
-      script: "%RECIPE_DIR%\\bld-base.bat"  # [win]
+      script:
+        - ${RECIPE_DIR}/build-base.sh  # [not win]
+        - "%RECIPE_DIR%\\bld-base.bat"  # [win]
       ignore_run_exports_from:
         - ffmpeg  # [not win]
       run_exports:
@@ -155,28 +155,32 @@ outputs:
         - pip check
         - test $(pip list | grep vtk | tr -s " " | grep $PKG_VERSION | wc -l) -eq 1  # [unix]
         - pip list | findstr "vtk"  # [win]
-        {% set vtk_qt_libs = [
-            "vtkGUISupportQt",
-            "vtkRenderingQt"
-        ] %}
-        {% for vtk_lib in vtk_qt_libs %}
-        - test -f $PREFIX/lib/lib{{ vtk_lib }}-{{ minor_version }}${SHLIB_EXT}  # [not win]
-        - if not exist %PREFIX%\\Library\\lib\\{{ vtk_lib }}-{{ minor_version }}.lib exit 1  # [win]
-        - if not exist %PREFIX%\\Library\\bin\\{{ vtk_lib }}-{{ minor_version }}.dll exit 1  # [win]
-        {% endfor %}
+        # Ideally here we would do:
+        # {% for vtk_lib in ["vtkGUISupportQt", "vtkRenderingQt"] %}
+        # ...
+        # {% endfor %}
+        # But it breaks the linter :( so we do it manually
+        - test -f $PREFIX/lib/libvtkGUISupportQt-{{ minor_version }}${SHLIB_EXT}  # [not win]
+        - if not exist %PREFIX%\\Library\\lib\\vtkGUISupportQt-{{ minor_version }}.lib exit 1  # [win]
+        - if not exist %PREFIX%\\Library\\bin\\vtkGUISupportQt-{{ minor_version }}.dll exit 1  # [win]
+        - test -f $PREFIX/lib/libvtkRenderingQt-{{ minor_version }}${SHLIB_EXT}  # [not win]
+        - if not exist %PREFIX%\\Library\\lib\\vtkRenderingQt-{{ minor_version }}.lib exit 1  # [win]
+        - if not exist %PREFIX%\\Library\\bin\\vtkRenderingQt-{{ minor_version }}.dll exit 1  # [win]
 
   - name: vtk-io-ffmpeg
     build:
       string: "py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ build }}"
-      script: ${RECIPE_DIR}/build-io-ffmpeg.sh  # [not win]
+      script:
+        - ${RECIPE_DIR}/build-io-ffmpeg.sh  # [not win]
+        - exit 1  # [win]
       skip: true  # [win]
       run_exports:
         - {{ pin_subpackage('vtk-io-ffmpeg', max_pin='x.x.x') }}
     requirements:
       build: []
       host:
-          # We use ffmpeg here in the host section so that conda build
-          # uses the global pinnings and ensures ffmpeg compatibility.
+        # We use ffmpeg here in the host section so that conda build
+        # uses the global pinnings and ensures ffmpeg compatibility.
         - ffmpeg
       run:
         - {{ pin_subpackage("vtk-base", exact=True) }}
