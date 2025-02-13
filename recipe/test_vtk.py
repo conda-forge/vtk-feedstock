@@ -6,10 +6,8 @@ import os
 # If this fails it raises a DistributionNotFound exception
 pkg_resources.get_distribution('vtk')
 
-if sys.platform != 'darwin':
-  # Linux and Windows can't run these tests on headless nodes, and OSX
-  # is where the problem was happening anyway
-  sys.exit(0)
+# As of VTK 9.4, Linux and Windows should automatically fall back to using OSMesa
+# if there is no valid display or OpenGL is too old, so tests should work on all OSes.
 
 # test libpng, since this was causing trouble in OSX previously
 source = vtk.vtkCubeSource()
