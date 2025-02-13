@@ -2,8 +2,9 @@
 c_stdlib_version:          # [osx]
   - 11.0                   # [osx]
 # TODO: Lower 15.1 to something closer to 12.3 if possible
+# Might need to try 15.1 after adding to conda-forge-ci-setup...
 MACOSX_SDK_VERSION:        # [osx]
-  - '15.1'                 # [osx]
+  - '14.5'                 # [osx]
 
 replacements:
   all_replacements:
