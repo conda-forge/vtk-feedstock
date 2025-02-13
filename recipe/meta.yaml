@@ -86,7 +86,8 @@ outputs:
         - eigen
         - double-conversion
         - pugixml
-        - glad2-cmake
+        # TODO: Restore pending https://github.com/conda-forge/glad-feedstock/pull/21
+        - glad2-cmake  # [not aarch64]
         - libogg
         - libtheora
         - nlohmann_json
@@ -98,7 +99,7 @@ outputs:
       run:
         - python
         - utfcpp
-        - glad2
+        - glad2  # [not aarch64]
         - nlohmann_json
         - loguru
         - numpy
