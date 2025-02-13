@@ -21,7 +21,7 @@ build:
   number: {{ build }}
   string: "py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ build }}"
   # TODO: REMOVE THIS LINE ONCE THE LINUX BUILD IS WORKING
-  skip: true  # [not (linux and x86_64)]
+  skip: true  # [py<313]
 
 outputs:
   - name: vtk-base

@@ -71,7 +71,7 @@ if [[ "$CONDA_BUILD_CROSS_COMPILATION" == "1" ]]; then
        -DCMAKE_INSTALL_LIBDIR=lib \
        -DVTK_BUILD_COMPILE_TOOLS_ONLY=ON ..
     ninja -j${CPU_COUNT}
-    ninja install
+    ninja install -j${CPU_COUNT}
     cd ..
   )
   MAJ_MIN=$(echo $PKG_VERSION | rev | cut -d"." -f2- | rev)
@@ -143,7 +143,7 @@ cmake -LAH .. -G "Ninja" ${CMAKE_ARGS} \
     "${VTK_ARGS[@]}"
 
 # compile & install!
-ninja install -v
+ninja install -j${CPU_COUNT} -v
 
 # Create a directory for the vtk-io-ffmpeg package
 # and find the ffmpeg-related files and process each of them

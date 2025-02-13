@@ -49,7 +49,7 @@ cmake .. -G "Ninja" ^
     !VTK_ARGS!
 if errorlevel 1 exit 1
 
-ninja install
+ninja install -j %CPU_COUNT%
 if errorlevel 1 exit 1
 
 REM The egg-info file is necessary because some packages,
