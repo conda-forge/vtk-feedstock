@@ -85,7 +85,7 @@ fi
 if [[ "$CONDA_BUILD_CROSS_COMPILATION" == "1" ]]; then
   CMAKE_ARGS="${CMAKE_ARGS} -DVTK_BUILD_PYI_FILES:BOOL=OFF"
 else
-  # TODO: Should restore this, but it breaks things for now
+  # TODO: Should restore this and the one in bld-base.bat, but it breaks things for now
   CMAKE_ARGS="${CMAKE_ARGS} -DVTK_BUILD_PYI_FILES:BOOL=OFF"
 fi
 
