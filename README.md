@@ -19,59 +19,6 @@ Current build status
 
 
 <table>
-    
-  <tr>
-    <td>Azure</td>
-    <td>
-      <details>
-        <summary>
-          <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=main">
-            <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=main">
-          </a>
-        </summary>
-        <table>
-          <thead><tr><th>Variant</th><th>Status</th></tr></thead>
-          <tbody><tr>
-              <td>linux_64_python3.10.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_python3.10.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_64_python3.11.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_python3.11.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_64_python3.12.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_python3.12.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_64_python3.13.____cp313</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_python3.13.____cp313" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_64_python3.9.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_python3.9.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </details>
-    </td>
-  </tr>
 </table>
 
 Current release info
@@ -80,8 +27,6 @@ Current release info
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-vtk-green.svg)](https://anaconda.org/conda-forge/vtk) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/vtk.svg)](https://anaconda.org/conda-forge/vtk) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/vtk.svg)](https://anaconda.org/conda-forge/vtk) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/vtk.svg)](https://anaconda.org/conda-forge/vtk) |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-vtk--base-green.svg)](https://anaconda.org/conda-forge/vtk-base) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/vtk-base.svg)](https://anaconda.org/conda-forge/vtk-base) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/vtk-base.svg)](https://anaconda.org/conda-forge/vtk-base) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/vtk-base.svg)](https://anaconda.org/conda-forge/vtk-base) |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-vtk--io--ffmpeg-green.svg)](https://anaconda.org/conda-forge/vtk-io-ffmpeg) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/vtk-io-ffmpeg.svg)](https://anaconda.org/conda-forge/vtk-io-ffmpeg) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/vtk-io-ffmpeg.svg)](https://anaconda.org/conda-forge/vtk-io-ffmpeg) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/vtk-io-ffmpeg.svg)](https://anaconda.org/conda-forge/vtk-io-ffmpeg) |
 
 Installing vtk
 ==============
@@ -93,16 +38,16 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `vtk, vtk-base, vtk-io-ffmpeg` can be installed with `conda`:
+Once the `conda-forge` channel has been enabled, `vtk` can be installed with `conda`:
 
 ```
-conda install vtk vtk-base vtk-io-ffmpeg
+conda install vtk
 ```
 
 or with `mamba`:
 
 ```
-mamba install vtk vtk-base vtk-io-ffmpeg
+mamba install vtk
 ```
 
 It is possible to list all of the versions of `vtk` available on your platform with `conda`:
