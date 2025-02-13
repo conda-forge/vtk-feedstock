@@ -8,10 +8,8 @@ set "CXXFLAGS=-MD"
 
 set PYTHON_MAJOR_VERSION=%PY_VER:~0,1%
 
-if "%build_variant%"=="qt" (
-    set VTK_ARGS=!VTK_ARGS! -DVTK_MODULE_ENABLE_VTK_GUISupportQt:STRING=YES
-    set VTK_ARGS=!VTK_ARGS! -DVTK_MODULE_ENABLE_VTK_RenderingQt:STRING=YES
-)
+set VTK_ARGS=!VTK_ARGS! -DVTK_MODULE_ENABLE_VTK_GUISupportQt:STRING=YES
+set VTK_ARGS=!VTK_ARGS! -DVTK_MODULE_ENABLE_VTK_RenderingQt:STRING=YES
 
 cmake .. -G "Ninja" ^
     -Wno-dev ^
@@ -32,7 +30,6 @@ cmake .. -G "Ninja" ^
     -DVTK_BUILD_PYI_FILES:BOOL=ON ^
     -DVTK_HAS_FEENABLEEXCEPT:BOOL=OFF ^
     -DVTK_SMP_IMPLEMENTATION_TYPE:STRING=TBB ^
-    -DVTK_DATA_EXCLUDE_FROM_ALL:BOOL=ON ^
     -DVTK_USE_EXTERNAL:BOOL=ON ^
     -DVTK_MODULE_ENABLE_VTK_WebCore:STRING=YES ^
     -DVTK_MODULE_ENABLE_VTK_WebGLExporter:STRING=YES ^
@@ -44,6 +41,7 @@ cmake .. -G "Ninja" ^
     -DVTK_MODULE_USE_EXTERNAL_VTK_fmt:BOOL=OFF ^
     -DVTK_MODULE_USE_EXTERNAL_VTK_cgns:BOOL=OFF ^
     -DVTK_MODULE_USE_EXTERNAL_VTK_ioss:BOOL=OFF ^
+    -DVTK_MODULE_USE_EXTERNAL_VTK_token:BOOL=OFF ^
     -DVTK_MODULE_USE_EXTERNAL_VTK_verdict:BOOL=OFF ^
     -DVTK_MODULE_ENABLE_VTK_IOXdmf2:STRING=YES ^
     -DVTK_MODULE_ENABLE_VTK_IOXdmf3:STRING=YES ^
@@ -51,7 +49,7 @@ cmake .. -G "Ninja" ^
     !VTK_ARGS!
 if errorlevel 1 exit 1
 
-ninja install
+ninja install -j %CPU_COUNT%
 if errorlevel 1 exit 1
 
 REM The egg-info file is necessary because some packages,
