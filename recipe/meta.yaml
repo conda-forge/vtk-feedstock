@@ -94,7 +94,10 @@ outputs:
         - proj
         - loguru
         - sqlite
-        - gl2ps
+        # Until this is solved:
+        # https://gitlab.kitware.com/vtk/vtk/-/issues/19561
+        # we use the internal one in build-base.sh
+        - gl2ps  # [not osx]
         - qt6-main  # [not ppc64le]
       run:
         - python

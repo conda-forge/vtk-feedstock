@@ -39,6 +39,7 @@ if [[ "qt" == "qt" ]]; then
         VTK_ARGS+=(
             "-DVTK_USE_COCOA:BOOL=ON"
             "-DCMAKE_OSX_SYSROOT:PATH=${CONDA_BUILD_SYSROOT}"
+            "-DVTK_MODULE_USE_EXTERNAL_VTK_gl2ps:BOOL=OFF"
         )
     fi
 fi
