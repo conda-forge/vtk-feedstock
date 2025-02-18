@@ -33,7 +33,6 @@ if [[ "qt" == "qt" ]]; then
             "-DOPENGL_opengl_LIBRARY:FILEPATH=${PREFIX}/lib/libGL.so.1"
             "-DVTK_OPENGL_HAS_EGL:BOOL=ON"
             "-DOPENGL_egl_LIBRARY:FILEPATH=${PREFIX}/lib/libEGL.so.1"
-            "-DOPENGL_opengl_LIBRARY:FILEPATH=${PREFIX}/lib/libGL.so.1"
         )
     elif [[ "${target_platform}" == osx-* ]]; then
         VTK_ARGS+=(
