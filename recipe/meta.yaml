@@ -87,6 +87,7 @@ outputs:
         - double-conversion
         - pugixml
         - glad2-cmake
+        - glad2
         - libogg
         - libtheora
         - nlohmann_json
@@ -226,7 +227,17 @@ outputs:
 about:
   home: http://www.vtk.org/
   license: BSD-3-Clause
-  license_file: Copyright.txt
+  license_file:
+    - Copyright.txt
+    - vendored-fast_float-license.txt  # https://gitlab.kitware.com/vtk/vtk/-/blob/master/ThirdParty/fast_float/vtkfast_float/LICENSE-MIT
+    - vendored-libharu-license.txt  # https://gitlab.kitware.com/vtk/vtk/-/blob/master/ThirdParty/libharu/vtklibharu/LICENSE
+    - vendored-pegtl-license.txt  # https://gitlab.kitware.com/vtk/vtk/-/blob/master/ThirdParty/pegtl/vtkpegtl/LICENSE
+    - vendored-exprtk-license.txt  # https://gitlab.kitware.com/vtk/vtk/-/blob/master/ThirdParty/exprtk/vtkexprtk/License.txt
+    - vendored-fmt-license.txt  # https://gitlab.kitware.com/vtk/vtk/-/blob/master/ThirdParty/fmt/vtkfmt/LICENSE.rst
+    - vendored-cgns-license.txt  # https://gitlab.kitware.com/vtk/vtk/-/blob/master/ThirdParty/cgns/vtkcgns/license.txt
+    - vendored-ioss-license.txt  # https://gitlab.kitware.com/vtk/vtk/-/blob/master/ThirdParty/ioss/vtkioss/COPYRIGHT
+    - vendored-token-license.txt  # https://gitlab.kitware.com/vtk/vtk/-/blob/master/ThirdParty/token/vtktoken/license.md
+    - vendored-verdict-license.txt  # https://gitlab.kitware.com/vtk/vtk/-/blob/master/ThirdParty/verdict/vtkverdict/LICENSE
   summary: >
     The Visualization Toolkit (VTK) is an open-source, freely available software system for 3D computer graphics, modeling, image processing, volume rendering, scientific visualization, and information visualization.
   dev_url: https://gitlab.kitware.com/vtk/vtk
