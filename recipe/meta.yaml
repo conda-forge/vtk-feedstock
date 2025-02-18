@@ -87,6 +87,7 @@ outputs:
         - double-conversion
         - pugixml
         - glad2-cmake
+        - glad2
         - libogg
         - libtheora
         - nlohmann_json
