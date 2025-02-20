@@ -32,8 +32,6 @@ outputs:
         - ffmpeg  # [not win]
       run_exports:
         - {{ pin_subpackage('vtk-base', max_pin='x.x.x') }}
-      # TODO: REMOVE THIS LINE ONCE ALL ARCH BUILDS WORK
-      skip: true  # [py<313]
 
     requirements:
       build:
@@ -177,9 +175,7 @@ outputs:
       script:
         - ${RECIPE_DIR}/build-io-ffmpeg.sh  # [not win]
         - exit 1  # [win]
-      # TODO: REMOVE THIS LINE ONCE ALL ARCH BUILDS WORK
-      skip: true  # [py<313 or win]
-      # skip: true  # [win]
+      skip: true  # [win]
       run_exports:
         - {{ pin_subpackage('vtk-io-ffmpeg', max_pin='x.x.x') }}
     requirements:
@@ -204,8 +200,6 @@ outputs:
         - ffmpeg
       run_exports:
         - {{ pin_subpackage('vtk-base', max_pin='x.x.x') }}
-      # TODO: REMOVE THIS LINE ONCE ALL ARCH BUILDS WORK
-      skip: true  # [py<313]
     requirements:
       build: []
       host:
