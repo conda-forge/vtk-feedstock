@@ -21,26 +21,23 @@ fi
 
 VTK_ARGS=()
 
-# TODO: Remove conditional and indentation (preserved to minimize diff on GH for now)
-if [[ "qt" == "qt" ]]; then
+VTK_ARGS+=(
+    "-DVTK_DEFAULT_RENDER_WINDOW_OFFSCREEN:BOOL=OFF"
+    "-DVTK_USE_TK:BOOL=ON"
+)
+if [[ "${target_platform}" == linux-* ]]; then
     VTK_ARGS+=(
-        "-DVTK_DEFAULT_RENDER_WINDOW_OFFSCREEN:BOOL=OFF"
-        "-DVTK_USE_TK:BOOL=ON"
+        "-DVTK_USE_X:BOOL=ON"
+        "-DOPENGL_opengl_LIBRARY:FILEPATH=${PREFIX}/lib/libGL.so.1"
+        "-DVTK_OPENGL_HAS_EGL:BOOL=ON"
+        "-DOPENGL_egl_LIBRARY:FILEPATH=${PREFIX}/lib/libEGL.so.1"
     )
-    if [[ "${target_platform}" == linux-* ]]; then
-        VTK_ARGS+=(
-            "-DVTK_USE_X:BOOL=ON"
-            "-DOPENGL_opengl_LIBRARY:FILEPATH=${PREFIX}/lib/libGL.so.1"
-            "-DVTK_OPENGL_HAS_EGL:BOOL=ON"
-            "-DOPENGL_egl_LIBRARY:FILEPATH=${PREFIX}/lib/libEGL.so.1"
-        )
-    elif [[ "${target_platform}" == osx-* ]]; then
-        VTK_ARGS+=(
-            "-DVTK_USE_COCOA:BOOL=ON"
-            "-DCMAKE_OSX_SYSROOT:PATH=${CONDA_BUILD_SYSROOT}"
-            "-DVTK_MODULE_USE_EXTERNAL_VTK_gl2ps:BOOL=OFF"
-        )
-    fi
+elif [[ "${target_platform}" == osx-* ]]; then
+    VTK_ARGS+=(
+        "-DVTK_USE_COCOA:BOOL=ON"
+        "-DCMAKE_OSX_SYSROOT:PATH=${CONDA_BUILD_SYSROOT}"
+        "-DVTK_MODULE_USE_EXTERNAL_VTK_gl2ps:BOOL=OFF"
+    )
 fi
 
 if [[ "$target_platform" != "linux-ppc64le" ]]; then
