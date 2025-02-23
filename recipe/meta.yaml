@@ -228,7 +228,7 @@ about:
     - vendored-fast_float-license.txt  # https://gitlab.kitware.com/vtk/vtk/-/blob/master/ThirdParty/fast_float/vtkfast_float/LICENSE-MIT
     - vendored-libharu-license.txt  # https://gitlab.kitware.com/vtk/vtk/-/blob/master/ThirdParty/libharu/vtklibharu/LICENSE
     - vendored-pegtl-license.txt  # https://gitlab.kitware.com/vtk/vtk/-/blob/master/ThirdParty/pegtl/vtkpegtl/LICENSE
-    - vendored-exprtk-license.txt  # https://gitlab.kitware.com/vtk/vtk/-/blob/master/ThirdParty/exprtk/vtkexprtk/License.txt
+    - vendored-exprtk-license.txt  # https://github.com/conda-forge/exprtk-feedstock/blob/main/license.txt
     - vendored-fmt-license.txt  # https://gitlab.kitware.com/vtk/vtk/-/blob/master/ThirdParty/fmt/vtkfmt/LICENSE.rst
     - vendored-cgns-license.txt  # https://gitlab.kitware.com/vtk/vtk/-/blob/master/ThirdParty/cgns/vtkcgns/license.txt
     - vendored-ioss-license.txt  # https://gitlab.kitware.com/vtk/vtk/-/blob/master/ThirdParty/ioss/vtkioss/COPYRIGHT
