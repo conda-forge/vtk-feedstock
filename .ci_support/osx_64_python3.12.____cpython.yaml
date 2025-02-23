@@ -2,8 +2,6 @@ MACOSX_DEPLOYMENT_TARGET:
 - '11.0'
 MACOSX_SDK_VERSION:
 - '12.3'
-build_variant:
-- qt
 c_stdlib:
 - macosx_deployment_target
 c_stdlib_version:
@@ -22,8 +20,6 @@ ffmpeg:
 - '7'
 freetype:
 - '2'
-glew:
-- '2.1'
 hdf5:
 - 1.14.3
 jsoncpp:
