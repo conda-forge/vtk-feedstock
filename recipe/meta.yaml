@@ -28,8 +28,15 @@ outputs:
       script:
         - ${RECIPE_DIR}/build-base.sh  # [not win]
         - "%RECIPE_DIR%\\bld-base.bat"  # [win]
-      ignore_run_exports_from:
+      ignore_run_exports:
         - ffmpeg  # [not win]
+        - libgl-devel  # [linux]
+        - libegl-devel  # [linux]
+        - libxcb  # [linux]
+        - xorg-libxext  # [linux]
+        - xorg-libxft  # [linux]
+        - xorg-libxt  # [linux]
+        - xorg-libxv  # [linux]
       run_exports:
         - {{ pin_subpackage('vtk-base', max_pin='x.x.x') }}
 
@@ -58,12 +65,21 @@ outputs:
         - libnetcdf
         - libnetcdf * nompi_*
         - lz4-c
+        - vulkan-tools # [linux or win]
         # These packages are not CDT to help with compat with other builds
         # (e.g., tensorflow, qt-main), e.g.
         # https://github.com/conda-forge/qt-main-feedstock/blob/2b166b35e9e1a2d897640ac28ae4b00491d9e310/recipe/meta.yaml#L134-L138
+        - libgl-devel  # [linux]
+        - libegl-devel  # [linux]
+        - libglvnd-devel  # [linux]
         - libglx-devel  # [linux]
+        - libxcb  # [linux]
         - libuuid  # [linux]
         - xorg-xproto  # [linux]
+        - xorg-libxft  # [linux]
+        - xorg-libxt  # [linux]
+        - xorg-libxv  # [linux]
+        - xorg-libxext  # [linux]
         - xorg-libx11  # [linux]
         - xorg-xf86vidmodeproto  # [linux]
         - libboost-headers
