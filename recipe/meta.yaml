@@ -30,6 +30,20 @@ outputs:
         - "%RECIPE_DIR%\\bld-base.bat"  # [win]
       ignore_run_exports:
         - ffmpeg  # [not win]
+        # Found via inspection of the conda-forge logs, hopefully okay to ignore:
+        - xorg-libxext  # [linux]
+        - xorg-libxxf86vm  # [linux]
+        - xorg-libxft  # [linux]
+        - xorg-libxt  # [linux]
+        - xorg-libxmu  # [linux]
+        - libxcb  # [linux]
+        - libglvd  # [linux]
+        - libuuid  # [linux]
+        - xorg-libxv  # [linux]
+        - libgl  # [linux]
+        - xorg-libxpm  # [linux]
+        - libegl  # [linux]
+        - xorg-libxinerama  # [linux]
       run_exports:
         - {{ pin_subpackage('vtk-base', max_pin='x.x.x') }}
 
@@ -60,6 +74,7 @@ outputs:
         - libnetcdf
         - libnetcdf * nompi_*
         - lz4-c
+        - fmt
         # TODO: Someday we should add Vulkan once it can be found in conda-forge
         # These packages are not CDT to help with compat with other builds
         # (e.g., tensorflow, qt-main), e.g.
@@ -135,8 +150,9 @@ outputs:
         - vtk.vtkRenderingVolume
         - vtk.vtkInteractionWidgets
         - vtk.vtkWebGLExporter
-        - vtk.tk.vtkTkRenderWidget  # [not win]
         - vtkmodules
+        - vtkmodules.qt.QVTKRenderWindowInteractor  # [not ppc64le]
+        - vtkmodules.tk.vtkTkRenderWidget  # [not win]
         - vtkmodules.vtkChartsCore
         - vtkmodules.vtkCommonCore
         - vtkmodules.vtkFiltersCore
