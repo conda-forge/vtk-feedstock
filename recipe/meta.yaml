@@ -66,10 +66,11 @@ outputs:
         - libegl-devel  # [linux]
         - libglvnd-devel  # [linux]
         - libglx-devel  # [linux]
-        - libgles  # [linux]
         - libglu  # [linux]
         - libxcb  # [linux]
+        - libxkbfile  # [linux]
         - libuuid  # [linux]
+        # still missing: Xaccessrules Xxf86misc, xcb_errors, xcb_xrm
         - xorg-xproto  # [linux]
         - xorg-libxft  # [linux]
         - xorg-libxt  # [linux]
@@ -104,7 +105,6 @@ outputs:
       run:
         - python
         - utfcpp
-        - glad2
         - nlohmann_json
         - loguru
         - numpy
