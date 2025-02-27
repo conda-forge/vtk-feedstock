@@ -163,6 +163,7 @@ outputs:
         - vtkmodules.vtkImagingCore
         - vtkmodules.vtkInfovisCore
         - vtkmodules.vtkRenderingCore
+        - vtkmodules.vtkRenderingMatplotlib
         - vtkmodules.vtkViewsCore
         - vtkmodules.vtkRenderingQt
         - vtkmodules.vtkRenderingVolume
