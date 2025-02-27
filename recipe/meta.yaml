@@ -55,32 +55,18 @@ outputs:
         - libtiff
         - jsoncpp
         - expat
-        - tbb
-        - tbb-devel
         - libnetcdf
         - libnetcdf * nompi_*
         - lz4-c
-        - xorg-libxt  # [linux]
         # These packages are not CDT to help with compat with other builds
         # (e.g., tensorflow, qt-main), e.g.
         # https://github.com/conda-forge/qt-main-feedstock/blob/2b166b35e9e1a2d897640ac28ae4b00491d9e310/recipe/meta.yaml#L134-L138
-        - libgl-devel  # [linux]
-        - libegl-devel  # [linux]
-        - libglvnd-devel  # [linux]
-        - libxcb  # [linux]
-        - xorg-libxau  # [linux]
+        - libglx-devel  # [linux]
         - libuuid  # [linux]
         - xorg-xproto  # [linux]
-        - xorg-libxext  # [linux]
-        - xorg-libxfixes  # [linux]
-        - xorg-libxxf86vm  # [linux]
-        - xorg-libxdamage  # [linux]
-        - xorg-libsm  # [linux]
-        - xorg-libice  # [linux]
         - xorg-libx11  # [linux]
         - xorg-xf86vidmodeproto  # [linux]
         - libboost-headers
-        - tk  # [not win]
         - ffmpeg
         - utfcpp
         - eigen
@@ -92,7 +78,6 @@ outputs:
         - libtheora
         - nlohmann_json
         - proj
-        - loguru
         - sqlite
         # Until this is solved:
         # https://gitlab.kitware.com/vtk/vtk/-/issues/19561
@@ -107,6 +92,7 @@ outputs:
         - loguru
         - numpy
         - wslink
+        - matplotlib-base >=2.0.0
 
       run_constrained:
         # Paraview bundles its own VTK that has conflicting Python vtkmodules
@@ -227,6 +213,7 @@ about:
     - Copyright.txt
     - vendored-fast_float-license.txt  # https://gitlab.kitware.com/vtk/vtk/-/blob/master/ThirdParty/fast_float/vtkfast_float/LICENSE-MIT
     - vendored-libharu-license.txt  # https://gitlab.kitware.com/vtk/vtk/-/blob/master/ThirdParty/libharu/vtklibharu/LICENSE
+    - vendored-loguru-license.txt  # https://gitlab.kitware.com/vtk/vtk/-/blob/v9.4.1/ThirdParty/loguru/vtkloguru/LICENSE
     - vendored-pegtl-license.txt  # https://gitlab.kitware.com/vtk/vtk/-/blob/master/ThirdParty/pegtl/vtkpegtl/LICENSE
     - vendored-exprtk-license.txt  # https://github.com/conda-forge/exprtk-feedstock/blob/main/license.txt
     - vendored-fmt-license.txt  # https://gitlab.kitware.com/vtk/vtk/-/blob/master/ThirdParty/fmt/vtkfmt/LICENSE.rst
