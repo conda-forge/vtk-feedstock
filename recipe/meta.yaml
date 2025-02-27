@@ -30,13 +30,6 @@ outputs:
         - "%RECIPE_DIR%\\bld-base.bat"  # [win]
       ignore_run_exports:
         - ffmpeg  # [not win]
-        - libgl-devel  # [linux]
-        - libegl-devel  # [linux]
-        - libxcb  # [linux]
-        - xorg-libxext  # [linux]
-        - xorg-libxft  # [linux]
-        - xorg-libxt  # [linux]
-        - xorg-libxv  # [linux]
       run_exports:
         - {{ pin_subpackage('vtk-base', max_pin='x.x.x') }}
 
@@ -65,7 +58,7 @@ outputs:
         - libnetcdf
         - libnetcdf * nompi_*
         - lz4-c
-        - vulkan-tools # [linux or win]
+        # TODO: Someday we should add Vulkan once it can be found in conda-forge
         # These packages are not CDT to help with compat with other builds
         # (e.g., tensorflow, qt-main), e.g.
         # https://github.com/conda-forge/qt-main-feedstock/blob/2b166b35e9e1a2d897640ac28ae4b00491d9e310/recipe/meta.yaml#L134-L138
@@ -80,6 +73,12 @@ outputs:
         - xorg-libxt  # [linux]
         - xorg-libxv  # [linux]
         - xorg-libxext  # [linux]
+        - xorg-libxres  # [linux]
+        - xorg-libxaw  # [linux]
+        - xorg-libxinerama  # [linux]
+        - xorg-libxpm  # [linux]
+        - xorg-libxmu  # [linux]
+        - xorg-libxxf86vm  # [linux]
         - xorg-libx11  # [linux]
         - xorg-xf86vidmodeproto  # [linux]
         - libboost-headers
