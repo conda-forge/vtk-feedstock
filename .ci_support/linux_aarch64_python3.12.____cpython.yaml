@@ -60,6 +60,10 @@ sqlite:
 - '3'
 target_platform:
 - linux-aarch64
+tbb:
+- '2021'
+tbb_devel:
+- '2021'
 vtk:
 - 9.3.1
 zlib:
