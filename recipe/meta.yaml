@@ -74,7 +74,6 @@ outputs:
         - libnetcdf
         - libnetcdf * nompi_*
         - lz4-c
-        - fmt
         # TODO: Someday we should add Vulkan once it can be found in conda-forge
         # These packages are not CDT to help with compat with other builds
         # (e.g., tensorflow, qt-main), e.g.
