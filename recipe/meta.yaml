@@ -66,6 +66,8 @@ outputs:
         - libegl-devel  # [linux]
         - libglvnd-devel  # [linux]
         - libglx-devel  # [linux]
+        - libgles  # [linux]
+        - libglu  # [linux]
         - libxcb  # [linux]
         - libuuid  # [linux]
         - xorg-xproto  # [linux]
