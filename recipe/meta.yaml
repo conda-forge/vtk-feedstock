@@ -55,6 +55,8 @@ outputs:
         - libtiff
         - jsoncpp
         - expat
+        - tbb  # [win]
+        - tbb-devel  # [win]
         - libnetcdf
         - libnetcdf * nompi_*
         - lz4-c
