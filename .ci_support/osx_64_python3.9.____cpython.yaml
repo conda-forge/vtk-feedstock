@@ -58,12 +58,6 @@ sqlite:
 - '3'
 target_platform:
 - osx-64
-tbb:
-- '2021'
-tbb_devel:
-- '2021'
-tk:
-- '8.6'
 vtk:
 - 9.3.1
 zlib:
