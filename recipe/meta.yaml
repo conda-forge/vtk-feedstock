@@ -92,7 +92,7 @@ outputs:
         - xorg-libxt  # [linux]
         - xorg-libxv  # [linux]
         - xorg-libxext  # [linux]
-        - xorg-libxres  # [linux and not aarch64]
+        - xorg-libxres  # [linux]
         - xorg-libxaw  # [linux]
         - xorg-libxinerama  # [linux]
         - xorg-libxpm  # [linux]
