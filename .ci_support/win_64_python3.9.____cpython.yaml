@@ -1,5 +1,3 @@
-build_variant:
-- qt
 c_stdlib:
 - vs
 channel_sources:
@@ -14,8 +12,6 @@ ffmpeg:
 - '7'
 freetype:
 - '2'
-glew:
-- '2.1'
 hdf5:
 - 1.14.3
 jsoncpp:

@@ -1,17 +1,7 @@
-{% set version = "9.3.1" %}
-{% set build = 16 %}
+{% set version = "9.4.1" %}
+{% set build = 0 %}
 
 {% set minor_version = ".".join(version.split(".")[:2]) %}
-
-{% set build = build + 100 %}   # [build_variant == "osmesa"]
-{% set build = build + 200 %}   # [build_variant == "qt"]
-# typically, osmesa is selected by installing or not installing
-# mesalib, but it could also be selected via the build string:
-# `vtk * osmesa*` for osmesa
-# `vtk * egl*` for egl
-# `vtk * qt*` for qt-main
-# The 'build: string: ...' needs to be set in each output and the top-level
-# otherwise it won't be correct in the final build.
 
 package:
   name: vtk
@@ -19,43 +9,47 @@ package:
 
 source:
   url: http://www.vtk.org/files/release/{{ minor_version }}/VTK-{{ version }}.tar.gz
-  sha256: 8354ec084ea0d2dc3d23dbe4243823c4bfc270382d0ce8d658939fd50061cab8
+  sha256: c253b0c8d002aaf98871c6d0cb76afc4936c301b72358a08d5f3f72ef8bc4529
   patches:
     - patches/fix-threads-windows.patch  # [win]
     # https://github.com/conda-forge/vtk-feedstock/pull/282
     # https://gitlab.kitware.com/vtk/vtk/-/issues/18365#note_1079278
     # https://gitlab.kitware.com/vtk/vtk/-/merge_requests/9987
     - patches/9987_try_except_python_import.patch  # [not win]
-    # https://gitlab.kitware.com/vtk/vtk/-/merge_requests/11486
-    - patches/11486.patch
-    # https://github.com/nigels-com/glew/blob/3da315c23aa80b5727e51f21bbe33823bf4c0511
-    - patches/define-apientry.patch
+    # https://gitlab.kitware.com/vtk/vtk/-/merge_requests/11929
+    - patches/11929_disable_class_overrides_pyi.patch
 
 build:
   number: {{ build }}
-  string: "{{ build_variant }}_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ build }}"
 
 outputs:
   - name: vtk-base
     build:
-      string: "{{ build_variant }}_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ build }}"
-      script: ${RECIPE_DIR}/build-base.sh  # [not win]
-      script: "%RECIPE_DIR%\\bld-base.bat"  # [win]
-      ignore_run_exports_from:
+      script:
+        - ${RECIPE_DIR}/build-base.sh  # [not win]
+        - "%RECIPE_DIR%\\bld-base.bat"  # [win]
+      ignore_run_exports:
         - ffmpeg  # [not win]
+        # Found via inspection of the conda-forge logs, hopefully okay to ignore:
+        - xorg-libxext  # [linux]
+        - xorg-libxxf86vm  # [linux]
+        - xorg-libxft  # [linux]
+        - xorg-libxt  # [linux]
+        - xorg-libxmu  # [linux]
+        - libxcb  # [linux]
+        - libglvd  # [linux]
+        - libuuid  # [linux]
+        - xorg-libxv  # [linux]
+        - libgl  # [linux]
+        - xorg-libxpm  # [linux]
+        - libegl  # [linux]
+        - xorg-libxinerama  # [linux]
       run_exports:
         - {{ pin_subpackage('vtk-base', max_pin='x.x.x') }}
-      track_features:
-        - vtk-egl  # [build_variant == "egl"]
-        - vtk-osmesa  # [build_variant == "osmesa"]
-
-      features:
-        - mesalib  # [build_variant == "osmesa"]
 
     requirements:
       build:
         - {{ compiler("cxx") }}
-        - {{ compiler('fortran') }}  # [build_variant != "qt"]
         - {{ stdlib("c") }}
         - cmake
         - ninja
@@ -77,53 +71,61 @@ outputs:
         - expat
         - tbb
         - tbb-devel
-        - mesalib  # [build_variant == "osmesa"]
         - libnetcdf
         - libnetcdf * nompi_*
         - lz4-c
-        - xorg-libxt  # [linux]
+        # TODO: Someday we should add Vulkan once it can be found in conda-forge
         # These packages are not CDT to help with compat with other builds
         # (e.g., tensorflow, qt-main), e.g.
         # https://github.com/conda-forge/qt-main-feedstock/blob/2b166b35e9e1a2d897640ac28ae4b00491d9e310/recipe/meta.yaml#L134-L138
-        - libgl-devel  # [linux and build_variant != "osmesa"]
-        - libegl-devel  # [build_variant == "egl"]
-        - libglvnd-devel  # [linux and build_variant != "osmesa"]
-        - libxcb  # [linux and build_variant != "osmesa"]
-        - xorg-libxau  # [linux and build_variant != "osmesa"]
-        - libuuid  # [linux and build_variant != "osmesa"]
-        - xorg-xproto  # [linux and build_variant != "osmesa"]
-        - xorg-libxext  # [linux and build_variant != "osmesa"]
-        - xorg-libxfixes  # [linux and build_variant != "osmesa"]
-        - xorg-libxxf86vm  # [linux and build_variant != "osmesa"]
-        - xorg-libxdamage  # [linux and build_variant != "osmesa"]
-        - xorg-libsm  # [linux and build_variant != "osmesa"]
-        - xorg-libice  # [linux and build_variant != "osmesa"]
-        - xorg-libx11  # [linux and build_variant != "osmesa"]
-        - xorg-xf86vidmodeproto  # [linux and build_variant != "osmesa"]
+        - libgl-devel  # [linux]
+        - libegl-devel  # [linux]
+        - libglvnd-devel  # [linux]
+        - libglx-devel  # [linux]
+        - libglu  # [linux]
+        - libxcb  # [linux]
+        - libxkbfile  # [linux]
+        - libuuid  # [linux]
+        # still missing: Xaccessrules Xxf86misc, xcb_errors, xcb_xrm
+        - xorg-xproto  # [linux]
+        - xorg-libxft  # [linux]
+        - xorg-libxt  # [linux]
+        - xorg-libxv  # [linux]
+        - xorg-libxext  # [linux]
+        - xorg-libxres  # [linux]
+        - xorg-libxaw  # [linux]
+        - xorg-libxinerama  # [linux]
+        - xorg-libxpm  # [linux]
+        - xorg-libxmu  # [linux]
+        - xorg-libxxf86vm  # [linux]
+        - xorg-libx11  # [linux]
+        - xorg-xf86vidmodeproto  # [linux]
         - libboost-headers
-        - tk  # [not win and (build_variant == "qt")]
         - ffmpeg
         - utfcpp
         - eigen
         - double-conversion
         - pugixml
-        - glew  # [build_variant == "qt"]
+        - glad2-cmake
+        - glad2
         - libogg
         - libtheora
         - nlohmann_json
         - proj
-        - loguru
         - sqlite
-        - gl2ps
-        - qt6-main  # [not ppc64le and (build_variant == "qt")]
+        # Until this is solved:
+        # https://gitlab.kitware.com/vtk/vtk/-/issues/19561
+        # we use the internal one in build-base.sh
+        - gl2ps  # [not osx]
+        - qt6-main  # [not ppc64le]
       run:
         - python
-        - mesalib >=21.0  # [build_variant == "osmesa"]
         - utfcpp
         - nlohmann_json
         - loguru
         - numpy
         - wslink
+        - matplotlib-base >=2.0.0
 
       run_constrained:
         # Paraview bundles its own VTK that has conflicting Python vtkmodules
@@ -147,8 +149,9 @@ outputs:
         - vtk.vtkRenderingVolume
         - vtk.vtkInteractionWidgets
         - vtk.vtkWebGLExporter
-        - vtk.tk.vtkTkRenderWidget  # [not win and (build_variant == "qt")]
         - vtkmodules
+        - vtkmodules.qt.QVTKRenderWindowInteractor  # [not ppc64le]
+        - vtkmodules.tk.vtkTkRenderWidget  # [not win]
         - vtkmodules.vtkChartsCore
         - vtkmodules.vtkCommonCore
         - vtkmodules.vtkFiltersCore
@@ -159,8 +162,9 @@ outputs:
         - vtkmodules.vtkImagingCore
         - vtkmodules.vtkInfovisCore
         - vtkmodules.vtkRenderingCore
+        - vtkmodules.vtkRenderingMatplotlib
         - vtkmodules.vtkViewsCore
-        - vtkmodules.vtkRenderingQt  # [build_variant == "qt"]
+        - vtkmodules.vtkRenderingQt
         - vtkmodules.vtkRenderingVolume
         - vtkmodules.vtkInteractionWidgets
         - vtkmodules.vtkWebCore
@@ -170,33 +174,37 @@ outputs:
       requires:
         - pip
         - setuptools
+        - pyside6  # [not ppc64le]
 
       commands:
         - pip check
         - test $(pip list | grep vtk | tr -s " " | grep $PKG_VERSION | wc -l) -eq 1  # [unix]
         - pip list | findstr "vtk"  # [win]
-        {% set vtk_qt_libs = [
-            "vtkGUISupportQt",
-            "vtkRenderingQt"
-        ] %}
-        {% for vtk_lib in vtk_qt_libs %}
-        - test -f $PREFIX/lib/lib{{ vtk_lib }}-{{ minor_version }}${SHLIB_EXT}  # [not win and (build_variant == "qt")]
-        - if not exist %PREFIX%\\Library\\lib\\{{ vtk_lib }}-{{ minor_version }}.lib exit 1  # [win and (build_variant == "qt")]
-        - if not exist %PREFIX%\\Library\\bin\\{{ vtk_lib }}-{{ minor_version }}.dll exit 1  # [win and (build_variant == "qt")]
-        {% endfor %}
+        # Ideally here we would do:
+        # {% for vtk_lib in ["vtkGUISupportQt", "vtkRenderingQt"] %}
+        # ...
+        # {% endfor %}
+        # But it breaks the linter :( so we do it manually
+        - test -f $PREFIX/lib/libvtkGUISupportQt-{{ minor_version }}${SHLIB_EXT}  # [not win]
+        - if not exist %PREFIX%\\Library\\lib\\vtkGUISupportQt-{{ minor_version }}.lib exit 1  # [win]
+        - if not exist %PREFIX%\\Library\\bin\\vtkGUISupportQt-{{ minor_version }}.dll exit 1  # [win]
+        - test -f $PREFIX/lib/libvtkRenderingQt-{{ minor_version }}${SHLIB_EXT}  # [not win]
+        - if not exist %PREFIX%\\Library\\lib\\vtkRenderingQt-{{ minor_version }}.lib exit 1  # [win]
+        - if not exist %PREFIX%\\Library\\bin\\vtkRenderingQt-{{ minor_version }}.dll exit 1  # [win]
 
   - name: vtk-io-ffmpeg
     build:
-      string: "{{ build_variant }}_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ build }}"
-      script: ${RECIPE_DIR}/build-io-ffmpeg.sh  # [not win]
+      script:
+        - ${RECIPE_DIR}/build-io-ffmpeg.sh  # [not win]
+        - exit 1  # [win]
       skip: true  # [win]
       run_exports:
         - {{ pin_subpackage('vtk-io-ffmpeg', max_pin='x.x.x') }}
     requirements:
       build: []
       host:
-          # We use ffmpeg here in the host section so that conda build
-          # uses the global pinnings and ensures ffmpeg compatibility.
+        # We use ffmpeg here in the host section so that conda build
+        # uses the global pinnings and ensures ffmpeg compatibility.
         - ffmpeg
       run:
         - {{ pin_subpackage("vtk-base", exact=True) }}
@@ -212,7 +220,6 @@ outputs:
     build:
       ignore_run_exports_from:
         - ffmpeg
-      string: "{{ build_variant }}_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ build }}"
       run_exports:
         - {{ pin_subpackage('vtk-base', max_pin='x.x.x') }}
     requirements:
@@ -238,7 +245,18 @@ outputs:
 about:
   home: http://www.vtk.org/
   license: BSD-3-Clause
-  license_file: Copyright.txt
+  license_file:
+    - Copyright.txt
+    - vendored-fast_float-license.txt  # https://gitlab.kitware.com/vtk/vtk/-/blob/master/ThirdParty/fast_float/vtkfast_float/LICENSE-MIT
+    - vendored-libharu-license.txt  # https://gitlab.kitware.com/vtk/vtk/-/blob/master/ThirdParty/libharu/vtklibharu/LICENSE
+    - vendored-loguru-license.txt  # https://gitlab.kitware.com/vtk/vtk/-/blob/v9.4.1/ThirdParty/loguru/vtkloguru/LICENSE
+    - vendored-pegtl-license.txt  # https://gitlab.kitware.com/vtk/vtk/-/blob/master/ThirdParty/pegtl/vtkpegtl/LICENSE
+    - vendored-exprtk-license.txt  # https://github.com/conda-forge/exprtk-feedstock/blob/main/license.txt
+    - vendored-fmt-license.txt  # https://gitlab.kitware.com/vtk/vtk/-/blob/master/ThirdParty/fmt/vtkfmt/LICENSE.rst
+    - vendored-cgns-license.txt  # https://gitlab.kitware.com/vtk/vtk/-/blob/master/ThirdParty/cgns/vtkcgns/license.txt
+    - vendored-ioss-license.txt  # https://gitlab.kitware.com/vtk/vtk/-/blob/master/ThirdParty/ioss/vtkioss/COPYRIGHT
+    - vendored-token-license.txt  # https://gitlab.kitware.com/vtk/vtk/-/blob/master/ThirdParty/token/vtktoken/license.md
+    - vendored-verdict-license.txt  # https://gitlab.kitware.com/vtk/vtk/-/blob/master/ThirdParty/verdict/vtkverdict/LICENSE
   summary: >
     The Visualization Toolkit (VTK) is an open-source, freely available software system for 3D computer graphics, modeling, image processing, volume rendering, scientific visualization, and information visualization.
   dev_url: https://gitlab.kitware.com/vtk/vtk
