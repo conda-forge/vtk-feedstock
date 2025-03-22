@@ -88,6 +88,7 @@ outputs:
         - libuuid  # [linux]
         # still missing: Xaccessrules Xxf86misc, xcb_errors, xcb_xrm
         - xorg-xproto  # [linux]
+        - xorg-libxcursor  # [linux]
         - xorg-libxft  # [linux]
         - xorg-libxt  # [linux]
         - xorg-libxv  # [linux]
