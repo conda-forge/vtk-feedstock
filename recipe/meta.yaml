@@ -1,5 +1,5 @@
 {% set version = "9.4.1" %}
-{% set build = 2 %}
+{% set build = 3 %}
 
 {% set minor_version = ".".join(version.split(".")[:2]) %}
 
@@ -235,11 +235,18 @@ outputs:
       requires:
         - pip
         - setuptools
+        - cmake-package-check
+        - {{ compiler('c') }}
+        - {{ compiler('cxx') }}
       imports:
         - vtk
         - vtk.vtkIOFFMPEG  # [not win]
       commands:
         - python test_vtk.py
+        # find_package(VTK) requires vtk ffmpeg support to be installed if vtk was configure with ffmpeg
+        # support, so if one wants to use find_package(VTK) vtk needs to be added as a dependency
+        - cmake-package-check VTK
+
 
 about:
   home: http://www.vtk.org/
