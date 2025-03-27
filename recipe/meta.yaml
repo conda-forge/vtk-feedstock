@@ -1,5 +1,5 @@
 {% set version = "9.4.1" %}
-{% set build = 2 %}
+{% set build = 3 %}
 
 {% set minor_version = ".".join(version.split(".")[:2]) %}
 
@@ -231,15 +231,21 @@ outputs:
         # and https://github.com/conda-forge/vtk-feedstock/issues/372
         - {{ pin_subpackage("vtk-base", max_pin='x.x.x') }}
         - {{ pin_subpackage("vtk-io-ffmpeg", max_pin='x.x.x') }}  # [not win]
+        # This is done to ensure that find_package(VTK) works fine
+        - tbb-devel
     test:
       requires:
         - pip
         - setuptools
+        - cmake-package-check
+        - {{ compiler('c') }}
+        - {{ compiler('cxx') }}
       imports:
         - vtk
         - vtk.vtkIOFFMPEG  # [not win]
       commands:
         - python test_vtk.py
+        - cmake-package-check VTK
 
 about:
   home: http://www.vtk.org/
