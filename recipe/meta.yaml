@@ -119,6 +119,10 @@ outputs:
         # we use the internal one in build-base.sh
         - gl2ps  # [not osx]
         - qt6-main  # [not ppc64le]
+        # Additional qt6-main pin as a workaround for https://github.com/conda-forge/vtk-feedstock/pull/375#issuecomment-2760685256
+        # remove once we mirate to qt6-main 6.10
+        - qt6-main 6.8.0.*  # [not ppc64le]
+        
       run:
         - python
         - utfcpp
