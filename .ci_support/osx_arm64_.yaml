@@ -37,7 +37,7 @@ libpng:
 libtiff:
 - '4.7'
 libxml2:
-- '2'
+- '2.13'
 lz4_c:
 - '1.10'
 macos_machine:
@@ -51,9 +51,13 @@ proj:
 pugixml:
 - '1.15'
 python:
+- 3.10.* *_cpython
 - 3.11.* *_cpython
+- 3.12.* *_cpython
+- 3.13.* *_cp313
+- 3.9.* *_cpython
 qt6_main:
-- '6.8'
+- '6.9'
 sqlite:
 - '3'
 target_platform:
