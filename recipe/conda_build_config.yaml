@@ -3,6 +3,8 @@ c_stdlib_version:          # [osx]
   - 11.0                   # [osx]
 MACOSX_SDK_VERSION:        # [osx]
   - '12.3'                 # [osx]
+qt6_main:
+  - 6.9
 
 replacements:
   all_replacements:
