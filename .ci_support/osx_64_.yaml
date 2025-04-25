@@ -1,19 +1,19 @@
+MACOSX_DEPLOYMENT_TARGET:
+- '11.0'
+MACOSX_SDK_VERSION:
+- '12.3'
 c_stdlib:
-- sysroot
+- macosx_deployment_target
 c_stdlib_version:
-- '2.17'
-cdt_name:
-- conda
+- '11.0'
 channel_sources:
 - conda-forge
 channel_targets:
 - conda-forge main
 cxx_compiler:
-- gxx
+- clangxx
 cxx_compiler_version:
-- '13'
-docker_image:
-- quay.io/condaforge/linux-anvil-x86_64:alma9
+- '18'
 expat:
 - '2'
 ffmpeg:
@@ -21,7 +21,7 @@ ffmpeg:
 freetype:
 - '2'
 hdf5:
-- 1.14.3
+- 1.14.6
 jsoncpp:
 - 1.9.6
 libboost_headers:
@@ -36,14 +36,12 @@ libpng:
 - '1.6'
 libtiff:
 - '4.7'
-libuuid:
-- '2'
-libxcb:
-- '1'
 libxml2:
-- '2'
+- '2.13'
 lz4_c:
 - '1.10'
+macos_machine:
+- x86_64-apple-darwin13.4.0
 pin_run_as_build:
   python:
     min_pin: x.x
@@ -53,13 +51,17 @@ proj:
 pugixml:
 - '1.15'
 python:
+- 3.10.* *_cpython
 - 3.11.* *_cpython
+- 3.12.* *_cpython
+- 3.13.* *_cp313
+- 3.9.* *_cpython
 qt6_main:
-- '6.8'
+- '6.9'
 sqlite:
 - '3'
 target_platform:
-- linux-aarch64
+- osx-64
 tbb:
 - '2021'
 tbb_devel:
