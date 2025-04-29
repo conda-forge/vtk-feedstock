@@ -225,7 +225,8 @@ outputs:
         - {{ pin_subpackage('vtk-base', max_pin='x.x.x') }}
     requirements:
       build: []
-      host: []
+      host:
+        - python
       run:
         # The pin_subpackage is not exact to avoid issues like https://github.com/conda-forge/vtk-feedstock/issues/347
         # and https://github.com/conda-forge/vtk-feedstock/issues/372
