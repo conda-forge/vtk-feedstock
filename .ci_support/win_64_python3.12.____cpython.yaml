@@ -1,19 +1,11 @@
 c_stdlib:
-- sysroot
-c_stdlib_version:
-- '2.17'
-cdt_name:
-- conda
+- vs
 channel_sources:
 - conda-forge
 channel_targets:
 - conda-forge main
 cxx_compiler:
-- gxx
-cxx_compiler_version:
-- '13'
-docker_image:
-- quay.io/condaforge/linux-anvil-x86_64:alma9
+- vs2019
 expat:
 - '2'
 ffmpeg:
@@ -36,10 +28,6 @@ libpng:
 - '1.6'
 libtiff:
 - '4.7'
-libuuid:
-- '2'
-libxcb:
-- '1'
 libxml2:
 - '2.13'
 lz4_c:
@@ -53,17 +41,13 @@ proj:
 pugixml:
 - '1.15'
 python:
-- 3.10.* *_cpython
-- 3.11.* *_cpython
 - 3.12.* *_cpython
-- 3.13.* *_cp313
-- 3.9.* *_cpython
 qt6_main:
 - '6.9'
 sqlite:
 - '3'
 target_platform:
-- linux-aarch64
+- win-64
 tbb:
 - '2021'
 tbb_devel:
