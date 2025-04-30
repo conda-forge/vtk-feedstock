@@ -18,6 +18,8 @@ source:
     - patches/9987_try_except_python_import.patch  # [not win]
     # https://gitlab.kitware.com/vtk/vtk/-/merge_requests/11929
     - patches/11929_disable_class_overrides_pyi.patch
+    # https://gitlab.kitware.com/vtk/vtk/-/issues/19666
+    - patches/fix-qt-keywords.patch
 
 build:
   number: {{ build }}
