@@ -1,0 +1,29 @@
+diff --git a/GUISupport/Qt/QVTKInteractor.cxx b/GUISupport/Qt/QVTKInteractor.cxx
+index dfc212c7b8..9b0c6f2366 100644
+--- a/GUISupport/Qt/QVTKInteractor.cxx
++++ b/GUISupport/Qt/QVTKInteractor.cxx
+@@ -52,9 +52,9 @@ QVTKInteractorInternal::QVTKInteractorInternal(QVTKInteractor* p)
+ 
+ QVTKInteractorInternal::~QVTKInteractorInternal() = default;
+ 
+-void QVTKInteractorInternal::TimerEvent(int id)
++void QVTKInteractorInternal::TimerEvent(int timerId)
+ {
+-  Parent->TimerEvent(id);
++  Parent->TimerEvent(timerId);
+ }
+ 
+ /*! allocation method for Qt/VTK interactor
+diff --git a/GUISupport/Qt/QVTKInteractorInternal.h b/GUISupport/Qt/QVTKInteractorInternal.h
+index 141c9c4dfd..2f69ad521c 100644
+--- a/GUISupport/Qt/QVTKInteractorInternal.h
++++ b/GUISupport/Qt/QVTKInteractorInternal.h
+@@ -28,7 +28,7 @@ public:
+   QVTKInteractorInternal(QVTKInteractor* p);
+   ~QVTKInteractorInternal() override;
+ public Q_SLOTS: // NOLINT(readability-redundant-access-specifiers)
+-  void TimerEvent(int id);
++  void TimerEvent(int timerId);
+ 
+ public: // NOLINT(readability-redundant-access-specifiers)
+   QSignalMapper* SignalMapper;
