@@ -8,8 +8,9 @@ package:
   version: {{ version }}
 
 source:
-  url: http://www.vtk.org/files/release/{{ minor_version }}/VTK-{{ version }}.tar.gz
-  sha256: 36c98e0da96bb12a30fe53708097aa9492e7b66d5c3b366e1c8dc251e2856a02
+  # TODO: Just to test master, do not merge!
+  url: https://gitlab.kitware.com/vtk/vtk/-/archive/c0d6c63d5b1ebe2534e2deaeedf02849bc5c9fb1/vtk-c0d6c63d5b1ebe2534e2deaeedf02849bc5c9fb1.tar.gz
+  sha256: ce9ad771c2fb7a237015f19c74dc524270c59995bbf21a7f33ee2e37b0c0a9ef
   patches:
     - patches/fix-threads-windows.patch  # [win]
     # https://github.com/conda-forge/vtk-feedstock/pull/282

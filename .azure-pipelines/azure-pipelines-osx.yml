@@ -38,7 +38,7 @@ jobs:
       osx_arm64_python3.9.____cpython:
         CONFIG: osx_arm64_python3.9.____cpython
         UPLOAD_PACKAGES: 'True'
-  timeoutInMinutes: 360
+  timeoutInMinutes: 1  # TODO: REVERT!
   variables: {}
 
   steps:
