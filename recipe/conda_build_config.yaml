@@ -4,6 +4,11 @@ c_stdlib_version:          # [osx]
 MACOSX_SDK_VERSION:        # [osx]
   - '12.3'                 # [osx]
 
+c_compiler:    # [win]
+- vs2022       # [win]
+cxx_compiler:  # [win]
+- vs2022       # [win]
+
 replacements:
   all_replacements:
     - tag: 'CMake build metadata'
