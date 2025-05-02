@@ -236,11 +236,15 @@ outputs:
       requires:
         - pip
         - setuptools
+        - cmake-package-check
+        - {{ compiler('c') }}
+        - {{ compiler('cxx') }}
       imports:
         - vtk
         - vtk.vtkIOFFMPEG  # [not win]
       commands:
         - python test_vtk.py
+        - cmake-package-check VTK
 
 about:
   home: http://www.vtk.org/
