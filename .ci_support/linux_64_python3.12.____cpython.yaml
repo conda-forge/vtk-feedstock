@@ -21,7 +21,7 @@ ffmpeg:
 freetype:
 - '2'
 hdf5:
-- 1.14.3
+- 1.14.6
 jsoncpp:
 - 1.9.6
 libboost_headers:
@@ -41,7 +41,7 @@ libuuid:
 libxcb:
 - '1'
 libxml2:
-- '2'
+- '2.13'
 lz4_c:
 - '1.10'
 pin_run_as_build:
@@ -55,7 +55,7 @@ pugixml:
 python:
 - 3.12.* *_cpython
 qt6_main:
-- '6.8'
+- '6.9'
 sqlite:
 - '3'
 target_platform:
