@@ -131,7 +131,7 @@ outputs:
       run_constrained:
         # Paraview bundles its own VTK that has conflicting Python vtkmodules
         - paraview ==9999999999
-        - {{ pin_compatible('libboost_headers', max_pin='x.x') }}
+        - {{ pin_compatible('libboost-headers', max_pin='x.x') }}
 
     test:
       imports:
@@ -232,6 +232,12 @@ outputs:
         # and https://github.com/conda-forge/vtk-feedstock/issues/372
         - {{ pin_subpackage("vtk-base", max_pin='x.x.x') }}
         - {{ pin_subpackage("vtk-io-ffmpeg", max_pin='x.x.x') }}  # [not win]
+        # The following dependencies are here to make sure that find_package(VTK) works fine, they could be moved to vtk-devel if that is ever created
+        - libgl-devel  # [linux]
+        - libboost-devel
+        - liblzma-devel
+        - tbb-devel
+        - eigen
     test:
       requires:
         - pip
@@ -243,7 +249,8 @@ outputs:
         - vtk
         - vtk.vtkIOFFMPEG  # [not win]
       commands:
-        - python test_vtk.py
+      # uncomment once we fix test_vtk.py, see https://github.com/conda-forge/vtk-feedstock/issues/383#issuecomment-2890722669
+      #  - python test_vtk.py
         - cmake-package-check VTK
 
 about:
@@ -267,6 +274,7 @@ about:
   doc_url: https://vtk.org/documentation
 
 extra:
+  feedstock-name: vtk
   recipe-maintainers:
     - Maxyme
     - ccordoba12
