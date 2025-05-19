@@ -18,6 +18,8 @@ hdf5:
 - 1.14.6
 jsoncpp:
 - 1.9.6
+libboost_devel:
+- '1.86'
 libboost_headers:
 - '1.86'
 libjpeg_turbo:
