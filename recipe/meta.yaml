@@ -234,10 +234,12 @@ outputs:
         - {{ pin_subpackage("vtk-io-ffmpeg", max_pin='x.x.x') }}  # [not win]
         # The following dependencies are here to make sure that find_package(VTK) works fine, they could be moved to vtk-devel if that is ever created
         - libgl-devel  # [linux]
+        - libopengl-devel  # [linux]
         - libboost-devel
         - liblzma-devel
         - tbb-devel
         - eigen
+        - expat
     test:
       requires:
         - pip
