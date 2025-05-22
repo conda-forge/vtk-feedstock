@@ -2,6 +2,10 @@ MACOSX_DEPLOYMENT_TARGET:
 - '11.0'
 MACOSX_SDK_VERSION:
 - '12.3'
+c_compiler:
+- clang
+c_compiler_version:
+- '18'
 c_stdlib:
 - macosx_deployment_target
 c_stdlib_version:
@@ -24,6 +28,8 @@ hdf5:
 - 1.14.6
 jsoncpp:
 - 1.9.6
+libboost_devel:
+- '1.86'
 libboost_headers:
 - '1.86'
 libjpeg_turbo:
@@ -64,5 +70,8 @@ tbb_devel:
 - '2021'
 vtk:
 - 9.3.1
+zip_keys:
+- - c_compiler_version
+  - cxx_compiler_version
 zlib:
 - '1'
