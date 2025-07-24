@@ -22,6 +22,8 @@ expat:
 - '2'
 ffmpeg:
 - '7'
+fmt:
+- '10'
 freetype:
 - '2'
 hdf5:
