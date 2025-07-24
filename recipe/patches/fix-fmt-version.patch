@@ -1,0 +1,12 @@
+diff --git a/ThirdParty/fmt/CMakeLists.txt b/ThirdParty/fmt/CMakeLists.txt
+index 8fbb497c3a3..dab2e6fa288 100644
+--- a/ThirdParty/fmt/CMakeLists.txt
++++ b/ThirdParty/fmt/CMakeLists.txt
+@@ -9,7 +9,6 @@ vtk_module_third_party(
+   EXTERNAL
+     PACKAGE fmt
+     TARGETS fmt::fmt
+-    VERSION       "11.0.0"
+     STANDARD_INCLUDE_DIRS)
+ 
+ configure_file(
