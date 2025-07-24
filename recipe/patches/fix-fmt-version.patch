@@ -6,7 +6,7 @@ index 8fbb497c3a3..dab2e6fa288 100644
    EXTERNAL
      PACKAGE fmt
      TARGETS fmt::fmt
--    VERSION       "11.0.0"
+-    VERSION       "9.0.0"
      STANDARD_INCLUDE_DIRS)
  
  configure_file(
