@@ -70,6 +70,7 @@ outputs:
         - libtiff
         - jsoncpp
         - expat
+        - fmt
         - tbb
         - tbb-devel
         - libnetcdf
