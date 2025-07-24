@@ -91,6 +91,7 @@ cmake -LAH .. -G "Ninja" ${CMAKE_ARGS} \
     -Wno-dev \
     -DCMAKE_BUILD_TYPE=$BUILD_CONFIG \
     -DCMAKE_PREFIX_PATH:PATH="${PREFIX}" \
+    -DCMAKE_IGNORE_PATH="/opt/conda/lib/cmake/fmt" \
     -DCMAKE_FIND_FRAMEWORK=LAST \
     -DCMAKE_INSTALL_PREFIX:PATH="${PREFIX}" \
     -DCMAKE_INSTALL_RPATH:PATH="${PREFIX}/lib" \
