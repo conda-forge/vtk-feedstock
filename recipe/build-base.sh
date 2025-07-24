@@ -136,7 +136,6 @@ cmake -LAH .. -G "Ninja" ${CMAKE_ARGS} \
     -DVTK_MODULE_USE_EXTERNAL_VTK_ioss:BOOL=OFF \
     -DVTK_MODULE_USE_EXTERNAL_VTK_token:BOOL=OFF \
     -DVTK_MODULE_USE_EXTERNAL_VTK_verdict:BOOL=OFF \
-    -Dfmt_DIR:STRING="${PREFIX}/lib/cmake/fmt" \
     -DQT_HOST_PATH:STRING="${PREFIX}" \
     "${VTK_ARGS[@]}"
 
