@@ -1,5 +1,5 @@
 {% set version = "9.4.2" %}
-{% set build = 1 %}
+{% set build = 2 %}
 
 {% set minor_version = ".".join(version.split(".")[:2]) %}
 
@@ -69,6 +69,7 @@ outputs:
         - libtiff
         - jsoncpp
         - expat
+        - fmt
         - tbb
         - tbb-devel
         - libnetcdf
@@ -265,7 +266,6 @@ about:
     - vendored-loguru-license.txt  # https://gitlab.kitware.com/vtk/vtk/-/blob/v9.4.1/ThirdParty/loguru/vtkloguru/LICENSE
     - vendored-pegtl-license.txt  # https://gitlab.kitware.com/vtk/vtk/-/blob/master/ThirdParty/pegtl/vtkpegtl/LICENSE
     - vendored-exprtk-license.txt  # https://github.com/conda-forge/exprtk-feedstock/blob/main/license.txt
-    - vendored-fmt-license.txt  # https://gitlab.kitware.com/vtk/vtk/-/blob/master/ThirdParty/fmt/vtkfmt/LICENSE.rst
     - vendored-cgns-license.txt  # https://gitlab.kitware.com/vtk/vtk/-/blob/master/ThirdParty/cgns/vtkcgns/license.txt
     - vendored-ioss-license.txt  # https://gitlab.kitware.com/vtk/vtk/-/blob/master/ThirdParty/ioss/vtkioss/COPYRIGHT
     - vendored-token-license.txt  # https://gitlab.kitware.com/vtk/vtk/-/blob/master/ThirdParty/token/vtktoken/license.md

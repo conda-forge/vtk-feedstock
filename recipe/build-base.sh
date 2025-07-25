@@ -87,8 +87,6 @@ cd build || exit
 echo "VTK_ARGS:" "${VTK_ARGS[@]}"
 
 # now we can start configuring
-# TODO: Figure out why external fmt must be used, failed when it was tried in
-# https://github.com/conda-forge/vtk-feedstock/pull/368
 cmake -LAH .. -G "Ninja" ${CMAKE_ARGS} \
     -Wno-dev \
     -DCMAKE_BUILD_TYPE=$BUILD_CONFIG \
@@ -133,7 +131,7 @@ cmake -LAH .. -G "Ninja" ${CMAKE_ARGS} \
     -DVTK_MODULE_USE_EXTERNAL_VTK_loguru:BOOL=OFF \
     -DVTK_MODULE_USE_EXTERNAL_VTK_pegtl:BOOL=OFF \
     -DVTK_MODULE_USE_EXTERNAL_VTK_exprtk:BOOL=OFF \
-    -DVTK_MODULE_USE_EXTERNAL_VTK_fmt:BOOL=OFF \
+    -DVTK_MODULE_USE_EXTERNAL_VTK_fmt:BOOL=ON \
     -DVTK_MODULE_USE_EXTERNAL_VTK_cgns:BOOL=OFF \
     -DVTK_MODULE_USE_EXTERNAL_VTK_ioss:BOOL=OFF \
     -DVTK_MODULE_USE_EXTERNAL_VTK_token:BOOL=OFF \
