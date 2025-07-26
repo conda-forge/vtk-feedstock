@@ -13,7 +13,7 @@ expat:
 ffmpeg:
 - '7'
 fmt:
-- '10'
+- '11.2'
 freetype:
 - '2'
 hdf5:
