@@ -103,9 +103,9 @@ index 00b160a4952..8811b98598c 100644
 -                endif()
 -            endif()
 -        endforeach()
++unset(CMAKE_MATCH_1)
 +set(EXPAT_NAMES expat expatw)
 +set(EXPAT_NAMES_DEBUG expatd expatwd)
-+
 +if(WIN32)
 +  if(EXPAT_USE_STATIC_LIBS)
 +    list(APPEND EXPAT_NAMES expatMT expatwMT)
