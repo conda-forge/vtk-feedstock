@@ -16,7 +16,7 @@ source:
     # https://gitlab.kitware.com/vtk/vtk/-/issues/18365#note_1079278
     # https://gitlab.kitware.com/vtk/vtk/-/merge_requests/9987
     - patches/9987_try_except_python_import.patch  # [not win]
-    - patches/update_outdated_findexpat.patch
+    - patches/update_outdated_findexpat.patch  # [osx]
 
 build:
   number: {{ build }}
