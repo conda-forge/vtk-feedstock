@@ -1,0 +1,15 @@
+diff --git a/CMake/FindEXPAT.cmake b/CMake/FindEXPAT.cmake
+index 00b160a4952..d7571c6b7a7 100644
+--- a/CMake/FindEXPAT.cmake
++++ b/CMake/FindEXPAT.cmake
+@@ -39,7 +39,9 @@ find_path(EXPAT_INCLUDE_DIR NAMES expat.h HINTS ${PC_EXPAT_INCLUDE_DIRS})
+ # Look for the library.
+ find_library(EXPAT_LIBRARY NAMES expat libexpat HINTS ${PC_EXPAT_LIBRARY_DIRS})
+ 
+-if (EXPAT_INCLUDE_DIR AND EXISTS "${EXPAT_INCLUDE_DIR}/expat.h")
++set(EXPAT_VERSION_STRING "${PC_EXPAT_VERSION}")
++
++if (EXPAT_INCLUDE_DIR AND EXISTS "${EXPAT_INCLUDE_DIR}/expat.h" AND NOT EXPAT_VERSION_STRING)
+     file(STRINGS "${EXPAT_INCLUDE_DIR}/expat.h" expat_version_str
+          REGEX "^#[\t ]*define[\t ]+XML_(MAJOR|MINOR|MICRO)_VERSION[\t ]+[0-9]+$")
+ 
