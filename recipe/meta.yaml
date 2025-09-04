@@ -278,6 +278,7 @@ about:
 extra:
   feedstock-name: vtk
   recipe-maintainers:
+    - traversaro
     - Maxyme
     - ccordoba12
     - grlee77
