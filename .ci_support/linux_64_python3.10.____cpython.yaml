@@ -39,7 +39,7 @@ libjpeg_turbo:
 liblzma_devel:
 - '5'
 libnetcdf:
-- 4.9.2
+- 4.9.3
 libpng:
 - '1.6'
 libtiff:
