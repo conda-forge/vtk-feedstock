@@ -9,7 +9,7 @@ c_stdlib_version:
 cdt_name:
 - conda
 channel_sources:
-- conda-forge
+- conda-forge,conda-forge/label/python_rc
 channel_targets:
 - conda-forge main
 cxx_compiler:
@@ -61,7 +61,7 @@ proj:
 pugixml:
 - '1.15'
 python:
-- 3.12.* *_cpython
+- 3.14.* *_cp314
 qt6_main:
 - '6.9'
 sqlite:
