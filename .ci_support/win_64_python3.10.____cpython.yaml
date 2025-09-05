@@ -11,7 +11,7 @@ cxx_compiler:
 expat:
 - '2'
 ffmpeg:
-- '7'
+- '8'
 fmt:
 - '11.2'
 freetype:
@@ -59,6 +59,6 @@ tbb:
 tbb_devel:
 - '2021'
 vtk:
-- 9.3.1
+- 9.4.2
 zlib:
 - '1'
