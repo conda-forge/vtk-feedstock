@@ -1,69 +1,39 @@
-From c2bd786a32a72136bb248a91dd8ff62df619dec4 Mon Sep 17 00:00:00 2001
+From a9e60d40c1780022112ae9e1cd964a3648bb7d47 Mon Sep 17 00:00:00 2001
 From: Ben Boeckel <ben.boeckel@kitware.com>
-Date: Sat, 18 Jan 2025 01:13:20 +0100
-Subject: [PATCH 1/2] vtkFFMPEGVideoSource: free the context itself as well
+Date: Sat, 18 Jan 2025 01:13:37 +0100
+Subject: [PATCH] IO/FFMPEG: avoid deprecated `avcodec_close`
 
+It hasn't been necessary for a long time, so mask its use.
 ---
- IO/FFMPEG/vtkFFMPEGVideoSource.cxx | 2 ++
- 1 file changed, 2 insertions(+)
+ IO/FFMPEG/vtkFFMPEGVideoSource.cxx | 6 ++++++
+ IO/FFMPEG/vtkFFMPEGWriter.cxx      | 2 ++
+ 2 files changed, 8 insertions(+)
 
 diff --git a/IO/FFMPEG/vtkFFMPEGVideoSource.cxx b/IO/FFMPEG/vtkFFMPEGVideoSource.cxx
-index f2366e7152a3..344d361b3cd3 100644
+index f2366e7152a..c7e5c93d91a 100644
 --- a/IO/FFMPEG/vtkFFMPEGVideoSource.cxx
 +++ b/IO/FFMPEG/vtkFFMPEGVideoSource.cxx
-@@ -73,11 +73,13 @@ public:
+@@ -72,12 +72,18 @@ class vtkFFMPEGVideoSourceInternal
+     }
      if (this->VideoDecodeContext)
      {
++#if defined(LIBAVCODEC_VERSION_MAJOR) && LIBAVCODEC_VERSION_MAJOR < 62
        avcodec_close(this->VideoDecodeContext);
++#endif
 +      avcodec_free_context(&this->VideoDecodeContext);
        this->VideoDecodeContext = nullptr;
      }
      if (this->AudioDecodeContext)
      {
++#if defined(LIBAVCODEC_VERSION_MAJOR) && LIBAVCODEC_VERSION_MAJOR < 62
        avcodec_close(this->AudioDecodeContext);
++#endif
 +      avcodec_free_context(&this->AudioDecodeContext);
        this->AudioDecodeContext = nullptr;
      }
      if (this->FormatContext)
--- 
-GitLab
-
-
-From b8da15a0ec5157bd8405cbd9b5a95ecd29eb4bb7 Mon Sep 17 00:00:00 2001
-From: Ben Boeckel <ben.boeckel@kitware.com>
-Date: Sat, 18 Jan 2025 01:13:37 +0100
-Subject: [PATCH 2/2] IO/FFMPEG: avoid deprecated `avcodec_close`
-
-It hasn't been necessary for a long time, so mask its use.
----
- IO/FFMPEG/vtkFFMPEGVideoSource.cxx | 4 ++++
- IO/FFMPEG/vtkFFMPEGWriter.cxx      | 2 ++
- 2 files changed, 6 insertions(+)
-
-diff --git a/IO/FFMPEG/vtkFFMPEGVideoSource.cxx b/IO/FFMPEG/vtkFFMPEGVideoSource.cxx
-index 344d361b3cd3..c7e5c93d91a3 100644
---- a/IO/FFMPEG/vtkFFMPEGVideoSource.cxx
-+++ b/IO/FFMPEG/vtkFFMPEGVideoSource.cxx
-@@ -72,13 +72,17 @@ public:
-     }
-     if (this->VideoDecodeContext)
-     {
-+#if defined(LIBAVCODEC_VERSION_MAJOR) && LIBAVCODEC_VERSION_MAJOR < 62
-       avcodec_close(this->VideoDecodeContext);
-+#endif
-       avcodec_free_context(&this->VideoDecodeContext);
-       this->VideoDecodeContext = nullptr;
-     }
-     if (this->AudioDecodeContext)
-     {
-+#if defined(LIBAVCODEC_VERSION_MAJOR) && LIBAVCODEC_VERSION_MAJOR < 62
-       avcodec_close(this->AudioDecodeContext);
-+#endif
-       avcodec_free_context(&this->AudioDecodeContext);
-       this->AudioDecodeContext = nullptr;
-     }
 diff --git a/IO/FFMPEG/vtkFFMPEGWriter.cxx b/IO/FFMPEG/vtkFFMPEGWriter.cxx
-index 2cb8083fef7e..cdf8c05e21fb 100644
+index 2cb8083fef7..cdf8c05e21f 100644
 --- a/IO/FFMPEG/vtkFFMPEGWriter.cxx
 +++ b/IO/FFMPEG/vtkFFMPEGWriter.cxx
 @@ -363,7 +363,9 @@ void vtkFFMPEGWriterInternal::End()
@@ -76,6 +46,3 @@ index 2cb8083fef7e..cdf8c05e21fb 100644
      avcodec_free_context(&this->avCodecContext);
      this->avCodecContext = nullptr;
    }
--- 
-GitLab
-
