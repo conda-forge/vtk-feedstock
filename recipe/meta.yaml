@@ -1,5 +1,5 @@
-{% set version = "9.5.0" %}
-{% set build = 1 %}
+{% set version = "9.5.1" %}
+{% set build = 0 %}
 
 {% set minor_version = ".".join(version.split(".")[:2]) %}
 
@@ -9,7 +9,7 @@ package:
 
 source:
   url: http://www.vtk.org/files/release/{{ minor_version }}/VTK-{{ version }}.tar.gz
-  sha256: 04ae86246b9557c6b61afbc534a6df099244fbc8f3937f82e6bc0570953af87d
+  sha256: 14443661c7b095d05b4e376fb3f40613f173e34fc9d4658234e9ec1d624a618f
   patches:
     - patches/fix-threads-windows.patch  # [win]
     # https://github.com/conda-forge/vtk-feedstock/pull/282
