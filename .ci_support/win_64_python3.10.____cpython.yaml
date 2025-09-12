@@ -60,5 +60,8 @@ tbb_devel:
 - '2021'
 vtk:
 - 9.4.2
+zip_keys:
+- - python
+  - channel_sources
 zlib:
 - '1'
