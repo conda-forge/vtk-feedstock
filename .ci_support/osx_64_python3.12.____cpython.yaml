@@ -71,7 +71,7 @@ tbb:
 tbb_devel:
 - '2021'
 vtk:
-- 9.4.2
+- 9.5.1
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
