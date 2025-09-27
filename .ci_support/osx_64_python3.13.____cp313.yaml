@@ -44,8 +44,8 @@ libpng:
 - '1.6'
 libtiff:
 - '4.7'
-libxml2:
-- '2.13'
+libxml2_devel:
+- '2.14'
 lz4_c:
 - '1.10'
 macos_machine:
@@ -71,7 +71,7 @@ tbb:
 tbb_devel:
 - '2021'
 vtk:
-- 9.4.2
+- 9.5.1
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
