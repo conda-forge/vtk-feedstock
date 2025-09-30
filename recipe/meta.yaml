@@ -248,6 +248,7 @@ outputs:
         - cmake-package-check
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
+        - libxml2-devel
       imports:
         - vtk
         - vtk.vtkIOFFMPEG  # [not win]
