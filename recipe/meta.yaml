@@ -106,6 +106,7 @@ outputs:
         - ffmpeg
         - utfcpp
         - eigen
+        - cli11
         - double-conversion
         - pugixml
         - glad2-cmake
@@ -124,6 +125,7 @@ outputs:
         - python
         - utfcpp
         - nlohmann_json
+        - cli11
         - loguru
         - numpy
         - wslink
