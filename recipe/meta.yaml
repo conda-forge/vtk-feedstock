@@ -1,5 +1,5 @@
 {% set version = "9.5.1" %}
-{% set build = 2 %}
+{% set build = 3 %}
 
 {% set minor_version = ".".join(version.split(".")[:2]) %}
 
@@ -62,7 +62,7 @@ outputs:
         - freetype
         - hdf5
         - hdf5 * nompi_*
-        - libxml2
+        - libxml2-devel
         - libpng
         - libjpeg-turbo
         - libtiff
@@ -248,6 +248,7 @@ outputs:
         - cmake-package-check
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
+        - libxml2-devel
       imports:
         - vtk
         - vtk.vtkIOFFMPEG  # [not win]
