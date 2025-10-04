@@ -1,5 +1,5 @@
 {% set version = "9.5.1" %}
-{% set build = 3 %}
+{% set build = 4 %}
 
 {% set minor_version = ".".join(version.split(".")[:2]) %}
 
@@ -106,6 +106,7 @@ outputs:
         - ffmpeg
         - utfcpp
         - eigen
+        - cli11
         - double-conversion
         - pugixml
         - glad2-cmake
@@ -124,6 +125,7 @@ outputs:
         - python
         - utfcpp
         - nlohmann_json
+        - cli11
         - loguru
         - numpy
         - wslink
