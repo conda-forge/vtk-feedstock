@@ -55,7 +55,7 @@ pin_run_as_build:
     min_pin: x.x
     max_pin: x.x
 proj:
-- '9.6'
+- '9.7'
 pugixml:
 - '1.15'
 python:
