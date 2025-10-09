@@ -132,8 +132,6 @@ outputs:
         - matplotlib-base >=2.0.0
 
       run_constrained:
-        # Paraview bundles its own VTK that has conflicting Python vtkmodules
-        - paraview ==9999999999
         - {{ pin_compatible('libboost-headers', max_pin='x.x') }}
 
     test:
