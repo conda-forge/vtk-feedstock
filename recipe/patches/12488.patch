@@ -1,0 +1,1830 @@
+From 95bf1f35a5113f9769781e08e9f5ac93d0d08d1c Mon Sep 17 00:00:00 2001
+From: Mathieu Westphal <mathieu.westphal@kitware.com>
+Date: Tue, 7 Oct 2025 15:32:59 +0200
+Subject: [PATCH 1/8] vtkImageReader2: Adding stream API
+
+---
+ IO/Image/vtk.module        |  1 +
+ IO/Image/vtkImageReader2.h | 15 +++++++++++++++
+ 2 files changed, 16 insertions(+)
+
+diff --git a/IO/Image/vtk.module b/IO/Image/vtk.module
+index b5b3d1b1e9c5..bf3595c6b18a 100644
+--- a/IO/Image/vtk.module
++++ b/IO/Image/vtk.module
+@@ -14,6 +14,7 @@ SPDX_COPYRIGHT_TEXT
+ DEPENDS
+   VTK::CommonCore
+   VTK::CommonExecutionModel
++  VTK::IOCore
+   VTK::ImagingCore
+ PRIVATE_DEPENDS
+   VTK::CommonDataModel
+diff --git a/IO/Image/vtkImageReader2.h b/IO/Image/vtkImageReader2.h
+index 7ca0f39159ac..c953570e67a0 100644
+--- a/IO/Image/vtkImageReader2.h
++++ b/IO/Image/vtkImageReader2.h
+@@ -31,9 +31,12 @@
+ 
+ #include "vtkIOImageModule.h" // For export macro
+ #include "vtkImageAlgorithm.h"
++#include "vtkResourceStream.h" // For stream
++#include "vtkSmartPointer.h"   // For smart pointer
+ 
+ VTK_ABI_NAMESPACE_BEGIN
+ class vtkStringArray;
++class vtkResourceStream;
+ 
+ #define VTK_FILE_BYTE_ORDER_BIG_ENDIAN 0
+ #define VTK_FILE_BYTE_ORDER_LITTLE_ENDIAN 1
+@@ -87,6 +90,16 @@ public:
+   vtkGetFilePathMacro(FilePattern);
+   ///@}
+ 
++  ///@{
++  /**
++   * Specify stream to read from
++   * When both `Stream` and `Filename` or `FilePattern` are set, it's left to the implementation to
++   * determine which one is used.
++   */
++  vtkSetSmartPointerMacro(Stream, vtkResourceStream);
++  vtkGetSmartPointerMacro(Stream, vtkResourceStream);
++  ///@}
++
+   /**
+    * Specify the in memory image buffer.
+    * May be used by a reader to allow the reading
+@@ -328,6 +341,8 @@ protected:
+ private:
+   vtkImageReader2(const vtkImageReader2&) = delete;
+   void operator=(const vtkImageReader2&) = delete;
++
++  vtkSmartPointer<vtkResourceStream> Stream;
+ };
+ 
+ VTK_ABI_NAMESPACE_END
+-- 
+GitLab
+
+
+From e2d097e04edf2999187c2d7cdc1c1c413d198cd1 Mon Sep 17 00:00:00 2001
+From: Mathieu Westphal <mathieu.westphal@kitware.com>
+Date: Tue, 7 Oct 2025 16:33:30 +0200
+Subject: [PATCH 2/8] vtkPNGReader: Adding stream support and a dedicated test
+
+---
+ IO/Image/Testing/Cxx/CMakeLists.txt           |  4 +
+ .../Cxx/TestPNGReaderReadFromStream.cxx       | 56 +++++++++++++
+ .../TestPNGReaderReadFromStream.png.sha512    |  1 +
+ IO/Image/vtkPNGReader.cxx                     | 78 +++++++++++++++++--
+ 4 files changed, 134 insertions(+), 5 deletions(-)
+ create mode 100644 IO/Image/Testing/Cxx/TestPNGReaderReadFromStream.cxx
+ create mode 100644 IO/Image/Testing/Data/Baseline/TestPNGReaderReadFromStream.png.sha512
+
+diff --git a/IO/Image/Testing/Cxx/CMakeLists.txt b/IO/Image/Testing/Cxx/CMakeLists.txt
+index 7b60a20198c6..f9b3ab469dfe 100644
+--- a/IO/Image/Testing/Cxx/CMakeLists.txt
++++ b/IO/Image/Testing/Cxx/CMakeLists.txt
+@@ -93,6 +93,10 @@ vtk_add_test_cxx(vtkIOImageCxxTests tests
+   TestPNGReaderReadFromMemory.cxx,NO_OUTPUT
+     "DATA{${_vtk_build_TEST_INPUT_DATA_DIRECTORY}/Data/vtk.png}")
+ 
++vtk_add_test_cxx(vtkIOImageCxxTests tests
++  TestPNGReaderReadFromStream.cxx,NO_OUTPUT
++    "DATA{${_vtk_build_TEST_INPUT_DATA_DIRECTORY}/Data/vtk.png}")
++
+ vtk_add_test_cxx(vtkIOImageCxxTests tests
+   TestWriteToUnicodeFileBMP,TestWriteToUnicodeFile.cxx,NO_VALID
+     "image.bmp")
+diff --git a/IO/Image/Testing/Cxx/TestPNGReaderReadFromStream.cxx b/IO/Image/Testing/Cxx/TestPNGReaderReadFromStream.cxx
+new file mode 100644
+index 000000000000..483516ae44d1
+--- /dev/null
++++ b/IO/Image/Testing/Cxx/TestPNGReaderReadFromStream.cxx
+@@ -0,0 +1,56 @@
++// SPDX-FileCopyrightText: Copyright (c) Ken Martin, Will Schroeder, Bill Lorensen
++// SPDX-License-Identifier: BSD-3-Clause
++
++#include "vtkFileResourceStream.h"
++#include "vtkImageData.h"
++#include "vtkImageViewer.h"
++#include "vtkPNGReader.h"
++#include "vtkRegressionTestImage.h"
++#include "vtkRenderWindow.h"
++#include "vtkRenderWindowInteractor.h"
++#include "vtkRenderer.h"
++
++#include <fstream>
++#include <vector>
++
++int TestPNGReaderReadFromStream(int argc, char* argv[])
++{
++
++  if (argc <= 1)
++  {
++    cout << "Usage: " << argv[0] << " <png file>" << endl;
++    return EXIT_FAILURE;
++  }
++
++  std::string filename = argv[1];
++
++  // Open the file
++  vtkNew<vtkFileResourceStream> stream;
++  if (!stream->Open(filename.c_str()))
++  {
++    std::cerr << "Could not open file " << filename << std::endl;
++  }
++
++  // Initialize reader
++  vtkNew<vtkPNGReader> pngReader;
++  pngReader->SetStream(stream);
++
++  // Visualize
++  vtkNew<vtkImageViewer> imageViewer;
++  imageViewer->SetInputConnection(pngReader->GetOutputPort());
++  imageViewer->SetColorWindow(256);
++  imageViewer->SetColorLevel(127.5);
++
++  vtkNew<vtkRenderWindowInteractor> renderWindowInteractor;
++  imageViewer->SetupInteractor(renderWindowInteractor);
++  imageViewer->Render();
++
++  vtkRenderWindow* renWin = imageViewer->GetRenderWindow();
++  int retVal = vtkRegressionTestImage(renWin);
++  if (retVal == vtkRegressionTester::DO_INTERACTOR)
++  {
++    renderWindowInteractor->Start();
++  }
++
++  return !retVal;
++}
+diff --git a/IO/Image/Testing/Data/Baseline/TestPNGReaderReadFromStream.png.sha512 b/IO/Image/Testing/Data/Baseline/TestPNGReaderReadFromStream.png.sha512
+new file mode 100644
+index 000000000000..ea990969add5
+--- /dev/null
++++ b/IO/Image/Testing/Data/Baseline/TestPNGReaderReadFromStream.png.sha512
+@@ -0,0 +1 @@
++2087623175d3079d0402fce808218e68b35905849f6bc7f5fd2b2cd17abde48e9f9408d72212ea8180b2b6db49d4e0ff238a8b0b78c4a73dc92fa390f2cc5892
+diff --git a/IO/Image/vtkPNGReader.cxx b/IO/Image/vtkPNGReader.cxx
+index 3892aede727c..93aa299125e4 100644
+--- a/IO/Image/vtkPNGReader.cxx
++++ b/IO/Image/vtkPNGReader.cxx
+@@ -49,6 +49,29 @@ struct MemoryBufferStream
+   size_t position = 0;
+ };
+ 
++// To be used by libpng instead of fread when reading data from memory.
++void PNGReadCallbackStream(png_structp pngPtr, png_bytep output, png_size_t length)
++{
++  if (output == nullptr)
++  {
++    png_error(pngPtr, "Invalid output buffer");
++  }
++  // Get pointer to input buffer
++  png_voidp inputVoidP = png_get_io_ptr(pngPtr);
++  if (inputVoidP == nullptr)
++  {
++    png_error(pngPtr, "Invalid input stream");
++  }
++
++  // Cast it to vtkResourceStream
++  vtkResourceStream* stream = static_cast<vtkResourceStream*>(inputVoidP);
++
++  // Read the data
++  if (stream->Read(output, length) != length)
++  {
++    png_error(pngPtr, "Attempt to read out of buffer");
++  }
++}
+ // To be used by libpng instead of fread when reading data from memory.
+ void PNGReadCallback(png_structp pngPtr, png_bytep output, png_size_t length)
+ {
+@@ -150,6 +173,18 @@ public:
+   }
+ 
+   // Returns true if the buffer's header is valid
++  bool CheckBufferHeaderStream(vtkResourceStream* stream)
++  {
++    unsigned char header[8];
++    if (stream->Read(header, 8) != 8)
++    {
++      vtkErrorWithObjectMacro(this->PNGReader, "Stream is too short, could not read the header");
++      return false;
++    }
++    stream->Seek(0, vtkResourceStream::SeekDirection::Begin);
++    return this->IsHeaderValid(header);
++  }
++
+   bool CheckBufferHeader(const unsigned char* buffer, vtkIdType length)
+   {
+     unsigned char header[8];
+@@ -191,7 +226,14 @@ public:
+   void InitLibPngInput(vtkPNGReader* self, png_structp pngPtr, MemoryBufferStream* stream, FILE* fp)
+   {
+     // Initialize libpng input
+-    if (self->GetMemoryBuffer())
++    if (self->GetStream())
++    {
++      // We pass a void pointer to our input object and a pointer to our read callback.
++      // Reading starts from 0, so png_set_sig_bytes is not needed.
++      png_set_read_fn(pngPtr, static_cast<png_voidp>(self->GetStream()),
++        reinterpret_cast<png_rw_ptr>(PNGReadCallbackStream));
++    }
++    else if (self->GetMemoryBuffer())
+     {
+       // Tell libpng to read from memory.
+       // Initialize our input object.
+@@ -242,7 +284,20 @@ void vtkPNGReader::ExecuteInformation()
+   FILE* fp = nullptr;
+   MemoryBufferStream stream;
+ 
+-  if (this->GetMemoryBuffer())
++  if (this->GetStream())
++  {
++    // Reset stream to the beginning
++    this->GetStream()->Seek(0, vtkResourceStream::SeekDirection::Begin);
++
++    // Read the header from MemoryBuffer
++    if (!impl->CheckBufferHeaderStream(this->GetStream()))
++    {
++      vtkErrorMacro("Invalid MemoryBuffer header: not a PNG file");
++      this->SetErrorCode(vtkErrorCode::UnrecognizedFileTypeError);
++      return;
++    }
++  }
++  else if (this->GetMemoryBuffer())
+   {
+     // Read the header from MemoryBuffer
+     const unsigned char* memBuffer = static_cast<const unsigned char*>(this->GetMemoryBuffer());
+@@ -376,7 +431,20 @@ void vtkPNGReader::vtkPNGReaderUpdate2(OT* outPtr, int* outExt, vtkIdType* outIn
+   FILE* fp = nullptr;
+   MemoryBufferStream stream;
+ 
+-  if (this->GetMemoryBuffer())
++  if (this->GetStream())
++  {
++    // Reset stream to the beginning
++    this->GetStream()->Seek(0, vtkResourceStream::SeekDirection::Begin);
++
++    // Read the header from MemoryBuffer
++    if (!impl->CheckBufferHeaderStream(this->GetStream()))
++    {
++      vtkErrorMacro("Invalid MemoryBuffer header: not a PNG file");
++      this->SetErrorCode(vtkErrorCode::UnrecognizedFileTypeError);
++      return;
++    }
++  }
++  else if (this->GetMemoryBuffer())
+   {
+     // Read the header from MemoryBuffer
+     const unsigned char* memBuffer = static_cast<const unsigned char*>(this->GetMemoryBuffer());
+@@ -529,9 +597,9 @@ void vtkPNGReader::ExecuteDataWithInformation(vtkDataObject* output, vtkInformat
+ {
+   vtkImageData* data = this->AllocateOutputData(output, outInfo);
+ 
+-  if (!this->GetMemoryBuffer() && this->InternalFileName == nullptr)
++  if (!this->GetStream() && !this->GetMemoryBuffer() && this->InternalFileName == nullptr)
+   {
+-    vtkErrorMacro(<< "Either a FileName, FilePrefix or MemoryBuffer must be specified.");
++    vtkErrorMacro(<< "Either a Stream, FileName, FilePrefix or MemoryBuffer must be specified.");
+     this->SetErrorCode(vtkErrorCode::NoFileNameError);
+     return;
+   }
+-- 
+GitLab
+
+
+From 14e2758cdebc01bd0503bec6e658876e81becc39 Mon Sep 17 00:00:00 2001
+From: Mathieu Westphal <mathieu.westphal@kitware.com>
+Date: Wed, 8 Oct 2025 20:24:42 +0200
+Subject: [PATCH 3/8] vtkMemoryResourceStream: Adding internal member accessors
+
+---
+ IO/Core/Testing/Cxx/TestResourceStreams.cxx |  2 ++
+ IO/Core/vtkMemoryResourceStream.h           | 10 ++++++++++
+ 2 files changed, 12 insertions(+)
+
+diff --git a/IO/Core/Testing/Cxx/TestResourceStreams.cxx b/IO/Core/Testing/Cxx/TestResourceStreams.cxx
+index 8363f695378b..3634f7dca6bf 100644
+--- a/IO/Core/Testing/Cxx/TestResourceStreams.cxx
++++ b/IO/Core/Testing/Cxx/TestResourceStreams.cxx
+@@ -108,6 +108,8 @@ bool TestMemoryResource()
+   const std::string str{ "Hello world!" };
+   vtkNew<vtkMemoryResourceStream> memory;
+   memory->SetBuffer(str.data(), str.size());
++  Check(memory->GetBuffer() == str.data(), "GetBuffer failed");
++  Check(memory->GetSize() == str.size(), "GetSize failed");
+ 
+   return TestStream(memory);
+ }
+diff --git a/IO/Core/vtkMemoryResourceStream.h b/IO/Core/vtkMemoryResourceStream.h
+index cbee6c93ae2a..62c63aae6340 100644
+--- a/IO/Core/vtkMemoryResourceStream.h
++++ b/IO/Core/vtkMemoryResourceStream.h
+@@ -103,6 +103,16 @@ public:
+    */
+   void SetBuffer(const void* buffer, std::size_t size, bool copy = false);
+ 
++  /**
++   * Get a pointer to the internal buffer
++   */
++  vtkGetMacro(Buffer, const void*);
++
++  /**
++   * Get a pointer to the size of the internal buffer set in SetBuffer
++   */
++  vtkGetMacro(Size, std::size_t);
++
+   /**
+    * @brief Set buffer to stream
+    *
+-- 
+GitLab
+
+
+From 1b4b7e0eb7e494e422680ba3f9e3b9f05a424fd9 Mon Sep 17 00:00:00 2001
+From: Mathieu Westphal <mathieu.westphal@kitware.com>
+Date: Wed, 8 Oct 2025 20:25:18 +0200
+Subject: [PATCH 4/8] vtkJPEGReader: Adding support for stream
+
+---
+ IO/Image/Testing/Cxx/CMakeLists.txt           |  4 +
+ .../Cxx/TestJPEGReaderReadFromStream.cxx      | 69 ++++++++++++++
+ .../TestJPEGReaderReadFromStream.png.sha512   |  1 +
+ IO/Image/vtkJPEGReader.cxx                    | 90 +++++++++++++++----
+ 4 files changed, 146 insertions(+), 18 deletions(-)
+ create mode 100644 IO/Image/Testing/Cxx/TestJPEGReaderReadFromStream.cxx
+ create mode 100644 IO/Image/Testing/Data/Baseline/TestJPEGReaderReadFromStream.png.sha512
+
+diff --git a/IO/Image/Testing/Cxx/CMakeLists.txt b/IO/Image/Testing/Cxx/CMakeLists.txt
+index f9b3ab469dfe..67aed5e47538 100644
+--- a/IO/Image/Testing/Cxx/CMakeLists.txt
++++ b/IO/Image/Testing/Cxx/CMakeLists.txt
+@@ -18,6 +18,10 @@ vtk_add_test_cxx(vtkIOImageCxxTests tests
+   TestJPEGReader.cxx,NO_OUTPUT
+     "DATA{${_vtk_build_TEST_INPUT_DATA_DIRECTORY}/Data/beach.jpg}")
+ 
++vtk_add_test_cxx(vtkIOImageCxxTests tests
++  TestJPEGReaderReadFromStream.cxx,NO_OUTPUT
++    "DATA{${_vtk_build_TEST_INPUT_DATA_DIRECTORY}/Data/beach.jpg}")
++
+ vtk_add_test_cxx(vtkIOImageCxxTests tests
+   TestDICOMImageReader.cxx,NO_OUTPUT
+     "DATA{${_vtk_build_TEST_INPUT_DATA_DIRECTORY}/Data/dicom/prostate.IMG}")
+diff --git a/IO/Image/Testing/Cxx/TestJPEGReaderReadFromStream.cxx b/IO/Image/Testing/Cxx/TestJPEGReaderReadFromStream.cxx
+new file mode 100644
+index 000000000000..9e689cca5e75
+--- /dev/null
++++ b/IO/Image/Testing/Cxx/TestJPEGReaderReadFromStream.cxx
+@@ -0,0 +1,69 @@
++// SPDX-FileCopyrightText: Copyright (c) Ken Martin, Will Schroeder, Bill Lorensen
++// SPDX-License-Identifier: BSD-3-Clause
++// .NAME Test of vtkJPEGReader
++// .SECTION Description
++//
++
++#include "vtkFileResourceStream.h"
++#include "vtkImageData.h"
++#include "vtkImageViewer.h"
++#include "vtkJPEGReader.h"
++#include "vtkNew.h"
++#include "vtkRegressionTestImage.h"
++#include "vtkRenderWindowInteractor.h"
++#include "vtkRenderer.h"
++#include "vtksys/SystemTools.hxx"
++
++#include <vector>
++
++int TestJPEGReaderReadFromStream(int argc, char* argv[])
++{
++
++  if (argc <= 1)
++  {
++    cout << "Usage: " << argv[0] << " <jpeg file>" << endl;
++    return EXIT_FAILURE;
++  }
++
++  std::string filename = argv[1];
++
++  // Open the file
++  vtkNew<vtkFileResourceStream> stream;
++  if (!stream->Open(filename.c_str()))
++  {
++    std::cerr << "Could not open file " << filename << std::endl;
++  }
++
++  // Initialize reader
++  vtkNew<vtkJPEGReader> jpegReader;
++  jpegReader->SetStream(stream);
++
++  // Check the image can be read
++  if (!jpegReader->CanReadFile(filename.c_str()))
++  {
++    cerr << "CanReadFile failed for " << filename << "\n";
++    return EXIT_FAILURE;
++  }
++
++  // Read the input image
++  jpegReader->Update();
++
++  // Visualize
++  vtkNew<vtkImageViewer> imageViewer;
++  imageViewer->SetInputConnection(jpegReader->GetOutputPort());
++  imageViewer->SetColorWindow(256);
++  imageViewer->SetColorLevel(127.5);
++
++  vtkNew<vtkRenderWindowInteractor> renderWindowInteractor;
++  imageViewer->SetupInteractor(renderWindowInteractor);
++  imageViewer->Render();
++
++  vtkRenderWindow* renWin = imageViewer->GetRenderWindow();
++  int retVal = vtkRegressionTestImage(renWin);
++  if (retVal == vtkRegressionTester::DO_INTERACTOR)
++  {
++    renderWindowInteractor->Start();
++  }
++
++  return !retVal;
++}
+diff --git a/IO/Image/Testing/Data/Baseline/TestJPEGReaderReadFromStream.png.sha512 b/IO/Image/Testing/Data/Baseline/TestJPEGReaderReadFromStream.png.sha512
+new file mode 100644
+index 000000000000..fecd23deeeca
+--- /dev/null
++++ b/IO/Image/Testing/Data/Baseline/TestJPEGReaderReadFromStream.png.sha512
+@@ -0,0 +1 @@
++13928b21502063cf0ec9922139445c9a94e8f7c32196501a996d3d9b33b16fc99d298d739c34ad45fdd0436365dd45b8e63cf0f843dbcaf9b9e0ab073cc659a1
+diff --git a/IO/Image/vtkJPEGReader.cxx b/IO/Image/vtkJPEGReader.cxx
+index 297a9bcf511a..b9bc7c24c111 100644
+--- a/IO/Image/vtkJPEGReader.cxx
++++ b/IO/Image/vtkJPEGReader.cxx
+@@ -4,6 +4,7 @@
+ 
+ #include "vtkDataArray.h"
+ #include "vtkImageData.h"
++#include "vtkMemoryResourceStream.h"
+ #include "vtkObjectFactory.h"
+ #include "vtkPointData.h"
+ #include <vtksys/SystemTools.hxx>
+@@ -117,7 +118,8 @@ void vtkJPEGReader::ExecuteInformation()
+   jerr.fp = nullptr;
+ 
+   this->ComputeInternalFileName(this->DataExtent[4]);
+-  if (this->InternalFileName == nullptr && this->MemoryBuffer == nullptr)
++  if (this->InternalFileName == nullptr && this->MemoryBuffer == nullptr &&
++    this->GetStream() == nullptr)
+   {
+     return;
+   }
+@@ -125,7 +127,7 @@ void vtkJPEGReader::ExecuteInformation()
+   // reset the error code before reading
+   this->ErrorCode = 0;
+ 
+-  if (!this->MemoryBuffer)
++  if (!this->MemoryBuffer && !this->GetStream())
+   {
+     jerr.fp = vtksys::SystemTools::Fopen(this->InternalFileName, "rb");
+     if (!jerr.fp)
+@@ -134,7 +136,7 @@ void vtkJPEGReader::ExecuteInformation()
+       return;
+     }
+   }
+-  else
++  else if (this->MemoryBuffer)
+   {
+     if (this->MemoryBufferLength == 0)
+     {
+@@ -162,24 +164,42 @@ void vtkJPEGReader::ExecuteInformation()
+     {
+       fclose(jerr.fp);
+       // this is not a valid jpeg file
+-      vtkErrorWithObjectMacro(this, "libjpeg could not read file: " << this->InternalFileName);
+-    }
+-    else
+-    {
+-      vtkErrorWithObjectMacro(this,
+-        "libjpeg could not read file from memory buffer: " << (this->MemoryBuffer ? "<ptr>"
+-                                                                                  : "(null)"));
++      vtkErrorMacro("libjpeg could not read file: " << this->InternalFileName);
+     }
+     return;
+   }
+   jpeg_create_decompress(&cinfo);
+ 
+-  // set the source file
+-  if (jerr.fp)
++  vtkNew<vtkMemoryResourceStream> tempMemStream;
++  std::vector<std::byte> tempBuffer;
++
++  if (this->GetStream())
+   {
+-    jpeg_stdio_src(&cinfo, jerr.fp);
++    vtkMemoryResourceStream* memStream = vtkMemoryResourceStream::SafeDownCast(this->GetStream());
++    if (!memStream)
++    {
++      vtkWarningMacro("Stream that are not vtkMemoryResourceStream require a copy into a buffer, "
++                      "which is not efficient");
++
++      // Copy stream into temp buffer
++      vtkResourceStream* stream = this->GetStream();
++      stream->Seek(0, vtkResourceStream::SeekDirection::End);
++      std::size_t size = stream->Tell();
++      stream->Seek(0, vtkResourceStream::SeekDirection::Begin);
++      tempBuffer.resize(size);
++      stream->Read(tempBuffer.data(), size);
++
++      // Use temp memn stream for the actual reading
++      tempMemStream->SetBuffer(tempBuffer.data(), size);
++      memStream = tempMemStream;
++    }
++#if JPEG_LIB_VERSION >= 80 || defined(MEM_SRCDST_SUPPORTED)
++    jMemSrc(&cinfo, memStream->GetBuffer(), static_cast<unsigned long>(memStream->GetSize()));
++#else
++    jpeg_mem_src(&cinfo, memStream->GetBuffer(), static_cast<unsigned long>(memStream->GetSize()));
++#endif
+   }
+-  else
++  else if (this->GetMemoryBuffer())
+   {
+ #if JPEG_LIB_VERSION >= 80 || defined(MEM_SRCDST_SUPPORTED)
+     jMemSrc(&cinfo, this->MemoryBuffer, this->MemoryBufferLength);
+@@ -187,6 +207,10 @@ void vtkJPEGReader::ExecuteInformation()
+     jpeg_mem_src(&cinfo, this->MemoryBuffer, this->MemoryBufferLength);
+ #endif
+   }
++  else // if (jerr.fp)
++  {
++    jpeg_stdio_src(&cinfo, jerr.fp);
++  }
+ 
+   // read the header
+   jpeg_read_header(&cinfo, TRUE);
+@@ -256,12 +280,38 @@ int vtkJPEGReaderUpdate2(vtkJPEGReader* self, OT* outPtr, int* outExt, vtkIdType
+   }
+   jpeg_create_decompress(&cinfo);
+ 
+-  // set the source file
+-  if (jerr.fp)
++  vtkNew<vtkMemoryResourceStream> tempMemStream;
++  std::vector<std::byte> tempBuffer;
++
++  if (self->GetStream())
+   {
+-    jpeg_stdio_src(&cinfo, jerr.fp);
++    vtkMemoryResourceStream* memStream = vtkMemoryResourceStream::SafeDownCast(self->GetStream());
++
++    if (!memStream)
++    {
++      vtkWarningWithObjectMacro(self,
++        "Stream that are not vtkMemoryResourceStream require a copy into a buffer, which is not "
++        "efficient");
++
++      // Copy stream into temp buffer
++      vtkResourceStream* stream = self->GetStream();
++      stream->Seek(0, vtkResourceStream::SeekDirection::End);
++      std::size_t size = stream->Tell();
++      stream->Seek(0, vtkResourceStream::SeekDirection::Begin);
++      tempBuffer.resize(size);
++      stream->Read(tempBuffer.data(), size);
++
++      // Use temp memn stream for the actual reading
++      tempMemStream->SetBuffer(tempBuffer.data(), size);
++      memStream = tempMemStream;
++    }
++#if JPEG_LIB_VERSION >= 80 || defined(MEM_SRCDST_SUPPORTED)
++    jMemSrc(&cinfo, memStream->GetBuffer(), static_cast<unsigned long>(memStream->GetSize()));
++#else
++    jpeg_mem_src(&cinfo, memStream->GetBuffer(), static_cast<unsigned long>(memStream->GetSize()));
++#endif
+   }
+-  else
++  else if (self->GetMemoryBuffer())
+   {
+ #if JPEG_LIB_VERSION >= 80 || defined(MEM_SRCDST_SUPPORTED)
+     jMemSrc(&cinfo, self->GetMemoryBuffer(), self->GetMemoryBufferLength());
+@@ -269,6 +319,10 @@ int vtkJPEGReaderUpdate2(vtkJPEGReader* self, OT* outPtr, int* outExt, vtkIdType
+     jpeg_mem_src(&cinfo, self->GetMemoryBuffer(), self->GetMemoryBufferLength());
+ #endif
+   }
++  else // if (jerr.fp)
++  {
++    jpeg_stdio_src(&cinfo, jerr.fp);
++  }
+ 
+   // read the header
+   jpeg_read_header(&cinfo, TRUE);
+-- 
+GitLab
+
+
+From 4cac5cdce9117247fa2998c10a0ef8f72528d90f Mon Sep 17 00:00:00 2001
+From: Mathieu Westphal <mathieu.westphal@kitware.com>
+Date: Thu, 9 Oct 2025 08:44:35 +0200
+Subject: [PATCH 5/8] vtkTGAReader: Adding stream support
+
+---
+ IO/Image/Testing/Cxx/CMakeLists.txt           |  4 ++
+ .../Cxx/TestTGAReaderReadFromStream.cxx       | 54 +++++++++++++++++++
+ .../TestTGAReaderReadFromStream.png.sha512    |  1 +
+ IO/Image/vtkTGAReader.cxx                     | 19 ++++++-
+ 4 files changed, 76 insertions(+), 2 deletions(-)
+ create mode 100644 IO/Image/Testing/Cxx/TestTGAReaderReadFromStream.cxx
+ create mode 100644 IO/Image/Testing/Data/Baseline/TestTGAReaderReadFromStream.png.sha512
+
+diff --git a/IO/Image/Testing/Cxx/CMakeLists.txt b/IO/Image/Testing/Cxx/CMakeLists.txt
+index 67aed5e47538..d2053ab0af1b 100644
+--- a/IO/Image/Testing/Cxx/CMakeLists.txt
++++ b/IO/Image/Testing/Cxx/CMakeLists.txt
+@@ -93,6 +93,10 @@ vtk_add_test_cxx(vtkIOImageCxxTests tests
+   TestTGAReader.cxx,NO_OUTPUT
+     "DATA{${_vtk_build_TEST_INPUT_DATA_DIRECTORY}/Data/vtk.tga}")
+ 
++vtk_add_test_cxx(vtkIOImageCxxTests tests
++  TestTGAReaderReadFromStream.cxx,NO_OUTPUT
++    "DATA{${_vtk_build_TEST_INPUT_DATA_DIRECTORY}/Data/vtk.tga}")
++
+ vtk_add_test_cxx(vtkIOImageCxxTests tests
+   TestPNGReaderReadFromMemory.cxx,NO_OUTPUT
+     "DATA{${_vtk_build_TEST_INPUT_DATA_DIRECTORY}/Data/vtk.png}")
+diff --git a/IO/Image/Testing/Cxx/TestTGAReaderReadFromStream.cxx b/IO/Image/Testing/Cxx/TestTGAReaderReadFromStream.cxx
+new file mode 100644
+index 000000000000..afb6d5c269a1
+--- /dev/null
++++ b/IO/Image/Testing/Cxx/TestTGAReaderReadFromStream.cxx
+@@ -0,0 +1,54 @@
++// SPDX-FileCopyrightText: Copyright (c) Ken Martin, Will Schroeder, Bill Lorensen
++// SPDX-License-Identifier: BSD-3-Clause
++
++#include "vtkFileResourceStream.h"
++#include "vtkImageData.h"
++#include "vtkImageViewer.h"
++#include "vtkRegressionTestImage.h"
++#include "vtkRenderWindow.h"
++#include "vtkRenderWindowInteractor.h"
++#include "vtkRenderer.h"
++#include "vtkTGAReader.h"
++
++int TestTGAReaderReadFromStream(int argc, char* argv[])
++{
++
++  if (argc <= 1)
++  {
++    cout << "Usage: " << argv[0] << " <tga file>" << endl;
++    return EXIT_FAILURE;
++  }
++
++  std::string filename = argv[1];
++
++  // Open the file
++  vtkNew<vtkFileResourceStream> stream;
++  if (!stream->Open(filename.c_str()))
++  {
++    std::cerr << "Could not open file " << filename << std::endl;
++  }
++
++  // Initialize and update reader
++  vtkNew<vtkTGAReader> tgaReader;
++  tgaReader->SetStream(stream);
++  tgaReader->Update();
++
++  // Visualize
++  vtkNew<vtkImageViewer> imageViewer;
++  imageViewer->SetInputConnection(tgaReader->GetOutputPort());
++  imageViewer->SetColorWindow(256);
++  imageViewer->SetColorLevel(127.5);
++
++  vtkNew<vtkRenderWindowInteractor> renderWindowInteractor;
++  imageViewer->SetupInteractor(renderWindowInteractor);
++  imageViewer->Render();
++
++  vtkRenderWindow* renWin = imageViewer->GetRenderWindow();
++  int retVal = vtkRegressionTestImage(renWin);
++  if (retVal == vtkRegressionTester::DO_INTERACTOR)
++  {
++    renderWindowInteractor->Start();
++  }
++
++  return !retVal;
++}
+diff --git a/IO/Image/Testing/Data/Baseline/TestTGAReaderReadFromStream.png.sha512 b/IO/Image/Testing/Data/Baseline/TestTGAReaderReadFromStream.png.sha512
+new file mode 100644
+index 000000000000..ea990969add5
+--- /dev/null
++++ b/IO/Image/Testing/Data/Baseline/TestTGAReaderReadFromStream.png.sha512
+@@ -0,0 +1 @@
++2087623175d3079d0402fce808218e68b35905849f6bc7f5fd2b2cd17abde48e9f9408d72212ea8180b2b6db49d4e0ff238a8b0b78c4a73dc92fa390f2cc5892
+diff --git a/IO/Image/vtkTGAReader.cxx b/IO/Image/vtkTGAReader.cxx
+index 4d46fc365f6b..2a85f7b192a8 100644
+--- a/IO/Image/vtkTGAReader.cxx
++++ b/IO/Image/vtkTGAReader.cxx
+@@ -29,7 +29,13 @@ void vtkTGAReader::ExecuteInformation()
+ {
+   char header[::HeaderSize];
+ 
+-  if (this->GetMemoryBuffer())
++  if (this->GetStream())
++  {
++    vtkResourceStream* stream = this->GetStream();
++    stream->Read(header, ::HeaderSize);
++    stream->Seek(0, vtkResourceStream::SeekDirection::Begin);
++  }
++  else if (this->GetMemoryBuffer())
+   {
+     const char* memBuffer = static_cast<const char*>(this->GetMemoryBuffer());
+     std::copy(memBuffer, memBuffer + ::HeaderSize, header);
+@@ -79,7 +85,16 @@ void vtkTGAReader::ExecuteDataWithInformation(vtkDataObject* output, vtkInformat
+ 
+   std::vector<unsigned char> content;
+ 
+-  if (this->GetMemoryBuffer())
++  if (this->GetStream())
++  {
++    vtkResourceStream* stream = this->GetStream();
++    stream->Seek(0, vtkResourceStream::SeekDirection::End);
++    std::size_t size = stream->Tell();
++    content.resize(size);
++    stream->Seek(0, vtkResourceStream::SeekDirection::Begin);
++    stream->Read(content.data(), size);
++  }
++  else if (this->GetMemoryBuffer())
+   {
+     const unsigned char* uBuffer = reinterpret_cast<const unsigned char*>(this->GetMemoryBuffer());
+     content.assign(uBuffer, uBuffer + this->GetMemoryBufferLength());
+-- 
+GitLab
+
+
+From f3bcbf079a4c74db8fb2840ed696ec10ee4a0431 Mon Sep 17 00:00:00 2001
+From: Mathieu Westphal <mathieu.westphal@kitware.com>
+Date: Fri, 10 Oct 2025 08:50:11 +0200
+Subject: [PATCH 6/8] vtkImageReader2: Deprecate SetMemoryBuffer in favor of
+ SetStream
+
+---
+ IO/Geometry/vtkGLTFDocumentLoader.cxx          | 13 ++++++-------
+ .../Cxx/TestPNGReaderReadFromMemory.cxx        |  1 +
+ IO/Image/vtkImageReader2.cxx                   | 18 ++++++++++++++++++
+ IO/Image/vtkImageReader2.h                     | 16 ++++++++++++++--
+ IO/Image/vtkJPEGReader.cxx                     |  7 ++++++-
+ IO/Image/vtkJPEGReader.h                       |  3 ++-
+ IO/Image/vtkPNGReader.cxx                      |  8 ++++++++
+ IO/Image/vtkPNGReader.h                        |  2 +-
+ IO/Image/vtkTGAReader.cxx                      |  4 ++++
+ IO/Image/vtkTGAReader.h                        |  2 +-
+ IO/OMF/core/OMFFile.cxx                        |  6 ++++--
+ Rendering/OpenGL2/vtk.module                   |  1 +
+ Rendering/OpenGL2/vtkOpenGLRenderWindow.cxx    |  6 ++++--
+ Rendering/OpenVR/vtkOpenVROverlay.cxx          |  6 ++++--
+ 14 files changed, 74 insertions(+), 19 deletions(-)
+
+diff --git a/IO/Geometry/vtkGLTFDocumentLoader.cxx b/IO/Geometry/vtkGLTFDocumentLoader.cxx
+index b413ced0a7d7..298b29b7dfb7 100644
+--- a/IO/Geometry/vtkGLTFDocumentLoader.cxx
++++ b/IO/Geometry/vtkGLTFDocumentLoader.cxx
+@@ -22,6 +22,7 @@
+ #include "vtkIntArray.h"
+ #include "vtkJPEGReader.h"
+ #include "vtkMath.h"
++#include "vtkMemoryResourceStream.h"
+ #include "vtkPNGReader.h"
+ #include "vtkPointData.h"
+ #include "vtkPolyData.h"
+@@ -30,7 +31,6 @@
+ #include "vtkTransform.h"
+ #include "vtkUnsignedShortArray.h"
+ 
+-#include "vtksys/FStream.hxx"
+ #include "vtksys/SystemTools.hxx"
+ 
+ #include <algorithm>
+@@ -841,6 +841,7 @@ bool vtkGLTFDocumentLoader::LoadImageData()
+     vtkSmartPointer<vtkImageReader2> reader = nullptr;
+     image.ImageData = vtkSmartPointer<vtkImageData>::New();
+     std::vector<std::uint8_t> buffer;
++    vtkNew<vtkMemoryResourceStream> imgStream;
+ 
+     // If image is defined via bufferview index
+     if (image.BufferView >= 0 &&
+@@ -873,10 +874,8 @@ bool vtkGLTFDocumentLoader::LoadImageData()
+         vtkErrorMacro("Invalid bufferView.buffer value for bufferView " << bufferView.Name);
+         return false;
+       }
+-      reader->SetMemoryBufferLength(
+-        static_cast<vtkIdType>(this->InternalModel->Buffers[bufferId].size()));
+-      reader->SetMemoryBuffer(
+-        this->InternalModel->Buffers[bufferId].data() + bufferView.ByteOffset);
++      imgStream->SetBuffer(this->InternalModel->Buffers[bufferId].data() + bufferView.ByteOffset,
++        this->InternalModel->Buffers[bufferId].size());
+     }
+     else // If image is defined via uri
+     {
+@@ -926,10 +925,10 @@ bool vtkGLTFDocumentLoader::LoadImageData()
+         return false;
+       }
+ 
+-      reader->SetMemoryBufferLength(buffer.size());
+-      reader->SetMemoryBuffer(buffer.data());
++      imgStream->SetBuffer(buffer.data(), buffer.size());
+     }
+ 
++    reader->SetStream(imgStream);
+     bool status = reader->GetExecutive()->Update();
+     image.ImageData = reader->GetOutput();
+ 
+diff --git a/IO/Image/Testing/Cxx/TestPNGReaderReadFromMemory.cxx b/IO/Image/Testing/Cxx/TestPNGReaderReadFromMemory.cxx
+index 75696d9f7496..d72346322736 100644
+--- a/IO/Image/Testing/Cxx/TestPNGReaderReadFromMemory.cxx
++++ b/IO/Image/Testing/Cxx/TestPNGReaderReadFromMemory.cxx
+@@ -1,5 +1,6 @@
+ // SPDX-FileCopyrightText: Copyright (c) Ken Martin, Will Schroeder, Bill Lorensen
+ // SPDX-License-Identifier: BSD-3-Clause
++#define VTK_DEPRECATION_LEVEL 0
+ 
+ #include "vtkImageData.h"
+ #include "vtkImageViewer.h"
+diff --git a/IO/Image/vtkImageReader2.cxx b/IO/Image/vtkImageReader2.cxx
+index 74b684db35e9..c341f397eaa7 100644
+--- a/IO/Image/vtkImageReader2.cxx
++++ b/IO/Image/vtkImageReader2.cxx
+@@ -1,5 +1,7 @@
+ // SPDX-FileCopyrightText: Copyright (c) Ken Martin, Will Schroeder, Bill Lorensen
+ // SPDX-License-Identifier: BSD-3-Clause
++#define VTK_DEPRECATION_LEVEL 0
++
+ #include "vtkImageReader2.h"
+ 
+ #include "vtkByteSwap.h"
+@@ -715,6 +717,7 @@ void vtkImageReader2::ExecuteDataWithInformation(vtkDataObject* output, vtkInfor
+ }
+ 
+ //------------------------------------------------------------------------------
++// VTK_DEPRECATED_IN_9_6_0
+ void vtkImageReader2::SetMemoryBuffer(const void* membuf)
+ {
+   if (this->MemoryBuffer != membuf)
+@@ -725,6 +728,14 @@ void vtkImageReader2::SetMemoryBuffer(const void* membuf)
+ }
+ 
+ //------------------------------------------------------------------------------
++// VTK_DEPRECATED_IN_9_6_0
++const void* vtkImageReader2::GetMemoryBuffer()
++{
++  return this->MemoryBuffer;
++}
++
++//------------------------------------------------------------------------------
++// VTK_DEPRECATED_IN_9_6_0
+ void vtkImageReader2::SetMemoryBufferLength(vtkIdType buflen)
+ {
+   if (this->MemoryBufferLength != buflen)
+@@ -734,6 +745,13 @@ void vtkImageReader2::SetMemoryBufferLength(vtkIdType buflen)
+   }
+ }
+ 
++//------------------------------------------------------------------------------
++// VTK_DEPRECATED_IN_9_6_0
++vtkIdType vtkImageReader2::GetMemoryBufferLength()
++{
++  return this->MemoryBufferLength;
++}
++
+ //------------------------------------------------------------------------------
+ // Set the data type of pixels in the file.
+ // If you want the output scalar type to have a different value, set it
+diff --git a/IO/Image/vtkImageReader2.h b/IO/Image/vtkImageReader2.h
+index c953570e67a0..f9551097022c 100644
+--- a/IO/Image/vtkImageReader2.h
++++ b/IO/Image/vtkImageReader2.h
+@@ -29,6 +29,7 @@
+ #ifndef vtkImageReader2_h
+ #define vtkImageReader2_h
+ 
++#include "vtkDeprecation.h"   // For VTK_DEPRECATED_IN_9_5_0
+ #include "vtkIOImageModule.h" // For export macro
+ #include "vtkImageAlgorithm.h"
+ #include "vtkResourceStream.h" // For stream
+@@ -100,20 +101,28 @@ public:
+   vtkGetSmartPointerMacro(Stream, vtkResourceStream);
+   ///@}
+ 
++  ///@{
+   /**
+    * Specify the in memory image buffer.
+    * May be used by a reader to allow the reading
+    * of an image from memory instead of from file.
+    * This should be reworked to use vtkResourceStream instead
+    */
++  VTK_DEPRECATED_IN_9_6_0("Use SetStream instead")
+   virtual void SetMemoryBuffer(const void*);
+-  virtual const void* GetMemoryBuffer() { return this->MemoryBuffer; }
++  VTK_DEPRECATED_IN_9_6_0("Use GetStream instead")
++  virtual const void* GetMemoryBuffer();
++  ///@}
+ 
++  ///@{
+   /**
+    * Specify the in memory image buffer length.
+    */
++  VTK_DEPRECATED_IN_9_6_0("Use SetStream instead")
+   virtual void SetMemoryBufferLength(vtkIdType buflen);
+-  vtkIdType GetMemoryBufferLength() { return this->MemoryBufferLength; }
++  VTK_DEPRECATED_IN_9_6_0("Use GetStream instead")
++  vtkIdType GetMemoryBufferLength();
++  ///@}
+ 
+   /**
+    * Set the data type of pixels in the file.
+@@ -312,7 +321,10 @@ protected:
+   int NumberOfScalarComponents;
+   vtkTypeBool FileLowerLeft;
+ 
++  VTK_DEPRECATED_IN_9_6_0("Use GetStream instead")
+   const void* MemoryBuffer;
++
++  VTK_DEPRECATED_IN_9_6_0("Use GetStream instead")
+   vtkIdType MemoryBufferLength;
+ 
+   istream* File;
+diff --git a/IO/Image/vtkJPEGReader.cxx b/IO/Image/vtkJPEGReader.cxx
+index b9bc7c24c111..a73992f72111 100644
+--- a/IO/Image/vtkJPEGReader.cxx
++++ b/IO/Image/vtkJPEGReader.cxx
+@@ -1,5 +1,7 @@
+ // SPDX-FileCopyrightText: Copyright (c) Ken Martin, Will Schroeder, Bill Lorensen
+ // SPDX-License-Identifier: BSD-3-Clause
++#define VTK_DEPRECATION_LEVEL 0
++
+ #include "vtkJPEGReader.h"
+ 
+ #include "vtkDataArray.h"
+@@ -138,6 +140,7 @@ void vtkJPEGReader::ExecuteInformation()
+   }
+   else if (this->MemoryBuffer)
+   {
++    // VTK_DEPRECATED_IN_9_6_0
+     if (this->MemoryBufferLength == 0)
+     {
+       vtkErrorWithObjectMacro(this,
+@@ -201,6 +204,7 @@ void vtkJPEGReader::ExecuteInformation()
+   }
+   else if (this->GetMemoryBuffer())
+   {
++    // VTK_DEPRECATED_IN_9_6_0
+ #if JPEG_LIB_VERSION >= 80 || defined(MEM_SRCDST_SUPPORTED)
+     jMemSrc(&cinfo, this->MemoryBuffer, this->MemoryBufferLength);
+ #else
+@@ -248,7 +252,7 @@ int vtkJPEGReaderUpdate2(vtkJPEGReader* self, OT* outPtr, int* outExt, vtkIdType
+   jerr.JPEGReader = self;
+   jerr.fp = nullptr;
+ 
+-  if (!self->GetMemoryBuffer())
++  if (!self->GetMemoryBuffer() && !self->GetStream())
+   {
+     jerr.fp = vtksys::SystemTools::Fopen(self->GetInternalFileName(), "rb");
+     if (!jerr.fp)
+@@ -313,6 +317,7 @@ int vtkJPEGReaderUpdate2(vtkJPEGReader* self, OT* outPtr, int* outExt, vtkIdType
+   }
+   else if (self->GetMemoryBuffer())
+   {
++    // VTK_DEPRECATED_IN_9_6_0
+ #if JPEG_LIB_VERSION >= 80 || defined(MEM_SRCDST_SUPPORTED)
+     jMemSrc(&cinfo, self->GetMemoryBuffer(), self->GetMemoryBufferLength());
+ #else
+diff --git a/IO/Image/vtkJPEGReader.h b/IO/Image/vtkJPEGReader.h
+index 4a77fd814e16..45c541fb97df 100644
+--- a/IO/Image/vtkJPEGReader.h
++++ b/IO/Image/vtkJPEGReader.h
+@@ -5,10 +5,11 @@
+  * @brief   read JPEG files
+  *
+  * vtkJPEGReader is a source object that reads JPEG files.
+- * The reader can also read an image from a memory buffer,
+  * see vtkImageReader2::MemoryBuffer.
+  * It should be able to read most any JPEG file.
+  *
++ * This reader supports the stream API but only with vtkMemoryResourceStream
++ *
+  * @sa
+  * vtkJPEGWriter
+  */
+diff --git a/IO/Image/vtkPNGReader.cxx b/IO/Image/vtkPNGReader.cxx
+index 93aa299125e4..3c375086ef14 100644
+--- a/IO/Image/vtkPNGReader.cxx
++++ b/IO/Image/vtkPNGReader.cxx
+@@ -1,5 +1,7 @@
+ // SPDX-FileCopyrightText: Copyright (c) Ken Martin, Will Schroeder, Bill Lorensen
+ // SPDX-License-Identifier: BSD-3-Clause
++#define VTK_DEPRECATION_LEVEL 0
++
+ #include "vtkPNGReader.h"
+ 
+ #include "vtkDataArray.h"
+@@ -41,6 +43,7 @@ public:
+  * When reading an image from memory, libpng needs to be passed a pointer to a custom
+  * read callback function, as well as a pointer to its input data.
+  * This callback function has to behave like fread(), so we use a custom stream object as input.
++ * VTK_DEPRECATED_IN_9_6_0
+  */
+ struct MemoryBufferStream
+ {
+@@ -73,6 +76,7 @@ void PNGReadCallbackStream(png_structp pngPtr, png_bytep output, png_size_t leng
+   }
+ }
+ // To be used by libpng instead of fread when reading data from memory.
++// VTK_DEPRECATED_IN_9_6_0
+ void PNGReadCallback(png_structp pngPtr, png_bytep output, png_size_t length)
+ {
+   if (output == nullptr)
+@@ -185,6 +189,7 @@ public:
+     return this->IsHeaderValid(header);
+   }
+ 
++  // VTK_DEPRECATED_IN_9_6_0
+   bool CheckBufferHeader(const unsigned char* buffer, vtkIdType length)
+   {
+     unsigned char header[8];
+@@ -235,6 +240,7 @@ public:
+     }
+     else if (self->GetMemoryBuffer())
+     {
++      // VTK_DEPRECATED_IN_9_6_0
+       // Tell libpng to read from memory.
+       // Initialize our input object.
+       stream->buffer = static_cast<const unsigned char*>(self->GetMemoryBuffer());
+@@ -299,6 +305,7 @@ void vtkPNGReader::ExecuteInformation()
+   }
+   else if (this->GetMemoryBuffer())
+   {
++    // VTK_DEPRECATED_IN_9_6_0
+     // Read the header from MemoryBuffer
+     const unsigned char* memBuffer = static_cast<const unsigned char*>(this->GetMemoryBuffer());
+     if (!impl->CheckBufferHeader(memBuffer, this->GetMemoryBufferLength()))
+@@ -446,6 +453,7 @@ void vtkPNGReader::vtkPNGReaderUpdate2(OT* outPtr, int* outExt, vtkIdType* outIn
+   }
+   else if (this->GetMemoryBuffer())
+   {
++    // VTK_DEPRECATED_IN_9_6_0
+     // Read the header from MemoryBuffer
+     const unsigned char* memBuffer = static_cast<const unsigned char*>(this->GetMemoryBuffer());
+     if (!impl->CheckBufferHeader(memBuffer, this->GetMemoryBufferLength()))
+diff --git a/IO/Image/vtkPNGReader.h b/IO/Image/vtkPNGReader.h
+index 42cb9f093a56..eb42e3a9a6b5 100644
+--- a/IO/Image/vtkPNGReader.h
++++ b/IO/Image/vtkPNGReader.h
+@@ -7,7 +7,7 @@
+  * vtkPNGReader is a source object that reads PNG files.
+  * It should be able to read most any PNG file
+  *
+- * This reader supports reading from memory.
++ * This reader supports the stream API.
+  *
+  * @sa
+  * vtkPNGWriter
+diff --git a/IO/Image/vtkTGAReader.cxx b/IO/Image/vtkTGAReader.cxx
+index 2a85f7b192a8..02251f0f684d 100644
+--- a/IO/Image/vtkTGAReader.cxx
++++ b/IO/Image/vtkTGAReader.cxx
+@@ -1,5 +1,7 @@
+ // SPDX-FileCopyrightText: Copyright (c) Ken Martin, Will Schroeder, Bill Lorensen
+ // SPDX-License-Identifier: BSD-3-Clause
++#define VTK_DEPRECATION_LEVEL 0
++
+ #include "vtkTGAReader.h"
+ 
+ #include "vtkDataArray.h"
+@@ -37,6 +39,7 @@ void vtkTGAReader::ExecuteInformation()
+   }
+   else if (this->GetMemoryBuffer())
+   {
++    // VTK_DEPRECATED_IN_9_6_0
+     const char* memBuffer = static_cast<const char*>(this->GetMemoryBuffer());
+     std::copy(memBuffer, memBuffer + ::HeaderSize, header);
+   }
+@@ -96,6 +99,7 @@ void vtkTGAReader::ExecuteDataWithInformation(vtkDataObject* output, vtkInformat
+   }
+   else if (this->GetMemoryBuffer())
+   {
++    // VTK_DEPRECATED_IN_9_6_0
+     const unsigned char* uBuffer = reinterpret_cast<const unsigned char*>(this->GetMemoryBuffer());
+     content.assign(uBuffer, uBuffer + this->GetMemoryBufferLength());
+   }
+diff --git a/IO/Image/vtkTGAReader.h b/IO/Image/vtkTGAReader.h
+index 24ce51305c4d..c358f30316fe 100644
+--- a/IO/Image/vtkTGAReader.h
++++ b/IO/Image/vtkTGAReader.h
+@@ -6,7 +6,7 @@
+  *
+  * vtkTGAReader is a source object that reads Targa files.
+  * It supports uncompressed 24 and 32 bits formats.
+- * This reader supports reading from memory.
++ * This reader supports the stream API.
+  *
+  * @sa
+  * vtkImageReader2
+diff --git a/IO/OMF/core/OMFFile.cxx b/IO/OMF/core/OMFFile.cxx
+index c610d960c4b9..94353721342e 100644
+--- a/IO/OMF/core/OMFFile.cxx
++++ b/IO/OMF/core/OMFFile.cxx
+@@ -8,6 +8,7 @@
+ #include "vtkDataArray.h"
+ #include "vtkDoubleArray.h"
+ #include "vtkImageData.h"
++#include "vtkMemoryResourceStream.h"
+ #include "vtkPNGReader.h"
+ #include "vtkTypeInt64Array.h"
+ #include "vtkUnsignedCharArray.h"
+@@ -345,8 +346,9 @@ vtkSmartPointer<vtkImageData> OMFFile::ReadPNGFromStream(const Json::Value& json
+   }
+ 
+   vtkNew<vtkPNGReader> reader;
+-  reader->SetMemoryBuffer(array->GetVoidPointer(0));
+-  reader->SetMemoryBufferLength(array->GetDataSize());
++  vtkNew<vtkMemoryResourceStream> stream;
++  stream->SetBuffer(array->GetVoidPointer(0), array->GetDataSize());
++  reader->SetStream(stream);
+   reader->Update();
+   vtkNew<vtkImageData> data;
+   data->ShallowCopy(reader->GetOutput());
+diff --git a/Rendering/OpenGL2/vtk.module b/Rendering/OpenGL2/vtk.module
+index 402497fe1bed..682f7f59d6fc 100644
+--- a/Rendering/OpenGL2/vtk.module
++++ b/Rendering/OpenGL2/vtk.module
+@@ -17,6 +17,7 @@ DEPENDS
+   VTK::CommonCore
+   VTK::CommonDataModel
+   VTK::FiltersGeneral
++  VTK::IOCore
+   VTK::IOImage
+   VTK::RenderingCore
+   VTK::RenderingHyperTreeGrid
+diff --git a/Rendering/OpenGL2/vtkOpenGLRenderWindow.cxx b/Rendering/OpenGL2/vtkOpenGLRenderWindow.cxx
+index 1016826f2b7d..e0e49acca80f 100644
+--- a/Rendering/OpenGL2/vtkOpenGLRenderWindow.cxx
++++ b/Rendering/OpenGL2/vtkOpenGLRenderWindow.cxx
+@@ -9,6 +9,7 @@
+ #include "vtkImageData.h"
+ #include "vtkJPEGReader.h"
+ #include "vtkLogger.h"
++#include "vtkMemoryResourceStream.h"
+ #include "vtkNew.h"
+ #include "vtkOpenGLBufferObject.h"
+ #include "vtkOpenGLCamera.h"
+@@ -3046,8 +3047,9 @@ int vtkOpenGLRenderWindow::GetNoiseTextureUnit()
+   {
+     vtkNew<vtkJPEGReader> imgReader;
+ 
+-    imgReader->SetMemoryBuffer(BlueNoiseTexture64x64);
+-    imgReader->SetMemoryBufferLength(sizeof(BlueNoiseTexture64x64));
++    vtkNew<vtkMemoryResourceStream> stream;
++    stream->SetBuffer(BlueNoiseTexture64x64, sizeof(BlueNoiseTexture64x64));
++    imgReader->SetStream(stream);
+     imgReader->Update();
+     vtkImageData* textureReader = imgReader->GetOutput();
+ 
+diff --git a/Rendering/OpenVR/vtkOpenVROverlay.cxx b/Rendering/OpenVR/vtkOpenVROverlay.cxx
+index 7ea88c8f57bc..3287697b7231 100644
+--- a/Rendering/OpenVR/vtkOpenVROverlay.cxx
++++ b/Rendering/OpenVR/vtkOpenVROverlay.cxx
+@@ -5,6 +5,7 @@
+ #include "vtkDataArray.h"
+ #include "vtkImageData.h"
+ #include "vtkJPEGReader.h"
++#include "vtkMemoryResourceStream.h"
+ #include "vtkObjectFactory.h"
+ #include "vtkOpenVROverlayInternal.h"
+ #include "vtkOpenVRRenderWindow.h"
+@@ -225,8 +226,9 @@ void vtkOpenVROverlay::Hide()
+ 
+ void vtkOpenVROverlay::SetDashboardImageData(vtkJPEGReader* imgReader)
+ {
+-  imgReader->SetMemoryBuffer(OpenVRDashboard);
+-  imgReader->SetMemoryBufferLength(sizeof(OpenVRDashboard));
++  vtkNew<vtkMemoryResourceStream> stream;
++  stream->SetBuffer(OpenVRDashboard, sizeof(OpenVRDashboard));
++  imgReader->SetStream(stream);
+   imgReader->Update();
+ }
+ 
+-- 
+GitLab
+
+
+From fbc078f025c0d3178eb63e74ce3bc299296f44be Mon Sep 17 00:00:00 2001
+From: Mathieu Westphal <mathieu.westphal@kitware.com>
+Date: Fri, 10 Oct 2025 09:00:13 +0200
+Subject: [PATCH 7/8] vtkImageReader2: Adding md doc
+
+---
+ .../release/dev/add-image-reader2-stream-support.md          | 5 +++++
+ 1 file changed, 5 insertions(+)
+ create mode 100644 Documentation/release/dev/add-image-reader2-stream-support.md
+
+diff --git a/Documentation/release/dev/add-image-reader2-stream-support.md b/Documentation/release/dev/add-image-reader2-stream-support.md
+new file mode 100644
+index 000000000000..ee1a60b994e6
+--- /dev/null
++++ b/Documentation/release/dev/add-image-reader2-stream-support.md
+@@ -0,0 +1,5 @@
++## vtkImageReader2 now supports reading vtkResourceStream
++
++vtkImageReader2::Get/SetStream methods have been added and implemented in vtkPNGReader, vtkTGAReader and vtkJPEGReader.
++
++vtkImageReader2::SetMemoryBuffer have been deprecated in favor of SetStream.
+-- 
+GitLab
+
+
+From f3c351de28a2519f9b8a560394e2e272421be2d9 Mon Sep 17 00:00:00 2001
+From: Mathieu Westphal <mathieu.westphal@kitware.com>
+Date: Thu, 25 Sep 2025 08:58:04 +0200
+Subject: [PATCH 8/8] vtkOBJImporter: Add stream support for obj, mtl and
+ textures
+
+---
+ .../dev/rework-importer-filename-stream.md    |   2 +
+ IO/Import/Testing/Cxx/CMakeLists.txt          |   7 ++
+ .../Testing/Cxx/TestOBJImporterStream.cxx     |  73 +++++++++++
+ .../Data/Baseline/OBJImport-Stream.png.sha512 |   1 +
+ IO/Import/vtkOBJImporter.cxx                  | 115 +++++++++++++-----
+ IO/Import/vtkOBJImporter.h                    |  20 ++-
+ IO/Import/vtkOBJImporterInternals.cxx         |  42 ++++---
+ IO/Import/vtkOBJImporterInternals.h           |  30 ++++-
+ 8 files changed, 231 insertions(+), 59 deletions(-)
+ create mode 100644 IO/Import/Testing/Cxx/TestOBJImporterStream.cxx
+ create mode 100644 IO/Import/Testing/Data/Baseline/OBJImport-Stream.png.sha512
+
+diff --git a/Documentation/release/dev/rework-importer-filename-stream.md b/Documentation/release/dev/rework-importer-filename-stream.md
+index a543b0b9dd63..f78afb3cf776 100644
+--- a/Documentation/release/dev/rework-importer-filename-stream.md
++++ b/Documentation/release/dev/rework-importer-filename-stream.md
+@@ -3,6 +3,7 @@
+ vtkImporter now provides an API to specify FileName and Stream.
+ 
+ vtk3DSImporter now supports stream.
++vtkOBJImporter now supports streams.
+ 
+ In that context the following members are now private (in the parent class):
+  - vtk3DSImporter::FileName
+@@ -10,3 +11,4 @@ In that context the following members are now private (in the parent class):
+  - vtkGLTFImporter::FileName
+  - vtkGLTFImporter::Stream
+  - vtkVRMLImporter::FileName
++ - vtkOBJImporter::Impl
+diff --git a/IO/Import/Testing/Cxx/CMakeLists.txt b/IO/Import/Testing/Cxx/CMakeLists.txt
+index bcdd293e4a7a..1d2bd9584f0e 100644
+--- a/IO/Import/Testing/Cxx/CMakeLists.txt
++++ b/IO/Import/Testing/Cxx/CMakeLists.txt
+@@ -17,6 +17,13 @@ vtk_add_test_cxx(vtkIOImportCxxTests tests
+     DATA{../Data/Input/noise.png}
+ )
+ 
++vtk_add_test_cxx(vtkIOImportCxxTests tests
++  OBJImport-Stream,TestOBJImporter.cxx
++    DATA{../Data/Input/cube-scene.obj}
++    DATA{../Data/Input/cube-scene.mtl}
++    DATA{../Data/Input/noise.png}
++)
++
+ vtk_add_test_cxx(vtkIOImportCxxTests tests
+   OBJImport-mtllib-texturepath,TestOBJImporter.cxx
+     DATA{../Data/Input/cube-scene.obj}
+diff --git a/IO/Import/Testing/Cxx/TestOBJImporterStream.cxx b/IO/Import/Testing/Cxx/TestOBJImporterStream.cxx
+new file mode 100644
+index 000000000000..e614ce62b48b
+--- /dev/null
++++ b/IO/Import/Testing/Cxx/TestOBJImporterStream.cxx
+@@ -0,0 +1,73 @@
++// SPDX-FileCopyrightText: Copyright (c) Ken Martin, Will Schroeder, Bill Lorensen
++// SPDX-License-Identifier: BSD-3-Clause
++
++#include "vtkNew.h"
++#include "vtkOBJImporter.h"
++
++#include "vtkCamera.h"
++#include "vtkLightCollection.h"
++#include "vtkRenderWindow.h"
++#include "vtkRenderWindowInteractor.h"
++#include "vtkRenderer.h"
++
++#include "vtksys/SystemTools.hxx"
++
++#include "vtkMapper.h"
++#include <sstream>
++
++int TestOBJImporter(int argc, char* argv[])
++{
++  // note that the executable name is stripped out already
++  // so argc argv will not have it
++
++  // Files for testing demonstrate updated functionality for OBJ import:
++  //       polydata + textures + actor properties all get loaded.
++  if (argc < 2)
++  {
++    std::cout << "expected TestName File1.obj [File2.obj.mtl]  [texture1]  ... " << std::endl;
++    return EXIT_FAILURE;
++  }
++
++  vtkNew<vtkFileResourceStream> fileStream;
++  fileStream->Open(argv[1]);
++
++  vtkNew<vtkFileResourceStream> mtlStream;
++  mtlStream->Open(argv[2]);
++
++  vtkNew<vtkFileResourceStream> texStream;
++  mtlStream->Open(argv[3]);
++
++  vtkNew<vtkOBJImporter> importer;
++  importer->SetStream(fileStream);
++  importer->SetStreamMTL(mtlStream);
++  importer->SetTextureStream({ { argv[3], texStream } });
++
++  vtkNew<vtkRenderer> ren;
++  vtkNew<vtkRenderWindow> renWin;
++  vtkNew<vtkRenderWindowInteractor> iren;
++
++  renWin->AddRenderer(ren);
++  iren->SetRenderWindow(renWin);
++  importer->SetRenderWindow(renWin);
++  if (!importer->Update())
++  {
++    std::cerr << "ERROR: Importer failed to update\n";
++    return EXIT_FAILURE;
++  }
++
++  ren->ResetCamera();
++
++  if (ren->GetActors()->GetNumberOfItems() < 1 ||
++    importer->GetImportedActors()->GetNumberOfItems() < 1)
++  {
++    std::cout << "failed to get an actor created?!" << std::endl;
++    return EXIT_FAILURE;
++  }
++
++  ren->GetActiveCamera()->SetPosition(10, 10, -10);
++  ren->ResetCamera();
++  renWin->SetSize(800, 600);
++  iren->Start();
++
++  return (EXIT_SUCCESS);
++}
+diff --git a/IO/Import/Testing/Data/Baseline/OBJImport-Stream.png.sha512 b/IO/Import/Testing/Data/Baseline/OBJImport-Stream.png.sha512
+new file mode 100644
+index 000000000000..f922e7591576
+--- /dev/null
++++ b/IO/Import/Testing/Data/Baseline/OBJImport-Stream.png.sha512
+@@ -0,0 +1 @@
++0b96967bba88e62a308918927973008cae72c2c9b2fd1c45d7ff8c8b30a0e201d543c3271b7697d8ecd12927dc09043292061eb4bb33a2693d2d90d4ad72cb5f
+diff --git a/IO/Import/vtkOBJImporter.cxx b/IO/Import/vtkOBJImporter.cxx
+index 1d161a5df6e5..a562a07f9429 100644
+--- a/IO/Import/vtkOBJImporter.cxx
++++ b/IO/Import/vtkOBJImporter.cxx
+@@ -4,6 +4,7 @@
+ 
+ #include "vtkActor.h"
+ #include "vtkCellArray.h"
++#include "vtkFileResourceStream.h"
+ #include "vtkFloatArray.h"
+ #include "vtkInformation.h"
+ #include "vtkInformationVector.h"
+@@ -34,16 +35,38 @@ vtkStandardNewMacro(vtkOBJPolyDataProcessor);
+ 
+ namespace
+ {
+-int CanReadFile(vtkObject* that, const std::string& fname)
++bool CanReadFile(vtkObject* that, const std::string& fname)
+ {
+-  FILE* fileFD = vtksys::SystemTools::Fopen(fname, "rb");
+-  if (fileFD == nullptr)
++  vtkNew<vtkFileResourceStream> file;
++  if (!file->Open(fname.c_str()))
+   {
+     vtkErrorWithObjectMacro(that, << "Unable to open file: " << fname);
+-    return 0;
++    return false;
+   }
+-  fclose(fileFD);
+-  return 1;
++  return true;
++}
++
++/**
++ * Read a line char by char from a vtkResourceStream
++ * Behave like fgets as specified here: https://en.cppreference.com/w/c/io/fgets
++ */
++bool ReadLine(char* rawLine, int maxLine, vtkResourceStream* stream)
++{
++  int nRead = 0;
++  for (; nRead < maxLine - 1 && !stream->EndOfStream(); nRead++)
++  {
++    if (stream->Read(rawLine, 1) != 1)
++    {
++      return false;
++    }
++    if (*rawLine == '\n')
++    {
++      *(rawLine + 1) = '\0';
++      return true;
++    }
++    rawLine++;
++  }
++  return nRead > 0;
+ }
+ }
+ 
+@@ -58,7 +81,7 @@ vtkOBJImporter::~vtkOBJImporter() = default;
+ 
+ int vtkOBJImporter::ImportBegin()
+ {
+-  if (!::CanReadFile(this, this->GetFileName()))
++  if (!this->GetStream() && !::CanReadFile(this, this->GetFileName()))
+   {
+     return 0;
+   }
+@@ -100,21 +123,37 @@ void vtkOBJImporter::PrintSelf(std::ostream& os, vtkIndent indent)
+   vtkImporter::PrintSelf(os, indent);
+ }
+ 
+-void vtkOBJImporter::SetFileNameMTL(const char* arg)
++//------------------------------------------------------------------------------
++void vtkOBJImporter::SetMTLStream(vtkResourceStream* mtlStream)
+ {
+-  this->Impl->SetMTLfileName(arg);
++  this->Impl->SetMTLStream(mtlStream);
+ }
+ 
+-void vtkOBJImporter::SetTexturePath(const char* path)
++//------------------------------------------------------------------------------
++void vtkOBJImporter::SetFileNameMTL(const char* arg)
+ {
+-  this->Impl->SetTexturePath(path);
++  this->Impl->SetMTLfileName(arg);
+ }
+ 
++//------------------------------------------------------------------------------
+ const char* vtkOBJImporter::GetFileNameMTL() const
+ {
+   return this->Impl->GetMTLFileName().data();
+ }
+ 
++//------------------------------------------------------------------------------
++void vtkOBJImporter::SetTextureStreams(std::map<std::string, vtkResourceStream*> streamMap)
++{
++  this->Impl->SetTextureStreams(streamMap);
++}
++
++//------------------------------------------------------------------------------
++void vtkOBJImporter::SetTexturePath(const char* path)
++{
++  this->Impl->SetTexturePath(path);
++}
++
++//------------------------------------------------------------------------------
+ const char* vtkOBJImporter::GetTexturePath() const
+ {
+   return this->Impl->GetTexturePath().data();
+@@ -332,17 +371,18 @@ p <v_a> <v_b> ...
+ int vtkOBJPolyDataProcessor::RequestData(vtkInformation* vtkNotUsed(request),
+   vtkInformationVector** vtkNotUsed(inputVector), vtkInformationVector* vtkNotUsed(outputVector))
+ {
+-  if (this->FileName.empty())
++  // Stream is higher priority than filename.
++  vtkResourceStream* stream = this->Stream;
++  vtkNew<vtkFileResourceStream> fileStream;
++  if (!stream)
+   {
+-    vtkErrorMacro(<< "A FileName must be specified.");
+-    return 0;
+-  }
++    if (!fileStream->Open(this->FileName.c_str()))
++    {
++      vtkErrorMacro("Unable to open " << this->GetFileName() << " , aborting.");
++      return 0;
++    }
+ 
+-  FILE* in = vtksys::SystemTools::Fopen(this->FileName, "r");
+-  if (in == nullptr)
+-  {
+-    vtkErrorMacro(<< "File " << this->FileName << " not found");
+-    return 0;
++    stream = fileStream;
+   }
+ 
+   // clear old poly list
+@@ -353,8 +393,6 @@ int vtkOBJPolyDataProcessor::RequestData(vtkInformation* vtkNotUsed(request),
+   }
+   poly_list.clear();
+ 
+-  vtkDebugMacro(<< "Reading file" << this->FileName);
+-
+   // clear any old mtls
+   for (size_t k = 0; k < this->parsedMTLs.size(); ++k)
+   {
+@@ -407,7 +445,7 @@ int vtkOBJPolyDataProcessor::RequestData(vtkInformation* vtkNotUsed(request),
+       constexpr int MAX_LINE = 100000;
+       char rawLine[MAX_LINE];
+ 
+-      while (fgets(rawLine, MAX_LINE, in) != nullptr)
++      while (::ReadLine(rawLine, MAX_LINE, stream))
+       {
+         _extractLine(rawLine);
+ 
+@@ -441,8 +479,7 @@ int vtkOBJPolyDataProcessor::RequestData(vtkInformation* vtkNotUsed(request),
+         }
+       }
+       // Reset file position
+-      clearerr(in);           // clear error and EOF flags
+-      fseek(in, 0, SEEK_SET); // move to beginning
++      stream->Seek(0, vtkResourceStream::SeekDirection::Begin);
+     }
+ 
+     if (mtllibDefined)
+@@ -488,8 +525,23 @@ int vtkOBJPolyDataProcessor::RequestData(vtkInformation* vtkNotUsed(request),
+     this->SetTexturePath(vtksys::SystemTools::GetFilenamePath(this->FileName).c_str());
+   }
+ 
++  // MTLStream is higher priority than MTLFilename.
++  vtkResourceStream* mtlStream = this->MTLStream;
++  vtkNew<vtkFileResourceStream> mtlFileStream;
++  if (!this->MTLFileName.empty() && !mtlStream)
++  {
++    if (!mtlFileStream->Open(this->MTLFileName.c_str()))
++    {
++      vtkErrorMacro("Unable to open MTL: " << this->MTLFileName << " , aborting.");
++      return 0;
++    }
++
++    mtlStream = mtlFileStream;
++  }
++
++  // Parse OBJ and MTL
+   int mtlParseResult;
+-  this->parsedMTLs = ParseOBJandMTL(this->MTLFileName, mtlParseResult);
++  this->parsedMTLs = ParseOBJandMTL(mtlStream, mtlParseResult);
+   if (this->parsedMTLs.empty())
+   { // construct a default material to define the single polydata's actor.
+     this->parsedMTLs.push_back(new vtkOBJImportedMaterial);
+@@ -556,7 +608,7 @@ int vtkOBJPolyDataProcessor::RequestData(vtkInformation* vtkNotUsed(request),
+ 
+     int lineNr = 0;
+     long lastVertexIndex = 0;
+-    while (everything_ok && fgets(rawLine, MAX_LINE, in) != nullptr)
++    while (everything_ok && ::ReadLine(rawLine, MAX_LINE, stream))
+     { /** While OK and there is another line in the file */
+       lineNr++;
+       _extractLine(rawLine);
+@@ -658,7 +710,7 @@ int vtkOBJPolyDataProcessor::RequestData(vtkInformation* vtkNotUsed(request),
+             else if (strcmp(pLine, "\\\n") == 0)
+             {
+               // handle backslash-newline continuation
+-              if (fgets(rawLine, MAX_LINE, in) != nullptr)
++              if (::ReadLine(rawLine, MAX_LINE, stream))
+               {
+                 lineNr++;
+                 pLine = rawLine;
+@@ -745,7 +797,7 @@ int vtkOBJPolyDataProcessor::RequestData(vtkInformation* vtkNotUsed(request),
+             else if (strcmp(pLine, "\\\n") == 0)
+             {
+               // handle backslash-newline continuation
+-              if (fgets(rawLine, MAX_LINE, in) != nullptr)
++              if (::ReadLine(rawLine, MAX_LINE, stream))
+               {
+                 lineNr++;
+                 pLine = rawLine;
+@@ -927,7 +979,7 @@ int vtkOBJPolyDataProcessor::RequestData(vtkInformation* vtkNotUsed(request),
+             else if (strcmp(pLine, "\\\n") == 0)
+             {
+               // handle backslash-newline continuation
+-              if (fgets(rawLine, MAX_LINE, in) != nullptr)
++              if (::ReadLine(rawLine, MAX_LINE, stream))
+               {
+                 lineNr++;
+                 pLine = rawLine;
+@@ -1043,9 +1095,6 @@ int vtkOBJPolyDataProcessor::RequestData(vtkInformation* vtkNotUsed(request),
+     } /** Looping over lines of file */ // (end of while loop)
+   }                                     // (end of local scope section)
+ 
+-  // we have finished with the file
+-  fclose(in);
+-
+   /** based on how many used materials are present,
+                  set the number of output ports of vtkPolyData */
+   this->SetNumberOfOutputPorts(static_cast<int>(poly_list.size()));
+diff --git a/IO/Import/vtkOBJImporter.h b/IO/Import/vtkOBJImporter.h
+index 086d75d61c24..d417f4bed250 100644
+--- a/IO/Import/vtkOBJImporter.h
++++ b/IO/Import/vtkOBJImporter.h
+@@ -5,8 +5,7 @@
+  * @brief   import from .obj wavefront files
+  *
+  * This importer doesn't support scene hierarchy API
+- * This importer doesn't support reading streams
+- *
++ * This importer supports reading streams
+  * This importer supports the collection API
+  *
+  *                        from Wavefront .obj & associated .mtl files.
+@@ -63,7 +62,7 @@ public:
+ 
+   ///@{
+   /**
+-   * Specify the name of the file to read.
++   * Specify the name of the file to read as MTL file.
+    * FileName must be provided in the parent class.
+    * FileNameMTL can be provided, if not provided, we will do, in order:
+    *  - Use mtllib is provided in the .obj file
+@@ -71,9 +70,18 @@ public:
+    *  - Check for a FileStem.mtl and use it if it exists
+    * TexturePath can be provided, it not provided, the folder containing FileName will be used
+    */
++  void SetMTLStream(vtkResourceStream* stream);
+   void SetFileNameMTL(VTK_FILEPATH const char* arg);
+-  void SetTexturePath(VTK_FILEPATH const char* path);
+   VTK_FILEPATH const char* GetFileNameMTL() const;
++  ///@}
++
++  ///@{
++
++  /**
++   * TexturePath can be provided, it not provided, the folder containing FileName will be used
++   */
++  void SetTextureStreams(std::map<std::string, vtkResourceStream*> streamMap);
++  void SetTexturePath(VTK_FILEPATH const char* path);
+   VTK_FILEPATH const char* GetTexturePath() const;
+   ///@}
+ 
+@@ -95,11 +103,11 @@ protected:
+   void ImportEnd() override /*override*/;
+   void ReadData() override /* override */;
+ 
+-  vtkSmartPointer<vtkOBJPolyDataProcessor> Impl;
+-
+ private:
+   vtkOBJImporter(const vtkOBJImporter&) = delete;
+   void operator=(const vtkOBJImporter&) = delete;
++
++  vtkSmartPointer<vtkOBJPolyDataProcessor> Impl;
+ };
+ 
+ VTK_ABI_NAMESPACE_END
+diff --git a/IO/Import/vtkOBJImporterInternals.cxx b/IO/Import/vtkOBJImporterInternals.cxx
+index 9e4ba3a4976c..3016d1247266 100644
+--- a/IO/Import/vtkOBJImporterInternals.cxx
++++ b/IO/Import/vtkOBJImporterInternals.cxx
+@@ -8,6 +8,7 @@
+ #include "vtkProperty.h"
+ #include "vtkRenderWindow.h"
+ #include "vtkRenderer.h"
++#include "vtkResourceStream.h"
+ #include "vtkSmartPointer.h"
+ #include "vtkTexture.h"
+ #include "vtkTransform.h"
+@@ -240,29 +241,26 @@ VTK_ABI_NAMESPACE_END
+ 
+ VTK_ABI_NAMESPACE_BEGIN
+ std::vector<vtkOBJImportedMaterial*> vtkOBJPolyDataProcessor::ParseOBJandMTL(
+-  std::string Filename, int& result_code)
++  vtkResourceStream* mtlStream, int& result_code)
+ {
+   std::vector<vtkOBJImportedMaterial*> listOfMaterials;
+   result_code = 0;
+ 
+-  if (Filename.empty())
+-  {
+-    return listOfMaterials;
+-  }
+-
+-  vtksys::ifstream in(Filename.c_str(), std::ios::in | std::ios::binary);
+-  if (!in)
++  if (!mtlStream)
+   {
+     return listOfMaterials;
+   }
+ 
+   std::vector<Token> tokens;
+   std::string contents;
+-  in.seekg(0, std::ios::end);
+-  contents.resize(in.tellg());
+-  in.seekg(0, std::ios::beg);
+-  in.read(contents.data(), contents.size());
+-  in.close();
++
++  // Recover length of stream
++  mtlStream->Seek(0, vtkResourceStream::SeekDirection::End);
++  contents.resize(mtlStream->Tell());
++  mtlStream->Seek(0, vtkResourceStream::SeekDirection::Begin);
++
++  // Read the mtl file
++  mtlStream->Read(contents.data(), contents.size());
+ 
+   // watch for UTF-8 BOM
+   if (std::string_view(contents.data(), 3) == "\xef\xbb\xbf")
+@@ -415,7 +413,23 @@ bool bindTexturedPolydataToRenderWindow(vtkRenderWindow* renderWindow, vtkRender
+         }
+         else
+         {
+-          imgReader->SetFileName(textureFilename.c_str());
++          auto& streams = reader->GetTextureStreams();
++          if (streams.empty())
++          {
++            imgReader->SetFileName(textureFilename.c_str());
++          }
++          else
++          {
++            if (auto search = streams.find(textureFilename); search != streams.end())
++            {
++              imgReader->SetStream(search->second);
++            }
++            else
++            {
++              vtkErrorWithObjectMacro(
++                reader, "Texture stream not provided for: " << textureFilename);
++            }
++          }
+ 
+           vtkSmartPointer<vtkTexture> vTexture = vtkSmartPointer<vtkTexture>::New();
+           vTexture->SetInputConnection(imgReader->GetOutputPort());
+diff --git a/IO/Import/vtkOBJImporterInternals.h b/IO/Import/vtkOBJImporterInternals.h
+index 46aa2efe2b56..6de27ea6fe41 100644
+--- a/IO/Import/vtkOBJImporterInternals.h
++++ b/IO/Import/vtkOBJImporterInternals.h
+@@ -12,6 +12,7 @@
+ VTK_ABI_NAMESPACE_BEGIN
+ class vtkActor;
+ class vtkActorCollection;
++class vtkResourceStream;
+ 
+ struct VTKIOIMPORT_EXPORT vtkOBJImportedMaterial
+ {
+@@ -46,7 +47,8 @@ public:
+   void PrintSelf(ostream& os, vtkIndent indent) override;
+ 
+   // Description:
+-  // Specify file name of Wavefront .obj file.
++  // Specify filenames / streams to read  of Wavefront .obj file.
++  void SetStream(vtkResourceStream* stream) { this->Stream = stream; }
+   void SetFileName(const char* arg)
+   {
+     if (arg == nullptr)
+@@ -59,6 +61,7 @@ public:
+     }
+     this->FileName = std::string(arg);
+   }
++  void SetMTLStream(vtkResourceStream* mtlStream) { this->MTLStream = mtlStream; }
+   void SetMTLfileName(const char* arg)
+   {
+     if (arg == nullptr)
+@@ -72,6 +75,10 @@ public:
+     this->MTLFileName = std::string(arg);
+     this->DefaultMTLFileName = false;
+   }
++  void SetTextureStreams(std::map<std::string, vtkResourceStream*> streamMap)
++  {
++    this->TextureStreams = streamMap;
++  }
+   void SetTexturePath(const char* arg)
+   {
+     this->TexturePath = std::string(arg);
+@@ -91,6 +98,10 @@ public:
+     this->DefaultTexturePath = false;
+   }
+   const std::string& GetTexturePath() const { return this->TexturePath; }
++  const std::map<std::string, vtkResourceStream*>& GetTextureStreams() const
++  {
++    return this->TextureStreams;
++  }
+ 
+   const std::string& GetFileName() const { return this->FileName; }
+ 
+@@ -122,7 +133,8 @@ public:
+   std::vector<vtkSmartPointer<vtkActor>> actor_list;
+   /////////////////////
+ 
+-  std::vector<vtkOBJImportedMaterial*> ParseOBJandMTL(std::string filename, int& result_code);
++  std::vector<vtkOBJImportedMaterial*> ParseOBJandMTL(
++    vtkResourceStream* mtlStream, int& result_code);
+ 
+   void ReadVertices(bool gotFirstUseMaterialTag, char* pLine, float xyz, int lineNr, double v_scale,
+     bool everything_ok, vtkPoints* points, bool use_scale);
+@@ -135,11 +147,17 @@ protected:
+ 
+   vtkSetMacro(SuccessParsingFiles, int);
+ 
+-  std::string FileName;    // filename (.obj) being read
+-  std::string MTLFileName; // associated .mtl to *.obj, typically it is *.obj.mtl
+-  bool DefaultMTLFileName; // tells whether default MTL should be used
+-  std::string TexturePath;
++  vtkResourceStream* Stream = nullptr; // Stream of obj being read
++  std::string FileName;                // filename (.obj) being read
++
++  bool DefaultMTLFileName;                // tells whether default MTL should be used
++  std::string MTLFileName;                // associated .mtl to *.obj, typically it is *.obj.mtl
++  vtkResourceStream* MTLStream = nullptr; // Stream of associated MTL file
++
+   bool DefaultTexturePath; // tells whether default texture path should be used
++  std::string TexturePath; // Texture path to read
++  std::map<std::string, vtkResourceStream*> TextureStreams;
++
+   int SuccessParsingFiles;
+ 
+ private:
+-- 
+GitLab
