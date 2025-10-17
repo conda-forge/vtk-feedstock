@@ -2,7 +2,7 @@
 
 context:
   version: "9.5.2"
-  build: 3
+  build: 4
   minor_version: ${{ (version | split('.'))[:2] | join('.') }}
 
 recipe:
@@ -123,6 +123,7 @@ outputs:
         - nlohmann_json
         - proj
         - sqlite
+        - viskores =1.0
         # Until this is solved:
         # https://gitlab.kitware.com/vtk/vtk/-/issues/19561
         # we use the internal one in build-base.sh
