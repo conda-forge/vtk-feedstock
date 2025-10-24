@@ -1,5 +1,8 @@
 azure:
   max_parallel: 25
+  settings_win:
+    variables:
+      CONDA_BLD_PATH: C:\\bld\\
 build_platform:
   linux_aarch64: linux_64
   osx_arm64: osx_64
@@ -10,6 +13,4 @@ github:
   branch_name: main
   tooling_branch_name: main
 test: native_and_emulated
-settings_win:
-  variables:
-    CONDA_BLD_PATH: C:\\bld\\
+
