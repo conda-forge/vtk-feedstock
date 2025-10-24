@@ -20,6 +20,8 @@ source:
 
 build:
   number: {{ build }}
+  # For debug, only build Windows and one python version
+  skip: not win or py != 312
 
 outputs:
   - name: vtk-base
