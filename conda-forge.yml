@@ -10,3 +10,6 @@ github:
   branch_name: main
   tooling_branch_name: main
 test: native_and_emulated
+settings_win:
+  variables:
+    CONDA_BLD_PATH: C:\\bld\\
