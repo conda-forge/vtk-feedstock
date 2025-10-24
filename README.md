@@ -19,6 +19,59 @@ Current build status
 
 
 <table>
+    
+  <tr>
+    <td>Azure</td>
+    <td>
+      <details>
+        <summary>
+          <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=main">
+            <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=main">
+          </a>
+        </summary>
+        <table>
+          <thead><tr><th>Variant</th><th>Status</th></tr></thead>
+          <tbody><tr>
+              <td>win_64_python3.10.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=main&jobName=win&configuration=win%20win_64_python3.10.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>win_64_python3.11.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=main&jobName=win&configuration=win%20win_64_python3.11.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>win_64_python3.12.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=main&jobName=win&configuration=win%20win_64_python3.12.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>win_64_python3.13.____cp313</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=main&jobName=win&configuration=win%20win_64_python3.13.____cp313" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>win_64_python3.14.____cp314</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=4807&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/vtk-feedstock?branchName=main&jobName=win&configuration=win%20win_64_python3.14.____cp314" alt="variant">
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </details>
+    </td>
+  </tr>
 </table>
 
 Current release info
@@ -26,7 +79,8 @@ Current release info
 
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-vtk--split-green.svg)](https://anaconda.org/conda-forge/vtk-split) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/vtk-split.svg)](https://anaconda.org/conda-forge/vtk-split) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/vtk-split.svg)](https://anaconda.org/conda-forge/vtk-split) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/vtk-split.svg)](https://anaconda.org/conda-forge/vtk-split) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-vtk-green.svg)](https://anaconda.org/conda-forge/vtk) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/vtk.svg)](https://anaconda.org/conda-forge/vtk) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/vtk.svg)](https://anaconda.org/conda-forge/vtk) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/vtk.svg)](https://anaconda.org/conda-forge/vtk) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-vtk--base-green.svg)](https://anaconda.org/conda-forge/vtk-base) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/vtk-base.svg)](https://anaconda.org/conda-forge/vtk-base) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/vtk-base.svg)](https://anaconda.org/conda-forge/vtk-base) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/vtk-base.svg)](https://anaconda.org/conda-forge/vtk-base) |
 
 Installing vtk
 ==============
@@ -38,41 +92,41 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `vtk-split` can be installed with `conda`:
+Once the `conda-forge` channel has been enabled, `vtk, vtk-base` can be installed with `conda`:
 
 ```
-conda install vtk-split
-```
-
-or with `mamba`:
-
-```
-mamba install vtk-split
-```
-
-It is possible to list all of the versions of `vtk-split` available on your platform with `conda`:
-
-```
-conda search vtk-split --channel conda-forge
+conda install vtk vtk-base
 ```
 
 or with `mamba`:
 
 ```
-mamba search vtk-split --channel conda-forge
+mamba install vtk vtk-base
+```
+
+It is possible to list all of the versions of `vtk` available on your platform with `conda`:
+
+```
+conda search vtk --channel conda-forge
+```
+
+or with `mamba`:
+
+```
+mamba search vtk --channel conda-forge
 ```
 
 Alternatively, `mamba repoquery` may provide more information:
 
 ```
 # Search all versions available on your platform:
-mamba repoquery search vtk-split --channel conda-forge
+mamba repoquery search vtk --channel conda-forge
 
-# List packages depending on `vtk-split`:
-mamba repoquery whoneeds vtk-split --channel conda-forge
+# List packages depending on `vtk`:
+mamba repoquery whoneeds vtk --channel conda-forge
 
-# List dependencies of `vtk-split`:
-mamba repoquery depends vtk-split --channel conda-forge
+# List dependencies of `vtk`:
+mamba repoquery depends vtk --channel conda-forge
 ```
 
 
