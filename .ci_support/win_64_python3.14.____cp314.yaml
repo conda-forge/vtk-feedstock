@@ -55,9 +55,9 @@ sqlite:
 target_platform:
 - win-64
 tbb:
-- '2021'
+- '2022'
 tbb_devel:
-- '2021'
+- '2022'
 vtk:
 - 9.5.1
 zlib:
