@@ -14,15 +14,3 @@ c_compiler_version:    # [osx]
 - '18'                 # [osx]
 cxx_compiler_version:  # [osx]
 - '18'                 # [osx]
-
-replacements:
-  - tag: 'CMake build metadata'
-    glob_patterns:
-      - '*.cmake'
-    regex_re: '([^;\s"]+/sysroot)'
-    replacement_re: '$ENV{CONDA_BUILD_SYSROOT}'
-  - tag: 'CMake build metadata OSX'
-    glob_patterns:
-      - '*.cmake'
-    regex_re: '([^;\s"]+/MacOSX\d*\.?\d*\.sdk)'
-    replacement_re: '$ENV{CONDA_BUILD_SYSROOT}'

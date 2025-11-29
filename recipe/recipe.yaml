@@ -2,7 +2,7 @@
 
 context:
   version: "9.5.2"
-  build: 0
+  build: 1
   minor_version: ${{ (version | split('.'))[:2] | join('.') }}
 
 recipe:
@@ -36,6 +36,19 @@ outputs:
           then: ${RECIPE_DIR}/build-base.sh
         - if: win
           then: "%RECIPE_DIR%\\bld-base.bat"
+      post_process:
+        - if: unix
+          then:
+            - files:
+                - "*.cmake"
+              regex: '([^;\s"]+/sysroot)'
+              replacement: "$${CONDA_BUILD_SYSROOT}"
+        - if: osx
+          then:
+            - files:
+                - "*.cmake"
+              regex: '([^;\s"]+/MacOSX\d*\.?\d*\.sdk)'
+              replacement: "$${CONDA_BUILD_SYSROOT}"
     requirements:
       build:
         - ${{ compiler("cxx") }}
