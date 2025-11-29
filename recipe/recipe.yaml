@@ -204,17 +204,15 @@ outputs:
             - vtkmodules.vtkWebCore
             - vtkmodules.web
             - vtkmodules.web.utils
-      - if: not ppc64le
-        then:
-          - python:
-              imports:
-                - vtkmodules.qt.QVTKRenderWindowInteractor
-      - if: not win
-        then:
-          - python:
-              imports:
+            - if: not win
+              then:
                 - vtkmodules.tk.vtkTkRenderWidget
       - script:
+          # We test the import vtkmodules.qt.QVTKRenderWindowInteractor here as it requires
+          # the pyisde6 optional dependency, that we can't add as a dependency in the python tests section
+          - if: not ppc64le
+            then:
+              - python -c "import vtkmodules.qt.QVTKRenderWindowInteractor"
           - if: unix
             then:
               - test $(pip list | grep vtk | tr -s " " | grep $PKG_VERSION | wc -l) -eq 1
