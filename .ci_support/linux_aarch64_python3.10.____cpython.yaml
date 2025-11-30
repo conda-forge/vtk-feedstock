@@ -36,6 +36,8 @@ liblzma_devel:
 - '5'
 libnetcdf:
 - 4.9.3
+libogg:
+- '1.3'
 libpng:
 - '1.6'
 libtiff:
