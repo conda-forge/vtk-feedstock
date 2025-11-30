@@ -26,10 +26,6 @@ source:
 
 build:
   number: ${{ build }}
-  # Debug
-  skip:
-    - not win
-    - python and not match(python, "3.12.*")
 
 outputs:
   - package:
