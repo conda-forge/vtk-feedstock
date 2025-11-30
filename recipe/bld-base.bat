@@ -8,6 +8,8 @@ set "CXXFLAGS=-MD"
 
 set PYTHON_MAJOR_VERSION=%PY_VER:~0,1%
 
+:: VTK_BUILD_PYI_FILES is disabled as a workaround for 
+:: https://github.com/conda-forge/vtk-feedstock/pull/417#issuecomment-3591995628
 cmake .. -G "Ninja" ^
     -Wno-dev ^
     -DCMAKE_BUILD_TYPE=Release ^
@@ -25,7 +27,7 @@ cmake .. -G "Ninja" ^
     -DVTK_PYTHON_VERSION:STRING="%PYTHON_MAJOR_VERSION%" ^
     -DPython3_FIND_STRATEGY=LOCATION ^
     -DPython3_ROOT_DIR="%PREFIX%" ^
-    -DVTK_BUILD_PYI_FILES:BOOL=ON ^
+    -DVTK_BUILD_PYI_FILES:BOOL=OFF ^
     -DVTK_HAS_FEENABLEEXCEPT:BOOL=OFF ^
     -DVTK_SMP_ENABLE_TBB:BOOL=ON ^
     -DVTK_USE_EXTERNAL:BOOL=ON ^
