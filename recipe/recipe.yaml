@@ -2,7 +2,7 @@
 
 context:
   version: "9.5.2"
-  build: 1
+  build: 2
   minor_version: ${{ (version | split('.'))[:2] | join('.') }}
 
 recipe:
@@ -19,8 +19,7 @@ source:
     # https://github.com/conda-forge/vtk-feedstock/pull/282
     # https://gitlab.kitware.com/vtk/vtk/-/issues/18365#note_1079278
     # https://gitlab.kitware.com/vtk/vtk/-/merge_requests/9987
-    - if: not win
-      then:
+      else:
         - patches/9987_try_except_python_import.patch
     - patches/expat_use_pkgconfig_version.patch
 
@@ -34,8 +33,7 @@ outputs:
       script:
         - if: not win
           then: ${RECIPE_DIR}/build-base.sh
-        - if: win
-          then: "%RECIPE_DIR%\\bld-base.bat"
+          else: "%RECIPE_DIR%\\bld-base.bat"
       post_process:
         - if: unix
           then:
@@ -224,16 +222,13 @@ outputs:
           # ...
           # {% endfor %}
           # But it breaks the linter :( so we do it manually
-          - if: not win
-            then:
-              - test -f $PREFIX/lib/libvtkGUISupportQt-${{ minor_version }}${SHLIB_EXT}
-              - test -f $PREFIX/lib/libvtkRenderingQt-${{ minor_version }}${SHLIB_EXT}
-          - if: win
-            then:
               - if not exist %PREFIX%\\Library\\lib\\vtkGUISupportQt-${{ minor_version }}.lib exit 1
               - if not exist %PREFIX%\\Library\\bin\\vtkGUISupportQt-${{ minor_version }}.dll exit 1
               - if not exist %PREFIX%\\Library\\lib\\vtkRenderingQt-${{ minor_version }}.lib exit 1
               - if not exist %PREFIX%\\Library\\bin\\vtkRenderingQt-${{ minor_version }}.dll exit 1
+            else:
+              - test -f $PREFIX/lib/libvtkGUISupportQt-${{ minor_version }}${SHLIB_EXT}
+              - test -f $PREFIX/lib/libvtkRenderingQt-${{ minor_version }}${SHLIB_EXT}
         requirements:
           run:
             - pip
@@ -250,8 +245,7 @@ outputs:
       script:
         - if: not win
           then: ${RECIPE_DIR}/build-io-ffmpeg.sh
-        - if: win
-          then: exit 1
+          else: exit 1
     requirements:
       build: []
       host:
