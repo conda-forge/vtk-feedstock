@@ -158,7 +158,7 @@ ninja install -j${CPU_COUNT} -v
 
 # Create a directory for the vtk-io-ffmpeg package
 # and find the ffmpeg-related files and process each of them
-FFMPEG_DIR="$(dirname $PREFIX)/ffmpeg_dir"
+FFMPEG_DIR="$(dirname $(dirname $PREFIX))/vtk_ffmpeg_dir_${PKG_VERSION}_${PY_VER}"
 mkdir -p "$FFMPEG_DIR"
 find $PREFIX -name "*vtkIOFFMPEG*" -print0 | while IFS= read -r -d '' file; do
     dest_dir="$FFMPEG_DIR/${file#$PREFIX/}"

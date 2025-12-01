@@ -1,0 +1,196 @@
+# -*- mode: toml -*-
+# This file was generated automatically from conda-smithy. To update this configuration,
+# update the conda-forge.yml and/or the recipe/meta.yaml.
+"$schema" = "https://pixi.sh/v0.59.0/schema/manifest/schema.json"
+
+[workspace]
+name = "vtk-feedstock"
+version = "3.53.3"  # conda-smithy version used to generate this file
+description = "Pixi configuration for conda-forge/vtk-feedstock"
+authors = ["@conda-forge/vtk"]
+channels = ["conda-forge"]
+platforms = ["linux-64", "osx-64", "win-64"]
+requires-pixi = ">=0.59.0"
+
+[dependencies]
+conda-build = ">=24.1"
+conda-forge-ci-setup = "4.*"
+rattler-build = "*"
+
+[tasks.inspect-all]
+cmd = "inspect_artifacts --all-packages"
+description = "List contents of all packages found in rattler-build build directory."
+[tasks.build]
+cmd = "rattler-build build --recipe recipe"
+description = "Build vtk-feedstock directly (without setup scripts), no particular variant specified"
+[tasks."build-linux_64_python3.10.____cpython"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/linux_64_python3.10.____cpython.yaml"
+description = "Build vtk-feedstock with variant linux_64_python3.10.____cpython directly (without setup scripts)"
+[tasks."inspect-linux_64_python3.10.____cpython"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_64_python3.10.____cpython.yaml"
+description = "List contents of vtk-feedstock packages built for variant linux_64_python3.10.____cpython"
+[tasks."build-linux_64_python3.11.____cpython"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/linux_64_python3.11.____cpython.yaml"
+description = "Build vtk-feedstock with variant linux_64_python3.11.____cpython directly (without setup scripts)"
+[tasks."inspect-linux_64_python3.11.____cpython"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_64_python3.11.____cpython.yaml"
+description = "List contents of vtk-feedstock packages built for variant linux_64_python3.11.____cpython"
+[tasks."build-linux_64_python3.12.____cpython"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/linux_64_python3.12.____cpython.yaml"
+description = "Build vtk-feedstock with variant linux_64_python3.12.____cpython directly (without setup scripts)"
+[tasks."inspect-linux_64_python3.12.____cpython"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_64_python3.12.____cpython.yaml"
+description = "List contents of vtk-feedstock packages built for variant linux_64_python3.12.____cpython"
+[tasks."build-linux_64_python3.13.____cp313"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/linux_64_python3.13.____cp313.yaml"
+description = "Build vtk-feedstock with variant linux_64_python3.13.____cp313 directly (without setup scripts)"
+[tasks."inspect-linux_64_python3.13.____cp313"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_64_python3.13.____cp313.yaml"
+description = "List contents of vtk-feedstock packages built for variant linux_64_python3.13.____cp313"
+[tasks."build-linux_64_python3.14.____cp314"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/linux_64_python3.14.____cp314.yaml"
+description = "Build vtk-feedstock with variant linux_64_python3.14.____cp314 directly (without setup scripts)"
+[tasks."inspect-linux_64_python3.14.____cp314"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_64_python3.14.____cp314.yaml"
+description = "List contents of vtk-feedstock packages built for variant linux_64_python3.14.____cp314"
+[tasks."build-linux_aarch64_python3.10.____cpython"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/linux_aarch64_python3.10.____cpython.yaml"
+description = "Build vtk-feedstock with variant linux_aarch64_python3.10.____cpython directly (without setup scripts)"
+[tasks."inspect-linux_aarch64_python3.10.____cpython"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_aarch64_python3.10.____cpython.yaml"
+description = "List contents of vtk-feedstock packages built for variant linux_aarch64_python3.10.____cpython"
+[tasks."build-linux_aarch64_python3.11.____cpython"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/linux_aarch64_python3.11.____cpython.yaml"
+description = "Build vtk-feedstock with variant linux_aarch64_python3.11.____cpython directly (without setup scripts)"
+[tasks."inspect-linux_aarch64_python3.11.____cpython"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_aarch64_python3.11.____cpython.yaml"
+description = "List contents of vtk-feedstock packages built for variant linux_aarch64_python3.11.____cpython"
+[tasks."build-linux_aarch64_python3.12.____cpython"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/linux_aarch64_python3.12.____cpython.yaml"
+description = "Build vtk-feedstock with variant linux_aarch64_python3.12.____cpython directly (without setup scripts)"
+[tasks."inspect-linux_aarch64_python3.12.____cpython"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_aarch64_python3.12.____cpython.yaml"
+description = "List contents of vtk-feedstock packages built for variant linux_aarch64_python3.12.____cpython"
+[tasks."build-linux_aarch64_python3.13.____cp313"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/linux_aarch64_python3.13.____cp313.yaml"
+description = "Build vtk-feedstock with variant linux_aarch64_python3.13.____cp313 directly (without setup scripts)"
+[tasks."inspect-linux_aarch64_python3.13.____cp313"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_aarch64_python3.13.____cp313.yaml"
+description = "List contents of vtk-feedstock packages built for variant linux_aarch64_python3.13.____cp313"
+[tasks."build-linux_aarch64_python3.14.____cp314"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/linux_aarch64_python3.14.____cp314.yaml"
+description = "Build vtk-feedstock with variant linux_aarch64_python3.14.____cp314 directly (without setup scripts)"
+[tasks."inspect-linux_aarch64_python3.14.____cp314"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_aarch64_python3.14.____cp314.yaml"
+description = "List contents of vtk-feedstock packages built for variant linux_aarch64_python3.14.____cp314"
+[tasks."build-osx_64_python3.10.____cpython"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/osx_64_python3.10.____cpython.yaml"
+description = "Build vtk-feedstock with variant osx_64_python3.10.____cpython directly (without setup scripts)"
+[tasks."inspect-osx_64_python3.10.____cpython"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/osx_64_python3.10.____cpython.yaml"
+description = "List contents of vtk-feedstock packages built for variant osx_64_python3.10.____cpython"
+[tasks."build-osx_64_python3.11.____cpython"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/osx_64_python3.11.____cpython.yaml"
+description = "Build vtk-feedstock with variant osx_64_python3.11.____cpython directly (without setup scripts)"
+[tasks."inspect-osx_64_python3.11.____cpython"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/osx_64_python3.11.____cpython.yaml"
+description = "List contents of vtk-feedstock packages built for variant osx_64_python3.11.____cpython"
+[tasks."build-osx_64_python3.12.____cpython"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/osx_64_python3.12.____cpython.yaml"
+description = "Build vtk-feedstock with variant osx_64_python3.12.____cpython directly (without setup scripts)"
+[tasks."inspect-osx_64_python3.12.____cpython"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/osx_64_python3.12.____cpython.yaml"
+description = "List contents of vtk-feedstock packages built for variant osx_64_python3.12.____cpython"
+[tasks."build-osx_64_python3.13.____cp313"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/osx_64_python3.13.____cp313.yaml"
+description = "Build vtk-feedstock with variant osx_64_python3.13.____cp313 directly (without setup scripts)"
+[tasks."inspect-osx_64_python3.13.____cp313"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/osx_64_python3.13.____cp313.yaml"
+description = "List contents of vtk-feedstock packages built for variant osx_64_python3.13.____cp313"
+[tasks."build-osx_64_python3.14.____cp314"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/osx_64_python3.14.____cp314.yaml"
+description = "Build vtk-feedstock with variant osx_64_python3.14.____cp314 directly (without setup scripts)"
+[tasks."inspect-osx_64_python3.14.____cp314"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/osx_64_python3.14.____cp314.yaml"
+description = "List contents of vtk-feedstock packages built for variant osx_64_python3.14.____cp314"
+[tasks."build-osx_arm64_python3.10.____cpython"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/osx_arm64_python3.10.____cpython.yaml"
+description = "Build vtk-feedstock with variant osx_arm64_python3.10.____cpython directly (without setup scripts)"
+[tasks."inspect-osx_arm64_python3.10.____cpython"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/osx_arm64_python3.10.____cpython.yaml"
+description = "List contents of vtk-feedstock packages built for variant osx_arm64_python3.10.____cpython"
+[tasks."build-osx_arm64_python3.11.____cpython"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/osx_arm64_python3.11.____cpython.yaml"
+description = "Build vtk-feedstock with variant osx_arm64_python3.11.____cpython directly (without setup scripts)"
+[tasks."inspect-osx_arm64_python3.11.____cpython"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/osx_arm64_python3.11.____cpython.yaml"
+description = "List contents of vtk-feedstock packages built for variant osx_arm64_python3.11.____cpython"
+[tasks."build-osx_arm64_python3.12.____cpython"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/osx_arm64_python3.12.____cpython.yaml"
+description = "Build vtk-feedstock with variant osx_arm64_python3.12.____cpython directly (without setup scripts)"
+[tasks."inspect-osx_arm64_python3.12.____cpython"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/osx_arm64_python3.12.____cpython.yaml"
+description = "List contents of vtk-feedstock packages built for variant osx_arm64_python3.12.____cpython"
+[tasks."build-osx_arm64_python3.13.____cp313"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/osx_arm64_python3.13.____cp313.yaml"
+description = "Build vtk-feedstock with variant osx_arm64_python3.13.____cp313 directly (without setup scripts)"
+[tasks."inspect-osx_arm64_python3.13.____cp313"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/osx_arm64_python3.13.____cp313.yaml"
+description = "List contents of vtk-feedstock packages built for variant osx_arm64_python3.13.____cp313"
+[tasks."build-osx_arm64_python3.14.____cp314"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/osx_arm64_python3.14.____cp314.yaml"
+description = "Build vtk-feedstock with variant osx_arm64_python3.14.____cp314 directly (without setup scripts)"
+[tasks."inspect-osx_arm64_python3.14.____cp314"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/osx_arm64_python3.14.____cp314.yaml"
+description = "List contents of vtk-feedstock packages built for variant osx_arm64_python3.14.____cp314"
+[tasks."build-win_64_python3.10.____cpython"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/win_64_python3.10.____cpython.yaml"
+description = "Build vtk-feedstock with variant win_64_python3.10.____cpython directly (without setup scripts)"
+[tasks."inspect-win_64_python3.10.____cpython"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/win_64_python3.10.____cpython.yaml"
+description = "List contents of vtk-feedstock packages built for variant win_64_python3.10.____cpython"
+[tasks."build-win_64_python3.11.____cpython"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/win_64_python3.11.____cpython.yaml"
+description = "Build vtk-feedstock with variant win_64_python3.11.____cpython directly (without setup scripts)"
+[tasks."inspect-win_64_python3.11.____cpython"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/win_64_python3.11.____cpython.yaml"
+description = "List contents of vtk-feedstock packages built for variant win_64_python3.11.____cpython"
+[tasks."build-win_64_python3.12.____cpython"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/win_64_python3.12.____cpython.yaml"
+description = "Build vtk-feedstock with variant win_64_python3.12.____cpython directly (without setup scripts)"
+[tasks."inspect-win_64_python3.12.____cpython"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/win_64_python3.12.____cpython.yaml"
+description = "List contents of vtk-feedstock packages built for variant win_64_python3.12.____cpython"
+[tasks."build-win_64_python3.13.____cp313"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/win_64_python3.13.____cp313.yaml"
+description = "Build vtk-feedstock with variant win_64_python3.13.____cp313 directly (without setup scripts)"
+[tasks."inspect-win_64_python3.13.____cp313"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/win_64_python3.13.____cp313.yaml"
+description = "List contents of vtk-feedstock packages built for variant win_64_python3.13.____cp313"
+[tasks."build-win_64_python3.14.____cp314"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/win_64_python3.14.____cp314.yaml"
+description = "Build vtk-feedstock with variant win_64_python3.14.____cp314 directly (without setup scripts)"
+[tasks."inspect-win_64_python3.14.____cp314"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/win_64_python3.14.____cp314.yaml"
+description = "List contents of vtk-feedstock packages built for variant win_64_python3.14.____cp314"
+
+[feature.smithy.dependencies]
+conda-smithy = "*"
+[feature.smithy.tasks.build-locally]
+cmd = "python ./build-locally.py"
+description = "Build packages locally using the same setup scripts used in conda-forge's CI"
+[feature.smithy.tasks.smithy]
+cmd = "conda-smithy"
+description = "Run conda-smithy. Pass necessary arguments."
+[feature.smithy.tasks.rerender]
+cmd = "conda-smithy rerender"
+description = "Rerender the feedstock."
+[feature.smithy.tasks.lint]
+cmd = "conda-smithy lint --conda-forge recipe"
+description = "Lint the feedstock recipe"
+
+[environments]
+smithy = ["smithy"]
+
+# This is a copy of default, to be enabled by build_steps.sh during Docker builds
+# __PLATFORM_SPECIFIC_ENV__ = []
