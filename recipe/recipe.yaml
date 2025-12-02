@@ -22,6 +22,7 @@ source:
       else:
         - patches/9987_try_except_python_import.patch
     - patches/expat_use_pkgconfig_version.patch
+    - patches/ioss_fix_fmt12.patch
 
 build:
   number: ${{ build }}
