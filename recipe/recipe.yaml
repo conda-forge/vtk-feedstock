@@ -2,7 +2,7 @@
 
 context:
   version: "9.5.2"
-  build: 6
+  build: 7
   minor_version: ${{ (version | split('.'))[:2] | join('.') }}
 
 recipe:
