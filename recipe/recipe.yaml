@@ -123,7 +123,7 @@ outputs:
         - nlohmann_json
         - proj
         - sqlite
-        - viskores =1.0
+        - viskores
         # Until this is solved:
         # https://gitlab.kitware.com/vtk/vtk/-/issues/19561
         # we use the internal one in build-base.sh
