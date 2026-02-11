@@ -1,8 +1,8 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/prefix-dev/recipe-format/main/schema.json
 
 context:
-  version: "9.5.2"
-  build: 7
+  version: "9.6.0"
+  build: 0
   minor_version: ${{ (version | split('.'))[:2] | join('.') }}
 
 recipe:
@@ -11,7 +11,7 @@ recipe:
 
 source:
   url: http://www.vtk.org/files/release/${{ minor_version }}/VTK-${{ version }}.tar.gz
-  sha256: cee64b98d270ff7302daf1ef13458dff5d5ac1ecb45d47723835f7f7d562c989
+  sha256: d77d180694faafdc816578b9a53651f6790e799615811bfbb91018661a3bb8f2
   patches:
     - if: win
       then:
