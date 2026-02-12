@@ -313,6 +313,7 @@ outputs:
             - ${{ compiler('c') }}
             - ${{ compiler('cxx') }}
             - libxml2-devel
+            - zlib
 
 about:
   homepage: http://www.vtk.org/
