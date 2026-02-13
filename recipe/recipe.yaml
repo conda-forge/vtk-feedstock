@@ -21,7 +21,7 @@ source:
     # https://gitlab.kitware.com/vtk/vtk/-/merge_requests/9987
       else:
         - patches/9987_try_except_python_import.patch
-    - patches/expat_use_pkgconfig_version.patch
+    # - patches/expat_use_pkgconfig_version.patch
     - patches/ioss_fix_fmt12.patch
 
 build:
