@@ -112,6 +112,7 @@ outputs:
         - ffmpeg * lgpl_*
         - utfcpp
         - eigen
+        - eigen-abi-devel
         - cli11
         - double-conversion
         - pugixml
