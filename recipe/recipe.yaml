@@ -304,7 +304,11 @@ outputs:
       - script:
           # uncomment once we fix test_vtk.py, see https://github.com/conda-forge/vtk-feedstock/issues/383#issuecomment-2890722669
           # - python test_vtk.py
-          - cmake-package-check VTK
+          - if: build_platform == target_platform
+            then:
+              - cmake-package-check VTK
+            else:
+              - echo "Do not run cmake-package-check in cross-compilation as it is flaky"
         requirements:
           run:
             - pip
