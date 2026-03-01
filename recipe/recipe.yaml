@@ -1,8 +1,8 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/prefix-dev/recipe-format/main/schema.json
 
 context:
-  version: "9.5.2"
-  build: 7
+  version: "9.6.0"
+  build: 0
   minor_version: ${{ (version | split('.'))[:2] | join('.') }}
 
 recipe:
@@ -11,7 +11,7 @@ recipe:
 
 source:
   url: http://www.vtk.org/files/release/${{ minor_version }}/VTK-${{ version }}.tar.gz
-  sha256: cee64b98d270ff7302daf1ef13458dff5d5ac1ecb45d47723835f7f7d562c989
+  sha256: d77d180694faafdc816578b9a53651f6790e799615811bfbb91018661a3bb8f2
   patches:
     - if: win
       then:
@@ -21,7 +21,6 @@ source:
     # https://gitlab.kitware.com/vtk/vtk/-/merge_requests/9987
       else:
         - patches/9987_try_except_python_import.patch
-    - patches/expat_use_pkgconfig_version.patch
     - patches/ioss_fix_fmt12.patch
 
 build:
@@ -113,6 +112,7 @@ outputs:
         - ffmpeg * lgpl_*
         - utfcpp
         - eigen
+        - eigen-abi-devel
         - cli11
         - double-conversion
         - pugixml
@@ -304,7 +304,11 @@ outputs:
       - script:
           # uncomment once we fix test_vtk.py, see https://github.com/conda-forge/vtk-feedstock/issues/383#issuecomment-2890722669
           # - python test_vtk.py
-          - cmake-package-check VTK
+          - if: build_platform == target_platform
+            then:
+              - cmake-package-check VTK
+            else:
+              - echo "Do not run cmake-package-check in cross-compilation as it is flaky"
         requirements:
           run:
             - pip
@@ -313,6 +317,7 @@ outputs:
             - ${{ compiler('c') }}
             - ${{ compiler('cxx') }}
             - libxml2-devel
+            - zlib
 
 about:
   homepage: http://www.vtk.org/
@@ -328,6 +333,7 @@ about:
     - vendored-ioss-license.txt  # https://gitlab.kitware.com/vtk/vtk/-/blob/master/ThirdParty/ioss/vtkioss/COPYRIGHT
     - vendored-token-license.txt  # https://gitlab.kitware.com/vtk/vtk/-/blob/master/ThirdParty/token/vtktoken/license.md
     - vendored-verdict-license.txt  # https://gitlab.kitware.com/vtk/vtk/-/blob/master/ThirdParty/verdict/vtkverdict/LICENSE
+    - vendored-scn-license.txt  # https://gitlab.kitware.com/vtk/vtk/-/blob/master/ThirdParty/scn/vtkscn/LICENSE
   summary: >
     The Visualization Toolkit (VTK) is an open-source, freely available software system for 3D computer graphics, modeling, image processing, volume rendering, scientific visualization, and information visualization.
   repository: https://gitlab.kitware.com/vtk/vtk
