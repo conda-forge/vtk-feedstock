@@ -18,6 +18,8 @@ cxx_compiler:
 - clangxx
 cxx_compiler_version:
 - '18'
+eigen_abi_devel:
+- 3.4.0
 expat:
 - '2'
 ffmpeg:
@@ -55,7 +57,7 @@ pin_run_as_build:
     min_pin: x.x
     max_pin: x.x
 proj:
-- '9.7'
+- '9.8'
 pugixml:
 - '1.15'
 python:
