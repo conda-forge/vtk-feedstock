@@ -34,6 +34,7 @@ cmake .. -G "Ninja" ^
     -DVTK_ENABLE_VISKORES_OVERRIDES:BOOL=ON ^
     -DVTK_MODULE_ENABLE_VTK_AcceleratorsVTKmFilters:STRING=YES ^
     -DVTK_MODULE_ENABLE_VTK_cli11:STRING=YES ^
+    -DVTK_MODULE_ENABLE_VTK_doubleconversion=YES ^
     -DVTK_MODULE_ENABLE_VTK_FiltersParallelDIY2:STRING=YES ^
     -DVTK_MODULE_ENABLE_VTK_FiltersParallelStatistics:STRING=YES ^
     -DVTK_MODULE_ENABLE_VTK_FiltersParallelVerdict:STRING=YES ^
