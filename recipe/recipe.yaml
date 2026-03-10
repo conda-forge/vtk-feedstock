@@ -2,7 +2,7 @@
 
 context:
   version: "9.6.0"
-  build: 2
+  build: 3
   minor_version: ${{ (version | split('.'))[:2] | join('.') }}
 
 recipe:
@@ -138,7 +138,6 @@ outputs:
         - utfcpp
         - nlohmann_json
         - cli11
-        - loguru
         - numpy
         - wslink
         - matplotlib-base >=2.0.0
