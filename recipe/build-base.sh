@@ -7,18 +7,6 @@ BUILD_CONFIG=Release
 # Use bash "Remove Largest Suffix Pattern" to get rid of all but major version number
 PYTHON_MAJOR_VERSION=${PY_VER%%.*}
 
-if [[ "${target_platform}" =~ osx-arm64 && "${target_platform}" != "${build_platform}" ]]; then
-    rm -f "${PREFIX}/lib/qt6/moc"
-    ln -s "${BUILD_PREFIX}/lib/qt6/moc" "${PREFIX}/lib/qt6/moc"
-
-    # Additional debugging information
-    echo "Adjusted Qt tools for osx-arm64 with build variant qt6"
-    echo "Removed: ${PREFIX}/lib/qt6/moc"
-    echo "Linked to: ${BUILD_PREFIX}/lib/qt6/moc"
-else
-    echo "Skipping Qt tools adjustment. Target platform: ${target_platform}"
-fi
-
 VTK_ARGS=()
 
 if [[ "${target_platform}" == linux-* ]]; then
@@ -49,37 +37,7 @@ if [[ "$target_platform" == osx-* ]]; then
     export CXXFLAGS="${CXXFLAGS} -Wno-incompatible-pointer-types"
 fi
 
-if [[ "$CONDA_BUILD_CROSS_COMPILATION" == "1" ]]; then
-  (
-    mkdir build-native
-    cd build-native
-    export CC=$CC_FOR_BUILD
-    export CXX=$CXX_FOR_BUILD
-    unset CFLAGS
-    unset CXXFLAGS
-    unset CPPFLAGS
-    export LDFLAGS=${LDFLAGS//$PREFIX/$BUILD_PREFIX}
-    cmake -G Ninja -DCMAKE_INSTALL_PREFIX=$SRC_DIR/vtk-compile-tools \
-       -DCMAKE_PREFIX_PATH=$BUILD_PREFIX \
-       -DCMAKE_INSTALL_LIBDIR=lib \
-       -DVTK_BUILD_COMPILE_TOOLS_ONLY=ON ..
-    ninja -j${CPU_COUNT}
-    ninja install -j${CPU_COUNT}
-    cd ..
-  )
-  MAJ_MIN=$(echo $PKG_VERSION | rev | cut -d"." -f2- | rev)
-  CMAKE_ARGS="${CMAKE_ARGS} -DVTKCompileTools_DIR=$SRC_DIR/vtk-compile-tools/lib/cmake/vtkcompiletools-${MAJ_MIN}/"
-  CMAKE_ARGS="${CMAKE_ARGS} -DCMAKE_REQUIRE_LARGE_FILE_SUPPORT=1 -DCMAKE_REQUIRE_LARGE_FILE_SUPPORT__TRYRUN_OUTPUT="
-  CMAKE_ARGS="${CMAKE_ARGS} -DVTK_REQUIRE_LARGE_FILE_SUPPORT_EXITCODE=0 -DVTK_REQUIRE_LARGE_FILE_SUPPORT_EXITCODE__TRYRUN_OUTPUT="
-  CMAKE_ARGS="${CMAKE_ARGS} -DXDMF_REQUIRE_LARGE_FILE_SUPPORT_EXITCODE=0 -DXDMF_REQUIRE_LARGE_FILE_SUPPORT_EXITCODE__TRYRUN_OUTPUT="
-fi
-
-# Only build pyi files when natively compiling
-if [[ "$CONDA_BUILD_CROSS_COMPILATION" == "1" ]]; then
-  CMAKE_ARGS="${CMAKE_ARGS} -DVTK_BUILD_PYI_FILES:BOOL=OFF"
-else
-  CMAKE_ARGS="${CMAKE_ARGS} -DVTK_BUILD_PYI_FILES:BOOL=ON"
-fi
+CMAKE_ARGS="${CMAKE_ARGS} -DVTK_BUILD_PYI_FILES:BOOL=ON"
 
 mkdir build
 cd build || exit
