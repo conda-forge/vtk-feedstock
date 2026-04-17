@@ -59,7 +59,7 @@ outputs:
         - zlib
         - liblzma-devel
         - freetype
-        - hdf5
+        - hdf5 <2
         - hdf5 * nompi_*
         - libxml2-devel
         - libpng
