@@ -20,6 +20,7 @@ freetype:
 - '2'
 hdf5:
 - 1.14.6
+- '2'
 jsoncpp:
 - 1.9.6
 libboost_headers:
