@@ -38,6 +38,7 @@ cmake .. -G "Ninja" ^
     -DVTK_MODULE_ENABLE_VTK_FiltersParallelStatistics:STRING=YES ^
     -DVTK_MODULE_ENABLE_VTK_FiltersParallelVerdict:STRING=YES ^
     -DVTK_MODULE_ENABLE_VTK_IOAvmesh:STRING=YES ^
+    -DVTK_MODULE_ENABLE_VTK_IOFFMPEG:STRING=YES ^
     -DVTK_MODULE_ENABLE_VTK_IOH5part:STRING=YES ^
     -DVTK_MODULE_ENABLE_VTK_IOH5Rage:STRING=YES ^
     -DVTK_MODULE_ENABLE_VTK_IOOMF:STRING=YES ^
@@ -71,6 +72,17 @@ cmake .. -G "Ninja" ^
 if errorlevel 1 exit 1
 
 ninja install -j %CPU_COUNT%
+if errorlevel 1 exit 1
+
+REM Move vtkIOFFMPEG files to a staging directory for the vtk-io-ffmpeg subpackage
+set "FFMPEG_DIR=%SRC_DIR%\vtk_ffmpeg_dir_%PKG_VERSION%_%PY_VER%"
+mkdir "%FFMPEG_DIR%"
+for /r "%PREFIX%" %%f in (*vtkIOFFMPEG*) do (
+    set "src=%%f"
+    set "rel=!src:%PREFIX%\=!"
+    for %%d in ("!FFMPEG_DIR!\!rel!") do mkdir "%%~dpd" 2>nul
+    move "%%f" "!FFMPEG_DIR!\!rel!"
+)
 if errorlevel 1 exit 1
 
 REM The egg-info file is necessary because some packages,

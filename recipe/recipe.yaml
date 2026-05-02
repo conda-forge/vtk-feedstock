@@ -2,7 +2,7 @@
 
 context:
   version: "9.6.1"
-  build: 3
+  build: 4
   minor_version: ${{ (version | split('.'))[:2] | join('.') }}
 
 recipe:
@@ -143,9 +143,7 @@ outputs:
         - ${{ pin_subpackage('vtk-base', upper_bound='x.x.x') }}
       ignore_run_exports:
         by_name:
-          - if: not win
-            then:
-              - ffmpeg
+          - ffmpeg
           # Found via inspection of the conda-forge logs, hopefully okay to ignore:
           - if: linux
             then:
@@ -237,12 +235,10 @@ outputs:
   - package:
       name: vtk-io-ffmpeg
     build:
-      skip:
-        - win
       script:
         - if: not win
           then: ${RECIPE_DIR}/build-io-ffmpeg.sh
-          else: exit 1
+          else: "%RECIPE_DIR%\\bld-io-ffmpeg.bat"
     requirements:
       build: []
       host:
@@ -272,9 +268,7 @@ outputs:
         # The pin_subpackage is not exact to avoid issues like https://github.com/conda-forge/vtk-feedstock/issues/347
         # and https://github.com/conda-forge/vtk-feedstock/issues/372
         - ${{ pin_subpackage("vtk-base", upper_bound='x.x.x') }}
-        - if: not win
-          then:
-            - ${{ pin_subpackage("vtk-io-ffmpeg", upper_bound='x.x.x') }}
+        - ${{ pin_subpackage("vtk-io-ffmpeg", upper_bound='x.x.x') }}
         # The following dependencies are here to make sure that find_package(VTK) works fine, they could be moved to vtk-devel if that is ever created
         - if: linux
           then:
@@ -291,11 +285,7 @@ outputs:
       - python:
           imports:
             - vtk
-      - if: not win
-        then:
-          - python:
-              imports:
-                - vtk.vtkIOFFMPEG
+            - vtk.vtkIOFFMPEG
       - script:
           # uncomment once we fix test_vtk.py, see https://github.com/conda-forge/vtk-feedstock/issues/383#issuecomment-2890722669
           # - python test_vtk.py
