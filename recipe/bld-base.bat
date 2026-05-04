@@ -75,11 +75,15 @@ ninja install -j %CPU_COUNT%
 if errorlevel 1 exit 1
 
 REM Move vtkIOFFMPEG files to a staging directory for the vtk-io-ffmpeg subpackage
-set "FFMPEG_DIR=%SRC_DIR%\vtk_ffmpeg_dir_%PKG_VERSION%_%PY_VER%"
+for %%d in ("%PREFIX%\..\..") do set "FFMPEG_BASE=%%~fd"
+set "FFMPEG_DIR=%FFMPEG_BASE%\vtk_ffmpeg_dir_%PKG_VERSION%_%PY_VER%"
+echo FFMPEG_BASE=%FFMPEG_BASE%
+echo FFMPEG_DIR=%FFMPEG_DIR%
 mkdir "%FFMPEG_DIR%"
 for /r "%PREFIX%" %%f in (*vtkIOFFMPEG*) do (
     set "src=%%f"
     set "rel=!src:%PREFIX%\=!"
+    echo Staging %%f -^> !FFMPEG_DIR!\!rel!
     for %%d in ("!FFMPEG_DIR!\!rel!") do mkdir "%%~dpd" 2>nul
     move "%%f" "!FFMPEG_DIR!\!rel!"
 )
