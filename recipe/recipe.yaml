@@ -22,6 +22,7 @@ source:
     - patches/9987_try_except_python_import.patch
     - patches/ioss_fix_fmt12.patch
     - patches/expat_implib.patch
+    - patches/jsoncpp.patch
 
 build:
   number: ${{ build }}
