@@ -1,0 +1,26 @@
+From 56494304f71f4c42dc8da4082e72dfcb3e55cbe6 Mon Sep 17 00:00:00 2001
+From: Cory Quammen <cory.quammen@kitware.com>
+Date: Fri, 17 Apr 2026 17:23:14 -0400
+Subject: [PATCH] Fix tidy error after updating jsoncpp:
+ readability-redundant-string-cstr
+
+---
+ Rendering/VtkJS/vtkVtkJSSceneGraphSerializer.cxx | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Rendering/VtkJS/vtkVtkJSSceneGraphSerializer.cxx b/Rendering/VtkJS/vtkVtkJSSceneGraphSerializer.cxx
+index de48f860e75..f56d4477f74 100644
+--- a/Rendering/VtkJS/vtkVtkJSSceneGraphSerializer.cxx
++++ b/Rendering/VtkJS/vtkVtkJSSceneGraphSerializer.cxx
+@@ -318,7 +318,7 @@ void SetColorAndOpacity(
+     {
+       for (auto& colorProperty : colorProperties)
+       {
+-        property["properties"][colorProperty.c_str()][i] = atts->GetBlockColor(block)[i];
++        property["properties"][colorProperty][i] = atts->GetBlockColor(block)[i];
+       }
+     }
+   }
+-- 
+GitLab
+
