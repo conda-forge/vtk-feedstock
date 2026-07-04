@@ -21,7 +21,7 @@ freetype:
 hdf5:
 - 1.14.6
 jsoncpp:
-- 1.9.7
+- 1.9.8
 libboost_headers:
 - '1.90'
 libjpeg_turbo:
