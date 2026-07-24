@@ -29,11 +29,13 @@ libjpeg_turbo:
 liblzma_devel:
 - '5'
 libnetcdf:
-- 4.10.1
+- 4.10.0
 libogg:
 - '1.3'
 libpng:
 - '1.6'
+libtheora:
+- '1.2'
 libtiff:
 - '4.7'
 libxml2_devel:
@@ -51,7 +53,7 @@ pugixml:
 python:
 - 3.14.* *_cp314
 qt6_main:
-- '6.11'
+- '6'
 sqlite:
 - '3'
 target_platform:
