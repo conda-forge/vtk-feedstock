@@ -63,7 +63,7 @@ proj:
 pugixml:
 - '1.15'
 python:
-- 3.12.* *_cpython
+- 3.14.* *_cp314t
 qt6_main:
 - '6'
 sqlite:
