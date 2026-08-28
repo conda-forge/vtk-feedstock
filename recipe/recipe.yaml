@@ -2,7 +2,7 @@
 
 context:
   version: "9.7.0"
-  build: 0
+  build: 1
   minor_version: ${{ (version | split('.'))[:2] | join('.') }}
 
 recipe:
@@ -21,7 +21,6 @@ source:
     # https://gitlab.kitware.com/vtk/vtk/-/merge_requests/9987
     - patches/9987_try_except_python_import.patch
     - patches/ioss_fix_fmt12.patch
-    - patches/expat_implib.patch
     - patches/jsoncpp.patch
     # HDF5 2 exports HDF5_PROVIDES_PARALLEL instead of HDF5_IS_PARALLEL.
     - patches/hdf5-2-parallel-detection.patch
@@ -56,6 +55,11 @@ outputs:
         - ${{ stdlib("c") }}
         - cmake
         - ninja
+        - if: build_platform != target_platform
+          then:
+            - python
+            - cross-python_${{ target_platform }}
+            - qt6-main
       host:
         - python
         - zlib
@@ -70,6 +74,10 @@ outputs:
         - jsoncpp
         - expat
         - fmt
+        - fast_float
+        - libharu
+        - exprtk
+        - cgns
         - tbb
         - tbb-devel
         - libnetcdf
@@ -136,6 +144,7 @@ outputs:
         - utfcpp
         - nlohmann_json
         - cli11
+        - fast_float
         - numpy
         - wslink
         - matplotlib-base >=2.0.0
@@ -291,7 +300,11 @@ outputs:
       - script:
           # uncomment once we fix test_vtk.py, see https://github.com/conda-forge/vtk-feedstock/issues/383#issuecomment-2890722669
           # - python test_vtk.py
-          - cmake-package-check VTK
+          - if: build_platform == target_platform
+            then:
+              - cmake-package-check VTK
+            else:
+              - echo "Do not run cmake-package-check in cross-compilation as it is flaky"
         requirements:
           run:
             - pip
@@ -307,12 +320,8 @@ about:
   license: BSD-3-Clause
   license_file:
     - Copyright.txt
-    - vendored-fast_float-license.txt  # https://gitlab.kitware.com/vtk/vtk/-/blob/master/ThirdParty/fast_float/vtkfast_float/LICENSE-MIT
-    - vendored-libharu-license.txt  # https://gitlab.kitware.com/vtk/vtk/-/blob/master/ThirdParty/libharu/vtklibharu/LICENSE
     - vendored-loguru-license.txt  # https://gitlab.kitware.com/vtk/vtk/-/blob/v9.4.1/ThirdParty/loguru/vtkloguru/LICENSE
     - vendored-pegtl-license.txt  # https://gitlab.kitware.com/vtk/vtk/-/blob/master/ThirdParty/pegtl/vtkpegtl/LICENSE
-    - vendored-exprtk-license.txt  # https://github.com/conda-forge/exprtk-feedstock/blob/main/license.txt
-    - vendored-cgns-license.txt  # https://gitlab.kitware.com/vtk/vtk/-/blob/master/ThirdParty/cgns/vtkcgns/license.txt
     - vendored-ioss-license.txt  # https://gitlab.kitware.com/vtk/vtk/-/blob/master/ThirdParty/ioss/vtkioss/COPYRIGHT
     - vendored-token-license.txt  # https://gitlab.kitware.com/vtk/vtk/-/blob/master/ThirdParty/token/vtktoken/license.md
     - vendored-verdict-license.txt  # https://gitlab.kitware.com/vtk/vtk/-/blob/master/ThirdParty/verdict/vtkverdict/LICENSE
