@@ -15,7 +15,7 @@ cxx_compiler:
 cxx_compiler_version:
 - '15'
 docker_image:
-- quay.io/condaforge/linux-anvil-aarch64:alma10
+- quay.io/condaforge/linux-anvil-x86_64:alma10
 eigen_abi_devel:
 - 5.0.1
 expat:
@@ -64,13 +64,13 @@ proj:
 pugixml:
 - '1.15'
 python:
-- 3.11.* *_cpython
+- 3.13.* *_cp313
 qt6_main:
 - '6'
 sqlite:
 - '3'
 target_platform:
-- linux-aarch64
+- linux-64
 tbb:
 - '2023'
 tbb_devel:
@@ -78,5 +78,7 @@ tbb_devel:
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
+- - python
+  - channel_sources
 zlib:
 - '1'
