@@ -63,5 +63,8 @@ tbb:
 - '2023'
 tbb_devel:
 - '2023'
+zip_keys:
+- - python
+  - channel_sources
 zlib:
 - '1'

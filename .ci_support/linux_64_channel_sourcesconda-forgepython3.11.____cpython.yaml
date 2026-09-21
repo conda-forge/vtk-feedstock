@@ -64,7 +64,7 @@ proj:
 pugixml:
 - '1.15'
 python:
-- 3.14.* *_cp314
+- 3.11.* *_cpython
 qt6_main:
 - '6'
 sqlite:
@@ -78,5 +78,7 @@ tbb_devel:
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
+- - python
+  - channel_sources
 zlib:
 - '1'
