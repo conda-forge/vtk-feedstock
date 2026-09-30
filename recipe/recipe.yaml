@@ -56,6 +56,9 @@ outputs:
         - ${{ stdlib("c") }}
         - cmake
         - ninja
+        - if: build_platform != target_platform
+          then:
+            - vtk-base
       host:
         - python
         - zlib
