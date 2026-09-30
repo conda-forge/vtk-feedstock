@@ -1,3 +1,5 @@
+build_platform:
+  osx_64: osx_arm64
 azure:
   max_parallel: 25
 conda_build_tool: rattler-build
