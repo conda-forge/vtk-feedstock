@@ -37,7 +37,9 @@ if [[ "$target_platform" == osx-* ]]; then
     export CXXFLAGS="${CXXFLAGS} -Wno-incompatible-pointer-types"
 fi
 
-CMAKE_ARGS="${CMAKE_ARGS} -DVTK_BUILD_PYI_FILES:BOOL=ON"
+if [[ "${target_platform}" == "${build_platform}" ]]; then
+    CMAKE_ARGS="${CMAKE_ARGS} -DVTK_BUILD_PYI_FILES:BOOL=ON"
+fi
 
 mkdir build
 cd build || exit
@@ -47,6 +49,7 @@ echo "VTK_ARGS:" "${VTK_ARGS[@]}"
 # now we can start configuring
 cmake -LAH .. -G "Ninja" ${CMAKE_ARGS} \
     -Wno-dev \
+    -DCMAKE_CROSSCOMPILING_EMULATOR:STRING="${CMAKE_CROSSCOMPILING_EMULATOR}" \
     -DCMAKE_BUILD_TYPE=$BUILD_CONFIG \
     -DCMAKE_PREFIX_PATH:PATH="${PREFIX}" \
     -DCMAKE_FIND_FRAMEWORK=LAST \
@@ -100,12 +103,12 @@ cmake -LAH .. -G "Ninja" ${CMAKE_ARGS} \
     -DVTK_MODULE_ENABLE_VTK_WebGLExporter:STRING=YES \
     -DVTK_MODULE_ENABLE_VTK_WebPython:STRING=YES \
     -DVTK_USE_EXTERNAL:BOOL=ON \
-    -DVTK_MODULE_USE_EXTERNAL_VTK_fast_float:BOOL=OFF \
-    -DVTK_MODULE_USE_EXTERNAL_VTK_libharu:BOOL=OFF \
+    -DVTK_MODULE_USE_EXTERNAL_VTK_fast_float:BOOL=ON \
+    -DVTK_MODULE_USE_EXTERNAL_VTK_libharu:BOOL=ON \
     -DVTK_MODULE_USE_EXTERNAL_VTK_pegtl:BOOL=OFF \
-    -DVTK_MODULE_USE_EXTERNAL_VTK_exprtk:BOOL=OFF \
+    -DVTK_MODULE_USE_EXTERNAL_VTK_exprtk:BOOL=ON \
     -DVTK_MODULE_USE_EXTERNAL_VTK_fmt:BOOL=ON \
-    -DVTK_MODULE_USE_EXTERNAL_VTK_cgns:BOOL=OFF \
+    -DVTK_MODULE_USE_EXTERNAL_VTK_cgns:BOOL=ON \
     -DVTK_MODULE_USE_EXTERNAL_VTK_ioss:BOOL=OFF \
     -DVTK_MODULE_USE_EXTERNAL_VTK_token:BOOL=OFF \
     -DVTK_MODULE_USE_EXTERNAL_VTK_verdict:BOOL=OFF \

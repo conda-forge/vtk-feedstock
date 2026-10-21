@@ -9,5 +9,7 @@ github:
 provider:
   linux_aarch64: default
   osx_arm64: default
+build_platform:
+  osx_64: osx_arm64
 workflow_settings:
   free_disk_space: quick
