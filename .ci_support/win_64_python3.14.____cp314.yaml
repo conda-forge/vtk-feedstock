@@ -1,5 +1,5 @@
 c_compiler:
-- vs2022
+- vs
 c_compiler_version:
 - '2022'
 c_stdlib:
@@ -9,7 +9,7 @@ channel_sources:
 channel_targets:
 - conda-forge main
 cxx_compiler:
-- vs2022
+- vs
 cxx_compiler_version:
 - '2022'
 eigen_abi_devel:
