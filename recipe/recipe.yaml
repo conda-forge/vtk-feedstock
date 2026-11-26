@@ -2,7 +2,7 @@
 
 context:
   version: "9.7.2"
-  build: 2
+  build: 3
   minor_version: ${{ (version | split('.'))[:2] | join('.') }}
 
 recipe:
@@ -71,6 +71,7 @@ outputs:
         - libxml2-devel
         - libpng
         - libjpeg-turbo
+        - libpython
         - libtiff
         - jsoncpp
         - expat

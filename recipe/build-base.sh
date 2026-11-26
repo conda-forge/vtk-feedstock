@@ -4,6 +4,9 @@ set -ex
 
 BUILD_CONFIG=Release
 
+# https://gitlab.kitware.com/paraview/paraview/-/work_items/19645
+export LDFLAGS=`echo "${LDFLAGS}" | sed "s|-Wl,-dead_strip_dylibs||g"`
+
 # Use bash "Remove Largest Suffix Pattern" to get rid of all but major version number
 PYTHON_MAJOR_VERSION=${PY_VER%%.*}
 
